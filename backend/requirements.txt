@@ -20,7 +20,7 @@ bcrypt==4.0.1
 # is exactly the code path the report-upload endpoint runs). 0.0.32 is the
 # current clean release.
 python-multipart==0.0.32
-slowapi==0.1.9
+slowapi==0.1.10
 # Only actually connects when RATE_LIMIT_STORAGE_URI is set to a redis://
 # URL (see app/core/config.py) -- the limits package that slowapi sits on
 # top of lazy-imports this, but it still needs to be installed for that
