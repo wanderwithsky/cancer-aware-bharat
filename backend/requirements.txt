@@ -15,7 +15,7 @@ pydantic-settings==2.7.0
 # crafted compressed tokens) -- 3.5.0 is the current clean release.
 python-jose[cryptography]==3.5.0
 passlib==1.7.4
-bcrypt==4.0.1
+bcrypt==5.0.0
 # 0.0.20 has 6 known CVEs (several DoS vectors in multipart parsing, which
 # is exactly the code path the report-upload endpoint runs). 0.0.32 is the
 # current clean release.
