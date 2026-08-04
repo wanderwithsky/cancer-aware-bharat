@@ -33,7 +33,7 @@ slowapi==0.1.10
 # top of lazy-imports this, but it still needs to be installed for that
 # import to succeed once someone does set it.
 redis==8.1.0
-boto3==1.35.90
+boto3==1.43.62
 razorpay==1.4.2
 # razorpay's SDK still imports the deprecated pkg_resources, which recent
 # setuptools releases (81+) dropped entirely -- pin below that until
