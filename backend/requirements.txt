@@ -38,4 +38,4 @@ razorpay==1.4.2
 # razorpay's SDK still imports the deprecated pkg_resources, which recent
 # setuptools releases (81+) dropped entirely -- pin below that until
 # razorpay's SDK drops the dependency.
-setuptools<81
+setuptools<84
