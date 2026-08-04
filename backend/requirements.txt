@@ -34,7 +34,7 @@ slowapi==0.1.10
 # import to succeed once someone does set it.
 redis==8.1.0
 boto3==1.35.90
-razorpay==1.4.2
+razorpay==2.0.1
 # razorpay's SDK still imports the deprecated pkg_resources, which recent
 # setuptools releases (81+) dropped entirely -- pin below that until
 # razorpay's SDK drops the dependency.
