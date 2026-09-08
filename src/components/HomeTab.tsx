@@ -604,33 +604,63 @@ function TestimonialsCarousel() {
 const NEWS_ARTICLES_DATA = [
   {
     id: 'news-1',
-    title: 'Early Detection Saves Lives',
-    description: 'Learn why regular screening can significantly improve survival rates and the importance of early diagnosis.',
+    title: 'Oral Cancer Awareness & Early Screening',
+    description: 'Oral cancer refers to malignant growths in the mouth, tongue, gums, or throat. Regular screening catches abnormal lesions early when cure rates exceed 90%.',
     image: '/events/event-1.jpeg',
-    category: 'Prevention',
+    category: 'Oral Oncology',
     date: '24 Oct, 2026',
     readTime: '5 min read',
-    link: '#'
+    link: '/cancer-awareness'
   },
   {
     id: 'news-2',
-    title: 'Understanding Oral Cancer',
-    description: 'Common warning signs every tobacco user should know to catch oral cancer in its earliest, most treatable stages.',
+    title: 'Cervical Cancer Prevention & HPV Vaccination',
+    description: 'Cervical cancer originates in the cells of the cervix. Highly preventable through routine Pap smear screening and timely HPV vaccination.',
     image: '/events/event-4.jpeg',
-    category: 'Awareness',
+    category: 'Cervical Care',
     date: '18 Oct, 2026',
     readTime: '4 min read',
-    link: '#'
+    link: '/cancer-awareness'
   },
   {
     id: 'news-3',
-    title: 'Breast Cancer Awareness',
-    description: 'A simple, step-by-step self-examination guide every woman should know for proactive health monitoring.',
+    title: 'Breast Cancer Detection & Self-Examination',
+    description: 'A step-by-step clinical self-examination guide and routine mammography protocols every woman should practice for early detection.',
     image: '/events/event-2.jpeg',
-    category: 'Screening',
+    category: 'Breast Oncology',
     date: '12 Oct, 2026',
     readTime: '6 min read',
-    link: '#'
+    link: '/cancer-awareness'
+  },
+  {
+    id: 'news-4',
+    title: 'Lung & Thoracic Cancer Warning Signs',
+    description: 'Understanding persistent cough, chest discomfort, and high-risk respiratory factors. Diagnostic pathways and low-dose CT screening guidelines.',
+    image: '/events/event-3.jpeg',
+    category: 'Thoracic Care',
+    date: '08 Oct, 2026',
+    readTime: '5 min read',
+    link: '/cancer-awareness'
+  },
+  {
+    id: 'news-5',
+    title: 'Gastrointestinal (GI) Cancer Insights',
+    description: 'Covering cancers of the digestive tract (esophagus, stomach, colon, liver). Dietary risk factors, endoscopy indications, and early warning signs.',
+    image: '/events/event-1.jpeg',
+    category: 'Gastro Oncology',
+    date: '02 Oct, 2026',
+    readTime: '4 min read',
+    link: '/cancer-awareness'
+  },
+  {
+    id: 'news-6',
+    title: 'Grassroots Screening Camps Across India',
+    description: 'How our mobile healthcare teams and partner hospitals deliver free screening tests directly to rural and urban communities nationwide.',
+    image: '/events/event-4.jpeg',
+    category: 'Free Camps',
+    date: '28 Sep, 2026',
+    readTime: '3 min read',
+    link: '/events'
   }
 ];
 
@@ -1350,6 +1380,130 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
                 </div>
               </RevealSection>
             ))}
+          </div>
+        </div>
+      </PremiumSection>
+
+      {/* ═══════════════════════════════════════════
+          SECTION 2.5: ABOUT & CLINICAL LEADERSHIP SPOTLIGHT (2-COLUMN REFERENCE LAYOUT)
+          ═══════════════════════════════════════════ */}
+      <PremiumSection variant="warm-1" paddingClass="py-16 md:py-24">
+        <div className="section-container relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            
+            {/* Left Column: Doctor / Specialist Photo & Badges (5 cols) */}
+            <div className="lg:col-span-5 relative">
+              <RevealSection>
+                <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-white group">
+                  <div className="aspect-[4/5] w-full overflow-hidden bg-slate-100">
+                    <img
+                      src="/dr-ajay-kumar.jpg"
+                      alt="Dr. Ajay Kumar - Senior Surgical Oncologist"
+                      className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                    />
+                  </div>
+                  {/* Subtle Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0d2136]/90 via-[#0d2136]/20 to-transparent pointer-events-none" />
+
+                  {/* Overlaid Badges */}
+                  <div className="absolute top-4 left-4 flex flex-col gap-2">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#CA1871] text-white text-[11px] font-bold tracking-wider shadow-lg">
+                      <Award className="w-3.5 h-3.5 text-amber-300" />
+                      <span>Gold Medalist</span>
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/90 text-secondary text-[10px] font-bold tracking-wider backdrop-blur-md border border-secondary/30">
+                      IMS-BHU Varanasi
+                    </span>
+                  </div>
+
+                  {/* Bottom Text inside Photo Frame */}
+                  <div className="absolute bottom-4 left-4 right-4 text-white z-10">
+                    <p className="font-outfit text-xl font-bold leading-tight">Dr. Ajay Kumar</p>
+                    <p className="text-xs text-secondary font-medium">Senior Surgical Oncologist • Cancer Aware Bharat Panel</p>
+                  </div>
+                </div>
+
+                {/* Floating Experience Card */}
+                <div className="absolute -bottom-6 -right-4 sm:-bottom-8 sm:-right-6 bg-white rounded-2xl p-4 sm:p-5 shadow-xl border border-slate-100 hidden sm:flex items-center gap-3.5 animate-float delay-200 z-20">
+                  <div className="w-12 h-12 rounded-xl bg-secondary/15 text-primary flex items-center justify-center font-black text-lg">
+                    5k+
+                  </div>
+                  <div>
+                    <p className="font-outfit text-sm font-bold text-primary leading-tight">5,000+ Patients</p>
+                    <p className="text-[11px] text-slate-500 font-medium">Treated & Assisted</p>
+                  </div>
+                </div>
+              </RevealSection>
+            </div>
+
+            {/* Right Column: Bio, Credentials & Actions (7 cols) */}
+            <div className="lg:col-span-7 flex flex-col space-y-6">
+              <RevealSection delay={200}>
+                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary/[0.06] text-primary text-[11px] font-bold tracking-widest uppercase mb-3">
+                  <Stethoscope className="w-3.5 h-3.5 text-secondary" />
+                  <span>KNOW MORE ABOUT OUR CLINICAL MISSION</span>
+                </div>
+
+                <h2 className="font-outfit text-primary text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight mb-4">
+                  Dedicated Cancer Care with <span className="text-secondary italic">Clinical Excellence</span>
+                </h2>
+
+                <div className="flex flex-wrap items-center gap-2 mb-4">
+                  <span className="text-sm font-bold text-slate-700">
+                    MBBS, MS, MCh (Surgical Oncology) IMS-BHU Varanasi
+                  </span>
+                  <span className="px-2.5 py-0.5 rounded-md bg-[#CA1871] text-white text-xs font-bold shadow-sm">
+                    Gold Medalist
+                  </span>
+                  <span className="px-2.5 py-0.5 rounded-md bg-primary text-secondary text-xs font-bold">
+                    'UP Ratna' & 'Kashi Ratna' Honored
+                  </span>
+                </div>
+
+                <p className="text-slate-600 text-sm sm:text-base leading-relaxed mb-4">
+                  Cancer Aware Bharat unites renowned surgical oncologists, medical specialists, and compassionate healthcare workers dedicated to early detection and patient-centric oncology care. With a track record of successfully evaluating and navigating thousands of patients, our mission ensures optimal clinical outcomes with human empathy.
+                </p>
+
+                <p className="text-slate-600 text-sm sm:text-base leading-relaxed mb-6">
+                  We emphasize personalized, evidence-based treatment plans, early screening camps in underserved areas, and full patient navigation from initial diagnosis through rehabilitation.
+                </p>
+
+                {/* Key Bullet Highlights */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+                  {[
+                    'Evidence-Based Screening Protocols',
+                    'Empaneled Specialist Guidance',
+                    'Accurate Hospital Referral Pathways',
+                    'Comprehensive Patient Navigation'
+                  ].map((highlight, idx) => (
+                    <div key={idx} className="flex items-center gap-2.5 text-slate-700 text-sm font-semibold">
+                      <CheckCircle2 className="w-4 h-4 text-secondary shrink-0" />
+                      <span>{highlight}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Dual Action Buttons */}
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
+                  <button
+                    onClick={onOpenEnquiry}
+                    className="btn-primary py-3.5 px-8 text-sm font-bold flex items-center justify-center gap-2 shadow-lg hover:shadow-xl cursor-pointer"
+                  >
+                    <Calendar className="w-4 h-4 text-secondary" />
+                    <span>Book Your Consultation</span>
+                    <ArrowRight className="w-4 h-4 ml-1" />
+                  </button>
+                  <button
+                    onClick={() => navigate('/doctors')}
+                    className="btn-secondary py-3.5 px-7 text-sm font-bold flex items-center justify-center gap-2 cursor-pointer"
+                  >
+                    <Stethoscope className="w-4 h-4 text-primary" />
+                    <span>Explore Specialist Panel</span>
+                  </button>
+                </div>
+              </RevealSection>
+            </div>
+
           </div>
         </div>
       </PremiumSection>

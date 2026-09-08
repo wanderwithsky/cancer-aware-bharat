@@ -119,30 +119,86 @@ export default function Navbar({
 
   return (
     <>
+      {/* ── Top Contact & Emergency Helpline Bar (Inspired by reference site topbar) ── */}
+      <div className="bg-[#102a45] text-white text-xs border-b border-white/10 hidden md:block">
+        <div className="w-full px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto py-2 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-6">
+            <a 
+              href="tel:+911140559200" 
+              className="flex items-center gap-1.5 text-white/90 hover:text-white transition-colors"
+            >
+              <PhoneCall className="w-3.5 h-3.5 text-secondary" />
+              <span className="font-semibold text-white">24/7 Helpline:</span>
+              <span className="text-white/80">+91 11 4055 9200</span>
+            </a>
+            <a 
+              href="https://wa.me/919120110286" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 text-white/90 hover:text-white transition-colors"
+            >
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="text-white/80">WhatsApp Support: +91 9120110286</span>
+            </a>
+          </div>
+
+          <div className="flex items-center gap-5 text-xs text-white/80">
+            <button
+              onClick={() => handleNavClick('/events')}
+              className="hover:text-white transition-colors flex items-center gap-1 cursor-pointer"
+            >
+              <Calendar className="w-3 h-3 text-secondary" />
+              <span>Free Cancer Camps</span>
+            </button>
+            <span className="text-white/30">•</span>
+            <button
+              onClick={() => handleNavClick('/hospital/login')}
+              className="hover:text-white transition-colors flex items-center gap-1 cursor-pointer"
+            >
+              <Building2 className="w-3 h-3 text-secondary" />
+              <span>Hospital Partner Portal</span>
+            </button>
+            <span className="text-white/30">•</span>
+            <div className="flex items-center gap-2">
+              <a href="#" aria-label="Facebook" className="hover:text-white text-white/60 transition-colors">
+                <Facebook className="w-3.5 h-3.5" />
+              </a>
+              <a href="#" aria-label="Instagram" className="hover:text-white text-white/60 transition-colors">
+                <Instagram className="w-3.5 h-3.5" />
+              </a>
+              <a href="#" aria-label="YouTube" className="hover:text-white text-white/60 transition-colors">
+                <Youtube className="w-3.5 h-3.5" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Main Sticky Navigation Header ── */}
       <nav
         ref={navRef}
         className={`sticky top-0 z-50 w-full transition-all duration-300 ease-out ${scrolled
-            ? 'bg-white/97 backdrop-blur-xl shadow-[0_4px_24px_rgba(22,58,95,0.07),0_1px_3px_rgba(22,58,95,0.04)]'
-            : 'bg-white/90 backdrop-blur-md'
+            ? 'bg-white/98 backdrop-blur-xl shadow-[0_4px_24px_rgba(22,58,95,0.08),0_1px_3px_rgba(22,58,95,0.04)] border-b border-slate-100'
+            : 'bg-white/95 backdrop-blur-md border-b border-slate-100/70'
           }`}
       >
-        <div className={`transition-all duration-300 ease-out w-full px-3 sm:px-6 lg:px-8 xl:px-12 max-w-[1480px] mx-auto flex justify-between items-center gap-2 relative ${scrolled ? 'h-[72px]' : 'h-[84px]'}`}>
+        <div className={`transition-all duration-300 ease-out w-full px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto flex justify-between items-center gap-4 relative ${scrolled ? 'h-[72px]' : 'h-[80px]'}`}>
 
           {/* LEFT: Brand Logo */}
           <button
             onClick={() => handleNavClick('/')}
-            className="flex items-center space-x-1.5 sm:space-x-3 text-left hover:opacity-90 transition-opacity duration-200 focus:outline-none min-w-0 shrink-0 group z-10"
+            className="flex items-center space-x-2.5 sm:space-x-3 text-left hover:opacity-90 transition-opacity duration-200 focus:outline-none min-w-0 shrink-0 group z-10"
           >
             <img
               src="/brand-logo.jpeg"
               alt="Cancer Aware Bharat Logo"
-              className={`rounded-full object-cover shadow-[0_2px_10px_rgba(22,58,95,0.12)] group-hover:shadow-[0_4px_14px_rgba(22,58,95,0.18)] transition-all duration-200 shrink-0 ${scrolled ? 'w-8 h-8 sm:w-10 sm:h-10' : 'w-8 h-8 sm:w-11 sm:h-11'}`}
+              className={`rounded-full object-cover shadow-[0_2px_10px_rgba(22,58,95,0.12)] group-hover:shadow-[0_4px_14px_rgba(22,58,95,0.18)] transition-all duration-200 shrink-0 ${scrolled ? 'w-9 h-9 sm:w-10 sm:h-10' : 'w-10 h-10 sm:w-11 sm:h-11'}`}
             />
             <div className="flex flex-col min-w-0">
-              <span className={`font-outfit font-extrabold text-primary tracking-tight leading-none transition-all duration-200 truncate ${scrolled ? 'text-[16px] sm:text-[19px]' : 'text-[17px] sm:text-[21px]'}`}>
+              <span className={`font-outfit font-extrabold text-primary tracking-tight leading-none transition-all duration-200 truncate ${scrolled ? 'text-[17px] sm:text-[20px]' : 'text-[18px] sm:text-[22px]'}`}>
                 Cancer Aware Bharat
               </span>
-              <span className="text-[10px] font-semibold text-primary/50 tracking-[0.08em] uppercase hidden sm:block mt-0.5">
+              <span className="text-[10.5px] font-semibold text-primary/60 tracking-[0.06em] uppercase hidden sm:block mt-0.5">
                 कैंसर जागरूकता अभियान
               </span>
             </div>
@@ -456,17 +512,17 @@ export default function Navbar({
             )}
             <button
               onClick={onOpenDonate}
-              className="flex items-center gap-1 xl:gap-2 px-2.5 xl:px-4 py-1.5 xl:py-2 border-2 border-primary text-primary rounded-full font-semibold text-xs xl:text-[14px] transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/5 focus:outline-none whitespace-nowrap"
+              className="flex items-center gap-1.5 px-3 py-2 border border-primary/20 text-primary rounded-full font-semibold text-xs xl:text-[13.5px] transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/5 hover:border-primary/40 focus:outline-none whitespace-nowrap cursor-pointer"
             >
-              <Gift className="w-3.5 h-3.5 xl:w-4 xl:h-4" />
+              <Gift className="w-3.5 h-3.5 text-secondary" />
               <span>Donate</span>
             </button>
             <button
-              onClick={onOpenVolunteer}
-              className="flex items-center gap-1 xl:gap-2 px-3 xl:px-5 py-1.5 xl:py-2 bg-primary text-white rounded-full font-semibold text-xs xl:text-[14px] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(22,58,95,0.25)] hover:bg-[#112d4a] focus:outline-none whitespace-nowrap"
+              onClick={onOpenEnquiry}
+              className="flex items-center gap-1.5 px-4 xl:px-5 py-2 bg-primary text-white rounded-full font-semibold text-xs xl:text-[13.5px] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(22,58,95,0.25)] hover:bg-[#0e2742] focus:outline-none whitespace-nowrap cursor-pointer"
             >
-              <Heart className="w-3.5 h-3.5 xl:w-4 xl:h-4" />
-              <span>Become a Volunteer</span>
+              <PhoneCall className="w-3.5 h-3.5 text-secondary" />
+              <span>Book Consultation</span>
             </button>
           </div>
 

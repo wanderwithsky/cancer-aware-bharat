@@ -21,6 +21,7 @@ from app.core.database import get_db
 from app.core.limiter import limiter
 from app.main import app
 
+settings.email_backend = "console"
 engine = create_engine(settings.database_url)
 TestingSessionLocal = sessionmaker(bind=engine)
 
