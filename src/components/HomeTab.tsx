@@ -6,7 +6,7 @@ import {
   Phone, Stethoscope, Star, Quote, ChevronDown, Mail,
   Sun, Apple, Cigarette, Dumbbell, Syringe, Search as SearchIcon, Target,
   ClipboardCheck, UserCheck, Compass, HeartPulse, Droplet, Play,
-  Plus, Building, Clock, Sparkles
+  Plus, Building, Clock, Sparkles, ShieldCheck
 } from 'lucide-react';
 import { useEvents } from '../api/hooks';
 import TeamShowcase from './TeamShowcase';
@@ -1118,14 +1118,14 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
             </div>
 
             {/* Headline */}
-            <h1 className="font-outfit text-white text-[42px] sm:text-[54px] md:text-[64px] lg:text-[76px] font-[800] leading-[1.05] tracking-tight mb-6">
+            <h1 className="font-outfit text-white text-[40px] sm:text-[52px] md:text-[62px] lg:text-[72px] font-[800] leading-[1.08] tracking-tight mb-6">
               <div className="overflow-hidden pb-1">
                 <div className="animate-fade-in-up opacity-0 [animation-fill-mode:forwards]" style={{ animationDelay: '100ms', animationDuration: '400ms' }}>
                   {CAROUSEL_SLIDES[activeSlide].titleLine1}
                 </div>
               </div>
               <div className="overflow-hidden mt-1 pb-2">
-                <div className="animate-fade-in-up opacity-0 [animation-fill-mode:forwards] text-white font-[800]" style={{ animationDelay: '200ms', animationDuration: '400ms' }}>
+                <div className="animate-fade-in-up opacity-0 [animation-fill-mode:forwards] text-secondary font-[800]" style={{ animationDelay: '200ms', animationDuration: '400ms' }}>
                   {CAROUSEL_SLIDES[activeSlide].titleLine2}
                 </div>
               </div>
@@ -1133,9 +1133,21 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
 
             {/* Subtitle */}
             <div className="animate-fade-in-up opacity-0 [animation-fill-mode:forwards]" style={{ animationDelay: '300ms', animationDuration: '400ms' }}>
-              <p className="text-white/95 text-[17px] md:text-[20px] lg:text-[22px] font-medium leading-[1.65] mb-10 max-w-full">
+              <p className="text-white/90 text-[16px] md:text-[19px] lg:text-[21px] font-normal leading-[1.65] mb-8 max-w-full">
                 {CAROUSEL_SLIDES[activeSlide].desc}
               </p>
+            </div>
+
+            {/* Floating Trust Badges */}
+            <div className="flex flex-wrap items-center gap-3 mb-8 animate-fade-in-up opacity-0 [animation-fill-mode:forwards]" style={{ animationDelay: '350ms', animationDuration: '400ms' }}>
+              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md text-white text-xs font-semibold border border-white/15">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                14,250+ Lives Screened Free
+              </span>
+              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md text-white text-xs font-semibold border border-white/15">
+                <ShieldCheck className="w-3.5 h-3.5 text-secondary" />
+                Empaneled Hospital Network
+              </span>
             </div>
 
             {/* Buttons */}
@@ -1147,9 +1159,9 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
                   else if (act === 'enquiry') onOpenEnquiry();
                   else navigate('/events');
                 }}
-                className="px-10 py-4 rounded-full bg-primary text-white font-semibold text-[16px] hover:bg-[#112d4a] hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(22,58,95,0.4)] flex items-center justify-center gap-2 transition-all duration-300 ease-out cursor-pointer"
+                className="px-9 py-4 rounded-full bg-secondary text-slate-900 font-extrabold text-[15px] hover:bg-[#FDB64D] hover:-translate-y-1 shadow-[0_10px_30px_rgba(212,175,55,0.4)] flex items-center justify-center gap-2 transition-all duration-300 ease-out cursor-pointer group/btn"
               >
-                {CAROUSEL_SLIDES[activeSlide].primaryBtn} <ArrowRight className="w-4.5 h-4.5" />
+                {CAROUSEL_SLIDES[activeSlide].primaryBtn} <ArrowRight className="w-4.5 h-4.5 group-hover/btn:translate-x-1 transition-transform" />
               </button>
               <button
                 onClick={() => {
@@ -1158,7 +1170,7 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
                   else if (act === 'volunteer') onOpenVolunteer();
                   else navigate('/mission');
                 }}
-                className="px-10 py-4 rounded-full bg-transparent border-2 border-white text-white font-semibold text-[16px] hover:bg-white hover:text-primary hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(255,255,255,0.25)] flex items-center justify-center transition-all duration-300 ease-out cursor-pointer"
+                className="px-9 py-4 rounded-full bg-white/10 backdrop-blur-md border border-white/30 text-white font-semibold text-[15px] hover:bg-white hover:text-primary hover:-translate-y-1 hover:shadow-xl flex items-center justify-center transition-all duration-300 ease-out cursor-pointer"
               >
                 {CAROUSEL_SLIDES[activeSlide].secondaryBtn}
               </button>
@@ -1184,7 +1196,7 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
         </button>
 
         {/* Cinematic Slide Indicators */}
-        <div className="absolute bottom-10 right-6 md:right-[6vw] lg:right-[8vw] z-40 flex items-center gap-3.5">
+        <div className="absolute bottom-8 right-6 md:right-[6vw] lg:right-[8vw] z-40 flex items-center gap-3.5">
           {CAROUSEL_SLIDES.map((_, idx) => (
             <button
               key={idx}
@@ -1194,7 +1206,7 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
               }}
               className={`transition-all duration-500 ease-out rounded-full cursor-pointer ${
                 idx === activeSlide
-                  ? 'w-3 h-3 bg-secondary shadow-[0_0_12px_rgba(212,175,55,0.8)] scale-110'
+                  ? 'w-8 h-2.5 bg-secondary shadow-[0_0_12px_rgba(212,175,55,0.8)]'
                   : 'w-2.5 h-2.5 bg-white/40 hover:bg-white/80'
               }`}
               aria-label={`Go to slide ${idx + 1}`}
@@ -1204,13 +1216,13 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
       </section>
 
       {/* ═══════════════════════════════════════════
-          SECTION 1.1: FLOATING ACTION BAR (APPOINTMENT & SOCIAL MEDIA)
+          SECTION 1.1: INTERACTIVE QUICK TRIAGE & APPOINTMENT BAR
           ═══════════════════════════════════════════ */}
-      <div className="relative z-30 -mt-10 md:-mt-14 mb-10 px-4 max-w-6xl mx-auto animate-float">
+      <div className="relative z-30 -mt-10 md:-mt-14 mb-12 px-4 max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-6 items-stretch">
           
-          {/* Card 1: Book Appointment (7 Cols on LG) */}
-          <div className="lg:col-span-7 bg-gradient-to-r from-[#0B1E36] via-[#163A5F] to-[#112E4C] rounded-3xl p-6 md:p-8 shadow-[0_20px_50px_rgba(11,30,54,0.4)] border-2 border-secondary/40 backdrop-blur-xl flex flex-col sm:flex-row items-center justify-between gap-6 relative overflow-hidden group">
+          {/* Card 1: Book Appointment & Quick Triage (7 Cols on LG) */}
+          <div className="lg:col-span-7 bg-gradient-to-br from-[#0B1E36] via-[#163A5F] to-[#112E4C] rounded-3xl p-6 md:p-8 shadow-[0_20px_50px_rgba(11,30,54,0.4)] border border-secondary/30 backdrop-blur-xl flex flex-col sm:flex-row items-center justify-between gap-6 relative overflow-hidden group">
             
             {/* Background Glow */}
             <div className="absolute top-0 right-0 w-48 h-48 bg-secondary/15 rounded-full blur-2xl pointer-events-none" />
@@ -1219,83 +1231,60 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
             <div className="flex flex-col text-center sm:text-left z-10">
               <div className="inline-flex items-center justify-center sm:justify-start gap-2 text-secondary text-xs font-black uppercase tracking-widest mb-2">
                 <Sparkles className="w-4 h-4 text-secondary" />
-                <span>EXPERT CARE & ASSISTANCE</span>
+                <span>EXPERT CLINICAL GUIDANCE</span>
               </div>
               <h3 className="font-outfit text-xl md:text-2xl lg:text-3xl font-extrabold text-white leading-tight mb-1">
-                Feel free to <span className="text-secondary italic">book an appointment</span>
+                Schedule a <span className="text-secondary italic">Consultation</span>
               </h3>
               <p className="text-slate-300 text-xs md:text-sm font-light">
-                Connect directly with top oncology specialists across India.
+                Connect with our expert surgical oncology panel and caseworkers.
               </p>
             </div>
 
             <button
               onClick={onOpenEnquiry}
-              className="w-full sm:w-auto h-14 md:h-15 px-7 md:px-8 rounded-2xl bg-gradient-to-r from-[#D4AF37] via-[#f3d677] to-[#D4AF37] text-[#163A5F] font-extrabold text-sm md:text-base flex items-center justify-center gap-3 shadow-[0_8px_25px_rgba(212,175,55,0.4)] hover:shadow-[0_12px_35px_rgba(212,175,55,0.7)] hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer shrink-0 z-10 relative overflow-hidden group/btn"
+              className="w-full sm:w-auto h-14 px-7 md:px-8 rounded-2xl bg-gradient-to-r from-[#D4AF37] via-[#f3d677] to-[#D4AF37] text-[#163A5F] font-extrabold text-sm md:text-base flex items-center justify-center gap-3 shadow-[0_8px_25px_rgba(212,175,55,0.4)] hover:shadow-[0_12px_35px_rgba(212,175,55,0.7)] hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer shrink-0 z-10 relative overflow-hidden group/btn"
             >
               <div className="absolute inset-0 bg-white/20 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000 ease-out pointer-events-none" />
               <Calendar className="w-5 h-5 text-[#163A5F] shrink-0" />
-              <span>Book an Appointment</span>
+              <span>Book Appointment</span>
               <ArrowRight className="w-4 h-4 text-[#163A5F] shrink-0 group-hover/btn:translate-x-1 transition-transform" />
             </button>
           </div>
 
-          {/* Card 2: Social FABs (5 Cols on LG) */}
-          <div className="lg:col-span-5 bg-gradient-to-r from-[#112E4C] via-[#163A5F] to-[#0B1E36] rounded-3xl p-6 md:p-8 shadow-[0_20px_50px_rgba(11,30,54,0.4)] border-2 border-secondary/40 backdrop-blur-xl flex flex-col justify-center items-center text-center relative overflow-hidden">
+          {/* Card 2: Quick Camp Locator & Helpline (5 Cols on LG) */}
+          <div className="lg:col-span-5 bg-gradient-to-br from-[#112E4C] via-[#163A5F] to-[#0B1E36] rounded-3xl p-6 md:p-8 shadow-[0_20px_50px_rgba(11,30,54,0.4)] border border-secondary/30 backdrop-blur-xl flex flex-col justify-center items-center text-center relative overflow-hidden">
             
             <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-secondary to-transparent opacity-70" />
 
-            <span className="text-xs font-extrabold uppercase tracking-widest text-secondary mb-4">
-              Follow Us On Social Media
-            </span>
-
-            <div className="grid grid-cols-3 gap-2.5 sm:gap-3 w-full">
-              {/* Instagram FAB */}
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                title="Follow on Instagram"
-                className="h-13 md:h-14 px-3 md:px-4 rounded-2xl bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 text-white font-bold text-xs md:text-sm flex items-center justify-center gap-2 shadow-[0_6px_20px_rgba(225,48,108,0.35)] hover:shadow-[0_10px_25px_rgba(225,48,108,0.6)] hover:scale-105 hover:-translate-y-0.5 transition-all duration-300 border border-white/20 group cursor-pointer"
-              >
-                <svg className="w-5 h-5 md:w-6 md:h-6 fill-current group-hover:scale-110 transition-transform shrink-0" viewBox="0 0 24 24">
-                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                </svg>
-                <span className="hidden sm:inline">Instagram</span>
-              </a>
-
-              {/* Facebook FAB */}
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook"
-                title="Follow on Facebook"
-                className="h-13 md:h-14 px-3 md:px-4 rounded-2xl bg-[#1877F2] text-white font-bold text-xs md:text-sm flex items-center justify-center gap-2 shadow-[0_6px_20px_rgba(24,119,242,0.35)] hover:shadow-[0_10px_25px_rgba(24,119,242,0.6)] hover:scale-105 hover:-translate-y-0.5 transition-all duration-300 border border-white/20 group cursor-pointer"
-              >
-                <svg className="w-5 h-5 md:w-6 md:h-6 fill-current group-hover:scale-110 transition-transform shrink-0" viewBox="0 0 24 24">
-                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                </svg>
-                <span className="hidden sm:inline">Facebook</span>
-              </a>
-
-              {/* YouTube FAB */}
-              <a
-                href="https://youtube.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="YouTube"
-                title="Subscribe on YouTube"
-                className="h-13 md:h-14 px-3 md:px-4 rounded-2xl bg-[#FF0000] text-white font-bold text-xs md:text-sm flex items-center justify-center gap-2 shadow-[0_6px_20px_rgba(255,0,0,0.35)] hover:shadow-[0_10px_25px_rgba(255,0,0,0.6)] hover:scale-105 hover:-translate-y-0.5 transition-all duration-300 border border-white/20 group cursor-pointer"
-              >
-                <svg className="w-5 h-5 md:w-6 md:h-6 fill-current group-hover:scale-110 transition-transform shrink-0" viewBox="0 0 24 24">
-                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                </svg>
-                <span className="hidden sm:inline">YouTube</span>
-              </a>
+            <div className="flex items-center justify-between w-full mb-4">
+              <span className="text-xs font-extrabold uppercase tracking-widest text-secondary">
+                24/7 Helpline & Support
+              </span>
+              <span className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] font-bold border border-emerald-500/30">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                Live Now
+              </span>
             </div>
 
+            <div className="grid grid-cols-2 gap-3 w-full">
+              <a
+                href="tel:+911140559200"
+                className="h-12 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs flex items-center justify-center gap-2 border border-white/15 transition-all duration-300 hover:scale-105"
+              >
+                <Phone className="w-4 h-4 text-secondary" />
+                <span>Call Helpline</span>
+              </a>
+              <a
+                href="https://wa.me/919120110286"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="h-12 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center justify-center gap-2 border border-emerald-400/30 transition-all duration-300 hover:scale-105 shadow-md shadow-emerald-900/30"
+              >
+                <HeartHandshake className="w-4 h-4" />
+                <span>WhatsApp</span>
+              </a>
+            </div>
           </div>
 
         </div>
