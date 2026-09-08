@@ -40,8 +40,9 @@ export default function AboutTab({ onOpenVolunteer }: AboutTabProps) {
 
   return (
     <>
-      <PremiumSection variant="warm-1" withTopDivider="none" withBottomDivider="torn">
+      <PremiumSection variant="warm-1">
         <div className="space-y-14">
+
           {/* Page Title Header */}
           <div className="text-center max-w-3xl mx-auto space-y-4">
             <span className="section-badge mx-auto">Who We Are</span>
@@ -132,8 +133,9 @@ export default function AboutTab({ onOpenVolunteer }: AboutTabProps) {
         </div>
       </PremiumSection>
 
-      <PremiumSection variant="warm-3" withTopDivider="wave" withBottomDivider="torn">
+      <PremiumSection variant="warm-3">
         <div className="space-y-20">
+
           {/* Message from Founder */}
           <div className="card-premium p-8 md:p-12">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-center">

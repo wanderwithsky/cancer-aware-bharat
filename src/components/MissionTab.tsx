@@ -100,8 +100,9 @@ export default function MissionTab({ onOpenVolunteer, onOpenEnquiry }: MissionTa
 
   return (
     <>
-      <PremiumSection variant="warm-1" withTopDivider="none" withBottomDivider="torn">
+      <PremiumSection variant="warm-1">
         <div className="space-y-12 animate-[fadeIn_0.3s_ease-out]">
+
       {/* ===== HERO SECTION ===== */}
       <section className="relative rounded-2xl min-h-[480px] sm:min-h-[520px] flex flex-col justify-between p-6 sm:p-10 md:p-14 overflow-hidden shadow-2xl bg-neutral-950 text-white">
         
@@ -271,8 +272,9 @@ export default function MissionTab({ onOpenVolunteer, onOpenEnquiry }: MissionTa
       </section>
         </div>
       </PremiumSection>
-      <PremiumSection variant="warm-3" withTopDivider="wave" withBottomDivider="torn">
+      <PremiumSection variant="warm-3">
         <div className="space-y-16">
+
           {/* ===== REFERRAL PATHWAY WORKFLOW (रेफरल प्रक्रिया) ===== */}
       <section className="bg-gradient-to-br from-slate-900 via-neutral-900 to-slate-950 text-white rounded-3xl p-8 sm:p-12 border border-slate-800 space-y-8 shadow-2xl relative overflow-hidden">
         <div className="max-w-2xl space-y-3">

@@ -232,8 +232,9 @@ function UpcomingCampsCarousel({ onOpenEnquiry }: { onOpenEnquiry: () => void })
   };
 
   return (
-    <PremiumSection variant="warm-1" withTopDivider="torn" withBottomDivider="wave">
+    <PremiumSection variant="warm-1">
       <RevealSection>
+
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-12">
             <div className="max-w-2xl">
               <span className="inline-block px-4 py-1.5 rounded-full bg-primary/[0.06] text-primary text-[11px] font-bold tracking-widest uppercase mb-4">
@@ -483,8 +484,9 @@ function TestimonialsCarousel() {
   };
 
   return (
-    <PremiumSection variant="warm-2" withTopDivider="wave" withBottomDivider="torn">
+    <PremiumSection variant="warm-2">
       {/* Decorative Dots Background */}
+
       <div 
         className="absolute inset-0 opacity-[0.025] pointer-events-none"
         style={{ backgroundImage: 'radial-gradient(#163A5F 2px, transparent 2px)', backgroundSize: '30px 30px' }}
@@ -1088,25 +1090,12 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
                   />
                 </div>
                 {/* Left-to-Right cinematic gradient overlay */}
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(22,58,95,0.75)_0%,rgba(22,58,95,0.35)_40%,rgba(22,58,95,0)_75%,transparent_100%)]" />
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(22,58,95,0.85)_0%,rgba(22,58,95,0.45)_50%,rgba(22,58,95,0.1)_80%,transparent_100%)]" />
               </div>
             );
           })}
         </div>
 
-        {/* Torn Edge Top (white, to match navbar/body transition) */}
-        <div className="absolute top-[-1px] left-0 w-full z-30 text-white transform rotate-180 pointer-events-none">
-          <svg viewBox="0 0 1200 40" preserveAspectRatio="none" className="w-full h-6 md:h-10 lg:h-12 fill-current block">
-            <path d="M0,40 L0,18 L12,25.9 L24,20.8 L36,13.8 L48,21 L60,25.5 L72,17.2 L84,15.6 L96,24.1 L108,21 L120,13 L132,19.9 L144,25 L156,16.5 L168,14 L180,22.8 L192,20.4 L204,12.5 L216,19 L228,24.5 L240,16 L252,13.2 L264,21.5 L276,19.5 L288,11.8 L300,18.2 L312,23.8 L324,15.3 L336,12.5 L348,20.2 L360,18.8 L372,11.2 L384,17.4 L396,23 L408,14.6 L420,11.8 L432,19 L444,18.2 L456,10.7 L468,16.6 L480,22.2 L492,14 L504,11.2 L516,17.9 L528,17.5 L540,10.2 L552,15.8 L564,21.3 L576,13.3 L588,10.6 L600,16.7 L612,16.8 L624,9.8 L636,15 L648,20.5 L660,12.7 L672,10.2 L684,15.5 L696,16.2 L708,9.4 L720,14.2 L732,19.6 L744,12 L756,9.8 L768,14.4 L780,15.5 L792,9 L804,13.5 L816,18.7 L828,11.4 L840,9.4 L852,13.3 L864,14.9 L876,8.6 L888,12.7 L900,17.8 L912,10.7 L924,9.1 L936,12.2 L948,14.2 L960,8.3 L972,12 L984,16.8 L996,10 L1008,8.8 L1020,11.1 L1032,13.6 L1044,8 L1056,11.2 L1068,15.8 L1080,9.4 L1092,8.6 L1104,10 L1116,12.9 L1128,7.7 L1140,10.5 L1152,14.8 L1164,8.8 L1176,8.4 L1188,8.9 L1200,12.3 L1200,40 Z"/>
-          </svg>
-        </div>
-
-        {/* Torn Edge Bottom */}
-        <div className="absolute bottom-[-1px] left-0 w-full z-30 text-white pointer-events-none">
-          <svg viewBox="0 0 1200 40" preserveAspectRatio="none" className="w-full h-6 md:h-10 lg:h-12 fill-current block">
-            <path d="M0,40 L0,18 L12,25.9 L24,20.8 L36,13.8 L48,21 L60,25.5 L72,17.2 L84,15.6 L96,24.1 L108,21 L120,13 L132,19.9 L144,25 L156,16.5 L168,14 L180,22.8 L192,20.4 L204,12.5 L216,19 L228,24.5 L240,16 L252,13.2 L264,21.5 L276,19.5 L288,11.8 L300,18.2 L312,23.8 L324,15.3 L336,12.5 L348,20.2 L360,18.8 L372,11.2 L384,17.4 L396,23 L408,14.6 L420,11.8 L432,19 L444,18.2 L456,10.7 L468,16.6 L480,22.2 L492,14 L504,11.2 L516,17.9 L528,17.5 L540,10.2 L552,15.8 L564,21.3 L576,13.3 L588,10.6 L600,16.7 L612,16.8 L624,9.8 L636,15 L648,20.5 L660,12.7 L672,10.2 L684,15.5 L696,16.2 L708,9.4 L720,14.2 L732,19.6 L744,12 L756,9.8 L768,14.4 L780,15.5 L792,9 L804,13.5 L816,18.7 L828,11.4 L840,9.4 L852,13.3 L864,14.9 L876,8.6 L888,12.7 L900,17.8 L912,10.7 L924,9.1 L936,12.2 L948,14.2 L960,8.3 L972,12 L984,16.8 L996,10 L1008,8.8 L1020,11.1 L1032,13.6 L1044,8 L1056,11.2 L1068,15.8 L1080,9.4 L1092,8.6 L1104,10 L1116,12.9 L1128,7.7 L1140,10.5 L1152,14.8 L1164,8.8 L1176,8.4 L1188,8.9 L1200,12.3 L1200,40 Z"/>
-          </svg>
-        </div>
 
         {/* Decorative Floating Elements */}
         <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden">
@@ -1528,50 +1517,88 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
             </div>
           </RevealSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {[
               {
                 icon: Microscope,
-                theme: 'theme-1',
-                iconColor: 'text-primary',
+                badge: 'Oral Oncology',
+                iconColor: 'text-primary bg-primary/10',
                 title: 'Early Cancer Screening',
-                desc: 'We organize free cancer screening camps in rural and urban communities for the early detection of Oral, Breast and Cervical Cancer.'
+                desc: 'Free, doctor-led clinical screening camps in rural and urban communities for the early detection of Oral, Breast, and Cervical Cancer with immediate referral pathways.',
+                action: 'Book Screening'
               },
               {
                 icon: HeartPulse,
-                theme: 'theme-2',
-                iconColor: 'text-[#2E8B57]',
+                badge: 'Patient Navigation',
+                iconColor: 'text-emerald-700 bg-emerald-50',
                 title: 'Patient Navigation & Support',
-                desc: 'Our trained volunteers guide patients and families through diagnosis, referrals, treatment planning and access to government healthcare schemes.'
+                desc: 'Dedicated caseworkers and volunteers guide families through biopsy reports, second opinions, treatment roadmap planning, and government scheme enrollments.',
+                action: 'Get Navigation'
+              },
+              {
+                icon: Stethoscope,
+                badge: 'Clinical Oncology',
+                iconColor: 'text-secondary bg-secondary/10',
+                title: 'Specialist Second Opinion',
+                desc: 'Access our panel of senior surgical oncologists and medical oncology specialists for verified evaluation before starting complex chemotherapy or surgical procedures.',
+                action: 'Request Opinion'
+              },
+              {
+                icon: Activity,
+                badge: 'Thoracic & Breast',
+                iconColor: 'text-indigo-700 bg-indigo-50',
+                title: 'Targeted Diagnostic Guidance',
+                desc: 'Structured clinical guidance for high-risk patients, low-dose respiratory evaluations, mammography scheduling, and histopathology correlation.',
+                action: 'View Protocols'
               },
               {
                 icon: BookOpen,
-                theme: 'theme-3',
-                iconColor: 'text-secondary',
+                badge: 'Community Outreach',
+                iconColor: 'text-amber-700 bg-amber-50',
                 title: 'Cancer Education & Prevention',
-                desc: 'We educate schools, colleges and communities through awareness workshops, self-examination training and preventive healthcare programs.'
+                desc: 'Grassroots awareness workshops, tobacco cessation campaigns, self-examination training, and healthy lifestyle seminars for schools and institutions.',
+                action: 'Join Workshop'
+              },
+              {
+                icon: MapPin,
+                badge: 'Mobile Healthcare',
+                iconColor: 'text-rose-700 bg-rose-50',
+                title: 'Free Diagnostic & Follow-Up Camps',
+                desc: 'Scheduled mobile health camps equipped with essential diagnostic tools, bringing top hospital capabilities directly to underserved areas.',
+                action: 'Find Nearest Camp'
               }
             ].map((item, i) => (
-              <RevealSection key={i} delay={i * 150}>
-                <div className={`card-organic ${item.theme} h-full bg-white p-8 md:p-10 flex flex-col items-center text-center group cursor-default`}>
-                  {/* Floating Icon Badge */}
-                  <div className="relative mb-8">
-                    <div className="absolute inset-0 bg-black/5 rounded-full blur-md transform translate-y-2 group-hover:translate-y-3 group-hover:blur-lg transition-all duration-300" />
-                    <div className="relative w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-slate-50 group-hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] transition-all duration-300 group-hover:-translate-y-1">
-                      <item.icon className={`w-9 h-9 ${item.iconColor} group-hover:rotate-6 transition-transform duration-500`} strokeWidth={1.5} />
+              <RevealSection key={i} delay={i * 100}>
+                <div className="card-clinical h-full p-7 md:p-8 flex flex-col justify-between group cursor-pointer bg-white">
+                  <div>
+                    {/* Top Bar: Icon & Category Badge */}
+                    <div className="flex items-center justify-between gap-4 mb-6">
+                      <div className={`w-14 h-14 rounded-2xl ${item.iconColor} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                        <item.icon className="w-7 h-7" strokeWidth={1.75} />
+                      </div>
+                      <span className="px-3 py-1 rounded-full text-[11px] font-bold tracking-wider uppercase bg-slate-100 text-slate-600 group-hover:bg-primary/10 group-hover:text-primary transition-colors">
+                        {item.badge}
+                      </span>
                     </div>
+                    
+                    <h3 className="font-outfit text-primary text-xl font-bold mb-3 group-hover:text-secondary transition-colors">
+                      {item.title}
+                    </h3>
+                    
+                    <p className="text-[14px] text-slate-600 leading-relaxed font-normal">
+                      {item.desc}
+                    </p>
                   </div>
-                  
-                  <h3 className="font-outfit text-primary text-xl md:text-2xl font-bold mb-4">
-                    {item.title}
-                  </h3>
-                  <p className="text-[15px] text-slate-500 leading-relaxed">
-                    {item.desc}
-                  </p>
+
+                  <div className="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between text-primary group-hover:text-secondary transition-colors">
+                    <span className="text-xs font-bold uppercase tracking-wider">{item.action}</span>
+                    <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1.5 transition-transform" />
+                  </div>
                 </div>
               </RevealSection>
             ))}
           </div>
+
         </div>
       </PremiumSection>
 
@@ -1640,7 +1667,6 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
                 <p className="text-base md:text-lg text-on-surface-variant leading-relaxed mb-10">
                   Cancer Aware Bharat connects patients with trusted doctors, screening camps, healthcare partners and trained volunteers to ensure timely diagnosis, guidance and compassionate support throughout their treatment journey.
                 </p>
-
                 {/* Feature Blocks */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-10">
                   {/* Feature 1 */}
@@ -1714,44 +1740,20 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
       <TestimonialsCarousel />
 
       {/* ═══════════════════════════════════════════
-          SECTION 10.1: PARTNERSHIPS (CONTINUOUS STRIP)
+          SECTION 10.1: PARTNERSHIPS & ADVOCACY PANELS
           ═══════════════════════════════════════════ */}
-      <style>{`
-        .torn-left {
-          -webkit-mask-image: url("data:image/svg+xml,%3Csvg width='100' height='100' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,0 L100,0 L100,95 C92,90 84,100 76,93 C68,88 60,98 52,94 C44,88 36,100 28,95 C20,89 12,99 4,94 C0,91 0,95 0,95 Z' fill='black'/%3E%3C/svg%3E");
-          mask-image: url("data:image/svg+xml,%3Csvg width='100' height='100' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,0 L100,0 L100,95 C92,90 84,100 76,93 C68,88 60,98 52,94 C44,88 36,100 28,95 C20,89 12,99 4,94 C0,91 0,95 0,95 Z' fill='black'/%3E%3C/svg%3E");
-          -webkit-mask-size: 100% 100%;
-          mask-size: 100% 100%;
-        }
-        .torn-right {
-          -webkit-mask-image: url("data:image/svg+xml,%3Csvg width='100' height='100' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,100 L100,100 L100,5 C92,10 84,0 76,7 C68,12 60,2 52,6 C44,12 36,0 28,5 C20,11 12,1 4,6 C0,9 0,5 0,5 Z' fill='black'/%3E%3C/svg%3E");
-          mask-image: url("data:image/svg+xml,%3Csvg width='100' height='100' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,100 L100,100 L100,5 C92,10 84,0 76,7 C68,12 60,2 52,6 C44,12 36,0 28,5 C20,11 12,1 4,6 C0,9 0,5 0,5 Z' fill='black'/%3E%3C/svg%3E");
-          -webkit-mask-size: 100% 100%;
-          mask-size: 100% 100%;
-        }
-        @media (min-width: 1024px) {
-          .torn-left {
-            -webkit-mask-image: url("data:image/svg+xml,%3Csvg width='100' height='100' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,0 L95,0 C87,10 100,20 92,30 C85,40 98,50 91,60 C86,70 100,80 93,90 C89,96 95,100 95,100 L0,100 Z' fill='black'/%3E%3C/svg%3E");
-            mask-image: url("data:image/svg+xml,%3Csvg width='100' height='100' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,0 L95,0 C87,10 100,20 92,30 C85,40 98,50 91,60 C86,70 100,80 93,90 C89,96 95,100 95,100 L0,100 Z' fill='black'/%3E%3C/svg%3E");
-          }
-          .torn-right {
-            -webkit-mask-image: url("data:image/svg+xml,%3Csvg width='100' height='100' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M100,0 L5,0 C13,10 0,20 8,30 C15,40 2,50 9,60 C14,70 0,80 7,90 C11,96 5,100 5,100 L100,100 Z' fill='black'/%3E%3C/svg%3E");
-            mask-image: url("data:image/svg+xml,%3Csvg width='100' height='100' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M100,0 L5,0 C13,10 0,20 8,30 C15,40 2,50 9,60 C14,70 0,80 7,90 C11,96 5,100 5,100 L100,100 Z' fill='black'/%3E%3C/svg%3E");
-          }
-        }
-      `}</style>
-      <section className="w-full bg-neutral-900 overflow-hidden">
-        <div className="flex flex-col lg:flex-row w-full min-h-[500px] lg:h-[540px]">
+      <section className="w-full bg-slate-900 py-16 md:py-24 px-4 sm:px-6 lg:px-8 border-t border-slate-800">
+        <div className="max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
           
           {/* Left Panel: Volunteer */}
-          <div className="torn-left relative flex-1 group min-h-[400px] z-10 -mb-8 lg:mb-0 lg:-mr-8">
-            <img src="/events/event-1.jpeg" alt="Volunteer" className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2000ms] group-hover:scale-105" />
-            <div className="absolute inset-0 bg-black/45 transition-colors duration-500" />
-            <div className="absolute inset-0 p-8 md:p-12 lg:pr-16 flex flex-col justify-center items-start text-left z-10">
-              <span className="inline-block text-[12px] md:text-[13px] font-medium uppercase tracking-[0.15em] text-secondary mb-2">
+          <div className="relative rounded-3xl overflow-hidden group min-h-[420px] bg-slate-800 shadow-2xl border border-white/10 flex flex-col justify-end p-8 md:p-10">
+            <img src="/events/event-1.jpeg" alt="Volunteer" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-900/60 to-transparent" />
+            <div className="relative z-10 space-y-3">
+              <span className="inline-block text-xs font-bold uppercase tracking-widest text-secondary">
                 Join Our Mission
               </span>
-              <h3 className="font-outfit text-[28px] md:text-[36px] lg:text-[42px] font-[700] text-white leading-[1.15] mb-3 tracking-tight max-w-[420px]">
+              <h3 className="font-outfit text-2xl sm:text-3xl font-bold text-white leading-tight">
                 Become A Volunteer
               </h3>
               <p className="text-white/90 text-[15px] md:text-[17px] font-normal leading-[1.7] mb-6 max-w-[420px]">
