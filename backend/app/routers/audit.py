@@ -5,7 +5,7 @@ from fastapi import APIRouter, Depends, Query, Request
 from app.core.limiter import limiter
 from app.deps import DbSession, require_roles
 from app.models.audit_log import AuditLog
-from app.schemas.audit_log import AuditLogOut
+from app.schemas.audit_log import AuditLogOut, Severity
 
 router = APIRouter(prefix="/audit-logs", tags=["audit-logs"])
 
@@ -17,12 +17,13 @@ _CRITICAL_SUFFIXES = ("_rejected", "_declined", "_deleted", "_suspended")
 _WARNING_SUFFIXES = ("_recommended", "_updated")
 
 
-def _severity_for(event_type: str) -> str:
+def _severity_for(event_type: str) -> Severity:
     if event_type == "login_failure" or event_type.endswith(_CRITICAL_SUFFIXES):
         return "Critical"
     if event_type.endswith(_WARNING_SUFFIXES):
         return "Warning"
     return "Info"
+
 
 
 @router.get("", response_model=list[AuditLogOut])

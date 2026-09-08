@@ -100,8 +100,9 @@ class _FakeRazorpayUtility:
 
     def verify_payment_signature(self, params):
         if self.should_fail:
-            import razorpay
-            raise razorpay.errors.SignatureVerificationError("bad signature")
+            from razorpay.errors import SignatureVerificationError
+            raise SignatureVerificationError("bad signature")
+
 
 
 class _FakeRazorpayClient:

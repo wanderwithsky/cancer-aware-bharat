@@ -48,7 +48,8 @@ def patient_intake_monthly(
         .order_by(month)
         .all()
     )
-    return [MonthlyCountOut(month=r.month, count=r.count) for r in rows]
+    return [MonthlyCountOut(month=r[0], count=int(r[1])) for r in rows]
+
 
 
 @router.get("/volunteer-hours-monthly", response_model=list[MonthlyHoursOut])

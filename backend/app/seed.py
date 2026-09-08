@@ -152,8 +152,9 @@ def run() -> None:
         for h in HOSPITALS:
             if db.query(Hospital).filter(Hospital.login_email == h["login_email"]).first():
                 continue
-            password = h.pop("password")
+            password = str(h.pop("password"))
             db.add(Hospital(hashed_password=hash_password(password), **h))
+
 
         for s in STAFF:
             if db.query(User).filter(User.email == s["email"]).first():

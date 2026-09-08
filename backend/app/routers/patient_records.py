@@ -36,12 +36,14 @@ def _out_many(db: Session, records: list[PatientRecord]) -> list[PatientRecordOu
     if not records:
         return []
     ids = [r.id for r in records]
-    counts = dict(
+    rows = (
         db.query(HospitalReport.patient_record_id, func.count())
         .filter(HospitalReport.patient_record_id.in_(ids))
         .group_by(HospitalReport.patient_record_id)
         .all()
     )
+    counts: dict[UUID, int] = {r[0]: int(r[1]) for r in rows if r[0] is not None}
+
     return [
         PatientRecordOut.model_validate(r).model_copy(update={
             "reports_count": counts.get(r.id, 0),

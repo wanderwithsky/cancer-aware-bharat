@@ -1,7 +1,9 @@
 import logging
+from typing import Any, cast
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+
 from fastapi.responses import JSONResponse
 from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
@@ -36,12 +38,13 @@ if settings.is_production and settings.rate_limit_storage_uri == "memory://":
 # unauthenticated visitor a complete map of every route, request/response
 # shape, and auth scheme. Disabling them there costs nothing (they're a dev
 # convenience, not a runtime dependency) and closes that recon surface.
-_docs_kwargs = {"docs_url": None, "redoc_url": None, "openapi_url": None} if settings.is_production else {}
+_docs_kwargs: dict[str, Any] = {"docs_url": None, "redoc_url": None, "openapi_url": None} if settings.is_production else {}
 
 app = FastAPI(title="Cancer Aware Bharat API", version="0.1.0", **_docs_kwargs)
 
 app.state.limiter = limiter
-app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+app.add_exception_handler(RateLimitExceeded, cast(Any, _rate_limit_exceeded_handler))
+
 
 
 @app.exception_handler(Exception)

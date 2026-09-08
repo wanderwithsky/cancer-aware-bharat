@@ -30,12 +30,14 @@ def list_roles(
         .limit(limit)
         .all()
     )
-    counts = dict(
+    role_count_rows = (
         db.query(User.custom_role_id, func.count(User.id))
         .filter(User.custom_role_id.isnot(None))
         .group_by(User.custom_role_id)
         .all()
     )
+    counts: dict[UUID, int] = {r[0]: int(r[1]) for r in role_count_rows if r[0] is not None}
+
     results = []
     for role in roles:
         out = CustomRoleOut.model_validate(role)

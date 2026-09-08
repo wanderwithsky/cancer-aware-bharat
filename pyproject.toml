@@ -12,3 +12,8 @@ search_paths = [
     "backend/.venv/Lib/site-packages",
 ]
 site_packages = "backend/.venv/Lib/site-packages"
+
+[tool.pytest.ini_options]
+pythonpath = ["backend"]
+testpaths = ["backend/tests"]
+

@@ -1,8 +1,9 @@
 import logging
-from typing import Annotated
+from typing import Annotated, Any
 from uuid import UUID
 
 import razorpay
+from razorpay.errors import SignatureVerificationError
 from fastapi import APIRouter, Depends, HTTPException, Query, Request, status
 
 from app.core.config import settings
@@ -17,7 +18,7 @@ logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/donations", tags=["donations"])
 
 
-def _razorpay_client() -> razorpay.Client:
+def _razorpay_client() -> Any:
     return razorpay.Client(auth=(settings.razorpay_key_id, settings.razorpay_key_secret))
 
 
@@ -49,7 +50,7 @@ def create_checkout(
         order_id=order["id"],
         amount_paise=amount_paise,
         currency="INR",
-        key_id=settings.razorpay_key_id,
+        key_id=settings.razorpay_key_id or "",
     )
 
 
@@ -77,8 +78,9 @@ def verify_checkout(
             "razorpay_payment_id": payload.razorpay_payment_id,
             "razorpay_signature": payload.razorpay_signature,
         })
-    except razorpay.errors.SignatureVerificationError:
+    except SignatureVerificationError:
         raise HTTPException(status.HTTP_400_BAD_REQUEST, "Payment verification failed -- this payment was not recorded.")
+
 
     donation = Donation(
         donor_name=payload.donor_name,

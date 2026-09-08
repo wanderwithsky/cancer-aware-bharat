@@ -26,8 +26,12 @@ class SmtpEmailSender:
         message["Subject"] = subject
         message["From"] = settings.smtp_from_email or settings.smtp_username or ""
         message["To"] = to
+        if not settings.smtp_host:
+            logger.error("SMTP_HOST is not configured, unable to send email")
+            return
         try:
             with smtplib.SMTP(settings.smtp_host, settings.smtp_port, timeout=10) as server:
+
                 if settings.smtp_use_tls:
                     server.starttls()
                 if settings.smtp_username and settings.smtp_password:
