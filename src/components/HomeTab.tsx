@@ -1054,164 +1054,235 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
     <div className="space-y-0">
 
       {/* ═══════════════════════════════════════════
-          SECTION 1: HERO BANNER
+          SECTION 1: INTERACTIVE CARD-BASED HERO SHOWCASE
           ═══════════════════════════════════════════ */}
       <section 
-        className="relative h-[75vh] min-h-[500px] md:min-h-[600px] lg:min-h-[700px] flex flex-col justify-center overflow-hidden bg-primary group/hero"
+        className="relative min-h-[640px] lg:min-h-[720px] bg-gradient-to-br from-[#061224] via-[#0B1E36] to-[#0A1829] flex flex-col justify-center overflow-hidden pt-28 md:pt-32 pb-16 md:pb-20 group/hero"
       >
-        {/* Background Slides with Ken Burns */}
-        <div className="absolute inset-0 z-0 bg-primary">
-          {CAROUSEL_SLIDES.map((slide, idx) => {
-            let state = 'next';
-            if (idx === activeSlide) state = 'active';
-            else if (idx === prevSlide) state = 'prev';
-
-            return (
-              <div
-                key={idx}
-                className={`absolute inset-0 transition-opacity duration-[1000ms] ease-in-out ${state === 'active' ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
-              >
-                <div
-                  className={`w-full h-full transition-transform ease-out origin-center ${
-                    state === 'active' 
-                      ? 'duration-[5000ms] scale-[1.05]' 
-                      : state === 'prev' 
-                        ? 'duration-[1000ms] scale-100' 
-                        : 'duration-0 scale-[1.08]'
-                  }`}
-                >
-                  <img
-                    src={slide.image}
-                    alt={slide.alt}
-                    className="w-full h-full object-cover brightness-[1.05] contrast-[1.05]"
-                    style={{ objectPosition: slide.objectPosition || 'center' }}
-                    referrerPolicy="no-referrer"
-                    loading={idx === 0 ? 'eager' : 'lazy'}
-                  />
-                </div>
-                {/* Left-to-Right cinematic gradient overlay */}
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(22,58,95,0.85)_0%,rgba(22,58,95,0.45)_50%,rgba(22,58,95,0.1)_80%,transparent_100%)]" />
-              </div>
-            );
-          })}
+        {/* Subtle Background Glows & Matrix Mesh */}
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+          <div className="absolute -top-32 -left-32 w-96 h-96 bg-secondary/15 rounded-full blur-[100px]" />
+          <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-cyan-500/10 rounded-full blur-[120px]" />
+          <div className="absolute inset-0 bg-[radial-gradient(#ffffff0a_1px,transparent_1px)] [background-size:24px_24px] opacity-60" />
+          
+          {/* Floating subtle ambient crosses */}
+          <Plus className="absolute top-[12%] left-[4%] w-6 h-6 text-white/10 rotate-12" />
+          <Plus className="absolute bottom-[18%] right-[8%] w-8 h-8 text-white/10 -rotate-12" />
+          <div className="absolute top-[25%] right-[35%] w-2 h-2 rounded-full bg-secondary/40 animate-pulse" />
+          <div className="absolute bottom-[30%] left-[30%] w-1.5 h-1.5 rounded-full bg-white/30 animate-pulse" style={{ animationDelay: '1.5s' }} />
         </div>
 
+        {/* Main Hero Container */}
+        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
+            
+            {/* ── CARD 1: INTERACTIVE MISSION & TEXT CARD (7 Cols on LG) ── */}
+            <div className="lg:col-span-7 bg-gradient-to-br from-[#0C223D]/95 via-[#133256]/90 to-[#0A1D33]/95 backdrop-blur-2xl rounded-3xl p-6 sm:p-8 md:p-10 border border-white/15 shadow-[0_25px_60px_rgba(0,0,0,0.5)] flex flex-col justify-between relative overflow-hidden group">
+              
+              {/* Top Accent Gradient Line */}
+              <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-secondary to-transparent opacity-80" />
+              <div className="absolute -top-24 -right-24 w-60 h-60 bg-secondary/10 rounded-full blur-3xl pointer-events-none" />
 
-        {/* Decorative Floating Elements */}
-        <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden">
-          <div className="absolute top-[20%] left-[45%] w-2 h-2 rounded-full bg-white/40 animate-pulse" />
-          <div className="absolute top-[60%] left-[10%] w-1.5 h-1.5 rounded-full bg-white/30 animate-pulse" style={{ animationDelay: '1s' }} />
-          <div className="absolute top-[40%] right-[30%] w-2.5 h-2.5 rounded-full bg-white/30 animate-pulse" style={{ animationDelay: '2s' }} />
-          <div className="absolute bottom-[25%] left-[50%] w-1 h-1 rounded-full bg-white/50 animate-pulse" style={{ animationDelay: '1.5s' }} />
-          <Plus className="absolute top-[15%] left-[5%] w-8 h-8 text-white/10 rotate-12" />
-          <Plus className="absolute bottom-[20%] right-[20%] w-12 h-12 text-white/10 -rotate-12" />
-        </div>
+              <div>
+                {/* Interactive Category Filter Pills */}
+                <div className="flex flex-wrap items-center gap-2 mb-6">
+                  {CAROUSEL_SLIDES.map((slide, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => {
+                        setPrevSlide(activeSlide);
+                        setActiveSlide(idx);
+                      }}
+                      className={`px-3 sm:px-3.5 py-1.5 rounded-full text-xs font-bold transition-all duration-300 cursor-pointer flex items-center gap-1.5 ${
+                        idx === activeSlide
+                          ? 'bg-secondary text-[#163A5F] shadow-[0_4px_15px_rgba(212,175,55,0.4)] scale-105'
+                          : 'bg-white/10 hover:bg-white/20 text-slate-300 border border-white/10'
+                      }`}
+                    >
+                      <span className={`w-1.5 h-1.5 rounded-full ${idx === activeSlide ? 'bg-[#163A5F]' : 'bg-secondary'}`} />
+                      <span>{slide.tag}</span>
+                    </button>
+                  ))}
+                </div>
 
-        {/* Hero Content */}
-        <div className="relative z-20 w-full px-6 md:pl-[6vw] lg:pl-[8vw] pt-24 pb-16 flex flex-col justify-center h-full" key={`hero-text-${activeSlide}`}>
-          <div className="max-w-[550px]">
-            {/* Small Label */}
-            <div className="animate-fade-in-up opacity-0 [animation-fill-mode:forwards]" style={{ animationDelay: '0ms', animationDuration: '400ms' }}>
-              <span className="inline-block px-4 py-1.5 rounded-full bg-secondary/15 text-secondary text-[11px] font-bold uppercase tracking-[0.2em] border border-secondary/20 mb-6 backdrop-blur-md shadow-sm">
-                {CAROUSEL_SLIDES[activeSlide].tag}
-              </span>
-            </div>
+                {/* Main Headline */}
+                <h1 className="font-outfit text-white text-3xl sm:text-4xl md:text-5xl lg:text-[52px] font-extrabold leading-[1.12] tracking-tight mb-4" key={`hero-title-${activeSlide}`}>
+                  <span className="block text-white animate-fade-in-up">
+                    {CAROUSEL_SLIDES[activeSlide].titleLine1}
+                  </span>
+                  <span className="block text-secondary font-extrabold italic mt-1 animate-fade-in-up" style={{ animationDelay: '100ms' }}>
+                    {CAROUSEL_SLIDES[activeSlide].titleLine2}
+                  </span>
+                </h1>
 
-            {/* Headline */}
-            <h1 className="font-outfit text-white text-[40px] sm:text-[52px] md:text-[62px] lg:text-[72px] font-[800] leading-[1.08] tracking-tight mb-6">
-              <div className="overflow-hidden pb-1">
-                <div className="animate-fade-in-up opacity-0 [animation-fill-mode:forwards]" style={{ animationDelay: '100ms', animationDuration: '400ms' }}>
-                  {CAROUSEL_SLIDES[activeSlide].titleLine1}
+                {/* Description */}
+                <p className="text-slate-200 text-sm sm:text-base md:text-lg font-light leading-relaxed mb-6 max-w-2xl" key={`hero-desc-${activeSlide}`}>
+                  {CAROUSEL_SLIDES[activeSlide].desc}
+                </p>
+
+                {/* Floating Trust Chips */}
+                <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 mb-8">
+                  <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md text-white text-xs font-semibold border border-white/15">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    14,250+ Lives Screened Free
+                  </span>
+                  <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md text-white text-xs font-semibold border border-white/15">
+                    <ShieldCheck className="w-3.5 h-3.5 text-secondary" />
+                    Empaneled Hospital Network
+                  </span>
                 </div>
               </div>
-              <div className="overflow-hidden mt-1 pb-2">
-                <div className="animate-fade-in-up opacity-0 [animation-fill-mode:forwards] text-secondary font-[800]" style={{ animationDelay: '200ms', animationDuration: '400ms' }}>
-                  {CAROUSEL_SLIDES[activeSlide].titleLine2}
+
+              {/* Action Buttons & Bottom Navigation Controls */}
+              <div className="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+                <div className="flex flex-wrap items-center gap-3">
+                  <button
+                    onClick={() => {
+                      const act = CAROUSEL_SLIDES[activeSlide].primaryAction;
+                      if (act === 'volunteer') onOpenVolunteer();
+                      else if (act === 'enquiry') onOpenEnquiry();
+                      else navigate('/events');
+                    }}
+                    className="px-7 py-3.5 rounded-2xl bg-gradient-to-r from-[#D4AF37] via-[#f3d677] to-[#D4AF37] text-[#163A5F] font-extrabold text-sm sm:text-[15px] hover:shadow-[0_8px_25px_rgba(212,175,55,0.6)] hover:scale-105 active:scale-95 flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer shadow-lg group/btn relative overflow-hidden"
+                  >
+                    <div className="absolute inset-0 bg-white/20 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000 ease-out pointer-events-none" />
+                    <span>{CAROUSEL_SLIDES[activeSlide].primaryBtn}</span>
+                    <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                  </button>
+                  <button
+                    onClick={() => {
+                      const act = CAROUSEL_SLIDES[activeSlide].secondaryAction;
+                      if (act === 'enquiry') onOpenEnquiry();
+                      else if (act === 'volunteer') onOpenVolunteer();
+                      else navigate('/mission');
+                    }}
+                    className="px-6 py-3.5 rounded-2xl bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/25 text-white font-semibold text-sm sm:text-[15px] hover:-translate-y-0.5 flex items-center justify-center transition-all duration-300 cursor-pointer"
+                  >
+                    {CAROUSEL_SLIDES[activeSlide].secondaryBtn}
+                  </button>
+                </div>
+
+                {/* Card Internal Slide Counter & Arrow Controls */}
+                <div className="flex items-center justify-end gap-3 pt-2 sm:pt-0">
+                  <span className="text-xs font-bold text-slate-400 tracking-widest font-mono">
+                    0{activeSlide + 1} / 0{CAROUSEL_SLIDES.length}
+                  </span>
+                  <div className="flex items-center gap-1.5">
+                    <button
+                      onClick={handlePrevSlide}
+                      aria-label="Previous Slide"
+                      className="w-9 h-9 rounded-xl bg-white/10 hover:bg-secondary text-white hover:text-[#163A5F] flex items-center justify-center border border-white/15 transition-all duration-200 hover:scale-105 cursor-pointer"
+                    >
+                      <ChevronLeft className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={handleNextSlide}
+                      aria-label="Next Slide"
+                      className="w-9 h-9 rounded-xl bg-white/10 hover:bg-secondary text-white hover:text-[#163A5F] flex items-center justify-center border border-white/15 transition-all duration-200 hover:scale-105 cursor-pointer"
+                    >
+                      <ChevronRight className="w-4 h-4" />
+                    </button>
+                  </div>
                 </div>
               </div>
-            </h1>
 
-            {/* Subtitle */}
-            <div className="animate-fade-in-up opacity-0 [animation-fill-mode:forwards]" style={{ animationDelay: '300ms', animationDuration: '400ms' }}>
-              <p className="text-white/90 text-[16px] md:text-[19px] lg:text-[21px] font-normal leading-[1.65] mb-8 max-w-full">
-                {CAROUSEL_SLIDES[activeSlide].desc}
-              </p>
             </div>
 
-            {/* Floating Trust Badges */}
-            <div className="flex flex-wrap items-center gap-3 mb-8 animate-fade-in-up opacity-0 [animation-fill-mode:forwards]" style={{ animationDelay: '350ms', animationDuration: '400ms' }}>
-              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md text-white text-xs font-semibold border border-white/15">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                14,250+ Lives Screened Free
-              </span>
-              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md text-white text-xs font-semibold border border-white/15">
-                <ShieldCheck className="w-3.5 h-3.5 text-secondary" />
-                Empaneled Hospital Network
-              </span>
+            {/* ── CARD 2: INTERACTIVE VISUAL CARD SHOWCASE (5 Cols on LG) ── */}
+            <div className="lg:col-span-5 flex flex-col gap-4 justify-between">
+              
+              {/* Featured Visual Card */}
+              <div className="relative rounded-3xl overflow-hidden border-2 border-white/20 bg-slate-900 shadow-[0_25px_60px_rgba(0,0,0,0.6)] aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3.4] group">
+                
+                {/* Images Stack with Ken Burns Crossfade */}
+                {CAROUSEL_SLIDES.map((slide, idx) => {
+                  const isActive = idx === activeSlide;
+                  return (
+                    <div
+                      key={idx}
+                      className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${isActive ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
+                    >
+                      <img
+                        src={slide.image}
+                        alt={slide.alt}
+                        className={`w-full h-full object-cover brightness-[1.05] contrast-[1.05] transition-transform duration-[6000ms] ease-out ${
+                          isActive ? 'scale-105' : 'scale-100'
+                        }`}
+                        style={{ objectPosition: slide.objectPosition || 'center' }}
+                        referrerPolicy="no-referrer"
+                        loading={idx === 0 ? 'eager' : 'lazy'}
+                      />
+                      {/* Gradient Vignette */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0B1E36]/90 via-[#0B1E36]/20 to-transparent" />
+                    </div>
+                  );
+                })}
+
+                {/* Floating Top Badge */}
+                <div className="absolute top-4 left-4 z-20 flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white text-xs font-bold shadow-lg">
+                  <Sparkles className="w-3.5 h-3.5 text-secondary animate-pulse" />
+                  <span>{CAROUSEL_SLIDES[activeSlide].tag}</span>
+                </div>
+
+                {/* Floating Bottom Live Overlay Card */}
+                <div className="absolute inset-x-4 bottom-4 z-20 p-3.5 sm:p-4 rounded-2xl bg-[#0B1E36]/85 backdrop-blur-md border border-white/15 shadow-xl flex items-center justify-between gap-3">
+                  <div className="min-w-0">
+                    <span className="text-[10px] font-extrabold uppercase tracking-widest text-secondary block truncate">
+                      National Initiative
+                    </span>
+                    <h4 className="text-white text-xs sm:text-sm font-bold truncate">
+                      {CAROUSEL_SLIDES[activeSlide].titleLine1}
+                    </h4>
+                  </div>
+                  <span className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] font-bold border border-emerald-500/30 shrink-0">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    Active
+                  </span>
+                </div>
+
+              </div>
+
+              {/* Interactive 4-Thumbnail Card Deck */}
+              <div className="grid grid-cols-4 gap-2 sm:gap-3">
+                {CAROUSEL_SLIDES.map((slide, idx) => {
+                  const isActive = idx === activeSlide;
+                  return (
+                    <button
+                      key={idx}
+                      onClick={() => {
+                        setPrevSlide(activeSlide);
+                        setActiveSlide(idx);
+                      }}
+                      className={`relative rounded-2xl overflow-hidden aspect-[4/3] border transition-all duration-300 cursor-pointer group text-left ${
+                        isActive
+                          ? 'border-secondary shadow-[0_0_15px_rgba(212,175,55,0.5)] scale-[1.03] ring-2 ring-secondary/50'
+                          : 'border-white/15 opacity-70 hover:opacity-100 hover:border-white/40'
+                      }`}
+                    >
+                      <img
+                        src={slide.image}
+                        alt={slide.alt}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        style={{ objectPosition: slide.objectPosition || 'center' }}
+                      />
+                      <div className={`absolute inset-0 transition-colors ${isActive ? 'bg-secondary/15' : 'bg-black/40 group-hover:bg-black/20'}`} />
+                      
+                      {/* Thumbnail Pill Indicator */}
+                      <div className="absolute bottom-1.5 inset-x-1.5 text-center">
+                        <span className={`inline-block px-1.5 py-0.5 rounded text-[9px] font-extrabold truncate max-w-full backdrop-blur-md ${
+                          isActive ? 'bg-secondary text-[#163A5F]' : 'bg-black/60 text-white/90'
+                        }`}>
+                          0{idx + 1}
+                        </span>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+
             </div>
 
-            {/* Buttons */}
-            <div className="flex flex-col sm:flex-row flex-wrap gap-4 animate-fade-in-up opacity-0 [animation-fill-mode:forwards]" style={{ animationDelay: '400ms', animationDuration: '400ms' }}>
-              <button
-                onClick={() => {
-                  const act = CAROUSEL_SLIDES[activeSlide].primaryAction;
-                  if (act === 'volunteer') onOpenVolunteer();
-                  else if (act === 'enquiry') onOpenEnquiry();
-                  else navigate('/events');
-                }}
-                className="px-9 py-4 rounded-full bg-secondary text-slate-900 font-extrabold text-[15px] hover:bg-[#FDB64D] hover:-translate-y-1 shadow-[0_10px_30px_rgba(212,175,55,0.4)] flex items-center justify-center gap-2 transition-all duration-300 ease-out cursor-pointer group/btn"
-              >
-                {CAROUSEL_SLIDES[activeSlide].primaryBtn} <ArrowRight className="w-4.5 h-4.5 group-hover/btn:translate-x-1 transition-transform" />
-              </button>
-              <button
-                onClick={() => {
-                  const act = CAROUSEL_SLIDES[activeSlide].secondaryAction;
-                  if (act === 'enquiry') onOpenEnquiry();
-                  else if (act === 'volunteer') onOpenVolunteer();
-                  else navigate('/mission');
-                }}
-                className="px-9 py-4 rounded-full bg-white/10 backdrop-blur-md border border-white/30 text-white font-semibold text-[15px] hover:bg-white hover:text-primary hover:-translate-y-1 hover:shadow-xl flex items-center justify-center transition-all duration-300 ease-out cursor-pointer"
-              >
-                {CAROUSEL_SLIDES[activeSlide].secondaryBtn}
-              </button>
-            </div>
           </div>
-        </div>
-
-        {/* Previous & Next Navigation Buttons for Hero Carousel */}
-        <button
-          onClick={handlePrevSlide}
-          aria-label="Previous Slide"
-          className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-40 w-11 h-11 md:w-14 md:h-14 rounded-full bg-black/30 hover:bg-secondary text-white hover:text-primary backdrop-blur-md border border-white/20 flex items-center justify-center shadow-xl transition-all duration-300 hover:scale-110 active:scale-95 group cursor-pointer"
-        >
-          <ChevronLeft className="w-6 h-6 md:w-7 md:h-7 group-hover:-translate-x-0.5 transition-transform" />
-        </button>
-
-        <button
-          onClick={handleNextSlide}
-          aria-label="Next Slide"
-          className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-40 w-11 h-11 md:w-14 md:h-14 rounded-full bg-black/30 hover:bg-secondary text-white hover:text-primary backdrop-blur-md border border-white/20 flex items-center justify-center shadow-xl transition-all duration-300 hover:scale-110 active:scale-95 group cursor-pointer"
-        >
-          <ChevronRight className="w-6 h-6 md:w-7 md:h-7 group-hover:translate-x-0.5 transition-transform" />
-        </button>
-
-        {/* Cinematic Slide Indicators */}
-        <div className="absolute bottom-8 right-6 md:right-[6vw] lg:right-[8vw] z-40 flex items-center gap-3.5">
-          {CAROUSEL_SLIDES.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => {
-                setPrevSlide(activeSlide);
-                setActiveSlide(idx);
-              }}
-              className={`transition-all duration-500 ease-out rounded-full cursor-pointer ${
-                idx === activeSlide
-                  ? 'w-8 h-2.5 bg-secondary shadow-[0_0_12px_rgba(212,175,55,0.8)]'
-                  : 'w-2.5 h-2.5 bg-white/40 hover:bg-white/80'
-              }`}
-              aria-label={`Go to slide ${idx + 1}`}
-            />
-          ))}
         </div>
       </section>
 
