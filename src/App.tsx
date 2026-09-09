@@ -139,26 +139,6 @@ function PublicLayout({
 
   return (
     <>
-      {/* Top Banner Alert */}
-      <div className="gradient-primary text-white text-xs py-2.5 overflow-hidden flex items-center relative">
-        <div className="animate-marquee hover:[animation-play-state:paused]">
-          {[...Array(6)].map((_, i) => (
-            <span key={i} className="flex items-center gap-2 mx-6 shrink-0 whitespace-nowrap">
-              <span className="text-base leading-none">📢</span>
-              <span className="opacity-90">
-                <strong className="font-semibold text-white tracking-wide">Campaign Alert:</strong> Free Early Detection & Screening Camps active across New Delhi & Pune.
-              </span>
-              <button
-                onClick={onOpenEnquiry}
-                className="underline underline-offset-2 font-semibold hover:opacity-80 transition-opacity cursor-pointer shrink-0"
-              >
-                Register Now →
-              </button>
-            </span>
-          ))}
-        </div>
-      </div>
-
       {/* Main Sticky Navbar */}
       <Navbar
         onOpenVolunteer={onOpenVolunteer}
