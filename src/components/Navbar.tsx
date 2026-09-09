@@ -1,9 +1,9 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router';
 import {
-  Menu, X, Heart, LogIn, LayoutDashboard, LogOut, Building2,
+  Menu, X, Heart, LogOut, Building2,
   ChevronDown, Home, Target, Stethoscope, BookOpen, Calendar, UserPlus, PhoneCall,
-  Images, Users, ArrowRight, User, Shield, Gift
+  Images, Users, ArrowRight, User, Shield, Gift, Sparkles, LayoutDashboard
 } from 'lucide-react';
 import { Facebook, Instagram, Linkedin, Youtube } from './icons/SocialIcons';
 
@@ -101,33 +101,49 @@ export default function Navbar({
     navigate('/');
   };
 
-  const mainNavLinks = [
-    { path: '/', label: 'Home' },
-    { path: '/about', label: 'About' },
-    { path: '/events', label: 'Events' },
-    { path: '/hospitals', label: 'Health Centres' },
-    { path: '/blogs', label: 'Blogs' },
-    { path: '/gallery', label: 'Gallery' },
-  ];
-
   const moreLinks = [
-    { path: '/mission', label: 'Our Mission', sublabel: 'Grassroots oncological vision', icon: Target, color: 'text-primary' },
-    { path: '/doctors', label: 'Our Doctors / हमारे डॉक्टर', sublabel: 'Oncology specialists panel', icon: Stethoscope, color: 'text-primary' },
-    { path: '/cancer-awareness', label: 'Cancer Awareness', sublabel: 'Education & prevention guides', icon: BookOpen, color: 'text-secondary' },
-    { path: '/events', label: 'Health Camps', sublabel: 'Free screening events', icon: Calendar, color: 'text-primary' },
+    { path: '/mission', label: 'Our Mission', sublabel: 'Grassroots oncological vision', icon: Target },
+    { path: '/doctors', label: 'Our Doctors / हमारे डॉक्टर', sublabel: 'Oncology specialists panel', icon: Stethoscope },
+    { path: '/cancer-awareness', label: 'Cancer Awareness', sublabel: 'Education & prevention guides', icon: BookOpen },
+    { path: '/events', label: 'Health Camps', sublabel: 'Free screening events', icon: Calendar },
   ];
 
   return (
     <>
-      {/* ── Top Contact & Emergency Helpline Bar (Inspired by reference site topbar) ── */}
-      <div className="bg-[#102a45] text-white text-xs border-b border-white/10 hidden md:block">
+      {/* ── Top Alert Bar (Sindoor Urgent Indicator Bar) ── */}
+      <div className="bg-[#C8443C] text-white text-[12px] py-1.5 px-4 overflow-hidden relative z-40 border-b border-[#a8342d]">
+        <div className="max-w-[1280px] mx-auto flex items-center justify-between">
+          <div className="flex items-center gap-2 overflow-hidden whitespace-nowrap text-xs">
+            <span className="flex h-2 w-2 relative shrink-0">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+            </span>
+            <span className="font-semibold uppercase tracking-wider text-[11px] text-amber-200">Alert:</span>
+            <span className="text-white/95 font-medium truncate">
+              Free Early Detection & Screening Camps Active Across New Delhi, Pune & Lucknow.
+            </span>
+            <button
+              onClick={() => handleNavClick('/events')}
+              className="font-bold underline text-amber-200 hover:text-white transition-colors cursor-pointer ml-1 text-xs shrink-0"
+            >
+              Register Now
+            </button>
+          </div>
+          <div className="hidden md:flex items-center gap-4 text-[11px] text-white/90 shrink-0">
+            <span>National Helpline: <a href="tel:+911140559200" className="font-bold text-white hover:text-amber-200 transition-colors">+91 11 4055 9200</a></span>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Top Contact Bar (Ink Teal Dusk Strip) ── */}
+      <div className="bg-[#0E3B36] text-white text-xs border-b border-white/10 hidden md:block">
         <div className="w-full px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto py-2 flex items-center justify-between gap-4">
           <div className="flex items-center gap-6">
             <a 
               href="tel:+911140559200" 
               className="flex items-center gap-1.5 text-white/90 hover:text-white transition-colors"
             >
-              <PhoneCall className="w-3.5 h-3.5 text-secondary" />
+              <PhoneCall className="w-3.5 h-3.5 text-[#E8A23A]" />
               <span className="font-semibold text-white">24/7 Helpline:</span>
               <span className="text-white/80">+91 11 4055 9200</span>
             </a>
@@ -145,28 +161,28 @@ export default function Navbar({
           <div className="flex items-center gap-5 text-xs text-white/80">
             <button
               onClick={() => handleNavClick('/events')}
-              className="hover:text-white transition-colors flex items-center gap-1 cursor-pointer"
+              className="hover:text-white transition-colors flex items-center gap-1.5 cursor-pointer"
             >
-              <Calendar className="w-3 h-3 text-secondary" />
+              <Calendar className="w-3.5 h-3.5 text-[#E8A23A]" />
               <span>Free Cancer Camps</span>
             </button>
             <span className="text-white/30">•</span>
             <button
               onClick={() => handleNavClick('/hospital/login')}
-              className="hover:text-white transition-colors flex items-center gap-1 cursor-pointer"
+              className="hover:text-white transition-colors flex items-center gap-1.5 cursor-pointer"
             >
-              <Building2 className="w-3 h-3 text-secondary" />
+              <Building2 className="w-3.5 h-3.5 text-[#E8A23A]" />
               <span>Hospital Partner Portal</span>
             </button>
             <span className="text-white/30">•</span>
-            <div className="flex items-center gap-2">
-              <a href="#" aria-label="Facebook" className="hover:text-white text-white/60 transition-colors">
+            <div className="flex items-center gap-2.5">
+              <a href="#" aria-label="Facebook" className="hover:text-[#E8A23A] text-white/70 transition-colors">
                 <Facebook className="w-3.5 h-3.5" />
               </a>
-              <a href="#" aria-label="Instagram" className="hover:text-white text-white/60 transition-colors">
+              <a href="#" aria-label="Instagram" className="hover:text-[#E8A23A] text-white/70 transition-colors">
                 <Instagram className="w-3.5 h-3.5" />
               </a>
-              <a href="#" aria-label="YouTube" className="hover:text-white text-white/60 transition-colors">
+              <a href="#" aria-label="YouTube" className="hover:text-[#E8A23A] text-white/70 transition-colors">
                 <Youtube className="w-3.5 h-3.5" />
               </a>
             </div>
@@ -178,60 +194,60 @@ export default function Navbar({
       <nav
         ref={navRef}
         className={`sticky top-0 z-50 w-full transition-all duration-300 ease-out ${scrolled
-            ? 'bg-white/98 backdrop-blur-xl shadow-[0_4px_24px_rgba(22,58,95,0.08),0_1px_3px_rgba(22,58,95,0.04)] border-b border-slate-100'
-            : 'bg-white/95 backdrop-blur-md border-b border-slate-100/70'
+            ? 'bg-[#FAFCF8]/98 backdrop-blur-xl shadow-[0_4px_24px_rgba(14,59,54,0.08)] border-b border-[#D5DFD7]'
+            : 'bg-[#F3F6F1]/95 backdrop-blur-md border-b border-[#D5DFD7]/60'
           }`}
       >
-        <div className={`transition-all duration-300 ease-out w-full px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto flex justify-between items-center gap-4 relative ${scrolled ? 'h-[72px]' : 'h-[80px]'}`}>
+        <div className={`transition-all duration-300 ease-out w-full px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto flex justify-between items-center gap-4 relative ${scrolled ? 'h-[70px]' : 'h-[78px]'}`}>
 
-          {/* LEFT: Brand Logo */}
+          {/* LEFT: Brand Logo & Typography */}
           <button
             onClick={() => handleNavClick('/')}
-            className="flex items-center space-x-2.5 sm:space-x-3 text-left hover:opacity-90 transition-opacity duration-200 focus:outline-none min-w-0 shrink-0 group z-10"
+            className="flex items-center space-x-3 text-left hover:opacity-95 transition-opacity duration-200 focus:outline-none min-w-0 shrink-0 group z-10"
           >
             <img
               src="/brand-logo.jpeg"
               alt="Cancer Aware Bharat Logo"
-              className={`rounded-full object-cover shadow-[0_2px_10px_rgba(22,58,95,0.12)] group-hover:shadow-[0_4px_14px_rgba(22,58,95,0.18)] transition-all duration-200 shrink-0 ${scrolled ? 'w-9 h-9 sm:w-10 sm:h-10' : 'w-10 h-10 sm:w-11 sm:h-11'}`}
+              className={`rounded-full object-cover ring-2 ring-[#0E3B36]/15 group-hover:ring-[#0E3B36]/30 transition-all duration-200 shrink-0 ${scrolled ? 'w-9 h-9 sm:w-10 sm:h-10' : 'w-10 h-10 sm:w-11 sm:h-11'}`}
             />
             <div className="flex flex-col min-w-0">
-              <span className={`font-outfit font-extrabold text-primary tracking-tight leading-none transition-all duration-200 truncate ${scrolled ? 'text-[17px] sm:text-[20px]' : 'text-[18px] sm:text-[22px]'}`}>
+              <span className={`font-serif font-bold text-[#0E3B36] tracking-tight leading-none transition-all duration-200 truncate ${scrolled ? 'text-[18px] sm:text-[21px]' : 'text-[19px] sm:text-[23px]'}`}>
                 Cancer Aware Bharat
               </span>
-              <span className="text-[10.5px] font-semibold text-primary/60 tracking-[0.06em] uppercase hidden sm:block mt-0.5">
-                कैंसर जागरूकता अभियान
+              <span className="font-serif-hindi text-[11px] font-medium text-[#0E3B36]/70 hidden sm:block mt-0.5">
+                जीवन की नई किरण • कैंसर जागरूकता
               </span>
             </div>
           </button>
 
           {/* CENTER: Floating Navigation Pill (Desktop) */}
-          <div className="hidden lg:flex items-center justify-center flex-1 min-w-0 px-1 xl:px-3 z-10">
-            <div className={`flex items-center bg-white rounded-full shadow-[0_6px_28px_rgba(22,58,95,0.08),0_1px_4px_rgba(22,58,95,0.04)] border border-slate-100/70 px-2 xl:px-3.5 transition-all duration-300 ease-out hover:shadow-[0_8px_36px_rgba(22,58,95,0.11)] ${scrolled ? 'h-[50px] xl:h-[58px] gap-0.5 xl:gap-1' : 'h-[54px] xl:h-[64px] gap-0.5 xl:gap-1'}`}>
+          <div className="hidden lg:flex items-center justify-center flex-1 min-w-0 px-2 xl:px-4 z-10">
+            <div className={`flex items-center bg-white/90 backdrop-blur-md rounded-full shadow-[0_4px_20px_rgba(14,59,54,0.06)] border border-[#D5DFD7]/80 px-2 xl:px-3.5 transition-all duration-300 ease-out hover:shadow-[0_6px_28px_rgba(14,59,54,0.1)] ${scrolled ? 'h-[48px] xl:h-[54px] gap-1' : 'h-[52px] xl:h-[58px] gap-1'}`}>
               <button
                 onClick={() => handleNavClick('/')}
-                className={`relative flex items-center px-2.5 xl:px-4 py-1.5 xl:py-2 text-xs xl:text-[15px] font-semibold transition-all duration-200 rounded-full cursor-pointer focus:outline-none whitespace-nowrap ${
+                className={`relative flex items-center px-3 xl:px-4 py-1.5 text-xs xl:text-[14.5px] font-semibold transition-all duration-200 rounded-full cursor-pointer focus:outline-none whitespace-nowrap ${
                   location.pathname === '/'
-                    ? 'text-secondary'
-                    : 'text-primary/80 hover:text-primary hover:bg-primary/[0.04]'
+                    ? 'text-[#0E3B36] font-bold bg-[#EEF3EF]'
+                    : 'text-[#1B2620]/80 hover:text-[#0E3B36] hover:bg-[#EEF3EF]/60'
                 }`}
               >
                 <span>Home</span>
                 {location.pathname === '/' && (
-                  <span className="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-4 xl:w-5 h-[2px] bg-secondary rounded-full" />
+                  <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-4 h-[2px] bg-[#E8A23A] rounded-full" />
                 )}
               </button>
 
               <button
                 onClick={() => handleNavClick('/about')}
-                className={`relative flex items-center px-2.5 xl:px-4 py-1.5 xl:py-2 text-xs xl:text-[15px] font-semibold transition-all duration-200 rounded-full cursor-pointer focus:outline-none whitespace-nowrap ${
+                className={`relative flex items-center px-3 xl:px-4 py-1.5 text-xs xl:text-[14.5px] font-semibold transition-all duration-200 rounded-full cursor-pointer focus:outline-none whitespace-nowrap ${
                   location.pathname === '/about'
-                    ? 'text-secondary'
-                    : 'text-primary/80 hover:text-primary hover:bg-primary/[0.04]'
+                    ? 'text-[#0E3B36] font-bold bg-[#EEF3EF]'
+                    : 'text-[#1B2620]/80 hover:text-[#0E3B36] hover:bg-[#EEF3EF]/60'
                 }`}
               >
                 <span>About</span>
                 {location.pathname === '/about' && (
-                  <span className="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-4 xl:w-5 h-[2px] bg-secondary rounded-full" />
+                  <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-4 h-[2px] bg-[#E8A23A] rounded-full" />
                 )}
               </button>
 
@@ -244,55 +260,55 @@ export default function Navbar({
               >
                 <button
                   onClick={() => setActiveDropdown(activeDropdown === 'events' ? null : 'events')}
-                  className={`relative flex items-center gap-1 px-2.5 xl:px-4 py-1.5 xl:py-2 text-xs xl:text-[15px] font-semibold transition-all duration-200 rounded-full cursor-pointer focus:outline-none whitespace-nowrap ${
+                  className={`relative flex items-center gap-1 px-3 xl:px-4 py-1.5 text-xs xl:text-[14.5px] font-semibold transition-all duration-200 rounded-full cursor-pointer focus:outline-none whitespace-nowrap ${
                     location.pathname === '/events' || location.pathname === '/gallery'
-                      ? 'text-secondary'
-                      : 'text-primary/80 hover:text-primary hover:bg-primary/[0.04]'
+                      ? 'text-[#0E3B36] font-bold bg-[#EEF3EF]'
+                      : 'text-[#1B2620]/80 hover:text-[#0E3B36] hover:bg-[#EEF3EF]/60'
                   }`}
                 >
                   <span>Events</span>
-                  <ChevronDown className={`w-3 h-3 xl:w-3.5 xl:h-3.5 transition-transform duration-200 ${activeDropdown === 'events' ? 'rotate-180' : ''}`} />
+                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${activeDropdown === 'events' ? 'rotate-180' : ''}`} />
                   {(location.pathname === '/events' || location.pathname === '/gallery') && (
-                    <span className="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-4 xl:w-5 h-[2px] bg-secondary rounded-full" />
+                    <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-4 h-[2px] bg-[#E8A23A] rounded-full" />
                   )}
                 </button>
 
                 {activeDropdown === 'events' && (
-                  <div className="absolute top-[100%] left-1/2 -translate-x-1/2 pt-3 z-50 w-[200px] xl:w-[220px]">
-                    <div className="bg-white rounded-2xl shadow-[0_20px_48px_rgba(22,58,95,0.12),0_4px_12px_rgba(22,58,95,0.04)] border border-slate-100/60 p-2 animate-fade-in-slide">
+                  <div className="absolute top-[100%] left-1/2 -translate-x-1/2 pt-2 z-50 w-[210px]">
+                    <div className="bg-white rounded-2xl shadow-[0_16px_40px_rgba(14,59,54,0.12)] border border-[#D5DFD7] p-2 animate-fade-in-slide">
                       <button
                         onClick={() => handleNavClick('/events')}
-                        className="w-full px-3.5 py-2.5 xl:px-4 xl:py-3 text-xs xl:text-[15px] font-semibold text-primary/80 hover:bg-primary/[0.04] hover:text-secondary rounded-xl transition-colors text-left"
+                        className="w-full px-4 py-2.5 text-xs xl:text-[14px] font-semibold text-[#1B2620]/90 hover:bg-[#EEF3EF] hover:text-[#0E3B36] rounded-xl transition-colors text-left"
                       >
-                        Event Details
+                        Screening Camps
                       </button>
                       <button
                         onClick={() => handleNavClick('/gallery')}
-                        className="w-full px-3.5 py-2.5 xl:px-4 xl:py-3 text-xs xl:text-[15px] font-semibold text-primary/80 hover:bg-primary/[0.04] hover:text-secondary rounded-xl transition-colors text-left"
+                        className="w-full px-4 py-2.5 text-xs xl:text-[14px] font-semibold text-[#1B2620]/90 hover:bg-[#EEF3EF] hover:text-[#0E3B36] rounded-xl transition-colors text-left"
                       >
-                        Event Gallery
+                        Camp Gallery
                       </button>
                     </div>
                   </div>
                 )}
               </div>
 
-              {/* Health Centres -- Visible on xl+ screens (1280px+); on lg screens it is neatly available in More */}
+              {/* Health Centres */}
               <button
                 onClick={() => handleNavClick('/hospitals')}
-                className={`hidden xl:flex relative items-center px-2.5 xl:px-4 py-1.5 xl:py-2 text-xs xl:text-[15px] font-semibold transition-all duration-200 rounded-full cursor-pointer focus:outline-none whitespace-nowrap ${
+                className={`hidden xl:flex relative items-center px-3 xl:px-4 py-1.5 text-xs xl:text-[14.5px] font-semibold transition-all duration-200 rounded-full cursor-pointer focus:outline-none whitespace-nowrap ${
                   location.pathname === '/hospitals'
-                    ? 'text-secondary'
-                    : 'text-primary/80 hover:text-primary hover:bg-primary/[0.04]'
+                    ? 'text-[#0E3B36] font-bold bg-[#EEF3EF]'
+                    : 'text-[#1B2620]/80 hover:text-[#0E3B36] hover:bg-[#EEF3EF]/60'
                 }`}
               >
                 <span>Health Centres</span>
                 {location.pathname === '/hospitals' && (
-                  <span className="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-4 xl:w-5 h-[2px] bg-secondary rounded-full" />
+                  <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-4 h-[2px] bg-[#E8A23A] rounded-full" />
                 )}
               </button>
 
-              {/* More Dropdown -- Holds all additional links cleanly */}
+              {/* More Dropdown */}
               <div
                 className="relative flex items-center h-full"
                 key="more-dropdown"
@@ -301,64 +317,64 @@ export default function Navbar({
               >
                 <button
                   onClick={() => setActiveDropdown(activeDropdown === 'more' ? null : 'more')}
-                  className={`relative flex items-center gap-1 px-2.5 xl:px-4 py-1.5 xl:py-2 text-xs xl:text-[15px] font-semibold transition-all duration-200 rounded-full cursor-pointer focus:outline-none whitespace-nowrap ${
-                    activeDropdown === 'more' ? 'text-secondary bg-primary/[0.04]' : 'text-primary/80 hover:text-primary hover:bg-primary/[0.04]'
+                  className={`relative flex items-center gap-1 px-3 xl:px-4 py-1.5 text-xs xl:text-[14.5px] font-semibold transition-all duration-200 rounded-full cursor-pointer focus:outline-none whitespace-nowrap ${
+                    activeDropdown === 'more' ? 'text-[#0E3B36] bg-[#EEF3EF]' : 'text-[#1B2620]/80 hover:text-[#0E3B36] hover:bg-[#EEF3EF]/60'
                   }`}
                 >
                   <span>More</span>
-                  <ChevronDown className={`w-3 h-3 xl:w-3.5 xl:h-3.5 transition-transform duration-200 ${activeDropdown === 'more' ? 'rotate-180' : ''}`} />
+                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${activeDropdown === 'more' ? 'rotate-180' : ''}`} />
                 </button>
 
                 {activeDropdown === 'more' && (
-                  <div className="absolute top-[100%] right-0 xl:right-auto xl:left-1/2 xl:-translate-x-1/2 pt-3 z-50 w-[300px] xl:w-[320px]">
-                    <div className="bg-white rounded-2xl shadow-[0_20px_48px_rgba(22,58,95,0.12),0_4px_12px_rgba(22,58,95,0.04)] border border-slate-100/60 p-2.5 animate-fade-in-slide max-h-[80vh] overflow-y-auto">
-                      <p className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.08em] text-slate-400">
+                  <div className="absolute top-[100%] right-0 xl:right-auto xl:left-1/2 xl:-translate-x-1/2 pt-2 z-50 w-[300px]">
+                    <div className="bg-white rounded-2xl shadow-[0_20px_48px_rgba(14,59,54,0.12)] border border-[#D5DFD7] p-2.5 animate-fade-in-slide max-h-[80vh] overflow-y-auto">
+                      <p className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.08em] text-[#7A8E83]">
                         Care & Centres
                       </p>
                       <button
                         onClick={() => handleNavClick('/hospitals')}
-                        className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-primary/80 hover:bg-primary/[0.04] hover:text-secondary transition-all duration-200 text-left group"
+                        className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-[#1B2620]/90 hover:bg-[#EEF3EF] hover:text-[#0E3B36] transition-all duration-200 text-left group"
                       >
-                        <div className="w-8 h-8 rounded-xl bg-primary/[0.06] text-primary flex items-center justify-center shrink-0 group-hover:bg-primary/[0.1] transition-colors duration-200">
+                        <div className="w-8 h-8 rounded-xl bg-[#EEF3EF] text-[#0E3B36] flex items-center justify-center shrink-0 group-hover:bg-[#E8A23A]/20 transition-colors duration-200">
                           <Building2 className="w-4 h-4" />
                         </div>
                         <div>
-                          <p className="font-semibold text-[13px] xl:text-[14px] leading-tight">Health Centres</p>
-                          <p className="text-[11px] text-slate-400 font-medium mt-0.5">Partner hospitals & screening centres</p>
+                          <p className="font-semibold text-[13px] leading-tight">Health Centres</p>
+                          <p className="text-[11px] text-[#7A8E83] font-medium mt-0.5">Partner hospitals & screening centres</p>
                         </div>
                       </button>
 
-                      <div className="my-1 mx-3 border-t border-slate-100/80" />
-                      <p className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.08em] text-slate-400">
+                      <div className="my-1.5 mx-3 kantha-divider" />
+                      <p className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.08em] text-[#7A8E83]">
                         Media & Resources
                       </p>
                       <button
                         onClick={() => handleNavClick('/blogs')}
-                        className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-primary/80 hover:bg-primary/[0.04] hover:text-secondary transition-all duration-200 text-left group"
+                        className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-[#1B2620]/90 hover:bg-[#EEF3EF] hover:text-[#0E3B36] transition-all duration-200 text-left group"
                       >
-                        <div className="w-8 h-8 rounded-xl bg-primary/[0.06] text-primary flex items-center justify-center shrink-0 group-hover:bg-primary/[0.1] transition-colors duration-200">
+                        <div className="w-8 h-8 rounded-xl bg-[#EEF3EF] text-[#0E3B36] flex items-center justify-center shrink-0 group-hover:bg-[#E8A23A]/20 transition-colors duration-200">
                           <BookOpen className="w-4 h-4" />
                         </div>
                         <div>
-                          <p className="font-semibold text-[13px] xl:text-[14px] leading-tight">Blogs & Articles</p>
-                          <p className="text-[11px] text-slate-400 font-medium mt-0.5">Cancer care insights & news</p>
+                          <p className="font-semibold text-[13px] leading-tight">Blogs & Articles</p>
+                          <p className="text-[11px] text-[#7A8E83] font-medium mt-0.5">Cancer care insights & stories</p>
                         </div>
                       </button>
                       <button
                         onClick={() => handleNavClick('/gallery')}
-                        className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-primary/80 hover:bg-primary/[0.04] hover:text-secondary transition-all duration-200 text-left group"
+                        className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-[#1B2620]/90 hover:bg-[#EEF3EF] hover:text-[#0E3B36] transition-all duration-200 text-left group"
                       >
-                        <div className="w-8 h-8 rounded-xl bg-primary/[0.06] text-primary flex items-center justify-center shrink-0 group-hover:bg-primary/[0.1] transition-colors duration-200">
+                        <div className="w-8 h-8 rounded-xl bg-[#EEF3EF] text-[#0E3B36] flex items-center justify-center shrink-0 group-hover:bg-[#E8A23A]/20 transition-colors duration-200">
                           <Images className="w-4 h-4" />
                         </div>
                         <div>
-                          <p className="font-semibold text-[13px] xl:text-[14px] leading-tight">Gallery</p>
-                          <p className="text-[11px] text-slate-400 font-medium mt-0.5">Camp photos & highlights</p>
+                          <p className="font-semibold text-[13px] leading-tight">Gallery</p>
+                          <p className="text-[11px] text-[#7A8E83] font-medium mt-0.5">Field camp photos & highlights</p>
                         </div>
                       </button>
 
-                      <div className="my-1 mx-3 border-t border-slate-100/80" />
-                      <p className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.08em] text-slate-400">
+                      <div className="my-1.5 mx-3 kantha-divider" />
+                      <p className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.08em] text-[#7A8E83]">
                         Specialist Info
                       </p>
 
@@ -366,30 +382,30 @@ export default function Navbar({
                         <button
                           key={item.path + item.label}
                           onClick={() => handleNavClick(item.path)}
-                          className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-primary/80 hover:bg-primary/[0.04] hover:text-secondary transition-all duration-200 text-left group"
+                          className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-[#1B2620]/90 hover:bg-[#EEF3EF] hover:text-[#0E3B36] transition-all duration-200 text-left group"
                         >
-                          <div className={`w-8 h-8 rounded-xl bg-primary/[0.06] ${item.color} flex items-center justify-center shrink-0 group-hover:bg-primary/[0.1] transition-colors duration-200`}>
+                          <div className="w-8 h-8 rounded-xl bg-[#EEF3EF] text-[#0E3B36] flex items-center justify-center shrink-0 group-hover:bg-[#E8A23A]/20 transition-colors duration-200">
                             <item.icon className="w-4 h-4" />
                           </div>
                           <div>
-                            <p className="font-semibold text-[13px] xl:text-[14px] leading-tight">{item.label}</p>
-                            <p className="text-[11px] text-slate-400 font-medium mt-0.5">{item.sublabel}</p>
+                            <p className="font-semibold text-[13px] leading-tight">{item.label}</p>
+                            <p className="text-[11px] text-[#7A8E83] font-medium mt-0.5">{item.sublabel}</p>
                           </div>
                         </button>
                       ))}
 
-                      <div className="my-1 mx-3 border-t border-slate-100/80" />
+                      <div className="my-1.5 mx-3 kantha-divider" />
 
                       <button
                         onClick={() => handleNavClick('/join-us')}
-                        className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-primary/80 hover:bg-primary/[0.04] hover:text-secondary transition-all duration-200 text-left group"
+                        className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-[#1B2620]/90 hover:bg-[#FDF4E5] hover:text-[#0E3B36] transition-all duration-200 text-left group"
                       >
-                        <div className="w-8 h-8 rounded-xl bg-secondary/10 text-secondary flex items-center justify-center shrink-0 group-hover:bg-secondary/15 transition-colors duration-200">
+                        <div className="w-8 h-8 rounded-xl bg-[#FDF4E5] text-[#E8A23A] flex items-center justify-center shrink-0 group-hover:bg-[#E8A23A]/25 transition-colors duration-200">
                           <UserPlus className="w-4 h-4" />
                         </div>
                         <div>
-                          <p className="font-semibold text-[13px] xl:text-[14px] leading-tight">Join Us / मिशन से जुड़ें</p>
-                          <p className="text-[11px] text-slate-400 font-medium mt-0.5">Become a community advocate</p>
+                          <p className="font-semibold text-[13px] leading-tight">Join Us / मिशन से जुड़ें</p>
+                          <p className="text-[11px] text-[#7A8E83] font-medium mt-0.5">Become a community advocate</p>
                         </div>
                       </button>
 
@@ -398,14 +414,14 @@ export default function Navbar({
                           setActiveDropdown(null);
                           onOpenEnquiry();
                         }}
-                        className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-primary/80 hover:bg-primary/[0.04] hover:text-secondary transition-all duration-200 text-left group"
+                        className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-[#1B2620]/90 hover:bg-[#EEF3EF] hover:text-[#0E3B36] transition-all duration-200 text-left group"
                       >
-                        <div className="w-8 h-8 rounded-xl bg-primary/[0.06] text-primary flex items-center justify-center shrink-0 group-hover:bg-primary/[0.1] transition-colors duration-200">
+                        <div className="w-8 h-8 rounded-xl bg-[#EEF3EF] text-[#0E3B36] flex items-center justify-center shrink-0 group-hover:bg-[#E8A23A]/20 transition-colors duration-200">
                           <PhoneCall className="w-4 h-4" />
                         </div>
                         <div>
-                          <p className="font-semibold text-[13px] xl:text-[14px] leading-tight">Contact Us</p>
-                          <p className="text-[11px] text-slate-400 font-medium mt-0.5">Patient helpline & enquiry</p>
+                          <p className="font-semibold text-[13px] leading-tight">Contact Us</p>
+                          <p className="text-[11px] text-[#7A8E83] font-medium mt-0.5">Patient helpline & enquiry</p>
                         </div>
                       </button>
                     </div>
@@ -416,58 +432,58 @@ export default function Navbar({
           </div>
 
           {/* RIGHT: Actions (Desktop) */}
-          <div className="hidden lg:flex items-center space-x-1.5 xl:space-x-3 shrink-0 z-10">
+          <div className="hidden lg:flex items-center space-x-2 xl:space-x-3 shrink-0 z-10">
             {loggedInStaff ? (
               <>
                 <button
                   onClick={() => navigate(loggedInStaff.role === 'superadmin' ? '/superadmin/dashboard' : '/admin/dashboard')}
-                  className="px-2.5 xl:px-4 py-1.5 xl:py-2 rounded-full bg-primary/[0.06] text-primary border border-primary/10 text-xs xl:text-[14px] font-semibold hover:bg-primary/[0.1] transition-all duration-200 cursor-pointer inline-flex items-center space-x-1.5 focus:outline-none whitespace-nowrap"
+                  className="px-3 xl:px-4 py-1.5 xl:py-2 rounded-full bg-[#EEF3EF] text-[#0E3B36] border border-[#D5DFD7] text-xs xl:text-[13.5px] font-semibold hover:bg-[#0E3B36] hover:text-white transition-all duration-200 cursor-pointer inline-flex items-center space-x-1.5 focus:outline-none whitespace-nowrap"
                 >
-                  <Shield className="w-3.5 h-3.5 xl:w-4 xl:h-4 text-primary" />
+                  <Shield className="w-3.5 h-3.5 text-[#E8A23A]" />
                   <span>{loggedInStaff.role === 'superadmin' ? 'Super Admin' : 'Admin Console'}</span>
                 </button>
                 <button
                   onClick={handleLogout}
-                  className="w-8 h-8 xl:w-9 xl:h-9 rounded-full bg-red-50 text-red-500 border border-red-100/80 flex items-center justify-center hover:bg-red-100 transition-all duration-200 cursor-pointer focus:outline-none shrink-0"
+                  className="w-8 h-8 xl:w-9 xl:h-9 rounded-full bg-red-50 text-[#C8443C] border border-red-100 flex items-center justify-center hover:bg-red-100 transition-all duration-200 cursor-pointer focus:outline-none shrink-0"
                   title="Logout"
                 >
-                  <LogOut className="w-3.5 h-3.5 xl:w-4 xl:h-4" />
+                  <LogOut className="w-3.5 h-3.5" />
                 </button>
               </>
             ) : loggedInVolunteer ? (
               <>
                 <button
                   onClick={() => navigate('/volunteer/dashboard')}
-                  className="px-2.5 xl:px-4 py-1.5 xl:py-2 rounded-full bg-primary/[0.06] text-primary text-xs xl:text-[14px] font-semibold hover:bg-primary/[0.1] transition-all duration-200 cursor-pointer inline-flex items-center space-x-2 border border-primary/10 focus:outline-none whitespace-nowrap"
+                  className="px-3 xl:px-4 py-1.5 xl:py-2 rounded-full bg-[#EEF3EF] text-[#0E3B36] text-xs xl:text-[13.5px] font-semibold hover:bg-[#0E3B36] hover:text-white transition-all duration-200 cursor-pointer inline-flex items-center space-x-2 border border-[#D5DFD7] focus:outline-none whitespace-nowrap"
                 >
-                  <div className="w-5 h-5 rounded-full bg-primary text-white text-[10px] font-bold flex items-center justify-center">
+                  <div className="w-5 h-5 rounded-full bg-[#0E3B36] text-white text-[10px] font-bold flex items-center justify-center">
                     {volunteerInitials}
                   </div>
                   <span>Dashboard</span>
                 </button>
                 <button
                   onClick={handleLogout}
-                  className="w-8 h-8 xl:w-9 xl:h-9 rounded-full bg-red-50 text-red-500 border border-red-100/80 flex items-center justify-center hover:bg-red-100 transition-all duration-200 cursor-pointer focus:outline-none shrink-0"
+                  className="w-8 h-8 xl:w-9 xl:h-9 rounded-full bg-red-50 text-[#C8443C] border border-red-100 flex items-center justify-center hover:bg-red-100 transition-all duration-200 cursor-pointer focus:outline-none shrink-0"
                   title="Logout"
                 >
-                  <LogOut className="w-3.5 h-3.5 xl:w-4 xl:h-4" />
+                  <LogOut className="w-3.5 h-3.5" />
                 </button>
               </>
             ) : loggedInHospital ? (
               <>
                 <button
                   onClick={() => navigate('/hospital/dashboard')}
-                  className="px-2.5 xl:px-4 py-1.5 xl:py-2 rounded-full bg-primary/[0.06] text-primary border border-primary/10 text-xs xl:text-[14px] font-semibold hover:bg-primary/[0.1] transition-all duration-200 cursor-pointer inline-flex items-center space-x-1.5 focus:outline-none whitespace-nowrap"
+                  className="px-3 xl:px-4 py-1.5 xl:py-2 rounded-full bg-[#EEF3EF] text-[#0E3B36] border border-[#D5DFD7] text-xs xl:text-[13.5px] font-semibold hover:bg-[#0E3B36] hover:text-white transition-all duration-200 cursor-pointer inline-flex items-center space-x-1.5 focus:outline-none whitespace-nowrap"
                 >
-                  <Building2 className="w-3.5 h-3.5 xl:w-4 xl:h-4 text-primary" />
+                  <Building2 className="w-3.5 h-3.5 text-[#E8A23A]" />
                   <span>Hospital Portal</span>
                 </button>
                 <button
                   onClick={handleLogout}
-                  className="w-8 h-8 xl:w-9 xl:h-9 rounded-full bg-red-50 text-red-500 border border-red-100/80 flex items-center justify-center hover:bg-red-100 transition-all duration-200 cursor-pointer focus:outline-none shrink-0"
+                  className="w-8 h-8 xl:w-9 xl:h-9 rounded-full bg-red-50 text-[#C8443C] border border-red-100 flex items-center justify-center hover:bg-red-100 transition-all duration-200 cursor-pointer focus:outline-none shrink-0"
                   title="Logout"
                 >
-                  <LogOut className="w-3.5 h-3.5 xl:w-4 xl:h-4" />
+                  <LogOut className="w-3.5 h-3.5" />
                 </button>
               </>
             ) : (
@@ -479,30 +495,30 @@ export default function Navbar({
               >
                 <button
                   onClick={() => setActiveDropdown(activeDropdown === 'login' ? null : 'login')}
-                  className="w-8 h-8 xl:w-10 xl:h-10 rounded-full bg-white border border-slate-200/80 flex items-center justify-center text-primary/70 hover:text-primary hover:bg-primary/[0.04] hover:border-primary/20 transition-all duration-200 shadow-[0_1px_4px_rgba(22,58,95,0.04)] focus:outline-none cursor-pointer"
+                  className="w-9 h-9 xl:w-10 xl:h-10 rounded-full bg-white border border-[#D5DFD7] flex items-center justify-center text-[#0E3B36] hover:bg-[#EEF3EF] transition-all duration-200 shadow-sm focus:outline-none cursor-pointer"
+                  title="Sign In"
                 >
                   <User className="w-4 h-4" />
                 </button>
 
-                {/* Profile Login Dropdown */}
                 {activeDropdown === 'login' && (
-                  <div className="absolute top-[100%] right-0 pt-3 z-50 w-60">
-                    <div className="bg-white rounded-2xl shadow-[0_20px_48px_rgba(22,58,95,0.12),0_4px_12px_rgba(22,58,95,0.04)] border border-slate-100/60 p-2 animate-fade-in-slide">
-                      <p className="px-3.5 py-2 text-[10px] font-bold uppercase tracking-[0.08em] text-slate-400 border-b border-slate-100/80 mb-1.5">
-                        Sign In Access
+                  <div className="absolute top-[100%] right-0 pt-2 z-50 w-56">
+                    <div className="bg-white rounded-2xl shadow-[0_20px_48px_rgba(14,59,54,0.12)] border border-[#D5DFD7] p-2 animate-fade-in-slide">
+                      <p className="px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.08em] text-[#7A8E83] border-b border-[#D5DFD7]/60 mb-1">
+                        Portal Access
                       </p>
                       <button
                         onClick={() => handleNavClick('/volunteer/login')}
-                        className="w-full flex items-center gap-3 px-3.5 py-2.5 text-[14px] font-semibold text-primary/80 hover:bg-primary/[0.04] hover:text-secondary rounded-xl transition-colors duration-200 text-left group"
+                        className="w-full flex items-center gap-2.5 px-3 py-2 text-[13.5px] font-semibold text-[#1B2620] hover:bg-[#EEF3EF] hover:text-[#0E3B36] rounded-xl transition-colors text-left group"
                       >
-                        <User className="w-4 h-4 text-slate-400 group-hover:text-secondary transition-colors duration-200" />
+                        <User className="w-4 h-4 text-[#7A8E83] group-hover:text-[#E8A23A]" />
                         <span>Volunteer Login</span>
                       </button>
                       <button
                         onClick={() => handleNavClick('/hospital/login')}
-                        className="w-full flex items-center gap-3 px-3.5 py-2.5 text-[14px] font-semibold text-primary/80 hover:bg-primary/[0.04] hover:text-secondary rounded-xl transition-colors duration-200 text-left group"
+                        className="w-full flex items-center gap-2.5 px-3 py-2 text-[13.5px] font-semibold text-[#1B2620] hover:bg-[#EEF3EF] hover:text-[#0E3B36] rounded-xl transition-colors text-left group"
                       >
-                        <Building2 className="w-4 h-4 text-slate-400 group-hover:text-secondary transition-colors duration-200" />
+                        <Building2 className="w-4 h-4 text-[#7A8E83] group-hover:text-[#E8A23A]" />
                         <span>Hospital Login</span>
                       </button>
                     </div>
@@ -510,41 +526,43 @@ export default function Navbar({
                 )}
               </div>
             )}
+            
+            {/* Donate Modal Trigger */}
             <button
               onClick={onOpenDonate}
-              className="flex items-center gap-1.5 px-3 py-2 border border-primary/20 text-primary rounded-full font-semibold text-xs xl:text-[13.5px] transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/5 hover:border-primary/40 focus:outline-none whitespace-nowrap cursor-pointer"
+              className="flex items-center gap-1.5 px-3.5 py-2 border border-[#0E3B36]/30 text-[#0E3B36] rounded-full font-semibold text-xs xl:text-[13.5px] transition-all duration-200 hover:bg-[#EEF3EF] hover:border-[#0E3B36] focus:outline-none whitespace-nowrap cursor-pointer"
             >
-              <Gift className="w-3.5 h-3.5 text-secondary" />
+              <Gift className="w-3.5 h-3.5 text-[#E8A23A]" />
               <span>Donate</span>
             </button>
+            
+            {/* Primary Consultation Action */}
             <button
               onClick={onOpenEnquiry}
-              className="flex items-center gap-1.5 px-4 xl:px-5 py-2 bg-primary text-white rounded-full font-semibold text-xs xl:text-[13.5px] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(22,58,95,0.25)] hover:bg-[#0e2742] focus:outline-none whitespace-nowrap cursor-pointer"
+              className="btn-marigold text-xs xl:text-[13.5px] !py-2 !px-4.5 whitespace-nowrap cursor-pointer"
             >
-              <PhoneCall className="w-3.5 h-3.5 text-secondary" />
+              <PhoneCall className="w-3.5 h-3.5" />
               <span>Book Consultation</span>
             </button>
           </div>
 
-          {/* Mobile Actions -- shrink-0 so these never lose room to the
-              (now-truncating) brand logo on narrow phones. Compact by
-              default; a little roomier from sm: (640px) up. */}
-          <div className="lg:hidden flex items-center gap-1 sm:gap-2 shrink-0">
+          {/* Mobile Actions */}
+          <div className="lg:hidden flex items-center gap-1.5 sm:gap-2 shrink-0">
             <button
               onClick={onOpenDonate}
-              className="px-2 sm:px-3.5 py-1.5 sm:py-2 rounded-full border-2 border-primary text-primary text-[11px] sm:text-[12px] font-semibold hover:bg-primary/5 transition-colors whitespace-nowrap"
+              className="px-2.5 sm:px-3.5 py-1.5 rounded-full border border-[#0E3B36] text-[#0E3B36] text-[11px] sm:text-[12px] font-semibold hover:bg-[#EEF3EF] transition-colors whitespace-nowrap"
             >
               Donate
             </button>
             <button
               onClick={() => onOpenEnquiry()}
-              className="px-2 sm:px-3.5 py-1.5 sm:py-2 rounded-full bg-primary text-white text-[11px] sm:text-[12px] font-semibold hover:opacity-95 transition-opacity shadow-sm whitespace-nowrap"
+              className="px-3 sm:px-4 py-1.5 rounded-full bg-[#E8A23A] text-[#1B2620] text-[11px] sm:text-[12px] font-bold hover:bg-[#D58F26] transition-colors shadow-sm whitespace-nowrap"
             >
               Enquiry
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-primary hover:bg-primary/[0.05] focus:outline-none transition-colors shrink-0"
+              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-[#0E3B36] hover:bg-[#EEF3EF] focus:outline-none transition-colors shrink-0"
               aria-label="Toggle Menu"
             >
               <Menu className="w-5 h-5" />
@@ -558,17 +576,15 @@ export default function Navbar({
           ═══════════════════════════════════════════ */}
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-[9999] lg:hidden">
-          {/* Dark Overlay + Backdrop Blur */}
           <div
-            className="absolute inset-0 bg-black/45 backdrop-blur-[7px] animate-fade-in"
+            className="absolute inset-0 bg-black/50 backdrop-blur-[6px] animate-fade-in"
             onClick={() => setMobileMenuOpen(false)}
           />
 
-          {/* Drawer Panel — slides from LEFT */}
-          <div className="absolute top-0 left-0 h-full w-[88%] max-w-[380px] bg-white shadow-[4px_0_30px_rgba(0,0,0,0.12)] rounded-r-3xl animate-slide-in-left flex flex-col overflow-hidden">
+          <div className="absolute top-0 left-0 h-full w-[88%] max-w-[360px] bg-[#FAFCF8] shadow-2xl rounded-r-3xl animate-slide-in-left flex flex-col overflow-hidden border-r border-[#D5DFD7]">
 
-            {/* ── Drawer Header ── */}
-            <div className="flex items-center justify-between px-6 py-5 border-b border-slate-100/80 shrink-0">
+            {/* Header */}
+            <div className="flex items-center justify-between px-5 py-4 border-b border-[#D5DFD7] shrink-0 bg-white">
               <button
                 onClick={() => handleNavClick('/')}
                 className="flex items-center gap-3 focus:outline-none"
@@ -576,312 +592,105 @@ export default function Navbar({
                 <img
                   src="/brand-logo.jpeg"
                   alt="Cancer Aware Bharat"
-                  className="w-10 h-10 rounded-full object-cover shadow-[0_2px_8px_rgba(22,58,95,0.12)]"
+                  className="w-9 h-9 rounded-full object-cover ring-2 ring-[#0E3B36]/15"
                 />
                 <div className="flex flex-col">
-                  <span className="font-outfit text-[17px] font-bold text-primary leading-tight">Cancer Aware Bharat</span>
-                  <span className="text-[9px] font-semibold text-primary/45 tracking-[0.06em] uppercase mt-0.5">कैंसर जागरूकता अभियान</span>
+                  <span className="font-serif text-[17px] font-bold text-[#0E3B36] leading-tight">Cancer Aware Bharat</span>
+                  <span className="font-serif-hindi text-[10px] font-medium text-[#0E3B36]/60">जीवन की नई किरण</span>
                 </div>
               </button>
               <button
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-10 h-10 rounded-full flex items-center justify-center hover:bg-slate-100 transition-colors duration-200"
+                className="w-9 h-9 rounded-full flex items-center justify-center hover:bg-[#EEF3EF] text-[#1B2620] transition-colors duration-200"
                 aria-label="Close menu"
               >
-                <X className="w-5 h-5 text-slate-500" />
+                <X className="w-5 h-5" />
               </button>
             </div>
 
-            {/* ── Scrollable Content ── */}
-            <div className="flex-1 overflow-y-auto overscroll-contain">
-
-              {/* Navigation Links */}
-              <div className="px-5 pt-5 pb-3">
-                {[
-                  { path: '/', label: 'Home', icon: Home },
-                  { path: '/about', label: 'About Us', icon: Users },
-                  { path: '/mission', label: 'Our Mission', icon: Target },
-                ].map(item => (
-                  <button
-                    key={item.path}
-                    onClick={() => handleNavClick(item.path)}
-                    className={`flex items-center gap-4 w-full text-left h-[58px] px-3 border-b border-slate-100/60 transition-all duration-200 ${
-                      location.pathname === item.path
-                        ? 'text-secondary font-semibold'
-                        : 'text-primary/80 hover:text-secondary'
-                    }`}
-                  >
-                    <item.icon className={`w-[18px] h-[18px] shrink-0 ${location.pathname === item.path ? 'text-secondary' : 'text-primary/40'}`} />
-                    <span className="text-[15px]">{item.label}</span>
-                    {location.pathname === item.path && <span className="ml-auto w-1.5 h-1.5 rounded-full bg-secondary" />}
-                  </button>
-                ))}
-
-                {/* Events Accordion */}
-                <div>
-                  <button
-                    onClick={() => setActiveMobileDropdown(activeMobileDropdown === 'events' ? null : 'events')}
-                    className={`flex items-center justify-between w-full text-left h-[58px] px-3 border-b border-slate-100/60 transition-all duration-200 ${
-                      location.pathname === '/events' || location.pathname === '/gallery'
-                        ? 'text-secondary font-semibold'
-                        : 'text-primary/80 hover:text-secondary'
-                    }`}
-                  >
-                    <div className="flex items-center gap-4">
-                      <Calendar className={`w-[18px] h-[18px] shrink-0 ${location.pathname === '/events' || location.pathname === '/gallery' ? 'text-secondary' : 'text-primary/40'}`} />
-                      <span className="text-[15px]">Events & Camps</span>
-                    </div>
-                    <ChevronDown className={`w-4 h-4 text-primary/40 transition-transform duration-300 ${activeMobileDropdown === 'events' ? 'rotate-180 text-secondary' : ''}`} />
-                  </button>
-                  <div className={`overflow-hidden transition-all duration-300 ease-out ${activeMobileDropdown === 'events' ? 'max-h-[140px] opacity-100' : 'max-h-0 opacity-0'}`}>
-                    <div className="pl-14 pr-3 py-2 space-y-1 bg-slate-50/50">
-                      <button
-                        onClick={() => handleNavClick('/events')}
-                        className={`w-full text-left py-2.5 px-3 rounded-xl text-[14px] transition-all duration-200 ${
-                          location.pathname === '/events' ? 'text-secondary font-semibold' : 'text-primary/70 hover:text-secondary'
-                        }`}
-                      >
-                        Event Details
-                      </button>
-                      <button
-                        onClick={() => handleNavClick('/gallery')}
-                        className={`w-full text-left py-2.5 px-3 rounded-xl text-[14px] transition-all duration-200 ${
-                          location.pathname === '/gallery' ? 'text-secondary font-semibold' : 'text-primary/70 hover:text-secondary'
-                        }`}
-                      >
-                        Event Gallery
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Health Centres */}
+            {/* Links */}
+            <div className="flex-1 overflow-y-auto overscroll-contain px-4 py-4 space-y-1">
+              {[
+                { path: '/', label: 'Home', icon: Home },
+                { path: '/about', label: 'About Us', icon: Users },
+                { path: '/mission', label: 'Our Mission', icon: Target },
+                { path: '/events', label: 'Screening Camps', icon: Calendar },
+                { path: '/hospitals', label: 'Health Centres', icon: Building2 },
+                { path: '/blogs', label: 'Blogs & Articles', icon: BookOpen },
+                { path: '/gallery', label: 'Field Gallery', icon: Images },
+                { path: '/doctors', label: 'Specialist Doctors', icon: Stethoscope },
+              ].map(item => (
                 <button
-                  onClick={() => handleNavClick('/hospitals')}
-                  className={`flex items-center gap-4 w-full text-left h-[58px] px-3 border-b border-slate-100/60 transition-all duration-200 ${
-                    location.pathname === '/hospitals'
-                      ? 'text-secondary font-semibold'
-                      : 'text-primary/80 hover:text-secondary'
+                  key={item.path}
+                  onClick={() => handleNavClick(item.path)}
+                  className={`flex items-center gap-3.5 w-full text-left py-3 px-3 rounded-xl transition-all duration-200 ${
+                    location.pathname === item.path
+                      ? 'bg-[#EEF3EF] text-[#0E3B36] font-bold'
+                      : 'text-[#1B2620] hover:bg-[#EEF3EF]/60'
                   }`}
                 >
-                  <Building2 className={`w-[18px] h-[18px] shrink-0 ${location.pathname === '/hospitals' ? 'text-secondary' : 'text-primary/40'}`} />
-                  <span className="text-[15px]">Health Centres</span>
-                  {location.pathname === '/hospitals' && <span className="ml-auto w-1.5 h-1.5 rounded-full bg-secondary" />}
+                  <item.icon className={`w-4 h-4 ${location.pathname === item.path ? 'text-[#E8A23A]' : 'text-[#7A8E83]'}`} />
+                  <span className="text-[14.5px]">{item.label}</span>
                 </button>
+              ))}
 
-                {/* Blogs Accordion */}
-                <div>
-                  <button
-                    onClick={() => setActiveMobileDropdown(activeMobileDropdown === 'blogs' ? null : 'blogs')}
-                    className={`flex items-center justify-between w-full text-left h-[58px] px-3 border-b border-slate-100/60 transition-all duration-200 ${
-                      location.pathname === '/blogs' || location.pathname === '/news'
-                        ? 'text-secondary font-semibold'
-                        : 'text-primary/80 hover:text-secondary'
-                    }`}
-                  >
-                    <div className="flex items-center gap-4">
-                      <BookOpen className={`w-[18px] h-[18px] shrink-0 ${location.pathname === '/blogs' || location.pathname === '/news' ? 'text-secondary' : 'text-primary/40'}`} />
-                      <span className="text-[15px]">Blogs</span>
-                    </div>
-                    <ChevronDown className={`w-4 h-4 text-primary/40 transition-transform duration-300 ${activeMobileDropdown === 'blogs' ? 'rotate-180 text-secondary' : ''}`} />
-                  </button>
-                  <div className={`overflow-hidden transition-all duration-300 ease-out ${activeMobileDropdown === 'blogs' ? 'max-h-[140px] opacity-100' : 'max-h-0 opacity-0'}`}>
-                    <div className="pl-14 pr-3 py-2 space-y-1 bg-slate-50/50">
-                      <button
-                        onClick={() => handleNavClick('/blogs')}
-                        className={`w-full text-left py-2.5 px-3 rounded-xl text-[14px] transition-all duration-200 ${
-                          location.pathname === '/blogs' ? 'text-secondary font-semibold' : 'text-primary/70 hover:text-secondary'
-                        }`}
-                      >
-                        Articles
-                      </button>
-                      <button
-                        onClick={() => handleNavClick('/news')}
-                        className={`w-full text-left py-2.5 px-3 rounded-xl text-[14px] transition-all duration-200 ${
-                          location.pathname === '/news' ? 'text-secondary font-semibold' : 'text-primary/70 hover:text-secondary'
-                        }`}
-                      >
-                        News
-                      </button>
-                    </div>
-                  </div>
-                </div>
+              <div className="my-2 kantha-divider" />
 
-                {/* More Accordion */}
-                <div>
-                  <button
-                    onClick={() => setActiveMobileDropdown(activeMobileDropdown === 'more' ? null : 'more')}
-                    className={`flex items-center justify-between w-full text-left h-[58px] px-3 border-b border-slate-100/60 transition-all duration-200 text-primary/80 hover:text-secondary`}
-                  >
-                    <div className="flex items-center gap-4">
-                      <ArrowRight className={`w-[18px] h-[18px] shrink-0 text-primary/40 transition-transform duration-300 ${activeMobileDropdown === 'more' ? 'rotate-90' : ''}`} />
-                      <span className="text-[15px]">More</span>
-                    </div>
-                    <ChevronDown className={`w-4 h-4 text-primary/40 transition-transform duration-300 ${activeMobileDropdown === 'more' ? 'rotate-180 text-secondary' : ''}`} />
-                  </button>
-                  <div className={`overflow-hidden transition-all duration-300 ease-out ${activeMobileDropdown === 'more' ? 'max-h-[280px] opacity-100' : 'max-h-0 opacity-0'}`}>
-                    <div className="pl-14 pr-3 py-2 space-y-1 bg-slate-50/50">
-                      {[
-                        { path: '/doctors', label: 'Our Doctors' },
-                        { path: '/cancer-awareness', label: 'Cancer Awareness' },
-                        { path: '/join-us', label: 'Join Us' },
-                      ].map(sub => (
-                        <button
-                          key={sub.path}
-                          onClick={() => handleNavClick(sub.path)}
-                          className={`w-full text-left py-2.5 px-3 rounded-xl text-[14px] transition-all duration-200 ${
-                            location.pathname === sub.path ? 'text-secondary font-semibold' : 'text-primary/70 hover:text-secondary'
-                          }`}
-                        >
-                          {sub.label}
-                        </button>
-                      ))}
-                      <button
-                        onClick={() => {
-                          setMobileMenuOpen(false);
-                          onOpenEnquiry();
-                        }}
-                        className="w-full text-left py-2.5 px-3 rounded-xl text-[14px] text-primary/70 hover:text-secondary transition-all duration-200"
-                      >
-                        Contact Us
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <button
+                onClick={() => handleNavClick('/join-us')}
+                className="flex items-center gap-3.5 w-full text-left py-3 px-3 rounded-xl text-[#0E3B36] font-semibold bg-[#FDF4E5] hover:bg-[#FDF4E5]/80 transition-colors"
+              >
+                <UserPlus className="w-4 h-4 text-[#E8A23A]" />
+                <span className="text-[14.5px]">Join As Volunteer / मिशन से जुड़ें</span>
+              </button>
 
-              {/* ── Auth Section ── */}
-              <div className="px-5 py-4 border-t border-slate-100/80">
-                <p className="text-[10px] font-bold uppercase tracking-[0.08em] text-slate-400 mb-3 px-1">Account</p>
+              {/* Mobile Auth Access */}
+              <div className="pt-3">
+                <p className="text-[10px] font-bold uppercase tracking-[0.08em] text-[#7A8E83] mb-2 px-1">Access Portals</p>
                 {loggedInStaff ? (
-                  <div className="space-y-2.5">
-                    <button
-                      onClick={() => {
-                        setMobileMenuOpen(false);
-                        navigate(loggedInStaff.role === 'superadmin' ? '/superadmin/dashboard' : '/admin/dashboard');
-                      }}
-                      className="w-full h-[48px] rounded-xl bg-primary/[0.06] text-primary font-semibold text-[14px] flex items-center justify-center gap-2.5 transition-all duration-200 hover:bg-primary/[0.1]"
-                    >
-                      <Shield className="w-4 h-4" />
-                      {loggedInStaff.role === 'superadmin' ? 'Super Admin Console' : 'Admin Console'}
-                    </button>
-                    <button
-                      onClick={() => {
-                        setMobileMenuOpen(false);
-                        handleLogout();
-                      }}
-                      className="w-full h-[44px] rounded-xl border border-red-100/80 text-red-500 font-semibold text-[14px] flex items-center justify-center gap-2 transition-all duration-200 hover:bg-red-50"
-                    >
-                      <LogOut className="w-4 h-4" />
-                      Logout
-                    </button>
-                  </div>
-                ) : loggedInVolunteer ? (
-                  <div className="space-y-2.5">
-                    <button
-                      onClick={() => {
-                        setMobileMenuOpen(false);
-                        navigate('/volunteer/dashboard');
-                      }}
-                      className="w-full h-[48px] rounded-xl bg-primary/[0.06] text-primary font-semibold text-[14px] flex items-center justify-center gap-2.5 transition-all duration-200 hover:bg-primary/[0.1]"
-                    >
-                      <LayoutDashboard className="w-4 h-4" />
-                      My Dashboard
-                    </button>
-                    <button
-                      onClick={() => {
-                        setMobileMenuOpen(false);
-                        handleLogout();
-                      }}
-                      className="w-full h-[44px] rounded-xl border border-red-100/80 text-red-500 font-semibold text-[14px] flex items-center justify-center gap-2 transition-all duration-200 hover:bg-red-50"
-                    >
-                      <LogOut className="w-4 h-4" />
-                      Logout
-                    </button>
-                  </div>
-                ) : loggedInHospital ? (
-                  <div className="space-y-2.5">
-                    <button
-                      onClick={() => {
-                        setMobileMenuOpen(false);
-                        navigate('/hospital/dashboard');
-                      }}
-                      className="w-full h-[48px] rounded-xl bg-primary/[0.06] text-primary font-semibold text-[14px] flex items-center justify-center gap-2.5 transition-all duration-200 hover:bg-primary/[0.1]"
-                    >
-                      <Building2 className="w-4 h-4" />
-                      Hospital Portal
-                    </button>
-                    <button
-                      onClick={() => {
-                        setMobileMenuOpen(false);
-                        handleLogout();
-                      }}
-                      className="w-full h-[44px] rounded-xl border border-red-100/80 text-red-500 font-semibold text-[14px] flex items-center justify-center gap-2 transition-all duration-200 hover:bg-red-50"
-                    >
-                      <LogOut className="w-4 h-4" />
-                      Logout
-                    </button>
-                  </div>
+                  <button
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      navigate(loggedInStaff.role === 'superadmin' ? '/superadmin/dashboard' : '/admin/dashboard');
+                    }}
+                    className="w-full py-2.5 px-3 rounded-xl bg-[#EEF3EF] text-[#0E3B36] font-semibold text-[13.5px] flex items-center justify-center gap-2 mb-2"
+                  >
+                    <Shield className="w-4 h-4 text-[#E8A23A]" />
+                    <span>Admin Console</span>
+                  </button>
                 ) : (
-                  <div className="space-y-2">
-                    {[
-                      { path: '/volunteer/login', label: 'Volunteer Login', icon: User },
-                      { path: '/hospital/login', label: 'Hospital Login', icon: Building2 },
-                      // Patient Login is deliberately disabled for now (product decision)
-                    ].map(portal => (
-                      <button
-                        key={portal.path}
-                        onClick={() => {
-                          setMobileMenuOpen(false);
-                          navigate(portal.path);
-                        }}
-                        className="w-full h-[46px] rounded-xl bg-slate-50 hover:bg-primary/[0.05] text-primary/80 hover:text-primary font-semibold text-[14px] flex items-center justify-center gap-2.5 transition-all duration-200 border border-slate-100/60"
-                      >
-                        <portal.icon className="w-4 h-4 text-primary/50" />
-                        {portal.label}
-                      </button>
-                    ))}
+                  <div className="grid grid-cols-2 gap-2">
+                    <button
+                      onClick={() => handleNavClick('/volunteer/login')}
+                      className="py-2.5 px-2 rounded-xl bg-white border border-[#D5DFD7] text-[#0E3B36] font-semibold text-[12px] flex items-center justify-center gap-1.5"
+                    >
+                      <User className="w-3.5 h-3.5 text-[#7A8E83]" />
+                      <span>Volunteer</span>
+                    </button>
+                    <button
+                      onClick={() => handleNavClick('/hospital/login')}
+                      className="py-2.5 px-2 rounded-xl bg-white border border-[#D5DFD7] text-[#0E3B36] font-semibold text-[12px] flex items-center justify-center gap-1.5"
+                    >
+                      <Building2 className="w-3.5 h-3.5 text-[#7A8E83]" />
+                      <span>Hospital</span>
+                    </button>
                   </div>
                 )}
               </div>
-
-              {/* ── CTA Button ── */}
-              <div className="px-5 pb-4">
-                <button
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    onOpenVolunteer();
-                  }}
-                  className="w-full h-[52px] bg-primary text-white rounded-full font-semibold text-[15px] flex items-center justify-center gap-2.5 transition-all duration-200 hover:bg-[#112d4a] hover:shadow-[0_4px_16px_rgba(22,58,95,0.3)] active:scale-[0.98]"
-                >
-                  <Heart className="w-4.5 h-4.5" />
-                  Become a Volunteer
-                </button>
-              </div>
             </div>
 
-            {/* ── Social Footer ── */}
-            <div className="shrink-0 px-6 py-4 border-t border-slate-100/80 bg-slate-50/50">
-              <div className="flex items-center justify-center gap-4">
-                {[
-                  { icon: Facebook, label: 'Facebook', href: '#' },
-                  { icon: Instagram, label: 'Instagram', href: '#' },
-                  { icon: Linkedin, label: 'LinkedIn', href: '#' },
-                  { icon: Youtube, label: 'YouTube', href: '#' },
-                ].map(social => (
-                  <a
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-full bg-white border border-slate-100/80 flex items-center justify-center text-primary/50 hover:text-secondary hover:border-secondary/30 hover:shadow-[0_2px_8px_rgba(212,175,55,0.15)] transition-all duration-200"
-                    aria-label={social.label}
-                  >
-                    <social.icon className="w-[18px] h-[18px]" />
-                  </a>
-                ))}
-              </div>
-              <p className="text-center text-[10px] text-slate-400 mt-3">© 2024 Cancer Aware Bharat</p>
+            {/* Mobile Footer CTA */}
+            <div className="p-4 border-t border-[#D5DFD7] bg-white">
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onOpenEnquiry();
+                }}
+                className="btn-marigold w-full !py-2.5 !text-sm"
+              >
+                <PhoneCall className="w-4 h-4" />
+                <span>Book Free Consultation</span>
+              </button>
             </div>
           </div>
         </div>
