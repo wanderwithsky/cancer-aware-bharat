@@ -181,19 +181,7 @@ function PublicLayout({
         onOpenSitemap={onOpenSitemap}
       />
 
-      {/* Floating Action Button */}
-      {!isAuthPage && (
-        <div className="fixed bottom-6 right-6 z-40 hidden sm:block">
-          <button
-            onClick={onOpenEnquiry}
-            className="group relative bg-primary text-white hover:bg-primary-container font-semibold text-sm px-6 py-3.5 rounded-2xl shadow-[0_8px_32px_rgba(0,67,73,0.25)] transition-all duration-300 transform hover:scale-105 hover:shadow-[0_12px_40px_rgba(0,67,73,0.35)] active:scale-95 cursor-pointer flex items-center gap-2"
-          >
-            <span className="absolute -top-1 -right-1 w-3 h-3 bg-slate-400 rounded-full animate-ping" />
-            <span className="absolute -top-1 -right-1 w-3 h-3 bg-slate-400 rounded-full" />
-            Get Patient Support
-          </button>
-        </div>
-      )}
+
     </>
   );
 }

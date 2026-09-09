@@ -6,7 +6,7 @@ import {
   Phone, Stethoscope, Star, Quote, ChevronDown, Mail,
   Sun, Apple, Cigarette, Dumbbell, Syringe, Search as SearchIcon, Target,
   ClipboardCheck, UserCheck, Compass, HeartPulse, Droplet, Play,
-  Plus, Building, Clock, Sparkles, ShieldCheck, PhoneCall
+  Plus, Building, Clock, Sparkles, ShieldCheck, PhoneCall, Radio
 } from 'lucide-react';
 import { useEvents } from '../api/hooks';
 import TeamShowcase from './TeamShowcase';
@@ -19,9 +19,11 @@ const CAROUSEL_SLIDES = [
   {
     image: '/hero/hero-new-1.png',
     tag: 'डॉक्टर नेटवर्क',
+    tagEn: 'Doctor Network',
+    badgeText: 'विशेषज्ञ ऑन्कोलॉजी परामर्श',
     titleLine1: 'विशेषज्ञ कैंसर देखभाल',
     titleLine2: 'आपके निकट',
-    subtitleEn: 'Connecting patients across India with leading oncology specialists and trusted healthcare centres.',
+    subtitleEn: 'Connecting patients across India with premier oncology specialists, hospitals & direct second opinions.',
     desc: 'भारत भर के मरीजों को प्रमुख ऑन्कोलॉजी विशेषज्ञों और विश्वसनीय स्वास्थ्य केंद्रों से जोड़ना।',
     primaryBtn: 'विशेषज्ञ खोजें',
     secondaryBtn: 'मरीज पूछताछ',
@@ -29,14 +31,18 @@ const CAROUSEL_SLIDES = [
     secondaryAction: 'enquiry',
     objectPosition: 'center 20%',
     alt: 'विशेषज्ञ कैंसर देखभाल',
-    dawnTheme: 'gradient-dawn-1'
+    dawnTheme: 'gradient-dawn-1',
+    highlightStat: '14,250+ Screened',
+    accentColor: '#E8A23A'
   },
   {
     image: '/hero/hero-new-2.png',
     tag: 'सामुदायिक जागरूकता',
+    tagEn: 'Community Outreach',
+    badgeText: 'रोकथाम और प्रारंभिक पहचान',
     titleLine1: 'जागरूकता से सशक्त',
     titleLine2: 'बनता भारत',
-    subtitleEn: 'Comprehensive awareness and clinical education campaigns for early symptom detection.',
+    subtitleEn: 'Comprehensive grassroots awareness and clinical education campaigns for early symptom detection.',
     desc: 'कैंसर के शुरुआती लक्षणों की पहचान के लिए व्यापक जागरूकता और शिक्षा अभियान।',
     primaryBtn: 'अभियान देखें',
     secondaryBtn: 'हमारे साथ जुड़ें',
@@ -44,14 +50,18 @@ const CAROUSEL_SLIDES = [
     secondaryAction: 'volunteer',
     objectPosition: 'center 30%',
     alt: 'जागरूकता से सशक्त बनता भारत',
-    dawnTheme: 'gradient-dawn-2'
+    dawnTheme: 'gradient-dawn-2',
+    highlightStat: '180+ Camps Held',
+    accentColor: '#7C9A82'
   },
   {
     image: '/hero/hero-new-3.png',
     tag: 'निःशुल्क जांच शिविर',
+    tagEn: 'Free Screening Camps',
+    badgeText: 'गाँव और शहरों में सुलभ स्वास्थ्य',
     titleLine1: 'सुलभ कैंसर जांच',
     titleLine2: 'हर गांव और शहर में',
-    subtitleEn: 'Delivering free early detection screening camps directly to rural and underserved communities.',
+    subtitleEn: 'Delivering free doctor-led early detection screening camps directly to rural and underserved communities.',
     desc: 'ग्रामीण और वंचित क्षेत्रों तक सीधे निःशुल्क कैंसर जांच शिविर पहुंचाना।',
     primaryBtn: 'नजदीकी कैंप खोजें',
     secondaryBtn: 'सहयोग करें',
@@ -59,14 +69,18 @@ const CAROUSEL_SLIDES = [
     secondaryAction: 'volunteer',
     objectPosition: 'center 25%',
     alt: 'सुलभ कैंसर जांच',
-    dawnTheme: 'gradient-dawn-3'
+    dawnTheme: 'gradient-dawn-3',
+    highlightStat: '100% Free Diagnostics',
+    accentColor: '#E8A23A'
   },
   {
     image: '/hero/hero-new-4.jpg',
     tag: 'मरीज सहायता केंद्र',
+    tagEn: 'Patient Support Centre',
+    badgeText: 'निदान से उपचार तक संपूर्ण सहयोग',
     titleLine1: 'स्वास्थ्य और जीवन की',
     titleLine2: 'नई किरण',
-    subtitleEn: 'Dedicated caseworkers and volunteers walking beside patients from diagnosis to recovery.',
+    subtitleEn: 'Dedicated caseworkers and volunteers walking beside patients and families from diagnosis to recovery.',
     desc: 'निदान से लेकर संपूर्ण इलाज तक, हमारे समर्पित स्वयंसेवक हर कदम पर मरीजों के साथ हैं।',
     primaryBtn: 'अभी मदद पाएं',
     secondaryBtn: 'मिशन से जुड़ें',
@@ -74,7 +88,9 @@ const CAROUSEL_SLIDES = [
     secondaryAction: 'volunteer',
     objectPosition: 'center 20%',
     alt: 'मरीज सहायता केंद्र',
-    dawnTheme: 'gradient-dawn-4'
+    dawnTheme: 'gradient-dawn-4',
+    highlightStat: '1,240+ Navigations',
+    accentColor: '#C8443C'
   }
 ];
 
@@ -812,6 +828,10 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
   const [isPaused, setIsPaused] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
+  // Quick triage input state
+  const [selectedSpecialty, setSelectedSpecialty] = useState('All Specialties');
+  const [pincodeCity, setPincodeCity] = useState('');
+
   // Newsletter state
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [newsletterSubmitted, setNewsletterSubmitted] = useState(false);
@@ -831,6 +851,11 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
     }, 5500);
     return () => clearInterval(slideInterval);
   }, [activeSlide, isPaused]);
+
+  const handleQuickSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    navigate('/events');
+  };
 
   const faqs = [
     { 
@@ -863,78 +888,77 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
     <div className="space-y-0 bg-[#F3F6F1]">
 
       {/* ═══════════════════════════════════════════
-          SECTION 1: THE SUNRISE ARC HERO CAROUSEL
+          SECTION 1: REFINED SUNRISE ARC HERO SHOWCASE
           ═══════════════════════════════════════════ */}
       <section 
-        className={`relative min-h-[620px] lg:min-h-[700px] ${CAROUSEL_SLIDES[activeSlide].dawnTheme} text-white flex flex-col justify-center overflow-hidden pt-12 pb-16 md:pb-20 transition-colors duration-1000 ease-in-out`}
+        className={`relative min-h-[640px] lg:min-h-[720px] ${CAROUSEL_SLIDES[activeSlide].dawnTheme} text-white flex flex-col justify-center overflow-hidden pt-12 md:pt-16 pb-20 md:pb-24 transition-colors duration-1000 ease-in-out`}
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
-        {/* Subtle Dawn Light & Grid Texture */}
+        {/* Subtle Dawn Ambient Light Rays & Glows */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute -top-32 -left-32 w-96 h-96 bg-[#E8A23A]/15 rounded-full blur-[100px]" />
-          <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#7C9A82]/15 rounded-full blur-[140px]" />
+          <div className="absolute -top-24 -left-24 w-[550px] h-[550px] bg-[#E8A23A]/15 rounded-full blur-[130px] transition-all duration-1000" />
+          <div className="absolute bottom-0 right-0 w-[650px] h-[650px] bg-[#7C9A82]/15 rounded-full blur-[150px] transition-all duration-1000" />
+          <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[750px] h-[750px] bg-[#0E3B36]/35 rounded-full blur-[170px]" />
+          <div className="absolute inset-0 bg-[radial-gradient(#ffffff08_1px,transparent_1px)] [background-size:32px_32px] opacity-70" />
         </div>
 
         {/* Main Hero Container: 55/45 Asymmetric Grid */}
         <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
             
-            {/* LEFT: Headline & Actions (7 Cols on LG) */}
+            {/* LEFT: Typography & Call-To-Action (7 Cols on LG) */}
             <div className="lg:col-span-7 flex flex-col justify-between">
               <div>
-                {/* Category Pill Deck */}
-                <div className="flex flex-wrap items-center gap-2 mb-6">
-                  {CAROUSEL_SLIDES.map((slide, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => setActiveSlide(idx)}
-                      className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all duration-300 cursor-pointer flex items-center gap-1.5 ${
-                        idx === activeSlide
-                          ? 'bg-[#E8A23A] text-[#1B2620] shadow-md scale-105'
-                          : 'bg-white/10 hover:bg-white/20 text-white/80 border border-white/15'
-                      }`}
-                    >
-                      <span className={`w-1.5 h-1.5 rounded-full ${idx === activeSlide ? 'bg-[#0E3B36]' : 'bg-[#E8A23A]'}`} />
-                      <span>{slide.tag}</span>
-                    </button>
-                  ))}
+                {/* Live Campaign Pill with Pulsing Sun Beacon */}
+                <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-sm mb-6 animate-fade-in">
+                  <span className="flex h-2 w-2 relative">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#E8A23A] opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#E8A23A]"></span>
+                  </span>
+                  <span className="text-[11.5px] font-bold text-[#E8A23A] uppercase tracking-wider">
+                    {CAROUSEL_SLIDES[activeSlide].badgeText}
+                  </span>
+                  <span className="text-white/40">•</span>
+                  <span className="text-white/80 text-xs font-medium">जीवन की नई किरण</span>
                 </div>
 
-                {/* Bilingual Main Headline: Fraunces + Tiro Devanagari */}
-                <h1 className="font-serif text-white text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-bold leading-[1.12] tracking-tight mb-4" key={`hero-title-${activeSlide}`}>
-                  <span className="font-serif-hindi block text-white">
-                    {CAROUSEL_SLIDES[activeSlide].titleLine1}
-                  </span>
-                  <span className="font-serif-hindi block text-[#E8A23A] mt-1">
-                    {CAROUSEL_SLIDES[activeSlide].titleLine2}
-                  </span>
-                </h1>
+                {/* Bilingual Main Headline: Fraunces + Tiro Devanagari Hindi Pairing */}
+                <div className="mb-5" key={`hero-head-${activeSlide}`}>
+                  <h1 className="font-serif text-white text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-bold leading-[1.14] tracking-tight">
+                    <span className="font-serif-hindi block text-white drop-shadow-sm">
+                      {CAROUSEL_SLIDES[activeSlide].titleLine1}
+                    </span>
+                    <span className="font-serif-hindi block text-[#E8A23A] mt-1.5 drop-shadow-sm">
+                      {CAROUSEL_SLIDES[activeSlide].titleLine2}
+                    </span>
+                  </h1>
+                </div>
 
-                {/* English Subtitle & Hindi Description */}
-                <p className="text-white/90 text-sm sm:text-base md:text-lg font-light leading-relaxed mb-4 max-w-2xl" key={`hero-desc-${activeSlide}`}>
+                {/* Narrative Description (Hindi + English) */}
+                <p className="text-white/95 text-base sm:text-lg font-light leading-relaxed mb-3 max-w-2xl" key={`hero-desc-${activeSlide}`}>
                   {CAROUSEL_SLIDES[activeSlide].desc}
                 </p>
-                <p className="text-white/70 text-xs sm:text-sm italic leading-relaxed mb-6 max-w-xl">
+                <p className="text-white/75 text-xs sm:text-sm italic font-light leading-relaxed mb-6 max-w-xl">
                   {CAROUSEL_SLIDES[activeSlide].subtitleEn}
                 </p>
 
                 {/* Trust Badges */}
                 <div className="flex flex-wrap items-center gap-3 mb-8">
-                  <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md text-white text-xs font-semibold border border-white/15">
+                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md text-white text-xs font-semibold border border-white/15 shadow-sm">
                     <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                    14,250+ Lives Screened Free
-                  </span>
-                  <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md text-white text-xs font-semibold border border-white/15">
+                    <span>14,250+ Lives Screened Free</span>
+                  </div>
+                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md text-white text-xs font-semibold border border-white/15 shadow-sm">
                     <ShieldCheck className="w-3.5 h-3.5 text-[#E8A23A]" />
-                    Empaneled Specialist Hospital Network
-                  </span>
+                    <span>Empaneled Specialist Hospital Network</span>
+                  </div>
                 </div>
               </div>
 
-              {/* Action Buttons & Slide Controls */}
-              <div className="pt-4 border-t border-white/15 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
-                <div className="flex flex-wrap items-center gap-3">
+              {/* Action Buttons & Carousel Navigators */}
+              <div className="pt-5 border-t border-white/15 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+                <div className="flex flex-wrap items-center gap-3.5">
                   <button
                     onClick={() => {
                       const act = CAROUSEL_SLIDES[activeSlide].primaryAction;
@@ -942,7 +966,7 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
                       else if (act === 'enquiry') onOpenEnquiry();
                       else navigate('/events');
                     }}
-                    className="btn-marigold text-xs sm:text-[14.5px] cursor-pointer"
+                    className="btn-marigold text-xs sm:text-[14.5px] cursor-pointer shadow-[0_4px_20px_rgba(232,162,58,0.35)] hover:shadow-[0_8px_28px_rgba(232,162,58,0.45)]"
                   >
                     <span>{CAROUSEL_SLIDES[activeSlide].primaryBtn}</span>
                     <ArrowRight className="w-4 h-4" />
@@ -954,15 +978,15 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
                       else if (act === 'volunteer') onOpenVolunteer();
                       else navigate('/mission');
                     }}
-                    className="px-6 py-3 rounded-full bg-transparent hover:bg-white/10 border border-white/40 text-white font-semibold text-xs sm:text-[14.5px] transition-colors cursor-pointer"
+                    className="px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 border border-white/30 text-white font-semibold text-xs sm:text-[14.5px] transition-all duration-200 cursor-pointer backdrop-blur-sm"
                   >
                     {CAROUSEL_SLIDES[activeSlide].secondaryBtn}
                   </button>
                 </div>
 
-                {/* Counter & Controls */}
+                {/* Progress Indicators & Controls */}
                 <div className="flex items-center justify-end gap-3 pt-2 sm:pt-0">
-                  <span className="text-xs font-mono font-bold text-white/60">
+                  <span className="text-xs font-mono font-bold text-white/70 tracking-wider">
                     0{activeSlide + 1} / 0{CAROUSEL_SLIDES.length}
                   </span>
                   <div className="flex items-center gap-1.5">
@@ -985,75 +1009,80 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
               </div>
             </div>
 
-            {/* RIGHT: Visual Showcase (5 Cols on LG) */}
+            {/* RIGHT: Visual Showcase & Active Thumbnails (5 Cols on LG) */}
             <div className="lg:col-span-5 flex flex-col gap-4">
-              <div className="relative rounded-3xl overflow-hidden border border-white/20 shadow-2xl aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3.2] bg-[#0E3B36]">
+              <div className="relative rounded-3xl overflow-hidden border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.35)] aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3.3] bg-[#0E3B36]">
                 {CAROUSEL_SLIDES.map((slide, idx) => {
                   const isActive = idx === activeSlide;
                   return (
                     <div
                       key={idx}
-                      className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${isActive ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
+                      className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${isActive ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
                     >
                       <img
                         src={slide.image}
                         alt={slide.alt}
-                        className={`w-full h-full object-cover transition-transform duration-[6000ms] ease-out ${
+                        className={`w-full h-full object-cover transition-transform duration-[7000ms] ease-out ${
                           isActive ? 'scale-105' : 'scale-100'
                         }`}
                         style={{ objectPosition: slide.objectPosition || 'center' }}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0E3B36]/90 via-transparent to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0E3B36]/90 via-[#0E3B36]/20 to-transparent" />
                     </div>
                   );
                 })}
 
-                {/* Tag Overlay */}
-                <div className="absolute top-4 left-4 z-20 flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0E3B36]/80 backdrop-blur-md border border-white/20 text-white text-xs font-bold shadow-md">
+                {/* Floating Top Pill */}
+                <div className="absolute top-4 left-4 z-20 flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0E3B36]/85 backdrop-blur-md border border-white/20 text-white text-xs font-bold shadow-md">
                   <Sparkles className="w-3.5 h-3.5 text-[#E8A23A]" />
                   <span>{CAROUSEL_SLIDES[activeSlide].tag}</span>
                 </div>
 
+                {/* Floating Stat Badge */}
+                <div className="absolute top-4 right-4 z-20 px-3 py-1 rounded-full bg-[#E8A23A] text-[#1B2620] text-[11px] font-extrabold shadow-md">
+                  {CAROUSEL_SLIDES[activeSlide].highlightStat}
+                </div>
+
                 {/* Floating Bottom Card */}
-                <div className="absolute inset-x-4 bottom-4 z-20 p-3.5 rounded-2xl bg-[#0E3B36]/90 backdrop-blur-md border border-white/15 flex items-center justify-between gap-3 shadow-lg">
-                  <div>
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-[#E8A23A] block">
+                <div className="absolute inset-x-4 bottom-4 z-20 p-4 rounded-2xl bg-[#0E3B36]/90 backdrop-blur-md border border-white/15 flex items-center justify-between gap-3 shadow-lg">
+                  <div className="min-w-0">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-[#E8A23A] block truncate">
                       National Initiative
                     </span>
-                    <h4 className="text-white text-xs sm:text-sm font-bold truncate">
+                    <h4 className="font-serif text-white text-xs sm:text-sm font-bold truncate">
                       {CAROUSEL_SLIDES[activeSlide].titleLine1}
                     </h4>
                   </div>
                   <span className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] font-bold border border-emerald-500/30 shrink-0">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    Active
+                    Live Program
                   </span>
                 </div>
               </div>
 
-              {/* 4-Thumbnail Pill Deck */}
-              <div className="grid grid-cols-4 gap-2">
+              {/* 4-Thumbnail Interactive Deck */}
+              <div className="grid grid-cols-4 gap-2.5">
                 {CAROUSEL_SLIDES.map((slide, idx) => {
                   const isActive = idx === activeSlide;
                   return (
                     <button
                       key={idx}
                       onClick={() => setActiveSlide(idx)}
-                      className={`relative rounded-2xl overflow-hidden aspect-[4/3] border transition-all duration-300 cursor-pointer text-left ${
+                      className={`relative rounded-2xl overflow-hidden aspect-[4/3] border transition-all duration-300 cursor-pointer text-left group ${
                         isActive
-                          ? 'border-[#E8A23A] shadow-md scale-[1.02] ring-2 ring-[#E8A23A]/50'
+                          ? 'border-[#E8A23A] shadow-md scale-[1.03] ring-2 ring-[#E8A23A]/50'
                           : 'border-white/15 opacity-65 hover:opacity-100'
                       }`}
                     >
                       <img
                         src={slide.image}
                         alt={slide.alt}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         style={{ objectPosition: slide.objectPosition || 'center' }}
                       />
-                      <div className={`absolute inset-0 ${isActive ? 'bg-[#E8A23A]/10' : 'bg-black/40'}`} />
+                      <div className={`absolute inset-0 ${isActive ? 'bg-[#E8A23A]/15' : 'bg-black/40 group-hover:bg-black/20'}`} />
                       <div className="absolute bottom-1 inset-x-1 text-center">
-                        <span className={`inline-block px-1.5 py-0.5 rounded text-[9px] font-bold ${
+                        <span className={`inline-block px-1.5 py-0.5 rounded text-[9px] font-bold backdrop-blur-md ${
                           isActive ? 'bg-[#E8A23A] text-[#1B2620]' : 'bg-black/60 text-white'
                         }`}>
                           0{idx + 1}
@@ -1070,43 +1099,88 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
       </section>
 
       {/* ═══════════════════════════════════════════
-          SECTION 1.1: FLOATING ACTION BAR (Soft-Elevated on Paper)
+          SECTION 1.1: REFINED INTERACTIVE CLINICAL TRIAGE & SEARCH BAR
           ═══════════════════════════════════════════ */}
-      <div className="relative z-30 -mt-8 md:-mt-10 mb-8 px-4 max-w-6xl mx-auto">
-        <div className="bg-white rounded-3xl p-5 md:p-7 shadow-[0_12px_36px_rgba(14,59,54,0.08)] border border-[#D5DFD7] grid grid-cols-1 md:grid-cols-12 gap-5 items-center">
+      <div className="relative z-30 -mt-10 md:-mt-12 mb-10 px-4 max-w-6xl mx-auto">
+        <div className="bg-white rounded-3xl p-5 md:p-8 shadow-[0_16px_40px_rgba(14,59,54,0.08)] border border-[#D5DFD7]">
           
-          <div className="md:col-span-7 flex flex-col sm:flex-row items-center sm:items-start gap-4 text-center sm:text-left">
-            <div className="w-12 h-12 rounded-2xl bg-[#EEF3EF] text-[#0E3B36] flex items-center justify-center shrink-0">
-              <PhoneCall className="w-6 h-6 text-[#E8A23A]" />
+          <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-6">
+            
+            {/* Left Info & Quick Consultation */}
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 rounded-2xl bg-[#EEF3EF] text-[#0E3B36] flex items-center justify-center shrink-0 shadow-sm">
+                <PhoneCall className="w-6 h-6 text-[#E8A23A]" />
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="text-[11px] font-bold uppercase tracking-widest text-[#7C9A82]">
+                    Free Patient Guidance & Camp Triage
+                  </span>
+                  <span className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" /> 24/7 Available
+                  </span>
+                </div>
+                <h3 className="font-serif text-lg md:text-xl font-bold text-[#0E3B36] mt-0.5">
+                  Need Oncology Second Opinion or Camp Location?
+                </h3>
+                <p className="text-xs md:text-sm text-[#4A5E54] font-light mt-0.5">
+                  Connect directly with empaneled surgical oncologists and patient caseworkers.
+                </p>
+              </div>
             </div>
-            <div>
-              <span className="text-[11px] font-bold uppercase tracking-widest text-[#7C9A82] block">
-                Free Patient Consultation & Triage
-              </span>
-              <h3 className="font-serif text-lg md:text-xl font-bold text-[#0E3B36]">
-                Need Medical Guidance or Second Opinion?
-              </h3>
-              <p className="text-xs md:text-sm text-[#4A5E54] font-light">
-                Connect with empaneled surgical oncologists and patient caseworkers.
-              </p>
-            </div>
+
+            {/* Quick Interactive Search / Action Triggers */}
+            <form onSubmit={handleQuickSearch} className="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto shrink-0">
+              <div className="relative w-full sm:w-60">
+                <MapPin className="w-4 h-4 text-[#7A8E83] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <input
+                  type="text"
+                  placeholder="Enter City or Pincode"
+                  value={pincodeCity}
+                  onChange={(e) => setPincodeCity(e.target.value)}
+                  className="w-full pl-10 pr-3 py-3 rounded-full bg-[#FAFCF8] border border-[#D5DFD7] text-xs text-[#1B2620] placeholder:text-[#7A8E83] focus:border-[#0E3B36] focus:bg-white outline-none transition-all shadow-inner"
+                />
+              </div>
+
+              <button
+                type="button"
+                onClick={onOpenEnquiry}
+                className="w-full sm:w-auto btn-marigold !py-3 !px-6 text-xs sm:text-sm font-bold flex items-center justify-center gap-2 cursor-pointer shadow-md"
+              >
+                <Calendar className="w-4 h-4" />
+                <span>Book Free Consultation</span>
+              </button>
+
+              <a
+                href="tel:+911140559200"
+                className="w-full sm:w-auto px-5 py-3 rounded-full border border-[#0E3B36] text-[#0E3B36] text-xs sm:text-sm font-semibold hover:bg-[#EEF3EF] transition-colors flex items-center justify-center gap-2 shrink-0"
+              >
+                <Phone className="w-3.5 h-3.5 text-[#0E3B36]" />
+                <span>+91 11 4055 9200</span>
+              </a>
+            </form>
+
           </div>
 
-          <div className="md:col-span-5 flex flex-col sm:flex-row items-center justify-end gap-3 w-full">
-            <button
-              onClick={onOpenEnquiry}
-              className="w-full sm:w-auto btn-marigold !py-3 !px-6 text-xs sm:text-sm font-bold flex items-center justify-center gap-2 cursor-pointer"
-            >
-              <Calendar className="w-4 h-4" />
-              <span>Book Appointment</span>
-            </button>
-            <a
-              href="tel:+911140559200"
-              className="w-full sm:w-auto px-5 py-3 rounded-full border border-[#0E3B36] text-[#0E3B36] text-xs sm:text-sm font-semibold hover:bg-[#EEF3EF] transition-colors flex items-center justify-center gap-2"
-            >
-              <Phone className="w-3.5 h-3.5 text-[#0E3B36]" />
-              <span>Helpline</span>
-            </a>
+          {/* Bottom Quick Suggestion Tags */}
+          <div className="mt-4 pt-4 border-t border-[#D5DFD7]/60 flex flex-wrap items-center gap-2 text-xs text-[#7A8E83]">
+            <span className="font-semibold text-[#0E3B36]">Popular Searches:</span>
+            {[
+              'Oral Cancer Screening',
+              'Mammography Van Camps',
+              'Surgical Second Opinion',
+              'Ayushman Bharat Scheme Navigation',
+              'Volunteer Registration'
+            ].map((tag, idx) => (
+              <button
+                key={idx}
+                type="button"
+                onClick={() => navigate('/events')}
+                className="px-2.5 py-1 rounded-lg bg-[#EEF3EF] text-[#0E3B36] hover:bg-[#E8A23A] hover:text-[#1B2620] transition-colors cursor-pointer text-[11.5px] font-medium"
+              >
+                {tag}
+              </button>
+            ))}
           </div>
 
         </div>

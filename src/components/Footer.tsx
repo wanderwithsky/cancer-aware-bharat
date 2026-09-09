@@ -201,44 +201,42 @@ export default function Footer({
         </div>
       </footer>
 
-      {/* ── Floating Contact Widgets ── */}
-      {/* 1. Emergency Helpline (Bottom Left) */}
-      <div className="fixed bottom-6 left-5 z-40 hidden sm:flex flex-col items-center group">
-        <a
-          href="tel:+911140559200"
-          aria-label="Call Emergency Helpline"
-          title="24/7 Cancer Care Helpline"
-          className="w-13 h-13 rounded-full bg-[#0E3B36] border-2 border-[#E8A23A] text-white flex items-center justify-center shadow-[0_8px_25px_rgba(14,59,54,0.4)] hover:scale-110 hover:shadow-[0_12px_30px_rgba(232,162,58,0.4)] transition-all duration-300"
-        >
-          <Phone className="w-5 h-5 text-[#E8A23A]" />
-        </a>
-      </div>
+      {/* ── Floating Contact Widgets (Grouped on Right Side) ── */}
+      <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-2.5">
+        {/* Back to Top */}
+        {showBackToTop && (
+          <button
+            onClick={scrollToTop}
+            aria-label="Back to Top"
+            title="Back to Top"
+            className="w-10 h-10 rounded-full bg-[#0E3B36] text-white border border-white/20 flex items-center justify-center shadow-lg hover:bg-[#E8A23A] hover:text-[#1B2620] transition-all duration-300 hover:scale-110 cursor-pointer animate-fade-in"
+          >
+            <ArrowUp className="w-4 h-4" />
+          </button>
+        )}
 
-      {/* 2. WhatsApp Support (Bottom Left, above phone) */}
-      <div className="fixed bottom-22 left-5 z-40 hidden sm:flex flex-col items-center group">
+        {/* WhatsApp Quick Chat */}
         <a
           href="https://wa.me/919120110286"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Chat on WhatsApp"
-          title="WhatsApp Support"
-          className="w-13 h-13 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-[0_8px_25px_rgba(37,211,102,0.4)] hover:scale-110 transition-all duration-300"
+          title="WhatsApp Support: +91 9120110286"
+          className="w-12 h-12 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-[0_8px_20px_rgba(37,211,102,0.4)] hover:scale-110 transition-all duration-300 group"
         >
           <MessageCircle className="w-6 h-6 fill-current text-white" />
         </a>
-      </div>
 
-      {/* 3. Back to Top (Bottom Right) */}
-      {showBackToTop && (
-        <button
-          onClick={scrollToTop}
-          aria-label="Back to Top"
-          title="Back to Top"
-          className="fixed bottom-6 right-5 z-40 w-11 h-11 rounded-full bg-[#0E3B36] text-white border border-white/20 flex items-center justify-center shadow-lg hover:bg-[#E8A23A] hover:text-[#1B2620] transition-all duration-300 hover:scale-110 cursor-pointer animate-fade-in"
+        {/* Emergency Helpline */}
+        <a
+          href="tel:+911140559200"
+          aria-label="Call Emergency Helpline"
+          title="24/7 Cancer Care Helpline: +91 11 4055 9200"
+          className="w-12 h-12 rounded-full bg-[#0E3B36] border-2 border-[#E8A23A] text-white flex items-center justify-center shadow-[0_8px_20px_rgba(14,59,54,0.4)] hover:scale-110 hover:shadow-[0_12px_24px_rgba(232,162,58,0.4)] transition-all duration-300"
         >
-          <ArrowUp className="w-5 h-5" />
-        </button>
-      )}
+          <Phone className="w-5 h-5 text-[#E8A23A]" />
+        </a>
+      </div>
     </>
   );
 }
