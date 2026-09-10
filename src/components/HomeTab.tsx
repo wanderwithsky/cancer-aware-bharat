@@ -11,6 +11,7 @@ import {
 import { useEvents } from '../api/hooks';
 import TeamShowcase from './TeamShowcase';
 import PremiumSection from './common/PremiumSection';
+import { Facebook, Instagram, Youtube } from './icons/SocialIcons';
 
 /* ═══════════════════════════════════════════
    HERO SLIDES DATA (Bilingual Hindi + English)
@@ -727,86 +728,93 @@ function NewsArticlesSection() {
 }
 
 /* ═══════════════════════════════════════════
-   FINAL REPRISE CTA (Sunrise Callback)
+   FINAL REPRISE CTA (Clean, Focused Sunrise Callback)
    ═══════════════════════════════════════════ */
 function SunriseRepriseCtaSection({ onOpenVolunteer, onOpenEnquiry }: { onOpenVolunteer: () => void; onOpenEnquiry: () => void }) {
   return (
-    <section className="relative py-20 md:py-28 overflow-hidden gradient-dawn-1 text-white">
+    <section className="relative py-16 md:py-20 overflow-hidden gradient-dawn-1 text-white border-t border-white/10">
       {/* Background Soft Ray Accents */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 right-[15%] w-96 h-96 bg-[#E8A23A]/10 rounded-full blur-[100px]" />
-        <div className="absolute bottom-0 left-[10%] w-96 h-96 bg-[#7C9A82]/15 rounded-full blur-[120px]" />
+        <div className="absolute top-0 right-[20%] w-96 h-96 bg-[#E8A23A]/10 rounded-full blur-[100px]" />
+        <div className="absolute bottom-0 left-[15%] w-96 h-96 bg-[#7C9A82]/15 rounded-full blur-[120px]" />
       </div>
 
-      <div className="section-container relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+        <RevealSection>
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[#E8A23A] text-xs font-bold uppercase tracking-widest mb-5">
+            <Sun className="w-3.5 h-3.5 text-[#E8A23A]" /> जीवन की नई किरण • GET IN TOUCH
+          </div>
           
-          <div className="lg:col-span-7">
-            <RevealSection>
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 text-[#E8A23A] text-xs font-bold uppercase tracking-widest mb-6">
-                <Sun className="w-4 h-4 text-[#E8A23A]" /> जीवन की नई किरण
-              </div>
-              
-              <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.15] tracking-tight mb-6">
-                Join India's Grassroots Movement Against Cancer
-              </h2>
-              
-              <p className="text-white/85 text-base md:text-lg mb-8 leading-relaxed font-light max-w-xl">
-                Whether you need medical guidance for a family member or wish to volunteer at a community screening camp, our dedicated network is standing by to assist you.
-              </p>
+          {/* Headline */}
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold leading-tight tracking-tight mb-4">
+            Join Our Mission Against Cancer
+          </h2>
+          
+          {/* Subtitle */}
+          <p className="text-white/85 text-base md:text-lg mb-8 leading-relaxed font-light max-w-2xl mx-auto">
+            Connect with our network for free screening guidance, clinical second opinions, and community outreach.
+          </p>
 
-              <div className="flex flex-col sm:flex-row gap-4">
-                <button 
-                  onClick={onOpenVolunteer}
-                  className="btn-marigold text-sm md:text-base !py-3.5 !px-8 cursor-pointer"
-                >
-                  <Heart className="w-4 h-4" />
-                  <span>Become a Volunteer</span>
-                </button>
-                <button 
-                  onClick={onOpenEnquiry}
-                  className="px-8 py-3.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/30 text-white font-semibold text-sm md:text-base transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
-                >
-                  <PhoneCall className="w-4 h-4 text-[#E8A23A]" />
-                  <span>Submit Patient Enquiry</span>
-                </button>
-              </div>
-            </RevealSection>
+          {/* Clean Primary Buttons */}
+          <div className="flex flex-wrap items-center justify-center gap-4 mb-10">
+            <button 
+              onClick={onOpenVolunteer}
+              className="btn-marigold text-xs sm:text-sm !py-3.5 !px-8 cursor-pointer shadow-lg flex items-center gap-2 font-bold"
+            >
+              <Heart className="w-4 h-4" />
+              <span>Become a Volunteer</span>
+            </button>
+            <button 
+              onClick={onOpenEnquiry}
+              className="px-8 py-3.5 rounded-full bg-white/15 hover:bg-white/25 border border-white/30 text-white font-semibold text-xs sm:text-sm transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer shadow-sm"
+            >
+              <PhoneCall className="w-4 h-4 text-[#E8A23A]" />
+              <span>Book Consultation</span>
+            </button>
+            <a
+              href="tel:+911140559200"
+              className="px-7 py-3.5 rounded-full bg-[#0E3B36]/80 hover:bg-[#0E3B36] border border-white/20 text-white font-medium text-xs sm:text-sm transition-all duration-200 flex items-center justify-center gap-2"
+            >
+              <Phone className="w-3.5 h-3.5 text-[#E8A23A]" />
+              <span>+91 11 4055 9200</span>
+            </a>
           </div>
 
-          <div className="lg:col-span-5 flex justify-center">
-            <RevealSection delay={200} className="w-full max-w-[440px]">
-              <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-7 md:p-8 shadow-2xl">
-                <span className="text-xs font-bold uppercase tracking-widest text-[#E8A23A] block mb-2">
-                  Instant Support Hotline
-                </span>
-                <h3 className="font-serif text-2xl font-bold text-white mb-4">
-                  24/7 National Patient Helpline
-                </h3>
-                <p className="text-white/80 text-sm leading-relaxed mb-6 font-light">
-                  Direct phone guidance for early symptom triage, free camp registrations, and hospital navigation.
-                </p>
-                <a
-                  href="tel:+911140559200"
-                  className="w-full btn-marigold !py-3 !text-sm flex items-center justify-center gap-2 mb-3"
-                >
-                  <Phone className="w-4 h-4" />
-                  <span>Call +91 11 4055 9200</span>
-                </a>
-                <a
-                  href="https://wa.me/919120110286"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full py-3 rounded-full bg-white/15 hover:bg-white/25 text-white text-xs font-semibold flex items-center justify-center gap-2 transition-colors border border-white/20"
-                >
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <span>WhatsApp Chat Support</span>
-                </a>
-              </div>
-            </RevealSection>
+          {/* Social Connect Strip */}
+          <div className="pt-8 border-t border-white/15 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+            <span className="text-xs text-white/80 font-medium">Follow & Connect with Our Outreach Community:</span>
+            <div className="flex items-center gap-3">
+              <a 
+                href="https://instagram.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#E8A23A] text-white hover:text-[#1B2620] flex items-center justify-center transition-all duration-200 border border-white/20 hover:scale-105"
+              >
+                <Instagram className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://facebook.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#E8A23A] text-white hover:text-[#1B2620] flex items-center justify-center transition-all duration-200 border border-white/20 hover:scale-105"
+              >
+                <Facebook className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://youtube.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                aria-label="YouTube"
+                className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#E8A23A] text-white hover:text-[#1B2620] flex items-center justify-center transition-all duration-200 border border-white/20 hover:scale-105"
+              >
+                <Youtube className="w-4 h-4" />
+              </a>
+            </div>
           </div>
-
-        </div>
+        </RevealSection>
       </div>
     </section>
   );
@@ -902,32 +910,9 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
           <div className="absolute bottom-0 left-10 w-[400px] h-[400px] bg-[#EEF3EF] rounded-full blur-[100px]" />
         </div>
 
-        {/* ── Top Story Selector Pill Bar (Clean Paper Glass) ── */}
-        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mb-8">
-          <div className="flex items-center justify-start sm:justify-center overflow-x-auto no-scrollbar gap-2 sm:gap-3 py-1">
-            {CAROUSEL_SLIDES.map((slide, idx) => {
-              const isActive = idx === activeSlide;
-              return (
-                <button
-                  key={idx}
-                  onClick={() => setActiveSlide(idx)}
-                  className={`px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all duration-300 cursor-pointer flex items-center gap-2 border ${
-                    isActive
-                      ? 'bg-white text-[#0E3B36] border-[#E8A23A] shadow-md ring-2 ring-[#E8A23A]/30 font-bold'
-                      : 'bg-white/70 text-[#4A5E54] border-[#D5DFD7] hover:bg-white hover:text-[#0E3B36]'
-                  }`}
-                >
-                  <span className={`w-2 h-2 rounded-full ${isActive ? 'bg-[#E8A23A] animate-pulse' : 'bg-[#7C9A82]'}`} />
-                  <span>{slide.tagEn}</span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
         {/* ── Main Hero Content Stage (Synchronized 7:5 Editorial & Visual Ratio) ── */}
         <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 flex flex-col justify-center">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
             
             {/* LEFT COLUMN: Editorial Typography & High-Converting Action (7 Cols) */}
             <div className="lg:col-span-7 flex flex-col justify-center space-y-4">
@@ -1214,36 +1199,6 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
       </section>
 
       {/* ═══════════════════════════════════════════
-          SECTION 2: IMPACT STATS (Fraunces Numerals with Underline Accent)
-          ═══════════════════════════════════════════ */}
-      <PremiumSection variant="warm-1" paddingClass="py-12 md:py-16">
-        <div className="section-container">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-            {[
-              { label: 'Free Screenings', val: '14250+', icon: Microscope, desc: 'Across 6 states & UTs' },
-              { label: 'Hospital Partners', val: '4', icon: Building, desc: 'Empaneled oncology centres' },
-              { label: 'Screening Camps', val: '180+', icon: MapPin, desc: 'Grassroots mobile outreach' },
-              { label: 'Patient Navigations', val: '1240+', icon: Compass, desc: 'Full-cycle treatment support' }
-            ].map((st, i) => (
-              <RevealSection key={i} delay={i * 90}>
-                <div className="text-left p-5 md:p-6 bg-white rounded-3xl border border-[#D5DFD7] shadow-sm hover:border-[#7C9A82] transition-colors">
-                  <div className="w-10 h-10 rounded-2xl bg-[#EEF3EF] text-[#0E3B36] flex items-center justify-center mb-3">
-                    <st.icon className="w-5 h-5 text-[#E8A23A]" />
-                  </div>
-                  <p className="font-serif text-3xl md:text-4xl font-bold text-[#0E3B36] tracking-tight relative inline-block">
-                    <AnimatedCounter value={st.val} />
-                    <span className="block h-1 w-12 bg-[#E8A23A] rounded-full mt-1" />
-                  </p>
-                  <p className="text-sm font-bold text-[#1B2620] mt-2">{st.label}</p>
-                  <p className="text-xs text-[#7A8E83] mt-0.5">{st.desc}</p>
-                </div>
-              </RevealSection>
-            ))}
-          </div>
-        </div>
-      </PremiumSection>
-
-      {/* ═══════════════════════════════════════════
           SECTION 2.5: CLINICAL LEADERSHIP SPOTLIGHT
           ═══════════════════════════════════════════ */}
       <PremiumSection variant="warm-2" paddingClass="py-16 md:py-24">
@@ -1287,7 +1242,8 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
                 </span>
 
                 <h2 className="section-title text-3xl sm:text-4xl lg:text-5xl">
-                  Know More About <span className="text-[#E8A23A] block sm:inline">Dr. Ajay Kumar</span>
+                  Know More About
+                  <span className="text-[#E8A23A] block mt-1">Dr. Ajay Kumar</span>
                 </h2>
 
                 <div className="flex flex-wrap items-center gap-2 mb-2">
