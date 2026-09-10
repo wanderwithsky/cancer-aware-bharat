@@ -246,7 +246,7 @@ function UpcomingCampsCarousel({ onOpenEnquiry }: { onOpenEnquiry: () => void })
 
   useEffect(() => {
     if (isPaused || totalSlides <= 1) return;
-    const interval = setInterval(nextSlide, 4500);
+    const interval = setInterval(nextSlide, 3000);
     return () => clearInterval(interval);
   }, [isPaused, totalSlides]);
 
@@ -313,10 +313,11 @@ function UpcomingCampsCarousel({ onOpenEnquiry }: { onOpenEnquiry: () => void })
             className="flex transition-transform duration-700 ease-in-out"
             style={{ transform: `translateX(calc(-${currentIndex * (100 / itemsPerView)}%))` }}
           >
-            {events.map((camp) => {
+            {events.map((camp, idx) => {
               const { label: statusLabel, badgeBg, textCol } = deriveCampStatus(camp.registeredCount, camp.capacity);
               const percentFull = camp.capacity > 0 ? Math.min(100, Math.round((camp.registeredCount / camp.capacity) * 100)) : 0;
               const isUrgent = percentFull >= 80;
+              const campBgImage = camp.image || `/events/event-${(idx % 10) + 1}.jpeg`;
 
               return (
                 <div
@@ -324,15 +325,15 @@ function UpcomingCampsCarousel({ onOpenEnquiry }: { onOpenEnquiry: () => void })
                   className="shrink-0 px-3"
                   style={{ width: `${100 / itemsPerView}%` }}
                 >
-                  <div className="h-full flex flex-col bg-white rounded-3xl overflow-hidden border border-[#D5DFD7] shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-400 group">
-                    {/* Image Header with Side-Rail Badge */}
+                  <div className="h-full flex flex-col bg-white rounded-3xl overflow-hidden border border-[#D5DFD7] shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-400 group relative">
+                    {/* Visual Card Image Header */}
                     <div className="relative h-48 md:h-52 overflow-hidden bg-[#EEF3EF]">
                       <img
-                        src={camp.image || '/events/event-1.jpeg'}
+                        src={campBgImage}
                         alt={camp.title}
                         className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0E3B36]/80 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0E3B36]/85 via-[#0E3B36]/20 to-transparent opacity-70 group-hover:opacity-90 transition-opacity" />
                       
                       {/* Top Category Tag */}
                       <div className="absolute top-3.5 left-3.5">
@@ -343,14 +344,14 @@ function UpcomingCampsCarousel({ onOpenEnquiry }: { onOpenEnquiry: () => void })
 
                       {/* Urgency Status Tag */}
                       <div className="absolute top-3.5 right-3.5">
-                        <span className={`inline-flex items-center px-3 py-1 rounded-full text-[10.5px] font-bold border ${badgeBg} ${textCol} backdrop-blur-md`}>
+                        <span className={`inline-flex items-center px-3 py-1 rounded-full text-[10.5px] font-bold border ${badgeBg} ${textCol} backdrop-blur-md shadow-sm`}>
                           {statusLabel}
                         </span>
                       </div>
                     </div>
 
                     {/* Content Area */}
-                    <div className="flex flex-col flex-1 p-6">
+                    <div className="flex flex-col flex-1 p-6 relative z-10 bg-white">
                       <h3 className="font-serif text-[18px] md:text-[20px] font-bold text-[#0E3B36] mb-3 line-clamp-2 leading-snug group-hover:text-[#E8A23A] transition-colors">
                         {camp.title}
                       </h3>
@@ -375,7 +376,7 @@ function UpcomingCampsCarousel({ onOpenEnquiry }: { onOpenEnquiry: () => void })
                       </p>
 
                       <div className="mt-auto pt-2">
-                        {/* Capacity Fill Meter (Sage -> Sindoor gradient based on urgency) */}
+                        {/* Capacity Fill Meter */}
                         <div className="flex items-center justify-between text-xs font-semibold mb-1.5">
                           <span className="text-[#4A5E54]">Slot Capacity</span>
                           <span className={isUrgent ? 'text-[#C8443C] font-bold' : 'text-[#0E3B36]'}>
@@ -542,12 +543,30 @@ const TESTIMONIALS_DATA = [
     rating: 5,
     reviewHindi: 'समय पर जांच और डॉक्टरों के सही मार्गदर्शन ने मेरे इलाज को आसान बनाया। टीम का सहयोग सराहनीय रहा।',
     review: 'Smooth coordination and accurate specialist referral. The emotional and clinical guidance was invaluable for my family.'
+  },
+  {
+    id: 't-4',
+    image: '/dr-neha-sharma.jpg',
+    name: 'Dr. Neha Sharma',
+    designation: 'Radiation Oncologist',
+    organization: 'Empaneled Hospital Partner',
+    rating: 5,
+    reviewHindi: 'कैंसर अवेयर भारत के साथ जुड़कर हम वंचित क्षेत्रों तक आधुनिक परामर्श और त्वरित जांच पहुंचा रहे हैं।',
+    review: 'Collaborating on grassroots detection brings advanced oncology consultation and timely treatment to underserved communities.'
+  },
+  {
+    id: 't-5',
+    image: '/dr-rahul-singh.jpg',
+    name: 'Anil Kumar',
+    designation: 'Caregiver Advocate',
+    organization: 'Varanasi Camp',
+    rating: 5,
+    reviewHindi: 'आयुष्मान भारत योजना और सही अस्पताल तक पहुंचाने में टीम ने हर मोड़ पर हमारा साथ दिया।',
+    review: 'The dedicated patient navigation support guided our family through government financial schemes and prompt hospital admission.'
   }
 ];
 
 function TestimonialsCarousel() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
   return (
     <PremiumSection variant="warm-1" withTopDivider="kantha">
       <div className="section-container relative z-10">
@@ -565,162 +584,55 @@ function TestimonialsCarousel() {
           </div>
         </RevealSection>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-          {TESTIMONIALS_DATA.map((item, idx) => (
-            <RevealSection key={item.id} delay={idx * 120}>
-              <div className="h-full flex flex-col bg-white rounded-3xl p-7 md:p-8 border border-[#D5DFD7] shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 relative">
-                {/* Marigold Star Rating & Kantha Quote Motif */}
-                <div className="flex justify-between items-center mb-5">
-                  <div className="flex gap-1">
-                    {[...Array(item.rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-[#E8A23A] text-[#E8A23A]" />
-                    ))}
-                  </div>
-                  <Quote className="w-8 h-8 text-[#7C9A82]/30" />
-                </div>
+        {/* Continuous Moving Marquee with Pause on Hover */}
+        <div className="relative overflow-hidden py-4 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 group">
+          {/* Soft Edge Gradient Fades */}
+          <div className="absolute left-0 top-0 bottom-0 w-12 md:w-20 bg-gradient-to-r from-[#F3F6F1] to-transparent pointer-events-none z-10" />
+          <div className="absolute right-0 top-0 bottom-0 w-12 md:w-20 bg-gradient-to-l from-[#F3F6F1] to-transparent pointer-events-none z-10" />
 
-                {/* Hindi Quote */}
-                <p className="font-serif-hindi text-[15px] text-[#0E3B36] font-semibold leading-relaxed mb-3">
-                  "{item.reviewHindi}"
-                </p>
-
-                {/* English Translation */}
-                <p className="text-[13.5px] text-[#4A5E54] leading-relaxed mb-6 flex-1 font-light">
-                  {item.review}
-                </p>
-
-                {/* Profile Signature */}
-                <div className="flex items-center gap-3.5 pt-4 border-t border-[#D5DFD7]/60 mt-auto">
-                  <div className="w-11 h-11 rounded-full overflow-hidden shrink-0 border border-[#D5DFD7]">
-                    <img src={item.image} alt={item.name} className="w-full h-full object-cover duotone-teal" />
-                  </div>
-                  <div>
-                    <h4 className="font-serif font-bold text-[#0E3B36] text-[15px]">{item.name}</h4>
-                    <p className="text-[11.5px] text-[#7A8E83] font-medium">
-                      {item.designation} • <span className="text-[#0E3B36] font-semibold">{item.organization}</span>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </RevealSection>
-          ))}
-        </div>
-      </div>
-    </PremiumSection>
-  );
-}
-
-/* ═══════════════════════════════════════════
-   CATEGORIZED CANCER AWARENESS ARTICLES
-   Topic badges: Sage = Prevention, Marigold = Awareness, Sindoor = Screening
-   ═══════════════════════════════════════════ */
-const NEWS_ARTICLES_DATA = [
-  {
-    id: 'news-1',
-    title: 'Oral Cancer Awareness & Early Screening Signs',
-    description: 'Oral oncology insights on identifying persistent ulcers and mucosal changes early when treatment success exceeds 90%.',
-    image: '/events/event-1.jpeg',
-    category: 'Screening',
-    badgeClass: 'bg-[#FBEAE9] text-[#C8443C] border-[#C8443C]/20',
-    date: '24 Oct, 2026',
-    readTime: '5 min read',
-    link: '/cancer-awareness'
-  },
-  {
-    id: 'news-2',
-    title: 'Cervical Cancer Prevention & Routine Pap Smears',
-    description: 'Guidelines on HPV vaccination, routine screening frequency, and community preventive healthcare measures for women.',
-    image: '/events/event-4.jpeg',
-    category: 'Prevention',
-    badgeClass: 'bg-[#EEF3EF] text-[#0E3B36] border-[#7C9A82]/30',
-    date: '18 Oct, 2026',
-    readTime: '4 min read',
-    link: '/cancer-awareness'
-  },
-  {
-    id: 'news-3',
-    title: 'Breast Cancer Detection Protocols & Self-Exam Guide',
-    description: 'Clinical self-examination steps and structured mammography protocols recommended by our oncology advisory board.',
-    image: '/events/event-2.jpeg',
-    category: 'Awareness',
-    badgeClass: 'bg-[#FDF4E5] text-[#D58F26] border-[#E8A23A]/30',
-    date: '12 Oct, 2026',
-    readTime: '6 min read',
-    link: '/cancer-awareness'
-  }
-];
-
-function NewsArticlesSection() {
-  const navigate = useNavigate();
-
-  return (
-    <PremiumSection variant="warm-2" paddingClass="py-16 md:py-24">
-      <div className="section-container relative z-10">
-        <RevealSection>
-          <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-6 mb-12">
-            <div>
-              <span className="section-badge">
-                <BookOpen className="w-3.5 h-3.5 text-[#E8A23A]" /> CLINICAL KNOWLEDGE
-              </span>
-              <h2 className="section-title text-3xl md:text-5xl">
-                Oncology Insights & Prevention Guides
-              </h2>
-              <p className="section-subtitle">
-                Evidence-based articles reviewed by medical professionals to empower patients with knowledge.
-              </p>
-            </div>
-            <button
-              onClick={() => navigate('/blogs')}
-              className="btn-secondary text-xs md:text-sm !py-2.5 !px-6 shrink-0 cursor-pointer"
-            >
-              <span>View All Articles</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          </div>
-        </RevealSection>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-          {NEWS_ARTICLES_DATA.map((article, i) => (
-            <RevealSection key={article.id} delay={i * 120}>
-              <div 
-                onClick={() => navigate(article.link)}
-                className="h-full bg-white rounded-3xl overflow-hidden border border-[#D5DFD7] shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col cursor-pointer group"
+          <div className="flex animate-marquee hover:[animation-play-state:paused] [animation-duration:32s] w-max">
+            {[...TESTIMONIALS_DATA, ...TESTIMONIALS_DATA].map((item, idx) => (
+              <div
+                key={`${item.id}-${idx}`}
+                className="w-[320px] sm:w-[380px] md:w-[420px] shrink-0 px-3 py-2"
               >
-                <div className="relative aspect-[16/10] overflow-hidden bg-[#EEF3EF]">
-                  <img 
-                    src={article.image} 
-                    alt={article.title} 
-                    className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute top-3.5 left-3.5">
-                    <span className={`inline-block px-3 py-1 text-[11px] font-bold rounded-full border backdrop-blur-md shadow-sm ${article.badgeClass}`}>
-                      {article.category}
-                    </span>
+                <div className="h-full flex flex-col bg-white rounded-3xl p-6 sm:p-7 border border-[#D5DFD7] shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 relative group/card">
+                  {/* Marigold Star Rating & Kantha Quote Motif */}
+                  <div className="flex justify-between items-center mb-4">
+                    <div className="flex gap-1">
+                      {[...Array(item.rating)].map((_, i) => (
+                        <Star key={i} className="w-4 h-4 fill-[#E8A23A] text-[#E8A23A]" />
+                      ))}
+                    </div>
+                    <Quote className="w-7 h-7 text-[#7C9A82]/30 group-hover/card:text-[#E8A23A]/40 transition-colors" />
                   </div>
-                </div>
 
-                <div className="p-6 md:p-7 flex flex-col flex-1">
-                  <h3 className="font-serif text-[18px] md:text-[19px] font-bold text-[#0E3B36] mb-2.5 leading-snug group-hover:text-[#E8A23A] transition-colors">
-                    {article.title}
-                  </h3>
-                  <p className="text-[13.5px] text-[#4A5E54] leading-relaxed mb-6 flex-1 font-light">
-                    {article.description}
+                  {/* Hindi Quote */}
+                  <p className="font-serif-hindi text-[14.5px] text-[#0E3B36] font-semibold leading-relaxed mb-2.5">
+                    "{item.reviewHindi}"
                   </p>
 
-                  <div className="mt-auto pt-4 border-t border-[#D5DFD7]/60 flex items-center justify-between text-xs text-[#7A8E83]">
-                    <div className="flex items-center gap-3">
-                      <span>{article.date}</span>
-                      <span>•</span>
-                      <span>{article.readTime}</span>
+                  {/* English Translation */}
+                  <p className="text-[13px] text-[#4A5E54] leading-relaxed mb-5 flex-1 font-light">
+                    {item.review}
+                  </p>
+
+                  {/* Profile Signature */}
+                  <div className="flex items-center gap-3 pt-3.5 border-t border-[#D5DFD7]/60 mt-auto">
+                    <div className="w-10 h-10 rounded-full overflow-hidden shrink-0 border border-[#D5DFD7] bg-[#EEF3EF]">
+                      <img src={item.image} alt={item.name} className="w-full h-full object-cover duotone-teal" />
                     </div>
-                    <span className="font-semibold text-[#0E3B36] group-hover:text-[#E8A23A] flex items-center gap-1 transition-colors">
-                      Read Guide <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                    </span>
+                    <div className="min-w-0">
+                      <h4 className="font-serif font-bold text-[#0E3B36] text-[14px] truncate">{item.name}</h4>
+                      <p className="text-[11px] text-[#7A8E83] font-medium truncate">
+                        {item.designation} • <span className="text-[#0E3B36] font-semibold">{item.organization}</span>
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </RevealSection>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </PremiumSection>
@@ -839,10 +751,6 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
   // Quick triage input state
   const [selectedSpecialty, setSelectedSpecialty] = useState('All Specialties');
   const [pincodeCity, setPincodeCity] = useState('');
-
-  // Newsletter state
-  const [newsletterEmail, setNewsletterEmail] = useState('');
-  const [newsletterSubmitted, setNewsletterSubmitted] = useState(false);
 
   const handlePrevSlide = () => {
     setActiveSlide((prev) => (prev <= 0 ? CAROUSEL_SLIDES.length - 1 : prev - 1));
@@ -1474,31 +1382,31 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
             </div>
 
             {/* Right Column: 4 Clinical Pillars (7 Cols) */}
-            <div className="lg:col-span-7 flex flex-col space-y-5">
+            <div className="lg:col-span-7 flex flex-col space-y-4">
               <RevealSection delay={150}>
                 
                 <span className="section-badge">
                   <ShieldCheck className="w-3.5 h-3.5 text-[#E8A23A]" /> CLINICAL EXCELLENCE & INTEGRITY
                 </span>
                 
-                <h2 className="section-title text-3xl sm:text-4xl lg:text-5xl mb-6">
+                <h2 className="section-title text-2xl sm:text-3xl lg:text-4xl mb-4">
                   Why Choose Us?
                 </h2>
 
                 {/* 4 Pillars Matching Reference Design */}
-                <div className="space-y-5 mb-8">
+                <div className="space-y-3 mb-6">
                   
                   {/* Pillar 1 */}
-                  <div className="p-5 rounded-2xl bg-white border border-[#D5DFD7] shadow-xs hover:shadow-md hover:border-[#0E3B36]/30 transition-all duration-300">
-                    <div className="flex items-start gap-3.5">
-                      <div className="w-10 h-10 rounded-xl bg-[#EEF3EF] text-[#0E3B36] flex items-center justify-center shrink-0 mt-0.5">
-                        <Award className="w-5 h-5 text-[#E8A23A]" />
+                  <div className="p-3.5 sm:p-4 rounded-xl bg-white border border-[#D5DFD7] shadow-xs hover:shadow-md hover:border-[#0E3B36]/30 transition-all duration-300">
+                    <div className="flex items-start gap-3">
+                      <div className="w-8 h-8 rounded-lg bg-[#EEF3EF] text-[#0E3B36] flex items-center justify-center shrink-0 mt-0.5">
+                        <Award className="w-4 h-4 text-[#E8A23A]" />
                       </div>
                       <div>
-                        <h3 className="font-serif text-[17px] font-bold text-[#0E3B36] mb-1">
+                        <h3 className="font-serif text-[14.5px] sm:text-[15.5px] font-bold text-[#0E3B36] mb-0.5">
                           Expertise and Credentials
                         </h3>
-                        <p className="text-[13.5px] text-[#4A5E54] leading-relaxed font-light">
+                        <p className="text-[12px] sm:text-[12.5px] text-[#4A5E54] leading-relaxed font-light">
                           Led by Dr. Ajay Kumar, a Gold Medalist with MBBS, MS, and MCh degrees in Surgical Oncology from IMS-BHU, Varanasi, we bring unparalleled expertise and advanced training in cancer care. With over 5,000 successfully treated patients, you are in the hands of a trusted specialist.
                         </p>
                       </div>
@@ -1506,16 +1414,16 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
                   </div>
 
                   {/* Pillar 2 */}
-                  <div className="p-5 rounded-2xl bg-white border border-[#D5DFD7] shadow-xs hover:shadow-md hover:border-[#0E3B36]/30 transition-all duration-300">
-                    <div className="flex items-start gap-3.5">
-                      <div className="w-10 h-10 rounded-xl bg-[#EEF3EF] text-[#0E3B36] flex items-center justify-center shrink-0 mt-0.5">
-                        <HeartPulse className="w-5 h-5 text-[#C8443C]" />
+                  <div className="p-3.5 sm:p-4 rounded-xl bg-white border border-[#D5DFD7] shadow-xs hover:shadow-md hover:border-[#0E3B36]/30 transition-all duration-300">
+                    <div className="flex items-start gap-3">
+                      <div className="w-8 h-8 rounded-lg bg-[#EEF3EF] text-[#0E3B36] flex items-center justify-center shrink-0 mt-0.5">
+                        <HeartPulse className="w-4 h-4 text-[#C8443C]" />
                       </div>
                       <div>
-                        <h3 className="font-serif text-[17px] font-bold text-[#0E3B36] mb-1">
+                        <h3 className="font-serif text-[14.5px] sm:text-[15.5px] font-bold text-[#0E3B36] mb-0.5">
                           Comprehensive Cancer Care
                         </h3>
-                        <p className="text-[13.5px] text-[#4A5E54] leading-relaxed font-light">
+                        <p className="text-[12px] sm:text-[12.5px] text-[#4A5E54] leading-relaxed font-light">
                           We provide a holistic approach to cancer treatment, including advanced surgical techniques, personalized treatment plans, and compassionate care to support both patients and families at every stage of the journey.
                         </p>
                       </div>
@@ -1523,16 +1431,16 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
                   </div>
 
                   {/* Pillar 3 */}
-                  <div className="p-5 rounded-2xl bg-white border border-[#D5DFD7] shadow-xs hover:shadow-md hover:border-[#0E3B36]/30 transition-all duration-300">
-                    <div className="flex items-start gap-3.5">
-                      <div className="w-10 h-10 rounded-xl bg-[#EEF3EF] text-[#0E3B36] flex items-center justify-center shrink-0 mt-0.5">
-                        <Building className="w-5 h-5 text-[#7C9A82]" />
+                  <div className="p-3.5 sm:p-4 rounded-xl bg-white border border-[#D5DFD7] shadow-xs hover:shadow-md hover:border-[#0E3B36]/30 transition-all duration-300">
+                    <div className="flex items-start gap-3">
+                      <div className="w-8 h-8 rounded-lg bg-[#EEF3EF] text-[#0E3B36] flex items-center justify-center shrink-0 mt-0.5">
+                        <Building className="w-4 h-4 text-[#7C9A82]" />
                       </div>
                       <div>
-                        <h3 className="font-serif text-[17px] font-bold text-[#0E3B36] mb-1">
+                        <h3 className="font-serif text-[14.5px] sm:text-[15.5px] font-bold text-[#0E3B36] mb-0.5">
                           State-of-the-Art Facilities
                         </h3>
-                        <p className="text-[13.5px] text-[#4A5E54] leading-relaxed font-light">
+                        <p className="text-[12px] sm:text-[12.5px] text-[#4A5E54] leading-relaxed font-light">
                           Our center is equipped with cutting-edge technology and infrastructure to deliver accurate diagnoses and effective treatments, ensuring the best possible outcomes for our patients.
                         </p>
                       </div>
@@ -1540,16 +1448,16 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
                   </div>
 
                   {/* Pillar 4 */}
-                  <div className="p-5 rounded-2xl bg-white border border-[#D5DFD7] shadow-xs hover:shadow-md hover:border-[#0E3B36]/30 transition-all duration-300">
-                    <div className="flex items-start gap-3.5">
-                      <div className="w-10 h-10 rounded-xl bg-[#EEF3EF] text-[#0E3B36] flex items-center justify-center shrink-0 mt-0.5">
-                        <Users className="w-5 h-5 text-[#E8A23A]" />
+                  <div className="p-3.5 sm:p-4 rounded-xl bg-white border border-[#D5DFD7] shadow-xs hover:shadow-md hover:border-[#0E3B36]/30 transition-all duration-300">
+                    <div className="flex items-start gap-3">
+                      <div className="w-8 h-8 rounded-lg bg-[#EEF3EF] text-[#0E3B36] flex items-center justify-center shrink-0 mt-0.5">
+                        <Users className="w-4 h-4 text-[#E8A23A]" />
                       </div>
                       <div>
-                        <h3 className="font-serif text-[17px] font-bold text-[#0E3B36] mb-1">
+                        <h3 className="font-serif text-[14.5px] sm:text-[15.5px] font-bold text-[#0E3B36] mb-0.5">
                           Patient-Centric Approach
                         </h3>
-                        <p className="text-[13.5px] text-[#4A5E54] leading-relaxed font-light">
+                        <p className="text-[12px] sm:text-[12.5px] text-[#4A5E54] leading-relaxed font-light">
                           We prioritize your comfort and care with a focus on early detection, timely intervention, and long-term support, ensuring you receive the best treatment with minimal stress.
                         </p>
                       </div>
@@ -1561,7 +1469,7 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
                   <button
                     onClick={onOpenEnquiry}
-                    className="btn-primary !py-3.5 !px-8 text-xs sm:text-sm font-bold flex items-center justify-center gap-2 cursor-pointer shadow-md"
+                    className="btn-primary !py-3 !px-7 text-xs sm:text-sm font-bold flex items-center justify-center gap-2 cursor-pointer shadow-md"
                   >
                     <Calendar className="w-4 h-4" />
                     <span>Book Your Free Consultation</span>
@@ -1569,7 +1477,7 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
                   </button>
                   <a
                     href="tel:+911140559200"
-                    className="px-6 py-3.5 rounded-full border border-[#0E3B36] text-[#0E3B36] text-xs sm:text-sm font-semibold hover:bg-[#EEF3EF] transition-colors flex items-center justify-center gap-2"
+                    className="px-6 py-3 rounded-full border border-[#0E3B36] text-[#0E3B36] text-xs sm:text-sm font-semibold hover:bg-[#EEF3EF] transition-colors flex items-center justify-center gap-2"
                   >
                     <Phone className="w-4 h-4 text-[#0E3B36]" />
                     <span>+91 11 4055 9200</span>
@@ -1666,11 +1574,6 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
       <TeamShowcase />
 
       {/* ═══════════════════════════════════════════
-          SECTION 10.3: NEWS & ARTICLES
-          ═══════════════════════════════════════════ */}
-      <NewsArticlesSection />
-
-      {/* ═══════════════════════════════════════════
           SECTION 11: CONNECTED FAQ (Kantha Connector Sequence)
           ═══════════════════════════════════════════ */}
       <PremiumSection variant="warm-1">
@@ -1704,61 +1607,6 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
           </div>
         </div>
       </PremiumSection>
-
-      {/* ═══════════════════════════════════════════
-          SECTION 12: DUSK NEWSLETTER (Inline Form on Ink Teal Band)
-          ═══════════════════════════════════════════ */}
-      <section className="bg-[#0E3B36] text-white py-14 px-4 sm:px-6 lg:px-8 border-t border-[#164E48]">
-        <div className="max-w-4xl mx-auto">
-          <RevealSection>
-            <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-              <div className="text-center md:text-left">
-                <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-[#E8A23A] mb-2">
-                  <Mail className="w-3.5 h-3.5" /> Newsletter
-                </span>
-                <h3 className="font-serif text-2xl md:text-3xl font-bold">
-                  Stay Informed on Camps & Guides
-                </h3>
-                <p className="text-white/80 text-sm font-light mt-1">
-                  Monthly updates on free screening camps, clinical tips, and volunteer stories.
-                </p>
-              </div>
-
-              <div className="w-full md:w-auto">
-                {!newsletterSubmitted ? (
-                  <form 
-                    onSubmit={(e) => {
-                      e.preventDefault();
-                      if (newsletterEmail.includes('@')) setNewsletterSubmitted(true);
-                    }}
-                    className="flex flex-col sm:flex-row gap-2 w-full max-w-md"
-                  >
-                    <input
-                      type="email"
-                      required
-                      placeholder="Enter your email address"
-                      value={newsletterEmail}
-                      onChange={(e) => setNewsletterEmail(e.target.value)}
-                      className="px-4 py-3 rounded-full bg-white/10 border border-white/20 text-white placeholder:text-white/50 text-sm outline-none focus:border-[#E8A23A] transition-colors min-w-[240px]"
-                    />
-                    <button
-                      type="submit"
-                      className="btn-marigold text-xs sm:text-sm !py-3 !px-6 cursor-pointer whitespace-nowrap"
-                    >
-                      Subscribe
-                    </button>
-                  </form>
-                ) : (
-                  <div className="px-4 py-2.5 rounded-full bg-white/15 text-emerald-300 text-xs font-semibold flex items-center gap-2 border border-emerald-400/30">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                    <span>Thank you! You are subscribed to our updates.</span>
-                  </div>
-                )}
-              </div>
-            </div>
-          </RevealSection>
-        </div>
-      </section>
 
       {/* ═══════════════════════════════════════════
           SECTION 13: SUNRISE REPRISE FINAL CTA

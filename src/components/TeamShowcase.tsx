@@ -137,7 +137,7 @@ export default function TeamShowcase() {
               <Stethoscope className="w-3.5 h-3.5 text-[#E8A23A]" /> Medical Advisory Board
             </span>
             <h2 className="section-title text-3xl md:text-5xl">
-              Distinguished Clinical Leadership
+              Our Specialized Doctors
             </h2>
             <p className="section-subtitle">
               Our experienced oncologists, surgeons, and cancer specialists guide Cancer Aware Bharat with clinical integrity, early detection protocols, and compassionate patient care.
