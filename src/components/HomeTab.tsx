@@ -925,15 +925,15 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
           </div>
         </div>
 
-        {/* ── Main Hero Content Stage (Enlarged Hero Visual Showcase) ── */}
-        <div className="relative z-20 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 flex flex-col justify-center">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+        {/* ── Main Hero Content Stage (Synchronized 7:5 Editorial & Visual Ratio) ── */}
+        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 flex flex-col justify-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             
-            {/* LEFT COLUMN: Editorial Typography & High-Converting Action (5 Cols) */}
-            <div className="lg:col-span-5 flex flex-col justify-center pr-0 lg:pr-2">
+            {/* LEFT COLUMN: Editorial Typography & High-Converting Action (7 Cols) */}
+            <div className="lg:col-span-7 flex flex-col justify-center space-y-4">
               
               {/* Live Badge Pill */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#D5DFD7] shadow-sm mb-5 w-fit">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#D5DFD7] shadow-sm w-fit">
                 <span className="flex h-2 w-2 relative">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#E8A23A] opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-[#E8A23A]"></span>
@@ -946,7 +946,7 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
               </div>
 
               {/* Main Headline Pairing */}
-              <h1 className="font-serif text-[#0E3B36] text-3xl sm:text-4xl lg:text-[44px] xl:text-[48px] font-bold leading-[1.15] tracking-tight mb-4" key={`bright-h1-${activeSlide}`}>
+              <h1 className="font-serif text-[#0E3B36] text-3xl sm:text-4xl md:text-5xl lg:text-[52px] font-bold leading-[1.14] tracking-tight" key={`bright-h1-${activeSlide}`}>
                 <span className="font-serif-hindi block text-[#0E3B36]">
                   {CAROUSEL_SLIDES[activeSlide].titleLine1}
                 </span>
@@ -956,15 +956,15 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
               </h1>
 
               {/* Subtitle & Narrative */}
-              <p className="text-[#4A5E54] text-base sm:text-lg font-normal leading-relaxed mb-2 max-w-xl" key={`bright-desc-${activeSlide}`}>
+              <p className="text-[#4A5E54] text-base sm:text-lg font-normal leading-relaxed max-w-xl" key={`bright-desc-${activeSlide}`}>
                 {CAROUSEL_SLIDES[activeSlide].desc}
               </p>
-              <p className="text-[#7A8E83] text-xs sm:text-sm italic font-light leading-relaxed mb-6 max-w-lg">
+              <p className="text-[#7A8E83] text-xs sm:text-sm italic font-light leading-relaxed max-w-lg">
                 {CAROUSEL_SLIDES[activeSlide].subtitleEn}
               </p>
 
               {/* Action Buttons Row */}
-              <div className="flex flex-wrap items-center gap-3.5 mb-7">
+              <div className="flex flex-wrap items-center gap-3.5 pt-1">
                 <button
                   onClick={() => {
                     const act = CAROUSEL_SLIDES[activeSlide].primaryAction;
@@ -994,7 +994,7 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
               </div>
 
               {/* Social Proof Trust Strip */}
-              <div className="pt-5 border-t border-[#D5DFD7] flex flex-wrap items-center gap-6 sm:gap-7 text-xs text-[#4A5E54]">
+              <div className="pt-4 border-t border-[#D5DFD7] flex flex-wrap items-center gap-6 sm:gap-7 text-xs text-[#4A5E54]">
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                   <span className="font-bold text-[#0E3B36]">14,250+</span>
@@ -1014,9 +1014,9 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
 
             </div>
 
-            {/* RIGHT COLUMN: Grand Emotive Doctor-Patient Visual Card (Expanded 7 Cols & Taller Height) */}
-            <div className="lg:col-span-7 relative">
-              <div className="relative rounded-[32px] overflow-hidden border border-[#D5DFD7] shadow-[0_28px_70px_rgba(14,59,54,0.14)] min-h-[460px] sm:min-h-[540px] lg:min-h-[580px] xl:min-h-[620px] w-full bg-[#1B2620] group flex flex-col justify-end">
+            {/* RIGHT COLUMN: Grand Emotive Doctor-Patient Visual Card (5 Cols, Aspect 4/5) */}
+            <div className="lg:col-span-5 relative">
+              <div className="relative rounded-3xl overflow-hidden shadow-xl border border-[#D5DFD7] aspect-[4/5] w-full bg-[#1B2620] group flex flex-col justify-end">
                 
                 {/* Visual Slide */}
                 {CAROUSEL_SLIDES.map((slide, idx) => {
@@ -1040,43 +1040,43 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
                 })}
 
                 {/* Floating Top Left Pill */}
-                <div className="absolute top-5 left-5 z-20 flex items-center gap-2 px-4 py-2 rounded-full bg-white/95 backdrop-blur-md border border-[#D5DFD7] text-[#0E3B36] text-xs font-bold shadow-lg">
-                  <Sparkles className="w-4 h-4 text-[#E8A23A]" />
+                <div className="absolute top-4 left-4 z-20 flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/95 backdrop-blur-md border border-[#D5DFD7] text-[#0E3B36] text-xs font-bold shadow-md">
+                  <Sparkles className="w-3.5 h-3.5 text-[#E8A23A]" />
                   <span>{CAROUSEL_SLIDES[activeSlide].tag}</span>
                 </div>
 
                 {/* Floating Top Right Pill */}
-                <div className="absolute top-5 right-5 z-20 px-4 py-2 rounded-full bg-[#E8A23A] text-[#1B2620] text-xs font-extrabold shadow-lg">
+                <div className="absolute top-4 right-4 z-20 px-3.5 py-1.5 rounded-full bg-[#E8A23A] text-[#1B2620] text-xs font-extrabold shadow-md">
                   {CAROUSEL_SLIDES[activeSlide].highlightStat}
                 </div>
 
                 {/* Floating Bottom Glass Stage */}
-                <div className="relative z-20 m-5 p-5 sm:p-6 rounded-2xl bg-white/95 backdrop-blur-md border border-[#D5DFD7] flex items-center justify-between gap-4 shadow-2xl">
+                <div className="relative z-20 m-4 p-4 rounded-2xl bg-white/95 backdrop-blur-md border border-[#D5DFD7] flex items-center justify-between gap-3 shadow-lg">
                   <div className="min-w-0">
-                    <div className="flex items-center gap-2 mb-0.5">
+                    <div className="flex items-center gap-1.5 mb-0.5">
                       <span className="text-[10px] font-bold uppercase tracking-widest text-[#E8A23A]">
                         National Outreach
                       </span>
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                     </div>
-                    <h4 className="font-serif text-[#0E3B36] text-sm sm:text-lg font-bold truncate">
+                    <h4 className="font-serif text-[#0E3B36] text-xs sm:text-sm font-bold truncate">
                       {CAROUSEL_SLIDES[activeSlide].titleLine1} — {CAROUSEL_SLIDES[activeSlide].titleLine2}
                     </h4>
                   </div>
-                  <div className="flex items-center gap-2.5 shrink-0">
+                  <div className="flex items-center gap-2 shrink-0">
                     <button
                       onClick={handlePrevSlide}
                       aria-label="Previous Slide"
-                      className="w-10 h-10 rounded-full bg-[#EEF3EF] hover:bg-[#E8A23A] text-[#0E3B36] hover:text-[#1B2620] flex items-center justify-center transition-all cursor-pointer shadow-sm hover:scale-105 active:scale-95"
+                      className="w-9 h-9 rounded-full bg-[#EEF3EF] hover:bg-[#E8A23A] text-[#0E3B36] hover:text-[#1B2620] flex items-center justify-center transition-all cursor-pointer shadow-xs hover:scale-105 active:scale-95"
                     >
-                      <ChevronLeft className="w-5 h-5" />
+                      <ChevronLeft className="w-4 h-4" />
                     </button>
                     <button
                       onClick={handleNextSlide}
                       aria-label="Next Slide"
-                      className="w-10 h-10 rounded-full bg-[#0E3B36] hover:bg-[#E8A23A] text-white hover:text-[#1B2620] flex items-center justify-center transition-all cursor-pointer shadow-sm hover:scale-105 active:scale-95"
+                      className="w-9 h-9 rounded-full bg-[#0E3B36] hover:bg-[#E8A23A] text-white hover:text-[#1B2620] flex items-center justify-center transition-all cursor-pointer shadow-xs hover:scale-105 active:scale-95"
                     >
-                      <ChevronRight className="w-5 h-5" />
+                      <ChevronRight className="w-4 h-4" />
                     </button>
                   </div>
                 </div>
@@ -1480,19 +1480,17 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
           ═══════════════════════════════════════════ */}
       <PremiumSection variant="warm-2" withTopDivider="kantha">
         <div className="section-container relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             
-            {/* Left Column: Visual Ribbon Card (5 Cols) */}
+            {/* Left Column: Visual Ribbon Card (5 Cols, Aspect 4/5 Matching Dr. Ajay Kumar Spotlight) */}
             <div className="lg:col-span-5 relative">
               <RevealSection>
-                <div className="relative w-full rounded-[32px] overflow-hidden shadow-2xl border border-[#D5DFD7] group bg-white">
-                  <div className="aspect-[4/4.5] sm:aspect-[4/4.8] w-full overflow-hidden bg-[#EEF3EF]">
-                    <img 
-                      src="/why-choose-us.jpg" 
-                      alt="Why Choose Us - Cancer Aware Bharat & Dr. Ajay Kumar" 
-                      className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" 
-                    />
-                  </div>
+                <div className="relative w-full rounded-3xl overflow-hidden shadow-xl border border-[#D5DFD7] group bg-white aspect-[4/5] flex flex-col justify-end">
+                  <img 
+                    src="/why-choose-us.jpg" 
+                    alt="Why Choose Us - Cancer Aware Bharat & Dr. Ajay Kumar" 
+                    className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" 
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0E3B36]/85 via-transparent to-transparent pointer-events-none" />
 
                   {/* Floating Top Badge */}
@@ -1504,14 +1502,14 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
                   </div>
 
                   {/* Floating Bottom Card */}
-                  <div className="absolute bottom-4 left-4 right-4 z-20 p-4 rounded-2xl bg-white/95 backdrop-blur-md border border-[#D5DFD7] shadow-lg">
+                  <div className="relative z-20 m-4 p-4 rounded-2xl bg-white/95 backdrop-blur-md border border-[#D5DFD7] shadow-lg">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-xl bg-[#EEF3EF] flex items-center justify-center text-[#0E3B36] shrink-0">
                         <Sparkles className="w-5 h-5 text-[#E8A23A]" />
                       </div>
                       <div>
-                        <h4 className="font-serif text-[#0E3B36] text-sm font-bold">Gold Medalist Surgical Oncology</h4>
-                        <p className="text-[11.5px] text-[#4A5E54]">IMS-BHU Varanasi • Ethical Clinical Care</p>
+                        <h4 className="font-serif text-[#0E3B36] text-xs sm:text-sm font-bold">Gold Medalist Surgical Oncology</h4>
+                        <p className="text-[11px] text-[#4A5E54]">IMS-BHU Varanasi • Ethical Clinical Care</p>
                       </div>
                     </div>
                   </div>
@@ -1520,7 +1518,7 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
             </div>
 
             {/* Right Column: 4 Clinical Pillars (7 Cols) */}
-            <div className="lg:col-span-7 flex flex-col">
+            <div className="lg:col-span-7 flex flex-col space-y-5">
               <RevealSection delay={150}>
                 
                 <span className="section-badge">
