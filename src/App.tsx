@@ -19,6 +19,8 @@ import { ToastProvider } from './components/common/Toast';
 import ChatAssistant from './components/ChatAssistant';
 import SitemapModal from './components/SitemapModal';
 import DonateModal from './components/DonateModal';
+import RiskAssessmentModal from './components/common/RiskAssessmentModal';
+import FastTrackTriageFab from './components/common/FastTrackTriageFab';
 
 // Lazy Loaded Route-Level Pages (Code Splitting & Performance).
 // Previously only the 4 dashboards were split out this way -- every public
@@ -127,12 +129,14 @@ function PublicLayout({
   onOpenEnquiry,
   onOpenSitemap,
   onOpenDonate,
+  onOpenAssessment,
 }: {
   children: React.ReactNode;
   onOpenVolunteer: () => void;
   onOpenEnquiry: () => void;
   onOpenSitemap: () => void;
   onOpenDonate: () => void;
+  onOpenAssessment: () => void;
 }) {
   const location = useLocation();
   const isAuthPage = ['/admin', '/superadmin', '/volunteer/login', '/hospital/login', '/patient/login'].includes(location.pathname);
@@ -146,10 +150,7 @@ function PublicLayout({
         onOpenDonate={onOpenDonate}
       />
 
-      {/* Page Content -- every route rendered through PublicLayout now
-          points at a lazy-loaded component (see imports above), so one
-          Suspense boundary here covers all of them without repeating it
-          at each <Route>. */}
+      {/* Page Content */}
       <Suspense fallback={<PageLoadingFallback />}>
         {children}
       </Suspense>
@@ -161,7 +162,13 @@ function PublicLayout({
         onOpenSitemap={onOpenSitemap}
       />
 
-
+      {/* Global Fast-Track Emergency Triage FAB (hidden on backoffice dashboard routes) */}
+      {!isAuthPage && (
+        <FastTrackTriageFab
+          onOpenAssessment={onOpenAssessment}
+          onOpenEnquiry={onOpenEnquiry}
+        />
+      )}
     </>
   );
 }
@@ -172,6 +179,7 @@ function AppContent() {
   const [enquiryOpen, setEnquiryOpen] = useState(false);
   const [sitemapOpen, setSitemapOpen] = useState(false);
   const [donateOpen, setDonateOpen] = useState(false);
+  const [assessmentOpen, setAssessmentOpen] = useState(false);
 
   // To allow pre-selecting a hospital when opening the Enquiry modal
   const [selectedHospitalId, setSelectedHospitalId] = useState<string | undefined>(undefined);
@@ -191,6 +199,7 @@ function AppContent() {
     onOpenEnquiry: () => handleOpenEnquiryForHospital(undefined),
     onOpenSitemap: () => setSitemapOpen(true),
     onOpenDonate: () => setDonateOpen(true),
+    onOpenAssessment: () => setAssessmentOpen(true),
   };
 
   return (
@@ -448,6 +457,12 @@ function AppContent() {
       <DonateModal
         isOpen={donateOpen}
         onClose={() => setDonateOpen(false)}
+      />
+
+      <RiskAssessmentModal
+        isOpen={assessmentOpen}
+        onClose={() => setAssessmentOpen(false)}
+        onOpenEnquiry={() => handleOpenEnquiryForHospital(undefined)}
       />
     </div>
   );

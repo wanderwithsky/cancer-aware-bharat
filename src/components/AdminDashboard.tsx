@@ -842,7 +842,7 @@ export default function AdminDashboard({ onPageChange, onLogout }: { onPageChang
   const unreadAdminNotifCount = useMemo(() => adminNotifications.filter(n => !n.read).length, [adminNotifications]);
 
   return (
-    <div className="min-h-screen bg-slate-50 flex text-slate-800">
+    <div className="min-h-screen bg-[#F3F6F1] flex text-slate-800">
 
       <DashboardSidebar
         items={sidebarItems}
@@ -855,60 +855,60 @@ export default function AdminDashboard({ onPageChange, onLogout }: { onPageChang
         sidebarCollapsed={sidebarCollapsed}
         mobileSidebarOpen={mobileSidebarOpen}
         onCloseMobile={() => setMobileSidebarOpen(false)}
-        bgClass="bg-[#004349]"
+        bgClass="bg-[#0A2E2A]"
         brandIcon={Shield}
-        brandIconWrapperClass="bg-white/10 backdrop-blur-md border border-white/20"
+        brandIconWrapperClass="bg-[#E8A23A]/20 border border-[#E8A23A]/40 text-[#E8A23A]"
         brandLabel="CAB Admin Portal"
-        activeAccentBorderClass="border-secondary-container"
-        badgeClass="bg-secondary-container text-[#004349]"
+        activeAccentBorderClass="border-[#E8A23A]"
+        badgeClass="bg-[#E8A23A] text-[#0A2E2A]"
       />
 
       {/* =====================================================
           MAIN DASHBOARD WORKSPACE
       ===================================================== */}
-      <main className="flex-1 flex flex-col min-w-0 bg-[#f9f9ff]">
+      <main className="flex-1 flex flex-col min-w-0 bg-[#F3F6F1]">
         {/* Workspace Top Header bar */}
-        <header className="bg-white border-b border-outline-variant/30 px-4 sm:px-6 py-4 flex items-center justify-between sticky top-0 z-30 shadow-xs">
+        <header className="bg-white/85 backdrop-blur-md border-b border-[#0E3B36]/10 px-4 sm:px-6 py-4 flex items-center justify-between sticky top-0 z-30 shadow-xs">
           <div className="flex items-center space-x-3 sm:space-x-4">
             <button
               onClick={toggleSidebar}
-              className="p-1.5 rounded-lg hover:bg-slate-100 text-slate-500 cursor-pointer focus:outline-none"
+              className="p-1.5 rounded-lg hover:bg-[#0E3B36]/5 text-[#0E3B36]/70 cursor-pointer focus:outline-none transition-colors"
               title="Toggle Menu"
               aria-label="Toggle menu"
             >
               <Menu className="w-5 h-5 lg:hidden" />
               <Terminal className="w-5 h-5 hidden lg:block" />
             </button>
-            <h2 className="font-headline-lg text-base sm:text-lg font-bold text-slate-900 capitalize">
+            <h2 className="font-serif text-lg sm:text-xl font-bold text-[#0E3B36] capitalize tracking-tight">
               {activeTab.replace('-', ' ')}
             </h2>
           </div>
 
           <div className="flex items-center space-x-2 sm:space-x-3">
             {/* Quick connection state badge */}
-            <span className="hidden sm:inline-flex items-center px-3 py-1 rounded-full bg-slate-50 text-slate-700 text-xs font-semibold border border-slate-200 gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-primary animate-pulse" /> dwarka-node-sync
+            <span className="hidden sm:inline-flex items-center px-3 py-1 rounded-full bg-[#7C9A82]/10 text-[#0E3B36] text-xs font-semibold border border-[#7C9A82]/30 gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-[#0E3B36] animate-pulse" /> dwarka-node-sync
             </span>
             <button
               onClick={() => setActiveTab('notifications')}
               className={`relative p-2 rounded-xl transition-colors cursor-pointer ${
-                activeTab === 'notifications' ? 'bg-primary/10 text-primary' : 'text-slate-500 hover:bg-slate-100'
+                activeTab === 'notifications' ? 'bg-[#0E3B36]/10 text-[#0E3B36]' : 'text-[#0E3B36]/60 hover:bg-[#0E3B36]/5'
               }`}
               title="Notifications"
             >
               <Bell className="w-5 h-5" />
               {unreadAdminNotifCount > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 min-w-[16px] h-4 px-1 rounded-full bg-secondary text-white text-[9px] font-bold flex items-center justify-center">
+                <span className="absolute -top-0.5 -right-0.5 min-w-[16px] h-4 px-1 rounded-full bg-[#C8443C] text-white text-[9px] font-bold flex items-center justify-center shadow-xs">
                   {unreadAdminNotifCount}
                 </span>
               )}
             </button>
-            <div className="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center font-bold text-primary border border-primary/20">
+            <div className="w-9 h-9 rounded-xl bg-[#0E3B36] text-[#F3F6F1] flex items-center justify-center font-bold text-xs shadow-sm">
               AD
             </div>
             <button
               onClick={onLogout}
-              className="p-2 rounded-xl text-red-500 hover:bg-red-50 cursor-pointer transition-colors"
+              className="p-2 rounded-xl text-[#C8443C] hover:bg-[#C8443C]/10 cursor-pointer transition-colors"
               title="Secure Logout"
             >
               <LogOut className="w-5 h-5" />

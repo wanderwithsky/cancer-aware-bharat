@@ -1,90 +1,51 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { 
   ChevronRight, Sparkles, Search as SearchIcon, Apple, Cigarette, 
   Dumbbell, Sun, Syringe, AlertTriangle, Activity, Info, Shield, 
-  Heart, CheckCircle2, ChevronDown
+  Heart, CheckCircle2, ChevronDown, ArrowRight, BookOpen
 } from 'lucide-react';
 
-/* ─────────── Reveal Section ─────────── */
-function RevealSection({ children, className = '', delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => setVisible(true), delay);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [delay]);
-
-  return (
-    <div
-      ref={ref}
-      className={`transition-all duration-700 ease-out ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} ${className}`}
-    >
-      {children}
-    </div>
-  );
-}
-
-// ────────────────────────────────────────────────────────
-// DATA ARRAYS
-// ────────────────────────────────────────────────────────
-
 const CANCER_TYPES = [
-  { title: 'Oral Cancer', desc: 'Often caused by tobacco use. Look for sores that do not heal or red/white patches in the mouth.', img: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=400&h=300' },
-  { title: 'Breast Cancer', desc: 'Early detection through regular self-exams and mammograms significantly improves survival rates.', img: 'https://images.unsplash.com/photo-1576671081837-49000212a370?auto=format&fit=crop&q=80&w=400&h=300' },
-  { title: 'Cervical Cancer', desc: 'Highly preventable with the HPV vaccine and regular Pap smear screenings.', img: 'https://images.unsplash.com/photo-1579684453377-48ec05c6b30a?auto=format&fit=crop&q=80&w=400&h=300' },
-  { title: 'Lung Cancer', desc: 'Primarily associated with smoking. Quitting tobacco dramatically reduces your risk over time.', img: 'https://images.unsplash.com/photo-1584362917165-526a968579e8?auto=format&fit=crop&q=80&w=400&h=300' },
-  { title: 'Blood Cancer', desc: 'Includes leukemia and lymphoma. Watch for persistent fatigue, frequent infections, or easy bleeding.', img: 'https://images.unsplash.com/photo-1530026405186-ed1f139313f8?auto=format&fit=crop&q=80&w=400&h=300' },
+  { title: 'Oral Cancer', desc: 'Often caused by tobacco & supari use. Look for non-healing ulcers or white/red patches in the mouth.', img: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=400&h=300' },
+  { title: 'Breast Cancer', desc: 'Early detection through regular monthly self-exams and annual mammograms drastically improves survival rates.', img: 'https://images.unsplash.com/photo-1576671081837-49000212a370?auto=format&fit=crop&q=80&w=400&h=300' },
+  { title: 'Cervical Cancer', desc: 'Highly preventable with the HPV vaccine and regular Pap smear screenings for women aged 30 and above.', img: 'https://images.unsplash.com/photo-1579684453377-48ec05c6b30a?auto=format&fit=crop&q=80&w=400&h=300' },
+  { title: 'Lung Cancer', desc: 'Primarily linked with bidi/cigarette smoking and severe air pollution. Quitting dramatically reduces risk.', img: 'https://images.unsplash.com/photo-1584362917165-526a968579e8?auto=format&fit=crop&q=80&w=400&h=300' },
+  { title: 'Blood & Lymph Node Cancers', desc: 'Includes leukemia and lymphoma. Watch for persistent unexplained fatigue, fever, or painless swollen glands.', img: 'https://images.unsplash.com/photo-1530026405186-ed1f139313f8?auto=format&fit=crop&q=80&w=400&h=300' },
+  { title: 'Colorectal Cancer', desc: 'Screening with stool tests and colonoscopy catches polyps before they turn malignant. High fiber diet is protective.', img: 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&q=80&w=400&h=300' },
 ];
 
 const EARLY_SIGNS = [
-  'Persistent fatigue or extreme tiredness',
-  'Unexplained weight loss or gain',
-  'Changes in bowel or bladder habits',
-  'Unusual bleeding or discharge',
-  'A sore that does not heal',
-  'A thickening or lump in the breast or elsewhere',
-  'Indigestion or difficulty swallowing',
-  'Obvious change in a wart or mole',
-  'Nagging cough or hoarseness',
+  'Persistent fatigue or extreme tiredness lasting weeks',
+  'Unexplained, rapid weight loss (5+ kg without dieting)',
+  'Changes in bowel or bladder habits (blood in stool/urine)',
+  'A sore, ulcer, or mouth patch that does not heal within 2 weeks',
+  'A painless thickening or lump in the breast, neck, or groin',
+  'Persistent indigestion, acidity, or difficulty swallowing',
+  'Obvious changes in size, color, or shape of a mole',
+  'Nagging chronic cough or persistent hoarseness of voice',
 ];
 
 const RISK_FACTORS = [
-  { icon: Cigarette, title: 'Tobacco Use', desc: 'Smoking and chewing tobacco are the leading preventable causes of cancer worldwide.' },
-  { icon: Activity, title: 'Diet & Physical Activity', desc: 'High-fat diets, processed meats, and lack of exercise contribute to an increased risk.' },
-  { icon: Sun, title: 'Sun Exposure', desc: 'Excessive UV radiation without protection can lead to skin cancers like melanoma.' },
-  { icon: Shield, title: 'Genetics', desc: 'A family history of cancer may indicate an inherited genetic mutation.' },
+  { icon: Cigarette, title: 'Tobacco & Gutkha Use', desc: 'Smoking and chewing tobacco are the leading preventable causes of cancer worldwide, especially in Bharat.' },
+  { icon: Activity, title: 'Diet & Sedentary Lifestyle', desc: 'High-fat diets, deep-fried ultra-processed foods, and lack of exercise contribute significantly to metabolic oncology risk.' },
+  { icon: Sun, title: 'Excessive UV Radiation', desc: 'Prolonged unprotected sun exposure can lead to skin damage and melanomas.' },
+  { icon: Shield, title: 'Genetic & Family Predisposition', desc: 'A family history of early-onset cancer may indicate hereditary genetic markers (BRCA1/2, Lynch Syndrome).' },
 ];
 
 const LIFESTYLE_TIPS = [
-  { title: 'Eat a Plant-Based Diet', desc: 'Fill your plate with vegetables, fruits, and whole grains.' },
-  { title: 'Limit Alcohol', desc: 'If you choose to drink alcohol, do so in moderation.' },
-  { title: 'Maintain a Healthy Weight', desc: 'Keeping a healthy BMI can lower the risk of various cancers.' },
-  { title: 'Manage Stress', desc: 'Practice mindfulness, meditation, or yoga to support immune health.' },
+  { title: 'Eat a Diverse Plant-Rich Diet', desc: 'Fill your daily plate with seasonal local greens, turmeric, garlic, pulses, and whole grains.' },
+  { title: 'Absolute Tobacco Cessation', desc: 'Eliminate all forms of smoked and smokeless tobacco, gutkha, and khaini immediately.' },
+  { title: 'Daily 30-Min Physical Movement', desc: 'Brisk walking, yoga, or cycling strengthens natural immune surveillance.' },
+  { title: 'Proactive Annual Health Checkups', desc: 'Schedule regular clinical screenings and blood tests after age 40.' },
 ];
 
 const FAQS = [
-  { q: 'At what age should I start cancer screenings?', a: 'It varies by cancer type. Generally, women should begin cervical screenings at 21 and mammograms around 40-50. Both men and women should begin colon cancer screenings at 45. Discuss your family history with your doctor for a personalized plan.' },
-  { q: 'Are all tumors cancerous?', a: 'No, tumors can be benign (non-cancerous) or malignant (cancerous). Biopsies are required to determine the exact nature of a tumor.' },
-  { q: 'Is cancer always genetic?', a: 'No. While about 5-10% of cancers are strongly linked to inherited genetic mutations, the vast majority are caused by genetic changes that occur throughout a person’s lifetime as a result of aging and environmental exposures.' },
-  { q: 'How effective is early detection?', a: 'Early detection is one of the most powerful tools in cancer care. When found early, many cancers are highly treatable and even curable.' },
+  { q: 'At what age should I start cancer screenings?', a: 'It varies by cancer type. Generally, women should begin clinical breast exams and cervical Pap screenings at 25-30, and mammograms around 40-45. Both men and women should begin colorectal cancer screenings at 45. Discuss family history with your doctor for custom timelines.' },
+  { q: 'Are all lumps and tumors cancerous?', a: 'No, most lumps turn out to be benign (non-cancerous cysts or fibroids). However, a definitive clinical biopsy or fine needle aspiration (FNAC) is essential to confirm diagnosis without guesswork.' },
+  { q: 'Is cancer completely genetic or environmental?', a: 'Only about 5-10% of cancers are strongly linked to inherited genetic mutations. The vast majority (90%+) arise from environmental, lifestyle, and dietary exposures accumulated over a lifetime.' },
+  { q: 'How effective is early detection for cancer survival?', a: 'Early detection is transformative. When detected at Stage I, survival rates for breast, oral, and cervical cancers exceed 85-95% with standard, less invasive treatments.' },
 ];
-
-// ────────────────────────────────────────────────────────
-// COMPONENT
-// ────────────────────────────────────────────────────────
 
 export default function CancerAwareness() {
   const navigate = useNavigate();
@@ -95,251 +56,271 @@ export default function CancerAwareness() {
   }, []);
 
   return (
-    <div className="bg-surface min-h-screen">
+    <div className="bg-[#F3F6F1] text-[#1B2620] min-h-screen">
       
-      {/* 1. HERO BANNER */}
-      <section className="relative h-[350px] md:h-[450px] w-full flex items-center justify-center overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: 'url(/events/event-1.jpeg)' }}
-        />
-        <div className="absolute inset-0 bg-neutral-950/70" />
+      {/* ─── Sunrise Arc Hero Header ─── */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#EAEFE9] via-[#F4F7F2] to-[#F3F6F1] border-b border-[#0E3B36]/10 pt-28 pb-16 md:pt-36 md:pb-20">
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#E8A23A]/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-10 w-80 h-80 bg-[#0E3B36]/5 rounded-full blur-2xl pointer-events-none" />
 
-        <div className="relative z-10 text-center space-y-4 px-4">
-          <div className="flex items-center justify-center gap-2 text-[11px] sm:text-[13px] font-bold tracking-widest uppercase text-white/80">
-            <span onClick={() => navigate('/')} className="hover:text-white cursor-pointer transition-colors">Home</span>
-            <ChevronRight className="w-3.5 h-3.5 text-secondary" />
-            <span className="text-secondary">Cancer Awareness</span>
-          </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="max-w-3xl space-y-4">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0E3B36]/8 border border-[#0E3B36]/15 text-[#0E3B36] text-xs font-bold tracking-wider uppercase">
+              <Sparkles className="w-3.5 h-3.5 text-[#E8A23A]" />
+              <span>Public Health Education / जनस्वास्थ्य शिक्षा</span>
+            </div>
 
-          <h1 className="font-outfit text-4xl sm:text-5xl md:text-6xl font-black text-white drop-shadow-lg tracking-tight">
-            Cancer <span className="text-secondary">Awareness</span>
-          </h1>
-          <p className="text-white/90 text-sm sm:text-base font-medium max-w-xl mx-auto">
-            Learn, Prevent, Detect Early
-          </p>
-        </div>
-      </section>
+            <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-normal text-[#0E3B36] tracking-tight leading-[1.12]">
+              Knowledge is the First Step to <br />
+              <span className="italic font-serif text-[#C8443C]">Cancer Prevention.</span>
+            </h1>
 
-      {/* 2. INTRODUCTION */}
-      <section className="py-16 md:py-20 bg-white">
-        <div className="section-container max-w-4xl text-center">
-          <RevealSection>
-            <h2 className="font-outfit text-3xl md:text-4xl font-bold text-slate-900 mb-6">
-              Knowledge is the First Step to Prevention
-            </h2>
-            <p className="text-slate-600 text-lg leading-relaxed">
-              At Cancer Aware Bharat, we believe that education empowers individuals to make proactive health decisions. Understanding the risks, recognizing early symptoms, and adopting a healthy lifestyle can significantly reduce the impact of cancer.
+            <p className="font-serif-hindi text-lg sm:text-xl text-[#0E3B36]/80 font-normal">
+              समय पर जांच, सही जानकारी और जीवनशैली में सुधार — हर जीवन की सुरक्षा का आधार।
             </p>
-          </RevealSection>
-        </div>
-      </section>
 
-      {/* 3. CANCER PREVENTION TIPS (Moved from Home Page) */}
-      <section className="gradient-section py-16 md:py-20">
-        <div className="section-container">
-          <RevealSection>
-            <div className="section-header">
-              <span className="section-badge"><Sparkles className="w-3 h-3" /> Prevention First</span>
-              <h2 className="section-title text-2xl md:text-3xl">Cancer Prevention Tips</h2>
-              <p className="section-subtitle">Simple lifestyle changes can significantly reduce your cancer risk.</p>
+            <p className="text-sm sm:text-base text-[#1B2620]/75 leading-relaxed font-sans max-w-2xl">
+              Understanding subtle warning signals, avoiding tobacco risks, and adopting evidence-backed preventive habits empowers families to detect cancer when it is most curable.
+            </p>
+
+            <div className="flex flex-wrap gap-3.5 pt-4">
+              <button
+                onClick={() => navigate('/events')}
+                className="px-6 py-3 rounded-xl bg-[#0E3B36] hover:bg-[#0E3B36]/90 text-white font-bold text-xs sm:text-sm shadow-md transition-all cursor-pointer flex items-center gap-2"
+              >
+                <span>Find Free Screening Camp</span>
+                <ArrowRight className="w-4 h-4 text-[#E8A23A]" />
+              </button>
+
+              <button
+                onClick={() => navigate('/blogs')}
+                className="px-6 py-3 rounded-xl bg-white hover:bg-[#EEF3EF] border border-[#0E3B36]/20 text-[#0E3B36] font-bold text-xs sm:text-sm transition-all cursor-pointer flex items-center gap-2 shadow-xs"
+              >
+                <BookOpen className="w-4 h-4 text-[#C8443C]" />
+                <span>Read Clinical Guides</span>
+              </button>
             </div>
-          </RevealSection>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-5">
-            {[
-              { icon: SearchIcon, title: 'Regular Screening', desc: 'Schedule annual checkups and age-appropriate cancer screenings', color: 'text-primary bg-primary/10' },
-              { icon: Apple, title: 'Healthy Diet', desc: 'Eat fruits, vegetables, and whole grains. Limit processed foods', color: 'text-primary bg-primary/10' },
-              { icon: Cigarette, title: 'Avoid Tobacco', desc: 'Quit smoking and chewing tobacco — the #1 preventable cause', color: 'text-secondary bg-secondary/10' },
-              { icon: Dumbbell, title: 'Stay Active', desc: 'Exercise 30 minutes daily to lower your cancer risk significantly', color: 'text-primary bg-primary/10' },
-              { icon: Sun, title: 'Sun Protection', desc: 'Use sunscreen and protective clothing when outdoors', color: 'text-secondary bg-secondary/10' },
-              { icon: Syringe, title: 'Get Vaccinated', desc: 'HPV and Hepatitis B vaccines can prevent certain cancers', color: 'text-primary bg-primary/10' },
-            ].map((tip, i) => (
-              <RevealSection key={i} delay={i * 80}>
-                <div className="card-subtle p-5 md:p-6 h-full">
-                  <div className={`w-11 h-11 rounded-xl ${tip.color} flex items-center justify-center mb-4`}>
-                    <tip.icon className="w-5 h-5" />
-                  </div>
-                  <h3 className="font-outfit font-bold text-on-surface text-sm mb-1.5">{tip.title}</h3>
-                  <p className="text-xs text-on-surface-variant leading-relaxed">{tip.desc}</p>
-                </div>
-              </RevealSection>
-            ))}
           </div>
         </div>
       </section>
 
-      {/* 4. TYPES OF CANCER */}
-      <section className="py-16 md:py-20 bg-white">
-        <div className="section-container">
-          <RevealSection>
-            <div className="section-header">
-              <span className="section-badge"><Activity className="w-3 h-3" /> Common Cancers</span>
-              <h2 className="section-title text-2xl md:text-3xl">Types of Cancer We Address</h2>
-              <p className="section-subtitle">Understanding specific cancers helps in targeting early prevention and screenings.</p>
-            </div>
-          </RevealSection>
+      {/* ─── Main Content Container ─── */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 space-y-16">
+        
+        {/* ─── 6 Prevention Pillars Grid ─── */}
+        <section className="space-y-8">
+          <div className="text-center max-w-2xl mx-auto space-y-2">
+            <span className="px-3.5 py-1 rounded-full bg-[#0E3B36]/8 text-[#0E3B36] text-xs font-bold uppercase tracking-wider border border-[#0E3B36]/15">
+              PREVENTION PROTOCOLS / बचाव के उपाय
+            </span>
+            <h2 className="font-serif text-2xl sm:text-4xl font-normal text-[#0E3B36]">
+              6 स्तम्भ जो आपके जोखिम को घटाते हैं
+            </h2>
+            <p className="text-xs sm:text-sm text-[#1B2620]/70">
+              दैनिक जीवन में छोटे बदलाव आपको और आपके परिवार को गंभीर बीमारियों से सुरक्षित रख सकते हैं।
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { icon: SearchIcon, title: 'Periodic Screenings', desc: 'Schedule annual checkups, oral exams, and age-appropriate mammography scans.', tag: 'जांच' },
+              { icon: Apple, title: 'Nourishing Diet', desc: 'Eat antioxidant-rich fruits, leafy vegetables, and whole grains. Limit ultra-processed foods.', tag: 'पोषण' },
+              { icon: Cigarette, title: '100% Tobacco-Free', desc: 'Quit bidi, cigarettes, and gutkha — the #1 preventable cause of oral and lung cancers.', tag: 'तंबाकू निषेध' },
+              { icon: Dumbbell, title: 'Daily Physical Activity', desc: 'Engage in 30 minutes of moderate exercise daily to maintain optimal BMI and immunity.', tag: 'व्यायाम' },
+              { icon: Sun, title: 'Sun & Toxin Protection', desc: 'Protect skin with hats/sunscreen and use masks when exposed to industrial dust/fumes.', tag: 'सुरक्षा' },
+              { icon: Syringe, title: 'Preventive Vaccines', desc: 'HPV and Hepatitis B vaccines offer robust protection against cervical and liver cancers.', tag: 'टीकाकरण' },
+            ].map((tip, i) => {
+              const Icon = tip.icon;
+              return (
+                <div key={i} className="bg-[#FAFCF8] rounded-2xl p-6 border border-[#0E3B36]/12 shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div className="w-12 h-12 rounded-2xl bg-[#0E3B36]/8 text-[#0E3B36] flex items-center justify-center font-bold">
+                      <Icon className="w-6 h-6" />
+                    </div>
+                    <span className="px-2.5 py-0.5 rounded-full bg-[#E8A23A]/15 text-[#8B5E00] text-[10px] font-bold uppercase tracking-wider">
+                      {tip.tag}
+                    </span>
+                  </div>
+                  <h3 className="font-serif text-lg font-normal text-[#0E3B36]">{tip.title}</h3>
+                  <p className="text-xs text-[#1B2620]/75 leading-relaxed">{tip.desc}</p>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* ─── Types of Cancer We Address ─── */}
+        <section className="space-y-8">
+          <div className="text-center max-w-2xl mx-auto space-y-2">
+            <span className="px-3.5 py-1 rounded-full bg-[#0E3B36]/8 text-[#0E3B36] text-xs font-bold uppercase tracking-wider border border-[#0E3B36]/15">
+              COMMON CANCERS / प्रमुख कैंसर प्रकार
+            </span>
+            <h2 className="font-serif text-2xl sm:text-4xl font-normal text-[#0E3B36]">
+              Types of Cancer We Address
+            </h2>
+            <p className="text-xs sm:text-sm text-[#1B2620]/70">
+              Understanding specific cancer profiles helps in targeted early screening and timely medical consultation.
+            </p>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {CANCER_TYPES.map((type, i) => (
-              <RevealSection key={i} delay={i * 100}>
-                <div className="card-premium h-full overflow-hidden flex flex-col group">
-                  <div className="h-48 overflow-hidden">
-                    <img src={type.img} alt={type.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                  </div>
-                  <div className="p-6 flex-1 flex flex-col">
-                    <h3 className="font-outfit font-bold text-lg text-slate-900 mb-2">{type.title}</h3>
-                    <p className="text-sm text-slate-600 leading-relaxed flex-1">{type.desc}</p>
-                  </div>
+              <div key={i} className="bg-[#FAFCF8] rounded-2xl border border-[#0E3B36]/12 overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col group">
+                <div className="h-48 overflow-hidden bg-[#EEF3EF] relative">
+                  <img src={type.img} alt={type.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                 </div>
-              </RevealSection>
+                <div className="p-6 flex-1 flex flex-col justify-between space-y-2">
+                  <h3 className="font-serif text-lg font-normal text-[#0E3B36] group-hover:text-[#C8443C] transition-colors">{type.title}</h3>
+                  <p className="text-xs text-[#1B2620]/75 leading-relaxed flex-1">{type.desc}</p>
+                </div>
+              </div>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* 5. EARLY WARNING SIGNS & 6. RISK FACTORS */}
-      <section className="py-16 md:py-20 bg-slate-50">
-        <div className="section-container">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-            
-            {/* Early Signs */}
-            <RevealSection>
-              <div className="bg-white rounded-3xl p-8 border border-outline-variant/30 shadow-sm h-full">
-                <div className="w-12 h-12 rounded-xl bg-secondary/10 text-secondary flex items-center justify-center mb-6">
-                  <AlertTriangle className="w-6 h-6" />
-                </div>
-                <h3 className="font-outfit text-2xl font-bold text-slate-900 mb-6">Early Warning Signs</h3>
-                <ul className="space-y-4">
-                  {EARLY_SIGNS.map((sign, i) => (
-                    <li key={i} className="flex items-start gap-3">
-                      <div className="mt-1 flex-shrink-0">
-                        <CheckCircle2 className="w-5 h-5 text-secondary" />
-                      </div>
-                      <span className="text-slate-700 font-medium">{sign}</span>
-                    </li>
-                  ))}
-                </ul>
-                <p className="mt-6 text-xs text-slate-500 italic">
-                  *If you experience any of these symptoms persistently for more than two weeks, please consult a physician.
-                </p>
+        {/* ─── Early Warning Signs & Risk Factors Bento ─── */}
+        <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+          
+          {/* Early Signs Box */}
+          <div className="lg:col-span-6 bg-[#FAFCF8] rounded-3xl p-7 sm:p-9 border border-[#0E3B36]/12 shadow-sm space-y-6 flex flex-col justify-between">
+            <div>
+              <div className="w-12 h-12 rounded-2xl bg-[#C8443C]/10 text-[#C8443C] flex items-center justify-center mb-4">
+                <AlertTriangle className="w-6 h-6" />
               </div>
-            </RevealSection>
+              <h3 className="font-serif text-2xl font-normal text-[#0E3B36] mb-1">Early Warning Signs</h3>
+              <p className="text-xs text-[#1B2620]/70 mb-5">Do not ignore persistent changes in your body.</p>
 
-            {/* Risk Factors */}
-            <RevealSection delay={200}>
-              <div className="space-y-8">
-                <div>
-                  <span className="section-badge mb-3"><Shield className="w-3 h-3" /> Be Aware</span>
-                  <h3 className="font-outfit text-2xl font-bold text-slate-900 mb-2">Common Risk Factors</h3>
-                  <p className="text-slate-600">While you cannot change all risk factors, knowing them empowers you to modify the ones you can.</p>
-                </div>
-                
-                <div className="space-y-4">
-                  {RISK_FACTORS.map((risk, i) => (
-                    <div key={i} className="bg-white p-5 rounded-2xl border border-outline-variant/30 shadow-sm flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center flex-shrink-0">
-                        <risk.icon className="w-5 h-5" />
+              <ul className="space-y-3">
+                {EARLY_SIGNS.map((sign, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <CheckCircle2 className="w-4 h-4 text-[#0E3B36] shrink-0 mt-0.5" />
+                    <span className="text-xs text-[#1B2620]/85 font-medium leading-relaxed">{sign}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <p className="text-[11px] text-[#C8443C] italic font-medium pt-4 border-t border-[#0E3B36]/10">
+              *If you experience any of these symptoms persistently for more than two weeks, please consult a physician.
+            </p>
+          </div>
+
+          {/* Risk Factors Box */}
+          <div className="lg:col-span-6 bg-[#FAFCF8] rounded-3xl p-7 sm:p-9 border border-[#0E3B36]/12 shadow-sm space-y-6 flex flex-col justify-between">
+            <div>
+              <div className="w-12 h-12 rounded-2xl bg-[#E8A23A]/15 text-[#8B5E00] flex items-center justify-center mb-4">
+                <Shield className="w-6 h-6" />
+              </div>
+              <h3 className="font-serif text-2xl font-normal text-[#0E3B36] mb-1">Common Risk Factors</h3>
+              <p className="text-xs text-[#1B2620]/70 mb-5">Recognizing environmental & lifestyle triggers empowers you to modify them.</p>
+
+              <div className="space-y-3.5">
+                {RISK_FACTORS.map((risk, i) => {
+                  const Icon = risk.icon;
+                  return (
+                    <div key={i} className="bg-white p-4 rounded-xl border border-[#0E3B36]/10 shadow-xs flex items-start gap-3.5">
+                      <div className="w-9 h-9 rounded-xl bg-[#0E3B36]/8 text-[#0E3B36] flex items-center justify-center shrink-0 mt-0.5">
+                        <Icon className="w-4.5 h-4.5" />
                       </div>
                       <div>
-                        <h4 className="font-bold text-slate-900 mb-1">{risk.title}</h4>
-                        <p className="text-sm text-slate-600">{risk.desc}</p>
+                        <h4 className="font-bold text-xs text-[#0E3B36] mb-0.5">{risk.title}</h4>
+                        <p className="text-[11px] text-[#1B2620]/75 leading-relaxed">{risk.desc}</p>
                       </div>
                     </div>
-                  ))}
-                </div>
+                  );
+                })}
               </div>
-            </RevealSection>
-
-          </div>
-        </div>
-      </section>
-
-      {/* 7. HEALTHY LIFESTYLE TIPS */}
-      <section className="py-16 md:py-20 bg-primary text-white relative overflow-hidden">
-        {/* Background Accent */}
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/5 rounded-full filter blur-[80px]" />
-        
-        <div className="section-container relative z-10">
-          <RevealSection>
-            <div className="text-center max-w-2xl mx-auto mb-12">
-              <Heart className="w-10 h-10 text-secondary mx-auto mb-4" />
-              <h2 className="font-outfit text-3xl md:text-4xl font-bold mb-4">Healthy Lifestyle Tips</h2>
-              <p className="text-white/80">A healthy lifestyle is your strongest defense.</p>
             </div>
-          </RevealSection>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <p className="text-[11px] text-[#1B2620]/60 italic pt-4 border-t border-[#0E3B36]/10">
+              90%+ of oncological triggers can be mitigated through early awareness and lifestyle intervention.
+            </p>
+          </div>
+
+        </section>
+
+        {/* ─── Healthy Lifestyle Tips Dusk Container ─── */}
+        <section className="bg-[#0E3B36] text-white rounded-3xl p-8 sm:p-12 shadow-2xl space-y-8 relative overflow-hidden">
+          <div className="text-center max-w-2xl mx-auto space-y-3 relative z-10">
+            <Heart className="w-10 h-10 text-[#E8A23A] mx-auto" />
+            <h2 className="font-serif text-2xl sm:text-4xl font-normal text-white">
+              Daily Habits for Cellular Resilience
+            </h2>
+            <p className="text-white/80 text-xs sm:text-sm font-sans">
+              Simple, consistent holistic practices form your body's strongest internal defense against neoplastic mutations.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 relative z-10">
             {LIFESTYLE_TIPS.map((tip, i) => (
-              <RevealSection key={i} delay={i * 100}>
-                <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/10 h-full hover:bg-white/15 transition-all">
-                  <h3 className="font-bold text-secondary text-lg mb-2">{tip.title}</h3>
-                  <p className="text-sm text-white/90 leading-relaxed">{tip.desc}</p>
-                </div>
-              </RevealSection>
+              <div key={i} className="bg-white/8 border border-white/15 rounded-2xl p-6 space-y-2 backdrop-blur-sm">
+                <h3 className="font-serif text-base text-[#E8A23A] font-normal">{tip.title}</h3>
+                <p className="text-xs text-white/75 leading-relaxed">{tip.desc}</p>
+              </div>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* 8. FAQS */}
-      <section className="py-16 md:py-20 bg-white">
-        <div className="section-container max-w-3xl">
-          <RevealSection>
-            <div className="text-center mb-12">
-              <h2 className="font-outfit text-3xl font-bold text-slate-900 mb-4">Frequently Asked Questions</h2>
-              <p className="text-slate-600">Common questions about cancer prevention and screening.</p>
-            </div>
-          </RevealSection>
+        {/* ─── FAQ Accordion ─── */}
+        <section className="max-w-4xl mx-auto space-y-8">
+          <div className="text-center space-y-2">
+            <h2 className="font-serif text-2xl sm:text-3xl font-normal text-[#0E3B36]">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-xs text-[#1B2620]/70">
+              Medical answers to common queries regarding screening age, tumor types, and genetic predisposition.
+            </p>
+          </div>
 
-          <div className="space-y-4">
+          <div className="space-y-3">
             {FAQS.map((faq, i) => (
-              <RevealSection key={i} delay={i * 50}>
-                <div className="border border-outline-variant/30 rounded-2xl overflow-hidden bg-surface-container-lowest">
-                  <button
-                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                    className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none hover:bg-surface-container-low transition-colors"
-                  >
-                    <span className="font-bold text-on-surface text-[15px] pr-4">{faq.q}</span>
-                    <ChevronDown className={`w-5 h-5 text-primary transition-transform duration-300 shrink-0 ${openFaq === i ? 'rotate-180' : ''}`} />
-                  </button>
-                  <div className={`overflow-hidden transition-all duration-300 ease-in-out ${openFaq === i ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
-                    <div className="px-6 pb-5 text-sm text-on-surface-variant leading-relaxed">
-                      {faq.a}
-                    </div>
+              <div key={i} className="border border-[#0E3B36]/12 rounded-2xl overflow-hidden bg-[#FAFCF8] shadow-xs">
+                <button
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  className="w-full px-6 py-4.5 flex items-center justify-between text-left focus:outline-none hover:bg-[#EEF3EF] transition-colors cursor-pointer"
+                >
+                  <span className="font-serif text-sm sm:text-base text-[#0E3B36] font-normal pr-4">{faq.q}</span>
+                  <ChevronDown className={`w-5 h-5 text-[#0E3B36] transition-transform duration-300 shrink-0 ${openFaq === i ? 'rotate-180 text-[#E8A23A]' : ''}`} />
+                </button>
+                <div className={`overflow-hidden transition-all duration-300 ease-in-out ${openFaq === i ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+                  <div className="px-6 pb-5 text-xs sm:text-sm text-[#1B2620]/75 leading-relaxed border-t border-[#0E3B36]/8 pt-3 font-sans">
+                    {faq.a}
                   </div>
                 </div>
-              </RevealSection>
+              </div>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* 9. CALL TO ACTION */}
-      <section className="py-16 md:py-20 bg-slate-900 text-white text-center">
-        <div className="section-container max-w-3xl">
-          <RevealSection>
-            <h2 className="font-outfit text-3xl md:text-4xl font-bold mb-6">Take Action Today</h2>
-            <p className="text-slate-300 text-lg mb-10">
-              Join hands with Cancer Aware Bharat to spread awareness in your community or register for an upcoming screening camp.
+        {/* ─── Call to Action ─── */}
+        <section className="bg-gradient-to-r from-[#0E3B36] via-[#134F49] to-[#0E3B36] text-white rounded-3xl p-8 sm:p-12 text-center space-y-6 shadow-xl">
+          <div className="max-w-2xl mx-auto space-y-3">
+            <h2 className="font-serif text-2xl sm:text-4xl font-normal text-white">
+              Take Action for Your Community Today
+            </h2>
+            <p className="text-xs sm:text-sm text-white/80 leading-relaxed font-sans">
+              Join hands with Cancer Aware Bharat to spread early detection in your locality or register for an upcoming screening assembly.
             </p>
-            <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
-              <button 
-                onClick={() => navigate('/join-us')}
-                className="w-full sm:w-auto bg-secondary hover:bg-white text-primary font-bold px-8 py-4 rounded-xl transition-all shadow-lg hover:-translate-y-1"
-              >
-                Become a Volunteer
-              </button>
-              <button 
-                onClick={() => navigate('/events')}
-                className="w-full sm:w-auto bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold px-8 py-4 rounded-xl transition-all shadow-lg hover:-translate-y-1"
-              >
-                Book Awareness Camp
-              </button>
-            </div>
-          </RevealSection>
-        </div>
-      </section>
+          </div>
+
+          <div className="flex flex-wrap justify-center gap-3.5">
+            <button
+              onClick={() => navigate('/join-us')}
+              className="px-6 py-3 rounded-xl bg-white hover:bg-[#F4F7F2] text-[#0E3B36] font-bold text-xs sm:text-sm shadow-lg cursor-pointer transition-all hover:scale-[1.02]"
+            >
+              Become a Volunteer Advocate
+            </button>
+
+            <button
+              onClick={() => navigate('/events')}
+              className="px-6 py-3 rounded-xl bg-[#E8A23A] hover:bg-[#D49129] text-[#1B2620] font-bold text-xs sm:text-sm shadow-lg cursor-pointer transition-all hover:scale-[1.02]"
+            >
+              Explore Free Screening Camps
+            </button>
+          </div>
+        </section>
+
+      </div>
 
     </div>
   );

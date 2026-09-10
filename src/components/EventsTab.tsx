@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, Calendar, MapPin, Users, Heart, ChevronDown, ChevronUp, CheckCircle, History, ArrowRight } from 'lucide-react';
+import { Search, Calendar, MapPin, Users, Heart, ChevronDown, ChevronUp, CheckCircle, History, ArrowRight, Sparkles, Clock } from 'lucide-react';
 import { useEvents } from '../api/hooks';
 import PremiumSection from './common/PremiumSection';
 
@@ -14,7 +14,6 @@ export default function EventsTab({ onOpenEnquiry }: EventsTabProps) {
 
   const { events: liveEvents } = useEvents();
 
-  // Past events data with local camp photos
   const pastEvents = [
     {
       id: 'past-1',
@@ -68,215 +67,230 @@ export default function EventsTab({ onOpenEnquiry }: EventsTabProps) {
 
   return (
     <>
-      <PremiumSection variant="warm-1" withBottomDivider="wave">
-        <div className="space-y-12">
-      {/* Page header */}
-      <section className="text-center max-w-3xl mx-auto space-y-4">
-        <span className="section-badge mx-auto">Campaign Schedule</span>
-        <h1 className="font-outfit text-primary text-3xl md:text-5xl font-extrabold leading-tight tracking-tight">
-          Upcoming Diagnostic Camps & Events
-        </h1>
-        <p className="text-on-surface-variant text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
-          Book free admissions to our localized screening drives. Ensure early cancer screening for you and your loved ones entirely free of charge.
-        </p>
-      </section>
+      {/* ── 1. Sunrise Arc Hero Section ── */}
+      <section className="relative gradient-dawn-1 text-white py-16 md:py-24 px-4 overflow-hidden border-b border-[#D5DFD7]">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#E8A23A]/15 rounded-full blur-[120px]" />
+          <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#7C9A82]/15 rounded-full blur-[140px]" />
+        </div>
 
-      {/* Main Events list and filters */}
-      <section className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-
-        {/* Active Events Directory Column */}
-        <div className="lg:col-span-8 space-y-6">
-
-          {/* Controls Box */}
-          <div className="card-premium !rounded-2xl p-5 flex flex-col sm:flex-row gap-4 items-stretch sm:items-center justify-between">
-            {/* Search */}
-            <div className="relative flex-grow">
-              <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-on-surface-variant/50" />
-              <input
-                type="text"
-                placeholder="Search active camps by title, city, or venue..."
-                value={searchQuery}
-                onChange={e => setSearchQuery(e.target.value)}
-                className="input-premium !pl-9 !py-2.5 !text-xs"
-              />
-            </div>
-
-            {/* Filter */}
-            <div className="flex gap-1.5 overflow-x-auto pb-1 sm:pb-0">
-              {[
-                { val: 'all', label: 'All' },
-                { val: 'Screening Camp', label: 'Screening' },
-                { val: 'Blood Donation', label: 'Blood Drives' },
-                { val: 'Workshop', label: 'Workshops' }
-              ].map(cat => (
-                <button
-                  key={cat.val}
-                  onClick={() => setCategoryFilter(cat.val as any)}
-                  className={`px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap cursor-pointer transition-all ${categoryFilter === cat.val
-                      ? 'gradient-primary text-white shadow-sm'
-                      : 'bg-surface-container-low hover:bg-surface-container text-on-surface-variant'
-                    }`}
-                >
-                  {cat.label}
-                </button>
-              ))}
-            </div>
+        <div className="relative z-10 max-w-5xl mx-auto text-center space-y-6">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[#E8A23A] text-xs font-bold uppercase tracking-wider mx-auto">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>Campaign Schedule / शिविर अनुसूची</span>
           </div>
 
-          {/* Active Events Cards List */}
-          <div className="space-y-4">
-            {filteredEvents.length === 0 ? (
-              <div className="p-10 text-center card-premium">
-                <p className="font-outfit text-sm text-primary font-bold">No upcoming campaigns matched your search criteria.</p>
-                <p className="text-xs text-on-surface-variant mt-1">Try resetting the filter search box above.</p>
+          <h1 className="font-serif text-3xl sm:text-4xl md:text-6xl font-bold leading-tight tracking-tight text-white">
+            <span className="block">Upcoming Diagnostic</span>
+            <span className="font-serif-hindi text-[#E8A23A] mt-1 block">निःशुल्क स्वास्थ्य जांच शिविर</span>
+          </h1>
+
+          <p className="text-white/90 text-base md:text-lg leading-relaxed max-w-2xl mx-auto font-light">
+            Book free admissions to our localized screening drives and awareness assemblies. Ensure early cancer detection for you and your loved ones completely free of charge.
+          </p>
+        </div>
+      </section>
+
+      {/* ── 2. Main Events List & Controls ── */}
+      <PremiumSection variant="warm-2" withTopDivider="kantha">
+        <div className="space-y-12">
+          
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+            {/* Active Events Directory Column */}
+            <div className="lg:col-span-8 space-y-6">
+
+              {/* Controls Box */}
+              <div className="bg-white p-5 border border-[#D5DFD7] rounded-3xl shadow-sm flex flex-col sm:flex-row gap-4 items-stretch sm:items-center justify-between">
+                {/* Search */}
+                <div className="relative flex-grow">
+                  <Search className="w-4 h-4 absolute left-3.5 top-1/2 transform -translate-y-1/2 text-[#7A8E83]" />
+                  <input
+                    type="text"
+                    placeholder="Search active camps by title, city, or venue..."
+                    value={searchQuery}
+                    onChange={e => setSearchQuery(e.target.value)}
+                    className="w-full pl-10 pr-4 py-2.5 rounded-2xl border border-[#D5DFD7] bg-[#FAFCF8] focus:border-[#0E3B36] focus:bg-white outline-none text-xs md:text-sm text-[#1B2620] transition-all shadow-inner"
+                  />
+                </div>
+
+                {/* Filter */}
+                <div className="flex gap-1.5 overflow-x-auto pb-1 sm:pb-0">
+                  {[
+                    { val: 'all', label: 'All Camps' },
+                    { val: 'Screening Camp', label: 'Screening' },
+                    { val: 'Blood Donation', label: 'Blood Drives' },
+                    { val: 'Workshop', label: 'Workshops' }
+                  ].map(cat => (
+                    <button
+                      key={cat.val}
+                      onClick={() => setCategoryFilter(cat.val as any)}
+                      className={`px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap cursor-pointer transition-all ${
+                        categoryFilter === cat.val
+                          ? 'bg-[#0E3B36] text-white shadow-xs'
+                          : 'bg-[#EEF3EF] hover:bg-[#D5DFD7] text-[#4A5E54]'
+                      }`}
+                    >
+                      {cat.label}
+                    </button>
+                  ))}
+                </div>
               </div>
-            ) : (
-              filteredEvents.map(camp => {
-                const isExpanded = expandedEventId === camp.id;
-                const remainingSlots = camp.capacity - camp.registeredCount;
-                const capacityPercent = (camp.registeredCount / camp.capacity) * 100;
 
-                return (
-                  <div key={camp.id} className="card-premium overflow-hidden">
-                    <div className="p-5 flex flex-col md:flex-row gap-5 items-start">
-                      {/* Event Mini Thumbnail Image */}
-                      <div className="w-full md:w-36 h-24 rounded-xl bg-surface-container overflow-hidden flex-shrink-0">
-                        <img src={camp.image} alt={camp.title} className="w-full h-full object-cover" />
-                      </div>
+              {/* Active Events Cards List */}
+              <div className="space-y-4">
+                {filteredEvents.length === 0 ? (
+                  <div className="p-10 text-center bg-white border border-[#D5DFD7] rounded-3xl shadow-sm">
+                    <p className="font-serif text-base text-[#0E3B36] font-bold">No upcoming campaigns matched your search criteria.</p>
+                    <p className="text-xs text-[#7A8E83] mt-1">Try resetting the filter search box above or searching for another city.</p>
+                  </div>
+                ) : (
+                  filteredEvents.map(camp => {
+                    const isExpanded = expandedEventId === camp.id;
+                    const remainingSlots = camp.capacity - camp.registeredCount;
+                    const capacityPercent = camp.capacity > 0 ? Math.min(100, (camp.registeredCount / camp.capacity) * 100) : 0;
+                    const isUrgent = capacityPercent >= 80;
 
-                      {/* Info layout */}
-                      <div className="flex-grow space-y-2 text-left">
-                        <div className="flex flex-wrap items-center gap-1.5">
-                          <span className="text-[10px] font-bold uppercase tracking-wider bg-primary/8 text-primary px-2.5 py-1 rounded-lg">
-                            {camp.type}
-                          </span>
-                          <span className="text-[10px] text-red-500 font-bold bg-red-50 px-2.5 py-1 rounded-lg flex items-center gap-1">
-                            <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" /> Active Booking
-                          </span>
-                        </div>
+                    return (
+                      <div key={camp.id} className="bg-white rounded-3xl border border-[#D5DFD7] shadow-sm hover:shadow-md transition-all overflow-hidden">
+                        <div className="p-5 flex flex-col md:flex-row gap-5 items-start">
+                          <div className="w-full md:w-36 h-28 rounded-2xl bg-[#EEF3EF] overflow-hidden flex-shrink-0 border border-[#D5DFD7]">
+                            <img src={camp.image || '/events/event-1.jpeg'} alt={camp.title} className="w-full h-full object-cover" />
+                          </div>
 
-                        <h3 className="font-outfit text-base font-bold text-on-surface">{camp.title}</h3>
+                          <div className="flex-grow space-y-2 text-left">
+                            <div className="flex flex-wrap items-center gap-1.5">
+                              <span className="text-[10px] font-bold uppercase tracking-wider bg-[#EEF3EF] text-[#0E3B36] border border-[#7C9A82]/30 px-2.5 py-0.5 rounded-full">
+                                {camp.type}
+                              </span>
+                              <span className="text-[10px] text-[#C8443C] font-bold bg-[#FBEAE9] border border-[#C8443C]/20 px-2.5 py-0.5 rounded-full flex items-center gap-1">
+                                <span className="w-1.5 h-1.5 rounded-full bg-[#C8443C] animate-pulse" /> Active Booking
+                              </span>
+                            </div>
 
-                        <div className="flex flex-wrap gap-4 text-xs font-medium text-on-surface-variant">
-                          <p className="flex items-center gap-1.5">
-                            <Calendar className="w-3.5 h-3.5 text-primary" /> {camp.date} • {camp.time}
-                          </p>
-                          <p className="flex items-center gap-1.5">
-                            <MapPin className="w-3.5 h-3.5 text-primary" /> {camp.location}
-                          </p>
-                        </div>
-                      </div>
+                            <h3 className="font-serif text-lg font-bold text-[#0E3B36] leading-snug">{camp.title}</h3>
 
-                      {/* Expander Trigger */}
-                      <button
-                        onClick={() => setExpandedEventId(isExpanded ? null : camp.id)}
-                        className="p-2 rounded-xl border border-outline-variant/20 hover:bg-surface-container-low transition-colors self-end md:self-center cursor-pointer"
-                        title="Show description"
-                      >
-                        {isExpanded ? <ChevronUp className="w-4 h-4 text-on-surface-variant" /> : <ChevronDown className="w-4 h-4 text-on-surface-variant" />}
-                      </button>
-                    </div>
-
-                    {/* Collapsible Expansion Box */}
-                    {isExpanded && (
-                      <div className="px-5 pb-5 pt-1 border-t border-outline-variant/10 bg-surface-container-low/30 space-y-4">
-                        <div className="space-y-1.5 pt-3">
-                          <span className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant/60">Campaign Description</span>
-                          <p className="text-sm text-on-surface-variant leading-relaxed">
-                            {camp.description}
-                          </p>
-                        </div>
-
-                        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pt-3 border-t border-outline-variant/10">
-                          <div className="text-xs space-y-2 flex-1">
-                            <span className="text-on-surface-variant">Current Availability:</span>
-                            <div>
-                              <p className="font-bold text-primary text-sm">
-                                {remainingSlots > 0 ? `${remainingSlots} Free Slots Left` : 'Fully Booked'}
-                                <span className="text-xs text-on-surface-variant font-normal ml-1">out of {camp.capacity}</span>
+                            <div className="flex flex-wrap gap-4 text-xs font-medium text-[#4A5E54]">
+                              <p className="flex items-center gap-1.5">
+                                <Calendar className="w-3.5 h-3.5 text-[#E8A23A]" /> {camp.date} • {camp.time}
                               </p>
-                              <div className="h-1.5 bg-outline-variant/15 rounded-full overflow-hidden mt-2 max-w-[200px]">
-                                <div className="h-full bg-primary/60 rounded-full transition-all" style={{ width: `${capacityPercent}%` }} />
-                              </div>
+                              <p className="flex items-center gap-1.5">
+                                <MapPin className="w-3.5 h-3.5 text-[#C8443C]" /> {camp.location}
+                              </p>
                             </div>
                           </div>
 
                           <button
-                            onClick={onOpenEnquiry}
-                            disabled={remainingSlots <= 0}
-                            className="btn-primary !py-2.5 !px-5 !text-xs disabled:opacity-40 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none shrink-0"
+                            onClick={() => setExpandedEventId(isExpanded ? null : camp.id)}
+                            className="p-2.5 rounded-2xl border border-[#D5DFD7] hover:bg-[#EEF3EF] text-[#0E3B36] transition-colors self-end md:self-center cursor-pointer"
+                            title="Show details"
                           >
-                            {remainingSlots > 0 ? 'Reserve My Free Seat' : 'Waiting List Full'}
-                            {remainingSlots > 0 && <ArrowRight className="w-3.5 h-3.5" />}
+                            {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                           </button>
                         </div>
-                      </div>
-                    )}
-                  </div>
-                );
-              })
-            )}
-          </div>
-        </div>
 
-        {/* Right Column: Historic Camps / Past Success Gallery */}
-        <div className="lg:col-span-4 space-y-5">
-          <div className="space-y-2">
-            <h2 className="font-outfit text-primary text-lg font-bold flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-primary/8 flex items-center justify-center">
-                <History className="w-4 h-4 text-primary" />
+                        {/* Collapsible Details */}
+                        {isExpanded && (
+                          <div className="px-5 pb-5 pt-2 border-t border-[#D5DFD7]/60 bg-[#FAFCF8] space-y-4">
+                            <div className="space-y-1 pt-2">
+                              <span className="text-[10px] font-bold uppercase tracking-wider text-[#7A8E83]">Campaign Scope</span>
+                              <p className="text-xs md:text-sm text-[#4A5E54] leading-relaxed font-light">
+                                {camp.description}
+                              </p>
+                            </div>
+
+                            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pt-3 border-t border-[#D5DFD7]/40">
+                              <div className="text-xs space-y-1.5 flex-1">
+                                <div className="flex items-center justify-between max-w-xs font-semibold">
+                                  <span className="text-[#4A5E54]">Available Seats:</span>
+                                  <span className={isUrgent ? 'text-[#C8443C] font-bold' : 'text-[#0E3B36]'}>
+                                    {remainingSlots > 0 ? `${remainingSlots} Slots Left` : 'Fully Booked'} ({camp.registeredCount}/{camp.capacity})
+                                  </span>
+                                </div>
+                                <div className="h-2 bg-[#EEF3EF] rounded-full overflow-hidden max-w-xs">
+                                  <div
+                                    className={`h-full rounded-full transition-all duration-700 ${
+                                      isUrgent ? 'bg-gradient-to-r from-[#E8A23A] to-[#C8443C]' : 'bg-gradient-to-r from-[#7C9A82] to-[#0E3B36]'
+                                    }`}
+                                    style={{ width: `${capacityPercent}%` }}
+                                  />
+                                </div>
+                              </div>
+
+                              <button
+                                onClick={onOpenEnquiry}
+                                disabled={remainingSlots <= 0}
+                                className="btn-marigold !py-2.5 !px-5 !text-xs font-bold disabled:opacity-40 disabled:cursor-not-allowed shrink-0 cursor-pointer shadow-sm"
+                              >
+                                <span>{remainingSlots > 0 ? 'Register For Camp' : 'Waiting List Full'}</span>
+                                {remainingSlots > 0 && <ArrowRight className="w-3.5 h-3.5" />}
+                              </button>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })
+                )}
               </div>
-              Historic Assembly Gallery
-            </h2>
-            <p className="text-xs text-on-surface-variant">A glimpse at our successful cancer screening campaigns.</p>
-          </div>
+            </div>
 
-          <div className="space-y-4">
-            {pastEvents.map(past => {
-              const isPastExpanded = expandedPastId === past.id;
+            {/* Right Column: Historic Camps Gallery */}
+            <div className="lg:col-span-4 space-y-5">
+              <div className="space-y-1">
+                <span className="section-badge"><History className="w-3.5 h-3.5 text-[#E8A23A]" /> Archive</span>
+                <h2 className="font-serif text-xl font-bold text-[#0E3B36]">Historic Assembly Gallery</h2>
+                <p className="text-xs text-[#7A8E83] font-light">Documentary views of grassroots screening drives across India.</p>
+              </div>
 
-              return (
-                <div key={past.id} className="card-subtle overflow-hidden">
-                  <div className="h-32 relative bg-surface-container overflow-hidden">
-                    <img src={past.image} alt={past.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-                    <span className="absolute bottom-2 left-2 glass text-xs font-bold text-primary px-2.5 py-1 rounded-lg shadow-sm">
-                      {past.impact}
-                    </span>
-                  </div>
+              <div className="space-y-4">
+                {pastEvents.map(past => {
+                  const isPastExpanded = expandedPastId === past.id;
 
-                  <div className="p-4 space-y-2 text-left">
-                    <span className="text-[10px] text-on-surface-variant/60 font-medium">{past.date} • {past.location}</span>
-                    <h4 className="font-outfit text-sm font-bold text-on-surface leading-tight line-clamp-1">{past.title}</h4>
-
-                    {isPastExpanded ? (
-                      <div className="space-y-2 pt-1">
-                        <p className="text-xs text-on-surface-variant leading-relaxed">
-                          {past.summary}
-                        </p>
-                        <button
-                          onClick={() => setExpandedPastId(null)}
-                          className="text-[11px] text-primary font-semibold hover:underline flex items-center cursor-pointer"
-                        >
-                          Show Less <ChevronUp className="w-3.5 h-3.5 ml-0.5" />
-                        </button>
+                  return (
+                    <div key={past.id} className="bg-white rounded-3xl border border-[#D5DFD7] overflow-hidden shadow-sm hover:shadow-md transition-all">
+                      <div className="h-32 relative bg-[#0E3B36] overflow-hidden">
+                        <img src={past.image} alt={past.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                        <span className="absolute bottom-2 left-2 bg-[#0E3B36]/90 backdrop-blur-md text-xs font-bold text-[#E8A23A] px-2.5 py-1 rounded-xl shadow-sm border border-white/20">
+                          {past.impact}
+                        </span>
                       </div>
-                    ) : (
-                      <button
-                        onClick={() => setExpandedPastId(past.id)}
-                        className="text-[11px] text-primary font-semibold hover:underline flex items-center cursor-pointer"
-                      >
-                        Read Success Summary <ChevronDown className="w-3.5 h-3.5 ml-0.5" />
-                      </button>
-                    )}
-                  </div>
-                </div>
-              );
-            })}
+
+                      <div className="p-4 space-y-2 text-left">
+                        <span className="text-[10px] text-[#7A8E83] font-medium block">{past.date} • {past.location}</span>
+                        <h4 className="font-serif text-sm font-bold text-[#0E3B36] leading-tight line-clamp-1">{past.title}</h4>
+
+                        {isPastExpanded ? (
+                          <div className="space-y-2 pt-1 border-t border-[#D5DFD7]/40">
+                            <p className="text-xs text-[#4A5E54] leading-relaxed font-light">
+                              {past.summary}
+                            </p>
+                            <button
+                              onClick={() => setExpandedPastId(null)}
+                              className="text-[11px] text-[#0E3B36] font-bold hover:underline flex items-center cursor-pointer"
+                            >
+                              Show Less <ChevronUp className="w-3.5 h-3.5 ml-0.5" />
+                            </button>
+                          </div>
+                        ) : (
+                          <button
+                            onClick={() => setExpandedPastId(past.id)}
+                            className="text-[11px] text-[#0E3B36] font-bold hover:underline flex items-center cursor-pointer"
+                          >
+                            Read Summary <ChevronDown className="w-3.5 h-3.5 ml-0.5" />
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
           </div>
-        </div>
-      </section>
         </div>
       </PremiumSection>
     </>
   );
 }
+

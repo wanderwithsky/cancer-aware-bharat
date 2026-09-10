@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
-import { Search, MapPin, Phone, Mail, Info, ArrowUpRight, Map, Building2 } from 'lucide-react';
+import { Search, MapPin, Phone, Mail, Info, ArrowUpRight, Map, Building2, Sparkles, ShieldCheck } from 'lucide-react';
 import { useApiHospitals } from '../api/hooks';
 import { Hospital } from '../types';
 import MapContainer from './MapContainer';
@@ -31,293 +31,296 @@ export default function HospitalsTab({ onOpenEnquiry }: HospitalsTabProps) {
 
   return (
     <>
-      <PremiumSection variant="warm-1" withBottomDivider="wave">
-        <div className="space-y-12">
-      {/* Tab Header Section */}
-      <section className="text-center max-w-3xl mx-auto space-y-4">
-        <span className="section-badge mx-auto">Our Network</span>
-        <h1 className="font-outfit text-primary text-3xl md:text-5xl font-extrabold leading-tight tracking-tight">
-          Our Nationwide Oncology Partners
-        </h1>
-        <p className="text-on-surface-variant text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
-          We integrate only with recognized clinical centers and supportive community hospitals across India to maintain standard diagnostic oncology paths.
-        </p>
+      {/* ── 1. Sunrise Arc Hero Section ── */}
+      <section className="relative gradient-dawn-2 text-white py-16 md:py-24 px-4 overflow-hidden border-b border-[#D5DFD7]">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#E8A23A]/15 rounded-full blur-[120px]" />
+          <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#7C9A82]/15 rounded-full blur-[140px]" />
+        </div>
 
-        {/* Hospital Portal Access Button */}
+        <div className="relative z-10 max-w-5xl mx-auto text-center space-y-6">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[#E8A23A] text-xs font-bold uppercase tracking-wider mx-auto">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>Clinical Network / हमारे सहयोगी अस्पताल</span>
+          </div>
+
+          <h1 className="font-serif text-3xl sm:text-4xl md:text-6xl font-bold leading-tight tracking-tight text-white">
+            <span className="block">Nationwide Oncology</span>
+            <span className="font-serif-hindi text-[#E8A23A] mt-1 block">भागीदार अस्पताल नेटवर्क</span>
+          </h1>
+
+          <p className="text-white/90 text-base md:text-lg leading-relaxed max-w-2xl mx-auto font-light">
+            We integrate exclusively with verified clinical centers and supportive community hospitals across India to ensure standard diagnostic pathways and second opinions.
+          </p>
+
           <div className="pt-2 flex items-center justify-center gap-3">
             <button
               onClick={() => navigate('/hospital/login')}
-              className="btn-primary !text-xs"
+              className="btn-marigold text-xs md:text-sm !py-2.5 !px-6 cursor-pointer shadow-md"
             >
               <Building2 className="w-4 h-4" />
-              <span>Hospital Partner Login / Apply Portal</span>
+              <span>Hospital Partner Portal</span>
             </button>
           </div>
-      </section>
-
-      {/* Network Map Section */}
-      <section className="space-y-4">
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-3">
-          <div>
-            <h2 className="font-outfit text-primary text-xl font-bold flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-primary/8 flex items-center justify-center"><Map className="w-4 h-4 text-primary" /></div>
-              Interactive Hospital Map
-            </h2>
-            <p className="text-xs text-on-surface-variant mt-1">Explore clinical locations and partners across the country.</p>
-          </div>
-          <button
-            onClick={() => navigate('/hospital/login')}
-            className="btn-accent !py-2 !px-4 !text-xs shrink-0"
-          >
-            Join Network <ArrowUpRight className="w-3.5 h-3.5" />
-          </button>
         </div>
-
-        {/* Map Rendering Container */}
-        <MapContainer
-          hospitals={hospitals}
-          onSelectHospital={(h) => setSelectedHospital(h)}
-          onOpenContact={(id) => onOpenEnquiry(id)}
-        />
       </section>
 
-      {/* Main Directory & Filters */}
-      <section className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        
-        {/* Left Side: Directory search and results */}
-        <div className="lg:col-span-7 space-y-6">
-          <div className="bg-white p-5 border border-outline-variant/40 rounded-2xl shadow-xs space-y-4">
+      {/* ── 2. Interactive Map Section ── */}
+      <PremiumSection variant="warm-2" withTopDivider="kantha">
+        <div className="space-y-12">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-3">
+            <div>
+              <span className="section-badge"><Map className="w-3.5 h-3.5 text-[#E8A23A]" /> Geospatial Network</span>
+              <h2 className="section-title text-2xl md:text-4xl">Interactive Hospital Map</h2>
+              <p className="section-subtitle">Explore verified clinical partner locations and diagnostic units across India.</p>
+            </div>
+            <button
+              onClick={() => navigate('/hospital/login')}
+              className="btn-secondary !py-2 !px-4 !text-xs shrink-0 cursor-pointer"
+            >
+              <span>Partner With Us</span>
+              <ArrowUpRight className="w-3.5 h-3.5" />
+            </button>
+          </div>
+
+          <MapContainer
+            hospitals={hospitals}
+            onSelectHospital={(h) => setSelectedHospital(h)}
+            onOpenContact={(id) => onOpenEnquiry(id)}
+          />
+
+          {/* ── 3. Main Directory & Filters ── */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-6">
             
-            {/* Search Input */}
-            <div className="relative">
-              <Search className="w-5 h-5 absolute left-3.5 top-1/2 transform -translate-y-1/2 text-on-surface-variant/70" />
-              <input
-                type="text"
-                placeholder="Search partner by name, city, or specialty (e.g. Radiation)..."
-                value={searchQuery}
-                onChange={e => setSearchQuery(e.target.value)}
-                className="w-full pl-11 pr-4 py-2.5 rounded-xl border border-outline-variant bg-white focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm transition-all"
-              />
-            </div>
-
-            {/* Region Filter Buttons */}
-            <div className="space-y-2">
-              <label className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Filter by Region</label>
-              <div className="flex flex-wrap gap-1.5">
-                {[
-                  { value: 'all', label: 'All Regions' },
-                  { value: 'north', label: 'North India' },
-                  { value: 'south', label: 'South India' },
-                  { value: 'east', label: 'East India' },
-                  { value: 'west', label: 'West India' }
-                ].map(r => (
-                  <button
-                    key={r.value}
-                    onClick={() => setRegionFilter(r.value as any)}
-                    className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-all cursor-pointer ${
-                      regionFilter === r.value 
-                        ? 'bg-primary border-primary text-white shadow-xs' 
-                        : 'bg-white border-outline-variant text-on-surface-variant hover:bg-surface-variant/30'
-                    }`}
-                  >
-                    {r.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Type Filter Buttons */}
-            <div className="space-y-2 pt-1 border-t border-outline-variant/10">
-              <label className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Filter by Center Type</label>
-              <div className="flex flex-wrap gap-1.5">
-                {[
-                  { value: 'all', label: 'All Center Types' },
-                  { value: 'Center of Excellence', label: 'Centers of Excellence' },
-                  { value: 'Community Partner', label: 'Community Partners' }
-                ].map(t => (
-                  <button
-                    key={t.value}
-                    onClick={() => setTypeFilter(t.value as any)}
-                    className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-all cursor-pointer ${
-                      typeFilter === t.value 
-                        ? 'bg-secondary border-secondary text-white shadow-xs' 
-                        : 'bg-white border-outline-variant text-on-surface-variant hover:bg-surface-variant/30'
-                    }`}
-                  >
-                    {t.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Hospital Listings List */}
-          <div className="space-y-4">
-            {filteredHospitals.length === 0 ? (
-              <div className="p-8 text-center bg-white border border-outline-variant/30 rounded-2xl">
-                <p className="font-title-md text-base text-primary font-bold">No hospitals matched your query.</p>
-                <p className="text-xs text-on-surface-variant mt-1">Try clearing your filters or searching for another term like Delhi or Support.</p>
-                <button 
-                  onClick={() => { setSearchQuery(''); setRegionFilter('all'); setTypeFilter('all'); }}
-                  className="mt-4 px-4 py-2 bg-primary text-white rounded-lg text-xs font-semibold"
-                >
-                  Reset Filters
-                </button>
-              </div>
-            ) : (
-              filteredHospitals.map(hosp => (
-                <div 
-                  key={hosp.id} 
-                  className={`bg-white border rounded-2xl p-5 shadow-xs transition-all hover:shadow-md cursor-pointer flex flex-col md:flex-row justify-between items-start md:items-center gap-4 ${
-                    selectedHospital?.id === hosp.id ? 'border-primary ring-2 ring-primary/25' : 'border-outline-variant/40'
-                  }`}
-                  onClick={() => setSelectedHospital(hosp)}
-                >
-                  <div className="flex items-start space-x-4">
-                    {/* Hospital Logo / Initial Letter Badge */}
-                    <div className="w-14 h-14 rounded-xl bg-surface-container-low border border-outline-variant/30 overflow-hidden flex-shrink-0 flex items-center justify-center p-2">
-                      {hosp.logo ? (
-                        <img src={hosp.logo} alt={hosp.name} className="w-full h-full object-contain" referrerPolicy="no-referrer" />
-                      ) : (
-                        <span className="font-headline-lg text-xl font-bold text-primary">{hosp.name[0]}</span>
-                      )}
-                    </div>
-
-                    <div className="space-y-1">
-                      <div className="flex flex-wrap items-center gap-1.5">
-                        <span className={`text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${
-                          hosp.type === 'Center of Excellence' 
-                            ? 'bg-primary/10 text-primary' 
-                            : 'bg-secondary/10 text-secondary'
-                        }`}>
-                          {hosp.type}
-                        </span>
-                        <span className="text-[10px] text-on-surface-variant font-medium bg-surface-container px-2 py-0.5 rounded-full capitalize">
-                          {hosp.region} India
-                        </span>
-                      </div>
-                      <h3 className="font-title-md text-base font-bold text-primary">{hosp.name}</h3>
-                      <p className="text-xs text-on-surface-variant font-medium flex items-center gap-0.5">
-                        <MapPin className="w-3.5 h-3.5 text-primary" /> {hosp.city}, {hosp.state}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex md:flex-col items-stretch gap-2 w-full md:w-auto">
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setSelectedHospital(hosp);
-                      }}
-                      className="flex-1 md:flex-none px-3.5 py-1.5 bg-surface-variant text-primary text-xs font-bold rounded-lg hover:bg-surface-container transition-colors flex items-center justify-center gap-1"
-                    >
-                      <Info className="w-3.5 h-3.5" /> Details
-                    </button>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        onOpenEnquiry(hosp.id);
-                      }}
-                      className="flex-1 md:flex-none px-3.5 py-1.5 bg-primary text-white text-xs font-bold rounded-lg hover:opacity-90 shadow-sm flex items-center justify-center gap-1"
-                    >
-                      <Phone className="w-3.5 h-3.5" /> Contact
-                    </button>
-                  </div>
-                </div>
-              ))
-            )}
-          </div>
-        </div>
-
-        {/* Right Side: Hospital Detailed Inspector */}
-        <div className="lg:col-span-5">
-          <div className="sticky top-24 bg-surface-container-low border border-outline-variant/50 rounded-2xl p-6 shadow-xs min-h-[400px] flex flex-col justify-between">
-            {selectedHospital ? (
-              <div className="space-y-6">
-                {/* Header info */}
-                <div className="space-y-3">
-                  <div className="flex justify-between items-start">
-                    <span className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${
-                      selectedHospital.type === 'Center of Excellence' 
-                        ? 'bg-primary/10 text-primary border border-primary/20' 
-                        : 'bg-secondary/10 text-secondary border border-secondary/20'
-                    }`}>
-                      {selectedHospital.type}
-                    </span>
-                    <button 
-                      onClick={() => setSelectedHospital(null)}
-                      className="text-on-surface-variant hover:text-on-surface text-xs font-bold p-1 rounded-full hover:bg-surface-container-high transition-colors"
-                    >
-                      ✕
-                    </button>
-                  </div>
-
-                  <h2 className="font-headline-lg text-xl font-bold text-primary leading-tight">{selectedHospital.name}</h2>
-                  <p className="text-xs text-on-surface-variant font-semibold flex items-center gap-0.5">
-                    <MapPin className="w-4 h-4 text-primary" /> {selectedHospital.address}
-                  </p>
+            {/* Left Side: Directory search and results */}
+            <div className="lg:col-span-7 space-y-6">
+              <div className="bg-white p-5 border border-[#D5DFD7] rounded-3xl shadow-sm space-y-4">
+                
+                {/* Search Input */}
+                <div className="relative">
+                  <Search className="w-5 h-5 absolute left-3.5 top-1/2 transform -translate-y-1/2 text-[#7A8E83]" />
+                  <input
+                    type="text"
+                    placeholder="Search partner by name, city, or specialty (e.g. Radiation)..."
+                    value={searchQuery}
+                    onChange={e => setSearchQuery(e.target.value)}
+                    className="w-full pl-11 pr-4 py-3 rounded-2xl border border-[#D5DFD7] bg-[#FAFCF8] focus:border-[#0E3B36] focus:bg-white outline-none text-xs md:text-sm text-[#1B2620] transition-all shadow-inner"
+                  />
                 </div>
 
-                {/* Main description */}
+                {/* Region Filter Buttons */}
                 <div className="space-y-2">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">About the Institute</span>
-                  <p className="text-xs text-on-surface-variant leading-relaxed">
-                    {selectedHospital.description}
-                  </p>
-                </div>
-
-                {/* Specialties */}
-                <div className="space-y-2">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Core Oncological Specialties</span>
+                  <label className="text-[10px] font-bold uppercase tracking-wider text-[#7A8E83]">Filter by Region</label>
                   <div className="flex flex-wrap gap-1.5">
-                    {selectedHospital.specialties.map(spec => (
-                      <span key={spec} className="bg-white text-primary text-xs font-semibold px-3 py-1 rounded-full border border-primary-fixed-dim/30 shadow-xs">
-                        {spec}
-                      </span>
+                    {[
+                      { value: 'all', label: 'All Regions' },
+                      { value: 'north', label: 'North India' },
+                      { value: 'south', label: 'South India' },
+                      { value: 'east', label: 'East India' },
+                      { value: 'west', label: 'West India' }
+                    ].map(r => (
+                      <button
+                        key={r.value}
+                        onClick={() => setRegionFilter(r.value as any)}
+                        className={`px-3.5 py-1.5 rounded-full text-xs font-semibold border transition-all cursor-pointer ${
+                          regionFilter === r.value 
+                            ? 'bg-[#0E3B36] border-[#0E3B36] text-white shadow-xs' 
+                            : 'bg-white border-[#D5DFD7] text-[#4A5E54] hover:bg-[#EEF3EF] hover:border-[#0E3B36]'
+                        }`}
+                      >
+                        {r.label}
+                      </button>
                     ))}
                   </div>
                 </div>
 
-                {/* Contact info card */}
-                <div className="p-3.5 bg-white border border-outline-variant/30 rounded-xl space-y-2">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Direct Inquiries</span>
-                  <div className="space-y-1.5 text-xs text-on-surface">
-                    <p className="flex items-center gap-1.5 font-medium">
-                      <Phone className="w-4 h-4 text-primary" /> {selectedHospital.phone}
-                    </p>
-                    <p className="flex items-center gap-1.5 font-medium">
-                      <Mail className="w-4 h-4 text-primary" /> {selectedHospital.email}
-                    </p>
+                {/* Type Filter Buttons */}
+                <div className="space-y-2 pt-2 border-t border-[#D5DFD7]/60">
+                  <label className="text-[10px] font-bold uppercase tracking-wider text-[#7A8E83]">Filter by Center Type</label>
+                  <div className="flex flex-wrap gap-1.5">
+                    {[
+                      { value: 'all', label: 'All Center Types' },
+                      { value: 'Center of Excellence', label: 'Centers of Excellence' },
+                      { value: 'Community Partner', label: 'Community Partners' }
+                    ].map(t => (
+                      <button
+                        key={t.value}
+                        onClick={() => setTypeFilter(t.value as any)}
+                        className={`px-3.5 py-1.5 rounded-full text-xs font-semibold border transition-all cursor-pointer ${
+                          typeFilter === t.value 
+                            ? 'bg-[#E8A23A] border-[#E8A23A] text-[#1B2620] shadow-xs' 
+                            : 'bg-white border-[#D5DFD7] text-[#4A5E54] hover:bg-[#EEF3EF]'
+                        }`}
+                      >
+                        {t.label}
+                      </button>
+                    ))}
                   </div>
                 </div>
+              </div>
 
-                {/* Button Action */}
-                <button
-                  onClick={() => onOpenEnquiry(selectedHospital.id)}
-                  className="w-full py-2.5 rounded-xl bg-primary text-white font-bold text-sm hover:opacity-95 shadow-md flex items-center justify-center gap-1.5 cursor-pointer"
-                >
-                  <Phone className="w-4 h-4" /> Book Consultation / Ask Question
-                </button>
+              {/* Hospital Listings */}
+              <div className="space-y-4">
+                {filteredHospitals.length === 0 ? (
+                  <div className="p-8 text-center bg-white border border-[#D5DFD7] rounded-3xl shadow-sm">
+                    <p className="font-serif text-base text-[#0E3B36] font-bold">No hospitals matched your query.</p>
+                    <p className="text-xs text-[#7A8E83] mt-1">Try clearing your filters or searching for terms like Delhi, Radiation, or Surgery.</p>
+                    <button 
+                      onClick={() => { setSearchQuery(''); setRegionFilter('all'); setTypeFilter('all'); }}
+                      className="mt-4 px-4 py-2 bg-[#0E3B36] text-white rounded-xl text-xs font-semibold cursor-pointer"
+                    >
+                      Reset Filters
+                    </button>
+                  </div>
+                ) : (
+                  filteredHospitals.map(hosp => (
+                    <div 
+                      key={hosp.id} 
+                      className={`bg-white border rounded-3xl p-5 shadow-sm transition-all hover:shadow-md cursor-pointer flex flex-col md:flex-row justify-between items-start md:items-center gap-4 ${
+                        selectedHospital?.id === hosp.id ? 'border-[#0E3B36] ring-2 ring-[#0E3B36]/20' : 'border-[#D5DFD7]'
+                      }`}
+                      onClick={() => setSelectedHospital(hosp)}
+                    >
+                      <div className="flex items-start space-x-4">
+                        <div className="w-14 h-14 rounded-2xl bg-[#EEF3EF] border border-[#D5DFD7] overflow-hidden flex-shrink-0 flex items-center justify-center p-2">
+                          {hosp.logo ? (
+                            <img src={hosp.logo} alt={hosp.name} className="w-full h-full object-contain" referrerPolicy="no-referrer" />
+                          ) : (
+                            <span className="font-serif text-xl font-bold text-[#0E3B36]">{hosp.name[0]}</span>
+                          )}
+                        </div>
+
+                        <div className="space-y-1">
+                          <div className="flex flex-wrap items-center gap-1.5">
+                            <span className={`text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${
+                              hosp.type === 'Center of Excellence' 
+                                ? 'bg-[#EEF3EF] text-[#0E3B36] border border-[#7C9A82]/30' 
+                                : 'bg-[#FEF6EC] text-[#E8A23A] border border-[#E8A23A]/30'
+                            }`}>
+                              {hosp.type}
+                            </span>
+                            <span className="text-[10px] text-[#7A8E83] font-medium bg-[#EEF3EF] px-2 py-0.5 rounded-full capitalize">
+                              {hosp.region} India
+                            </span>
+                          </div>
+                          <h3 className="font-serif text-base font-bold text-[#0E3B36]">{hosp.name}</h3>
+                          <p className="text-xs text-[#4A5E54] font-medium flex items-center gap-1">
+                            <MapPin className="w-3.5 h-3.5 text-[#C8443C]" /> {hosp.city}, {hosp.state}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="flex md:flex-col items-stretch gap-2 w-full md:w-auto shrink-0">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSelectedHospital(hosp);
+                          }}
+                          className="flex-1 md:flex-none px-4 py-2 bg-[#EEF3EF] text-[#0E3B36] text-xs font-bold rounded-xl hover:bg-[#D5DFD7] transition-colors flex items-center justify-center gap-1 cursor-pointer"
+                        >
+                          <Info className="w-3.5 h-3.5" /> Details
+                        </button>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onOpenEnquiry(hosp.id);
+                          }}
+                          className="flex-1 md:flex-none px-4 py-2 bg-[#0E3B36] text-white text-xs font-bold rounded-xl hover:bg-[#164E48] shadow-sm flex items-center justify-center gap-1 cursor-pointer"
+                        >
+                          <Phone className="w-3.5 h-3.5 text-[#E8A23A]" /> Contact
+                        </button>
+                      </div>
+                    </div>
+                  ))
+                )}
               </div>
-            ) : (
-              /* Stale Inspector state */
-              <div className="flex flex-col items-center justify-center text-center p-8 space-y-4 my-auto">
-                <div className="w-14 h-14 bg-surface-container-high rounded-full flex items-center justify-center text-primary">
-                  <Building2 className="w-7 h-7" />
-                </div>
-                <div>
-                  <h3 className="font-title-md text-sm text-primary font-bold">Select a Facility</h3>
-                  <p className="text-xs text-on-surface-variant max-w-[240px] mt-1 leading-relaxed">
-                    Click "Details" on any hospital card or click on a map pin to inspect contact channels, specialized clinical programs, and map coordinates.
-                  </p>
-                </div>
+            </div>
+
+            {/* Right Side: Hospital Detailed Inspector */}
+            <div className="lg:col-span-5">
+              <div className="sticky top-24 bg-white border border-[#D5DFD7] rounded-3xl p-6 md:p-8 shadow-sm min-h-[420px] flex flex-col justify-between">
+                {selectedHospital ? (
+                  <div className="space-y-6">
+                    <div className="space-y-3">
+                      <div className="flex justify-between items-start">
+                        <span className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${
+                          selectedHospital.type === 'Center of Excellence' 
+                            ? 'bg-[#EEF3EF] text-[#0E3B36] border border-[#7C9A82]/30' 
+                            : 'bg-[#FEF6EC] text-[#E8A23A] border border-[#E8A23A]/30'
+                        }`}>
+                          {selectedHospital.type}
+                        </span>
+                        <button 
+                          onClick={() => setSelectedHospital(null)}
+                          className="text-[#7A8E83] hover:text-[#1B2620] text-xs font-bold p-1 rounded-full hover:bg-[#EEF3EF] transition-colors cursor-pointer"
+                        >
+                          ✕
+                        </button>
+                      </div>
+
+                      <h2 className="font-serif text-xl font-bold text-[#0E3B36] leading-tight">{selectedHospital.name}</h2>
+                      <p className="text-xs text-[#4A5E54] font-medium flex items-center gap-1">
+                        <MapPin className="w-4 h-4 text-[#C8443C] shrink-0" /> {selectedHospital.address}
+                      </p>
+                    </div>
+
+                    <div className="space-y-2">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-[#7A8E83]">About the Institute</span>
+                      <p className="text-xs md:text-sm text-[#4A5E54] leading-relaxed font-light">
+                        {selectedHospital.description}
+                      </p>
+                    </div>
+
+                    <div className="space-y-2">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-[#7A8E83]">Core Oncological Specialties</span>
+                      <div className="flex flex-wrap gap-1.5">
+                        {selectedHospital.specialties.map(spec => (
+                          <span key={spec} className="bg-[#EEF3EF] text-[#0E3B36] text-xs font-semibold px-3 py-1 rounded-full border border-[#D5DFD7]">
+                            {spec}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="p-4 bg-[#FAFCF8] border border-[#D5DFD7] rounded-2xl space-y-2">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-[#7A8E83]">Direct Inquiries</span>
+                      <div className="space-y-1.5 text-xs text-[#1B2620]">
+                        <p className="flex items-center gap-2 font-medium">
+                          <Phone className="w-3.5 h-3.5 text-[#E8A23A]" /> {selectedHospital.phone}
+                        </p>
+                        <p className="flex items-center gap-2 font-medium">
+                          <Mail className="w-3.5 h-3.5 text-[#0E3B36]" /> {selectedHospital.email}
+                        </p>
+                      </div>
+                    </div>
+
+                    <button
+                      onClick={() => onOpenEnquiry(selectedHospital.id)}
+                      className="w-full btn-marigold !py-3 !text-xs md:!text-sm font-bold flex items-center justify-center gap-2 cursor-pointer shadow-md"
+                    >
+                      <Phone className="w-4 h-4" />
+                      <span>Book Consultation / Ask Question</span>
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex flex-col items-center justify-center text-center p-8 space-y-4 my-auto">
+                    <div className="w-14 h-14 bg-[#EEF3EF] rounded-2xl flex items-center justify-center text-[#0E3B36]">
+                      <Building2 className="w-7 h-7 text-[#0E3B36]" />
+                    </div>
+                    <div>
+                      <h3 className="font-serif text-base text-[#0E3B36] font-bold">Select a Facility</h3>
+                      <p className="text-xs text-[#7A8E83] max-w-[240px] mt-1 leading-relaxed font-light">
+                        Click "Details" on any hospital card or click on a map pin to inspect contact channels, specialties, and location coordinates.
+                      </p>
+                    </div>
+                  </div>
+                )}
               </div>
-            )}
+            </div>
           </div>
         </div>
-      </section>
-    </div>
       </PremiumSection>
     </>
   );
 }
+

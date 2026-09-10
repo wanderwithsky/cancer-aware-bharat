@@ -888,130 +888,137 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
     <div className="space-y-0 bg-[#F3F6F1]">
 
       {/* ═══════════════════════════════════════════
-          SECTION 1: REFINED SUNRISE ARC HERO SHOWCASE
+          SECTION 1: BRIGHT & WARM EDITORIAL HERO (One Medical / Mayo Clinic style)
           ═══════════════════════════════════════════ */}
       <section 
-        className={`relative min-h-[640px] lg:min-h-[720px] ${CAROUSEL_SLIDES[activeSlide].dawnTheme} text-white flex flex-col justify-center overflow-hidden pt-12 md:pt-16 pb-20 md:pb-24 transition-colors duration-1000 ease-in-out`}
+        className="relative min-h-[660px] lg:min-h-[740px] bg-[#F3F6F1] text-[#1B2620] flex flex-col justify-between overflow-hidden pt-8 md:pt-12 pb-16 md:pb-20 border-b border-[#D5DFD7]/60"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
-        {/* Subtle Dawn Ambient Light Rays & Glows */}
+        {/* Soft Warm Radial Accents */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute -top-24 -left-24 w-[550px] h-[550px] bg-[#E8A23A]/15 rounded-full blur-[130px] transition-all duration-1000" />
-          <div className="absolute bottom-0 right-0 w-[650px] h-[650px] bg-[#7C9A82]/15 rounded-full blur-[150px] transition-all duration-1000" />
-          <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[750px] h-[750px] bg-[#0E3B36]/35 rounded-full blur-[170px]" />
-          <div className="absolute inset-0 bg-[radial-gradient(#ffffff08_1px,transparent_1px)] [background-size:32px_32px] opacity-70" />
+          <div className="absolute -top-32 left-1/4 w-[500px] h-[500px] bg-[#E8A23A]/10 rounded-full blur-[140px]" />
+          <div className="absolute top-1/3 -right-20 w-[550px] h-[550px] bg-[#7C9A82]/12 rounded-full blur-[140px]" />
+          <div className="absolute bottom-0 left-10 w-[400px] h-[400px] bg-[#EEF3EF] rounded-full blur-[100px]" />
         </div>
 
-        {/* Main Hero Container: 55/45 Asymmetric Grid */}
-        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+        {/* ── Top Story Selector Pill Bar (Clean Paper Glass) ── */}
+        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mb-8">
+          <div className="flex items-center justify-start sm:justify-center overflow-x-auto no-scrollbar gap-2 sm:gap-3 py-1">
+            {CAROUSEL_SLIDES.map((slide, idx) => {
+              const isActive = idx === activeSlide;
+              return (
+                <button
+                  key={idx}
+                  onClick={() => setActiveSlide(idx)}
+                  className={`px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all duration-300 cursor-pointer flex items-center gap-2 border ${
+                    isActive
+                      ? 'bg-white text-[#0E3B36] border-[#E8A23A] shadow-md ring-2 ring-[#E8A23A]/30 font-bold'
+                      : 'bg-white/70 text-[#4A5E54] border-[#D5DFD7] hover:bg-white hover:text-[#0E3B36]'
+                  }`}
+                >
+                  <span className={`w-2 h-2 rounded-full ${isActive ? 'bg-[#E8A23A] animate-pulse' : 'bg-[#7C9A82]'}`} />
+                  <span>{slide.tagEn}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* ── Main Hero Content Stage (Enlarged Hero Visual Showcase) ── */}
+        <div className="relative z-20 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 flex flex-col justify-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
             
-            {/* LEFT: Typography & Call-To-Action (7 Cols on LG) */}
-            <div className="lg:col-span-7 flex flex-col justify-between">
-              <div>
-                {/* Live Campaign Pill with Pulsing Sun Beacon */}
-                <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-sm mb-6 animate-fade-in">
-                  <span className="flex h-2 w-2 relative">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#E8A23A] opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#E8A23A]"></span>
-                  </span>
-                  <span className="text-[11.5px] font-bold text-[#E8A23A] uppercase tracking-wider">
-                    {CAROUSEL_SLIDES[activeSlide].badgeText}
-                  </span>
-                  <span className="text-white/40">•</span>
-                  <span className="text-white/80 text-xs font-medium">जीवन की नई किरण</span>
+            {/* LEFT COLUMN: Editorial Typography & High-Converting Action (5 Cols) */}
+            <div className="lg:col-span-5 flex flex-col justify-center pr-0 lg:pr-2">
+              
+              {/* Live Badge Pill */}
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#D5DFD7] shadow-sm mb-5 w-fit">
+                <span className="flex h-2 w-2 relative">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#E8A23A] opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#E8A23A]"></span>
+                </span>
+                <span className="text-[11.5px] font-bold text-[#0E3B36] uppercase tracking-wider">
+                  {CAROUSEL_SLIDES[activeSlide].badgeText}
+                </span>
+                <span className="text-[#7A8E83]">•</span>
+                <span className="text-[#4A5E54] text-xs font-semibold">100% Free Diagnostics</span>
+              </div>
+
+              {/* Main Headline Pairing */}
+              <h1 className="font-serif text-[#0E3B36] text-3xl sm:text-4xl lg:text-[44px] xl:text-[48px] font-bold leading-[1.15] tracking-tight mb-4" key={`bright-h1-${activeSlide}`}>
+                <span className="font-serif-hindi block text-[#0E3B36]">
+                  {CAROUSEL_SLIDES[activeSlide].titleLine1}
+                </span>
+                <span className="font-serif-hindi block text-[#E8A23A] mt-1">
+                  {CAROUSEL_SLIDES[activeSlide].titleLine2}
+                </span>
+              </h1>
+
+              {/* Subtitle & Narrative */}
+              <p className="text-[#4A5E54] text-base sm:text-lg font-normal leading-relaxed mb-2 max-w-xl" key={`bright-desc-${activeSlide}`}>
+                {CAROUSEL_SLIDES[activeSlide].desc}
+              </p>
+              <p className="text-[#7A8E83] text-xs sm:text-sm italic font-light leading-relaxed mb-6 max-w-lg">
+                {CAROUSEL_SLIDES[activeSlide].subtitleEn}
+              </p>
+
+              {/* Action Buttons Row */}
+              <div className="flex flex-wrap items-center gap-3.5 mb-7">
+                <button
+                  onClick={() => {
+                    const act = CAROUSEL_SLIDES[activeSlide].primaryAction;
+                    if (act === 'volunteer') onOpenVolunteer();
+                    else if (act === 'enquiry') onOpenEnquiry();
+                    else navigate('/events');
+                  }}
+                  className="btn-marigold text-xs sm:text-sm !py-3.5 !px-8 cursor-pointer shadow-[0_6px_24px_rgba(232,162,58,0.35)] hover:shadow-[0_8px_32px_rgba(232,162,58,0.45)] font-bold flex items-center gap-2.5"
+                >
+                  <Calendar className="w-4 h-4" />
+                  <span>{CAROUSEL_SLIDES[activeSlide].primaryBtn}</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+
+                <button
+                  onClick={() => {
+                    const act = CAROUSEL_SLIDES[activeSlide].secondaryAction;
+                    if (act === 'enquiry') onOpenEnquiry();
+                    else if (act === 'volunteer') onOpenVolunteer();
+                    else navigate('/mission');
+                  }}
+                  className="px-7 py-3.5 rounded-full bg-white hover:bg-[#EEF3EF] border border-[#0E3B36] text-[#0E3B36] font-semibold text-xs sm:text-sm transition-all duration-200 cursor-pointer shadow-sm flex items-center gap-2"
+                >
+                  <Heart className="w-4 h-4 text-[#C8443C]" />
+                  <span>{CAROUSEL_SLIDES[activeSlide].secondaryBtn}</span>
+                </button>
+              </div>
+
+              {/* Social Proof Trust Strip */}
+              <div className="pt-5 border-t border-[#D5DFD7] flex flex-wrap items-center gap-6 sm:gap-7 text-xs text-[#4A5E54]">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  <span className="font-bold text-[#0E3B36]">14,250+</span>
+                  <span>Lives Screened</span>
                 </div>
-
-                {/* Bilingual Main Headline: Fraunces + Tiro Devanagari Hindi Pairing */}
-                <div className="mb-5" key={`hero-head-${activeSlide}`}>
-                  <h1 className="font-serif text-white text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-bold leading-[1.14] tracking-tight">
-                    <span className="font-serif-hindi block text-white drop-shadow-sm">
-                      {CAROUSEL_SLIDES[activeSlide].titleLine1}
-                    </span>
-                    <span className="font-serif-hindi block text-[#E8A23A] mt-1.5 drop-shadow-sm">
-                      {CAROUSEL_SLIDES[activeSlide].titleLine2}
-                    </span>
-                  </h1>
+                <div className="flex items-center gap-2">
+                  <ShieldCheck className="w-4 h-4 text-[#E8A23A]" />
+                  <span className="font-bold text-[#0E3B36]">45+</span>
+                  <span>Hospital Partners</span>
                 </div>
-
-                {/* Narrative Description (Hindi + English) */}
-                <p className="text-white/95 text-base sm:text-lg font-light leading-relaxed mb-3 max-w-2xl" key={`hero-desc-${activeSlide}`}>
-                  {CAROUSEL_SLIDES[activeSlide].desc}
-                </p>
-                <p className="text-white/75 text-xs sm:text-sm italic font-light leading-relaxed mb-6 max-w-xl">
-                  {CAROUSEL_SLIDES[activeSlide].subtitleEn}
-                </p>
-
-                {/* Trust Badges */}
-                <div className="flex flex-wrap items-center gap-3 mb-8">
-                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md text-white text-xs font-semibold border border-white/15 shadow-sm">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                    <span>14,250+ Lives Screened Free</span>
-                  </div>
-                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md text-white text-xs font-semibold border border-white/15 shadow-sm">
-                    <ShieldCheck className="w-3.5 h-3.5 text-[#E8A23A]" />
-                    <span>Empaneled Specialist Hospital Network</span>
-                  </div>
+                <div className="flex items-center gap-2">
+                  <Award className="w-4 h-4 text-[#7C9A82]" />
+                  <span className="font-bold text-[#0E3B36]">100%</span>
+                  <span>Ethical Care</span>
                 </div>
               </div>
 
-              {/* Action Buttons & Carousel Navigators */}
-              <div className="pt-5 border-t border-white/15 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
-                <div className="flex flex-wrap items-center gap-3.5">
-                  <button
-                    onClick={() => {
-                      const act = CAROUSEL_SLIDES[activeSlide].primaryAction;
-                      if (act === 'volunteer') onOpenVolunteer();
-                      else if (act === 'enquiry') onOpenEnquiry();
-                      else navigate('/events');
-                    }}
-                    className="btn-marigold text-xs sm:text-[14.5px] cursor-pointer shadow-[0_4px_20px_rgba(232,162,58,0.35)] hover:shadow-[0_8px_28px_rgba(232,162,58,0.45)]"
-                  >
-                    <span>{CAROUSEL_SLIDES[activeSlide].primaryBtn}</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
-                  <button
-                    onClick={() => {
-                      const act = CAROUSEL_SLIDES[activeSlide].secondaryAction;
-                      if (act === 'enquiry') onOpenEnquiry();
-                      else if (act === 'volunteer') onOpenVolunteer();
-                      else navigate('/mission');
-                    }}
-                    className="px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 border border-white/30 text-white font-semibold text-xs sm:text-[14.5px] transition-all duration-200 cursor-pointer backdrop-blur-sm"
-                  >
-                    {CAROUSEL_SLIDES[activeSlide].secondaryBtn}
-                  </button>
-                </div>
-
-                {/* Progress Indicators & Controls */}
-                <div className="flex items-center justify-end gap-3 pt-2 sm:pt-0">
-                  <span className="text-xs font-mono font-bold text-white/70 tracking-wider">
-                    0{activeSlide + 1} / 0{CAROUSEL_SLIDES.length}
-                  </span>
-                  <div className="flex items-center gap-1.5">
-                    <button
-                      onClick={handlePrevSlide}
-                      aria-label="Previous Slide"
-                      className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#E8A23A] text-white hover:text-[#1B2620] flex items-center justify-center border border-white/20 transition-all cursor-pointer"
-                    >
-                      <ChevronLeft className="w-4 h-4" />
-                    </button>
-                    <button
-                      onClick={handleNextSlide}
-                      aria-label="Next Slide"
-                      className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#E8A23A] text-white hover:text-[#1B2620] flex items-center justify-center border border-white/20 transition-all cursor-pointer"
-                    >
-                      <ChevronRight className="w-4 h-4" />
-                    </button>
-                  </div>
-                </div>
-              </div>
             </div>
 
-            {/* RIGHT: Visual Showcase & Active Thumbnails (5 Cols on LG) */}
-            <div className="lg:col-span-5 flex flex-col gap-4">
-              <div className="relative rounded-3xl overflow-hidden border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.35)] aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3.3] bg-[#0E3B36]">
+            {/* RIGHT COLUMN: Grand Emotive Doctor-Patient Visual Card (Expanded 7 Cols & Taller Height) */}
+            <div className="lg:col-span-7 relative">
+              <div className="relative rounded-[32px] overflow-hidden border border-[#D5DFD7] shadow-[0_28px_70px_rgba(14,59,54,0.14)] min-h-[460px] sm:min-h-[540px] lg:min-h-[580px] xl:min-h-[620px] w-full bg-[#1B2620] group flex flex-col justify-end">
+                
+                {/* Visual Slide */}
                 {CAROUSEL_SLIDES.map((slide, idx) => {
                   const isActive = idx === activeSlide;
                   return (
@@ -1022,80 +1029,64 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
                       <img
                         src={slide.image}
                         alt={slide.alt}
-                        className={`w-full h-full object-cover transition-transform duration-[7000ms] ease-out ${
+                        className={`w-full h-full object-cover transition-transform duration-[8000ms] ease-out ${
                           isActive ? 'scale-105' : 'scale-100'
                         }`}
                         style={{ objectPosition: slide.objectPosition || 'center' }}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0E3B36]/90 via-[#0E3B36]/20 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0E3B36]/90 via-[#0E3B36]/15 to-transparent" />
                     </div>
                   );
                 })}
 
-                {/* Floating Top Pill */}
-                <div className="absolute top-4 left-4 z-20 flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0E3B36]/85 backdrop-blur-md border border-white/20 text-white text-xs font-bold shadow-md">
-                  <Sparkles className="w-3.5 h-3.5 text-[#E8A23A]" />
+                {/* Floating Top Left Pill */}
+                <div className="absolute top-5 left-5 z-20 flex items-center gap-2 px-4 py-2 rounded-full bg-white/95 backdrop-blur-md border border-[#D5DFD7] text-[#0E3B36] text-xs font-bold shadow-lg">
+                  <Sparkles className="w-4 h-4 text-[#E8A23A]" />
                   <span>{CAROUSEL_SLIDES[activeSlide].tag}</span>
                 </div>
 
-                {/* Floating Stat Badge */}
-                <div className="absolute top-4 right-4 z-20 px-3 py-1 rounded-full bg-[#E8A23A] text-[#1B2620] text-[11px] font-extrabold shadow-md">
+                {/* Floating Top Right Pill */}
+                <div className="absolute top-5 right-5 z-20 px-4 py-2 rounded-full bg-[#E8A23A] text-[#1B2620] text-xs font-extrabold shadow-lg">
                   {CAROUSEL_SLIDES[activeSlide].highlightStat}
                 </div>
 
-                {/* Floating Bottom Card */}
-                <div className="absolute inset-x-4 bottom-4 z-20 p-4 rounded-2xl bg-[#0E3B36]/90 backdrop-blur-md border border-white/15 flex items-center justify-between gap-3 shadow-lg">
+                {/* Floating Bottom Glass Stage */}
+                <div className="relative z-20 m-5 p-5 sm:p-6 rounded-2xl bg-white/95 backdrop-blur-md border border-[#D5DFD7] flex items-center justify-between gap-4 shadow-2xl">
                   <div className="min-w-0">
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-[#E8A23A] block truncate">
-                      National Initiative
-                    </span>
-                    <h4 className="font-serif text-white text-xs sm:text-sm font-bold truncate">
-                      {CAROUSEL_SLIDES[activeSlide].titleLine1}
+                    <div className="flex items-center gap-2 mb-0.5">
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-[#E8A23A]">
+                        National Outreach
+                      </span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                    </div>
+                    <h4 className="font-serif text-[#0E3B36] text-sm sm:text-lg font-bold truncate">
+                      {CAROUSEL_SLIDES[activeSlide].titleLine1} — {CAROUSEL_SLIDES[activeSlide].titleLine2}
                     </h4>
                   </div>
-                  <span className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] font-bold border border-emerald-500/30 shrink-0">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    Live Program
-                  </span>
-                </div>
-              </div>
-
-              {/* 4-Thumbnail Interactive Deck */}
-              <div className="grid grid-cols-4 gap-2.5">
-                {CAROUSEL_SLIDES.map((slide, idx) => {
-                  const isActive = idx === activeSlide;
-                  return (
+                  <div className="flex items-center gap-2.5 shrink-0">
                     <button
-                      key={idx}
-                      onClick={() => setActiveSlide(idx)}
-                      className={`relative rounded-2xl overflow-hidden aspect-[4/3] border transition-all duration-300 cursor-pointer text-left group ${
-                        isActive
-                          ? 'border-[#E8A23A] shadow-md scale-[1.03] ring-2 ring-[#E8A23A]/50'
-                          : 'border-white/15 opacity-65 hover:opacity-100'
-                      }`}
+                      onClick={handlePrevSlide}
+                      aria-label="Previous Slide"
+                      className="w-10 h-10 rounded-full bg-[#EEF3EF] hover:bg-[#E8A23A] text-[#0E3B36] hover:text-[#1B2620] flex items-center justify-center transition-all cursor-pointer shadow-sm hover:scale-105 active:scale-95"
                     >
-                      <img
-                        src={slide.image}
-                        alt={slide.alt}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        style={{ objectPosition: slide.objectPosition || 'center' }}
-                      />
-                      <div className={`absolute inset-0 ${isActive ? 'bg-[#E8A23A]/15' : 'bg-black/40 group-hover:bg-black/20'}`} />
-                      <div className="absolute bottom-1 inset-x-1 text-center">
-                        <span className={`inline-block px-1.5 py-0.5 rounded text-[9px] font-bold backdrop-blur-md ${
-                          isActive ? 'bg-[#E8A23A] text-[#1B2620]' : 'bg-black/60 text-white'
-                        }`}>
-                          0{idx + 1}
-                        </span>
-                      </div>
+                      <ChevronLeft className="w-5 h-5" />
                     </button>
-                  );
-                })}
+                    <button
+                      onClick={handleNextSlide}
+                      aria-label="Next Slide"
+                      className="w-10 h-10 rounded-full bg-[#0E3B36] hover:bg-[#E8A23A] text-white hover:text-[#1B2620] flex items-center justify-center transition-all cursor-pointer shadow-sm hover:scale-105 active:scale-95"
+                    >
+                      <ChevronRight className="w-5 h-5" />
+                    </button>
+                  </div>
+                </div>
+
               </div>
             </div>
 
           </div>
         </div>
+
       </section>
 
       {/* ═══════════════════════════════════════════
@@ -1292,11 +1283,11 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
             <div className="lg:col-span-7 flex flex-col space-y-5">
               <RevealSection delay={150}>
                 <span className="section-badge">
-                  <Stethoscope className="w-3.5 h-3.5 text-[#E8A23A]" /> CLINICAL MISSION LEADERSHIP
+                  <Stethoscope className="w-3.5 h-3.5 text-[#E8A23A]" /> CHIEF CLINICAL MENTOR
                 </span>
 
                 <h2 className="section-title text-3xl sm:text-4xl lg:text-5xl">
-                  Dedicated Cancer Care with Clinical Integrity
+                  Know More About <span className="text-[#E8A23A] block sm:inline">Dr. Ajay Kumar</span>
                 </h2>
 
                 <div className="flex flex-wrap items-center gap-2 mb-2">
@@ -1351,7 +1342,7 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
       </PremiumSection>
 
       {/* ═══════════════════════════════════════════
-          SECTION 3: CORE PROGRAMS (Asymmetric 3-Column Linework)
+          SECTION 3: CORE PROGRAMS (Asymmetric 3-Column Linework With Visual Cards)
           ═══════════════════════════════════════════ */}
       <PremiumSection variant="warm-1">
         <div className="section-container relative z-10">
@@ -1373,9 +1364,10 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
             {[
               {
                 icon: Microscope,
-                badge: 'Oral Oncology',
+                badge: 'Oral & General Oncology',
                 title: 'Early Cancer Screening Camps',
                 desc: 'Doctor-led clinical screening camps across rural and urban communities for early identification of Oral, Breast, and Cervical anomalies with referral pathways.',
+                image: '/programs/screening-camp.jpg',
                 action: 'Book Screening'
               },
               {
@@ -1383,6 +1375,7 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
                 badge: 'Patient Navigation',
                 title: 'Caseworker Patient Navigation',
                 desc: 'Dedicated caseworkers assist families through biopsy interpretation, specialist consultations, treatment planning, and government welfare scheme enrollments.',
+                image: '/programs/patient-navigation.jpg',
                 action: 'Get Navigation'
               },
               {
@@ -1390,6 +1383,7 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
                 badge: 'Clinical Oncology',
                 title: 'Specialist Second Opinions',
                 desc: 'Access our panel of senior surgical oncologists for independent evaluation and treatment verification before major surgical or chemotherapy interventions.',
+                image: '/programs/second-opinion.jpg',
                 action: 'Request Opinion'
               },
               {
@@ -1397,6 +1391,7 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
                 badge: 'Diagnostic Pathways',
                 title: 'Targeted Clinical Guidance',
                 desc: 'Structured diagnostic protocols for high-risk individuals, mammography scheduling, low-dose respiratory evaluations, and histopathology correlation.',
+                image: '/programs/clinical-guidance.jpg',
                 action: 'View Protocols'
               },
               {
@@ -1404,6 +1399,7 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
                 badge: 'Community Outreach',
                 title: 'Cancer Education & Prevention',
                 desc: 'Grassroots awareness workshops, tobacco cessation drives, self-examination training, and healthy lifestyle seminars for schools and community centres.',
+                image: '/programs/cancer-education.jpg',
                 action: 'Join Workshop'
               },
               {
@@ -1411,33 +1407,56 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
                 badge: 'Mobile Healthcare',
                 title: 'Follow-Up Health Camps',
                 desc: 'Mobile teams equipped with diagnostic tools, delivering follow-up care and specialist consultations directly to underserved districts.',
+                image: '/programs/mobile-clinic.jpg',
                 action: 'Find Nearest Camp'
               }
             ].map((item, i) => (
               <RevealSection key={i} delay={i * 90}>
-                <div className="card-clinical h-full p-7 md:p-8 flex flex-col justify-between group cursor-pointer bg-white">
-                  <div>
-                    <div className="flex items-center justify-between gap-4 mb-5">
-                      <div className="w-12 h-12 rounded-2xl bg-[#EEF3EF] text-[#0E3B36] flex items-center justify-center group-hover:bg-[#0E3B36] group-hover:text-white transition-colors duration-300">
-                        <item.icon className="w-6 h-6 text-[#E8A23A]" />
-                      </div>
-                      <span className="px-3 py-1 rounded-full text-[10.5px] font-bold tracking-wider uppercase bg-[#EEF3EF] text-[#0E3B36]">
+                <div 
+                  onClick={() => {
+                    if (item.action.includes('Screening') || item.action.includes('Camp')) navigate('/events');
+                    else onOpenEnquiry();
+                  }}
+                  className="card-clinical h-full p-0 flex flex-col justify-between group cursor-pointer bg-white overflow-hidden rounded-3xl border border-[#D5DFD7] shadow-sm hover:shadow-xl transition-all duration-300"
+                >
+                  {/* Card Visual Header with Image */}
+                  <div className="relative w-full h-52 sm:h-56 overflow-hidden bg-[#EEF3EF]">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0E3B36]/80 via-transparent to-transparent pointer-events-none" />
+                    
+                    {/* Badge Pill on Image */}
+                    <div className="absolute top-3.5 left-3.5 z-10">
+                      <span className="px-3 py-1 rounded-full text-[10.5px] font-bold tracking-wider uppercase bg-white/95 backdrop-blur-md text-[#0E3B36] border border-[#D5DFD7] shadow-sm">
                         {item.badge}
                       </span>
                     </div>
-                    
-                    <h3 className="font-serif text-[#0E3B36] text-[19px] font-bold mb-2.5 group-hover:text-[#E8A23A] transition-colors">
-                      {item.title}
-                    </h3>
-                    
-                    <p className="text-[13.5px] text-[#4A5E54] leading-relaxed font-light">
-                      {item.desc}
-                    </p>
+
+                    {/* Icon Pill on Image */}
+                    <div className="absolute bottom-3.5 right-3.5 z-10 w-10 h-10 rounded-xl bg-white/90 backdrop-blur-md text-[#0E3B36] flex items-center justify-center shadow-md group-hover:bg-[#E8A23A] group-hover:text-[#1B2620] transition-colors duration-300">
+                      <item.icon className="w-5 h-5 text-[#E8A23A] group-hover:text-[#1B2620]" />
+                    </div>
                   </div>
 
-                  <div className="pt-5 mt-6 border-t border-[#D5DFD7]/60 flex items-center justify-between text-[#0E3B36] group-hover:text-[#E8A23A] transition-colors">
-                    <span className="text-xs font-bold uppercase tracking-wider">{item.action}</span>
-                    <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1.5 transition-transform" />
+                  {/* Card Body */}
+                  <div className="p-6 md:p-7 flex-1 flex flex-col justify-between">
+                    <div>
+                      <h3 className="font-serif text-[#0E3B36] text-[18px] md:text-[19px] font-bold mb-2.5 group-hover:text-[#E8A23A] transition-colors">
+                        {item.title}
+                      </h3>
+                      
+                      <p className="text-[13.5px] text-[#4A5E54] leading-relaxed font-light">
+                        {item.desc}
+                      </p>
+                    </div>
+
+                    <div className="pt-4 mt-5 border-t border-[#D5DFD7]/60 flex items-center justify-between text-[#0E3B36] group-hover:text-[#E8A23A] transition-colors">
+                      <span className="text-xs font-bold uppercase tracking-wider">{item.action}</span>
+                      <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1.5 transition-transform" />
+                    </div>
                   </div>
                 </div>
               </RevealSection>
@@ -1457,103 +1476,152 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
       <PanoramicGallerySection />
 
       {/* ═══════════════════════════════════════════
-          SECTION 8: WHY CHOOSE US (Split Asymmetric Layout with Marigold Fabric Tag)
+          SECTION 8: WHY CHOOSE US? (Faithfully Designed from Dr. Ajay Kumar Clinical Portal)
           ═══════════════════════════════════════════ */}
-      <PremiumSection variant="warm-2">
+      <PremiumSection variant="warm-2" withTopDivider="kantha">
         <div className="section-container relative z-10">
-          <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
             
-            {/* Left Column: Images (45%) */}
-            <div className="w-full lg:w-[45%] relative">
+            {/* Left Column: Visual Ribbon Card (5 Cols) */}
+            <div className="lg:col-span-5 relative">
               <RevealSection>
-                <div className="relative w-full aspect-[4/5] rounded-3xl overflow-hidden shadow-xl border border-[#D5DFD7] group">
-                  <img src="/events/event-1.jpeg" alt="Medical Support" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0E3B36]/70 via-transparent to-transparent" />
-                </div>
+                <div className="relative w-full rounded-[32px] overflow-hidden shadow-2xl border border-[#D5DFD7] group bg-white">
+                  <div className="aspect-[4/4.5] sm:aspect-[4/4.8] w-full overflow-hidden bg-[#EEF3EF]">
+                    <img 
+                      src="/why-choose-us.jpg" 
+                      alt="Why Choose Us - Cancer Aware Bharat & Dr. Ajay Kumar" 
+                      className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" 
+                    />
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0E3B36]/85 via-transparent to-transparent pointer-events-none" />
 
-                {/* Overlapping Small Image */}
-                <div className="absolute -bottom-6 -right-4 sm:-bottom-8 sm:-right-6 w-36 h-36 md:w-48 md:h-48 rounded-2xl border-4 border-white overflow-hidden shadow-lg animate-float hidden sm:block">
-                  <img src="/events/event-4.jpeg" alt="Camp" className="w-full h-full object-cover" />
-                </div>
+                  {/* Floating Top Badge */}
+                  <div className="absolute top-4 left-4 z-20">
+                    <span className="kantha-tag">
+                      <Award className="w-3.5 h-3.5 text-[#1B2620]" />
+                      5,000+ Successfully Treated
+                    </span>
+                  </div>
 
-                {/* Rotated Marigold Fabric Tag */}
-                <div className="absolute top-8 -left-4 z-20">
-                  <span className="kantha-tag">
-                    <Heart className="w-3.5 h-3.5 fill-[#1B2620]" />
-                    जागरूकता ही बचाव है
-                  </span>
+                  {/* Floating Bottom Card */}
+                  <div className="absolute bottom-4 left-4 right-4 z-20 p-4 rounded-2xl bg-white/95 backdrop-blur-md border border-[#D5DFD7] shadow-lg">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-[#EEF3EF] flex items-center justify-center text-[#0E3B36] shrink-0">
+                        <Sparkles className="w-5 h-5 text-[#E8A23A]" />
+                      </div>
+                      <div>
+                        <h4 className="font-serif text-[#0E3B36] text-sm font-bold">Gold Medalist Surgical Oncology</h4>
+                        <p className="text-[11.5px] text-[#4A5E54]">IMS-BHU Varanasi • Ethical Clinical Care</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </RevealSection>
             </div>
 
-            {/* Right Column: Content (55%) */}
-            <div className="w-full lg:w-[55%] flex flex-col">
+            {/* Right Column: 4 Clinical Pillars (7 Cols) */}
+            <div className="lg:col-span-7 flex flex-col">
               <RevealSection delay={150}>
+                
                 <span className="section-badge">
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#E8A23A]" /> WHY CANCER AWARE BHARAT
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#E8A23A]" /> CLINICAL EXCELLENCE & INTEGRITY
                 </span>
-                <h2 className="section-title text-3xl md:text-5xl">
-                  Empowering Every Patient With Hope & Dignity
+                
+                <h2 className="section-title text-3xl sm:text-4xl lg:text-5xl mb-6">
+                  Why Choose Us?
                 </h2>
-                <p className="text-base text-[#4A5E54] leading-relaxed mb-8">
-                  Cancer Aware Bharat connects patients with trusted oncologists, screening camps, healthcare partners and trained caseworkers to ensure early diagnosis and continuous support.
-                </p>
 
-                {/* Feature Blocks */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                  <div className="flex gap-3.5">
-                    <div className="w-11 h-11 rounded-2xl bg-[#EEF3EF] text-[#0E3B36] flex items-center justify-center shrink-0">
-                      <HeartPulse className="w-5 h-5 text-[#E8A23A]" />
-                    </div>
-                    <div>
-                      <h4 className="font-serif text-[16px] font-bold text-[#0E3B36] mb-1">Compassionate Caseworkers</h4>
-                      <p className="text-[13px] text-[#4A5E54] leading-relaxed">Dedicated volunteers guiding families from first consultation through treatment roadmap.</p>
+                {/* 4 Pillars Matching Reference Design */}
+                <div className="space-y-5 mb-8">
+                  
+                  {/* Pillar 1 */}
+                  <div className="p-5 rounded-2xl bg-white border border-[#D5DFD7] shadow-xs hover:shadow-md hover:border-[#0E3B36]/30 transition-all duration-300">
+                    <div className="flex items-start gap-3.5">
+                      <div className="w-10 h-10 rounded-xl bg-[#EEF3EF] text-[#0E3B36] flex items-center justify-center shrink-0 mt-0.5">
+                        <Award className="w-5 h-5 text-[#E8A23A]" />
+                      </div>
+                      <div>
+                        <h3 className="font-serif text-[17px] font-bold text-[#0E3B36] mb-1">
+                          Expertise and Credentials
+                        </h3>
+                        <p className="text-[13.5px] text-[#4A5E54] leading-relaxed font-light">
+                          Led by Dr. Ajay Kumar, a Gold Medalist with MBBS, MS, and MCh degrees in Surgical Oncology from IMS-BHU, Varanasi, we bring unparalleled expertise and advanced training in cancer care. With over 5,000 successfully treated patients, you are in the hands of a trusted specialist.
+                        </p>
+                      </div>
                     </div>
                   </div>
-                  <div className="flex gap-3.5">
-                    <div className="w-11 h-11 rounded-2xl bg-[#EEF3EF] text-[#0E3B36] flex items-center justify-center shrink-0">
-                      <Building className="w-5 h-5 text-[#E8A23A]" />
-                    </div>
-                    <div>
-                      <h4 className="font-serif text-[16px] font-bold text-[#0E3B36] mb-1">Hospital Partner Network</h4>
-                      <p className="text-[13px] text-[#4A5E54] leading-relaxed">Direct links with empaneled cancer hospitals and diagnostic screening centres.</p>
+
+                  {/* Pillar 2 */}
+                  <div className="p-5 rounded-2xl bg-white border border-[#D5DFD7] shadow-xs hover:shadow-md hover:border-[#0E3B36]/30 transition-all duration-300">
+                    <div className="flex items-start gap-3.5">
+                      <div className="w-10 h-10 rounded-xl bg-[#EEF3EF] text-[#0E3B36] flex items-center justify-center shrink-0 mt-0.5">
+                        <HeartPulse className="w-5 h-5 text-[#C8443C]" />
+                      </div>
+                      <div>
+                        <h3 className="font-serif text-[17px] font-bold text-[#0E3B36] mb-1">
+                          Comprehensive Cancer Care
+                        </h3>
+                        <p className="text-[13.5px] text-[#4A5E54] leading-relaxed font-light">
+                          We provide a holistic approach to cancer treatment, including advanced surgical techniques, personalized treatment plans, and compassionate care to support both patients and families at every stage of the journey.
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <div className="w-full kantha-divider mb-6" />
-
-                {/* Checklist */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
-                  {[
-                    '100% Free Cancer Screening Camps',
-                    'Hospital & Referral Navigation',
-                    'Verified Specialist Second Opinions',
-                    'Grassroots Bilingual Awareness Drives'
-                  ].map((item, idx) => (
-                    <div key={idx} className="flex items-center gap-2.5">
-                      <CheckCircle2 className="w-4 h-4 text-[#7C9A82] shrink-0" />
-                      <span className="text-sm font-semibold text-[#1B2620]">{item}</span>
+                  {/* Pillar 3 */}
+                  <div className="p-5 rounded-2xl bg-white border border-[#D5DFD7] shadow-xs hover:shadow-md hover:border-[#0E3B36]/30 transition-all duration-300">
+                    <div className="flex items-start gap-3.5">
+                      <div className="w-10 h-10 rounded-xl bg-[#EEF3EF] text-[#0E3B36] flex items-center justify-center shrink-0 mt-0.5">
+                        <Building className="w-5 h-5 text-[#7C9A82]" />
+                      </div>
+                      <div>
+                        <h3 className="font-serif text-[17px] font-bold text-[#0E3B36] mb-1">
+                          State-of-the-Art Facilities
+                        </h3>
+                        <p className="text-[13.5px] text-[#4A5E54] leading-relaxed font-light">
+                          Our center is equipped with cutting-edge technology and infrastructure to deliver accurate diagnoses and effective treatments, ensuring the best possible outcomes for our patients.
+                        </p>
+                      </div>
                     </div>
-                  ))}
+                  </div>
+
+                  {/* Pillar 4 */}
+                  <div className="p-5 rounded-2xl bg-white border border-[#D5DFD7] shadow-xs hover:shadow-md hover:border-[#0E3B36]/30 transition-all duration-300">
+                    <div className="flex items-start gap-3.5">
+                      <div className="w-10 h-10 rounded-xl bg-[#EEF3EF] text-[#0E3B36] flex items-center justify-center shrink-0 mt-0.5">
+                        <Users className="w-5 h-5 text-[#E8A23A]" />
+                      </div>
+                      <div>
+                        <h3 className="font-serif text-[17px] font-bold text-[#0E3B36] mb-1">
+                          Patient-Centric Approach
+                        </h3>
+                        <p className="text-[13.5px] text-[#4A5E54] leading-relaxed font-light">
+                          We prioritize your comfort and care with a focus on early detection, timely intervention, and long-term support, ensuring you receive the best treatment with minimal stress.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
 
-                <div className="flex flex-col sm:flex-row items-center gap-4">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
                   <button
-                    onClick={() => navigate('/mission')}
-                    className="w-full sm:w-auto btn-primary !py-3 !px-7 text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 cursor-pointer"
+                    onClick={onOpenEnquiry}
+                    className="btn-primary !py-3.5 !px-8 text-xs sm:text-sm font-bold flex items-center justify-center gap-2 cursor-pointer shadow-md"
                   >
-                    <span>Explore Our Mission</span>
+                    <Calendar className="w-4 h-4" />
+                    <span>Book Your Free Consultation</span>
                     <ArrowRight className="w-4 h-4" />
                   </button>
                   <a
                     href="tel:+911140559200"
-                    className="w-full sm:w-auto px-6 py-3 rounded-full border border-[#0E3B36] text-[#0E3B36] text-xs sm:text-sm font-semibold hover:bg-[#EEF3EF] transition-colors flex items-center justify-center gap-2"
+                    className="px-6 py-3.5 rounded-full border border-[#0E3B36] text-[#0E3B36] text-xs sm:text-sm font-semibold hover:bg-[#EEF3EF] transition-colors flex items-center justify-center gap-2"
                   >
                     <Phone className="w-4 h-4 text-[#0E3B36]" />
-                    <span>Call Helpline</span>
+                    <span>+91 11 4055 9200</span>
                   </a>
                 </div>
+
               </RevealSection>
             </div>
 

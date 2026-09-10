@@ -886,7 +886,7 @@ export default function SuperAdminDashboard({ onPageChange, onLogout }: { onPage
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex text-slate-800">
+    <div className="min-h-screen bg-[#F3F6F1] flex text-slate-800">
 
       <DashboardSidebar
         items={sidebarItems}
@@ -899,59 +899,57 @@ export default function SuperAdminDashboard({ onPageChange, onLogout }: { onPage
         sidebarCollapsed={sidebarCollapsed}
         mobileSidebarOpen={mobileSidebarOpen}
         onCloseMobile={() => setMobileSidebarOpen(false)}
-        bgClass="bg-[#1a1042]"
+        bgClass="bg-[#06201D]"
         brandIcon={Crown}
-        brandIconWrapperClass="bg-gradient-to-br from-indigo-500 to-purple-600 shadow-lg"
+        brandIconWrapperClass="bg-[#E8A23A]/20 border border-[#E8A23A]/40 text-[#E8A23A] shadow-md"
         brandLabel="Super Admin Console"
         brandLabelClass="text-base"
-        activeAccentBorderClass="border-purple-400"
+        activeAccentBorderClass="border-[#E8A23A]"
+        badgeClass="bg-[#E8A23A] text-[#06201D]"
         navItemPaddingClass="p-2.5 text-[13px]"
         navIconSizeClass="w-4.5 h-4.5"
         navIconMarginClass="mr-3"
-        // No badgeClass: this dashboard has never rendered nav badge pills,
-        // even though one sidebarItems entry does carry a badge count --
-        // preserved as-is rather than silently changing behavior.
       />
 
       {/* ===== MAIN ===== */}
-      <main className="flex-1 flex flex-col min-w-0 bg-[#f8f7ff]">
+      <main className="flex-1 flex flex-col min-w-0 bg-[#F3F6F1]">
 
         {/* Header */}
-        <header className="bg-white border-b border-purple-100/50 px-4 sm:px-6 py-3.5 flex items-center justify-between sticky top-0 z-30 shadow-xs">
+        <header className="bg-white/85 backdrop-blur-md border-b border-[#0E3B36]/10 px-4 sm:px-6 py-3.5 flex items-center justify-between sticky top-0 z-30 shadow-xs">
           <div className="flex items-center space-x-3 sm:space-x-4">
             <button
               onClick={toggleSidebar}
-              className="p-1.5 rounded-lg hover:bg-slate-100 text-slate-500 cursor-pointer"
+              className="p-1.5 rounded-lg hover:bg-[#0E3B36]/5 text-[#0E3B36]/70 cursor-pointer transition-colors"
               title="Toggle Menu"
               aria-label="Toggle menu"
             >
               <Menu className="w-5 h-5 lg:hidden" />
               <Terminal className="w-5 h-5 hidden lg:block" />
             </button>
-            <h2 className="font-headline-lg text-base sm:text-lg font-bold text-slate-900 capitalize">{activeTab.replace('-', ' ')}</h2>
+            <h2 className="font-serif text-lg sm:text-xl font-bold text-[#0E3B36] capitalize tracking-tight">{activeTab.replace('-', ' ')}</h2>
           </div>
           <div className="flex items-center space-x-2 sm:space-x-3">
-            <span className="hidden sm:inline-flex items-center px-3 py-1 rounded-full bg-purple-50 text-purple-700 text-xs font-semibold border border-purple-200 gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-purple-500 animate-pulse" /> SUPER-ADMIN-NODE
+            <span className="hidden sm:inline-flex items-center px-3 py-1 rounded-full bg-[#E8A23A]/15 text-[#0E3B36] text-xs font-semibold border border-[#E8A23A]/30 gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-[#E8A23A] animate-pulse" /> SUPER-ADMIN-NODE
             </span>
             <button
               onClick={() => setActiveTab('notifications')}
               className={`relative p-2 rounded-xl transition-colors cursor-pointer ${
-                activeTab === 'notifications' ? 'bg-purple-100 text-purple-700' : 'text-slate-500 hover:bg-slate-100'
+                activeTab === 'notifications' ? 'bg-[#0E3B36]/10 text-[#0E3B36]' : 'text-[#0E3B36]/60 hover:bg-[#0E3B36]/5'
               }`}
               title="Notifications"
             >
               <Bell className="w-5 h-5" />
               {unreadSuperAdminNotifCount > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 min-w-[16px] h-4 px-1 rounded-full bg-purple-600 text-white text-[9px] font-bold flex items-center justify-center">
+                <span className="absolute -top-0.5 -right-0.5 min-w-[16px] h-4 px-1 rounded-full bg-[#C8443C] text-white text-[9px] font-bold flex items-center justify-center shadow-xs">
                   {unreadSuperAdminNotifCount}
                 </span>
               )}
             </button>
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center font-bold text-white text-xs shadow-md">SA</div>
+            <div className="w-9 h-9 rounded-xl bg-[#0E3B36] text-[#F3F6F1] flex items-center justify-center font-bold text-xs shadow-sm">SA</div>
             <button
               onClick={onLogout}
-              className="p-2 rounded-xl text-red-500 hover:bg-red-50 cursor-pointer transition-colors"
+              className="p-2 rounded-xl text-[#C8443C] hover:bg-[#C8443C]/10 cursor-pointer transition-colors"
               title="Secure Logout"
             >
               <LogOut className="w-5 h-5" />
@@ -961,8 +959,8 @@ export default function SuperAdminDashboard({ onPageChange, onLogout }: { onPage
 
         {/* Toast */}
         {toastMessage && (
-          <div className="fixed top-4 right-4 z-50 bg-slate-900 text-white px-5 py-3 rounded-xl shadow-2xl text-xs font-semibold flex items-center gap-2 animate-[fadeInUp_0.3s_ease-out]">
-            <CheckCircle2 className="w-4 h-4 text-slate-400" /> {toastMessage}
+          <div className="fixed top-4 right-4 z-50 bg-[#0E3B36] text-[#F3F6F1] px-5 py-3 rounded-xl shadow-2xl text-xs font-semibold flex items-center gap-2 animate-[fadeInUp_0.3s_ease-out] border border-white/15">
+            <CheckCircle2 className="w-4 h-4 text-[#E8A23A]" /> {toastMessage}
           </div>
         )}
 

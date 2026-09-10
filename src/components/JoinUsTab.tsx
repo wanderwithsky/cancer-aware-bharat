@@ -5,7 +5,6 @@ import {
   Calendar, Building2, Sparkles, AlertTriangle, Send, FileText,
   HeartHandshake, ChevronRight, Phone, Mail, Award, Target, Eye, LogIn
 } from 'lucide-react';
-import PremiumSection from './common/PremiumSection';
 import { ApiError, registerVolunteer } from '../api/client';
 
 interface VolunteerRole {
@@ -108,372 +107,337 @@ export default function JoinUsTab() {
   };
 
   return (
-    <>
-      <PremiumSection variant="warm-1" withBottomDivider="wave">
-        <div className="space-y-12 animate-[fadeIn_0.3s_ease-out]">
+    <div className="bg-[#F3F6F1] text-[#1B2620] min-h-screen">
       
-      {/* ===== HERO SECTION FOR VOLUNTEERS ===== */}
-      <section className="relative rounded-3xl min-h-[460px] flex flex-col justify-between p-6 sm:p-10 md:p-14 border border-outline-variant/30 overflow-hidden shadow-2xl bg-neutral-950 text-white">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/25 rounded-full filter blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary/20 rounded-full filter blur-[100px] pointer-events-none" />
+      {/* ─── Sunrise Arc Hero Header ─── */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#EAEFE9] via-[#F4F7F2] to-[#F3F6F1] border-b border-[#0E3B36]/10 pt-28 pb-16 md:pt-36 md:pb-20">
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#E8A23A]/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-10 w-80 h-80 bg-[#0E3B36]/5 rounded-full blur-2xl pointer-events-none" />
 
-        <div className="relative z-10 max-w-4xl space-y-5">
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 text-slate-300 backdrop-blur-md text-xs font-bold uppercase tracking-wider border border-white/15">
-              <Users className="w-4 h-4 text-slate-400" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0E3B36]/8 border border-[#0E3B36]/15 text-[#0E3B36] text-xs font-bold tracking-wider uppercase">
+              <Users className="w-3.5 h-3.5 text-[#E8A23A]" />
               <span>VOLUNTEER PORTAL / स्वयंसेवक पंजीकरण</span>
-            </span>
-
-            <div className="flex items-center bg-white/10 p-1 rounded-xl border border-white/15 backdrop-blur-md text-xs font-bold">
-              <button
-                onClick={() => setLang('hindi')}
-                className={`px-3 py-1 rounded-lg transition-all cursor-pointer ${
-                  lang === 'hindi' ? 'bg-primary text-white shadow-md' : 'text-white/70 hover:text-white'
-                }`}
-              >
-                हिंदी (Hindi)
-              </button>
-              <button
-                onClick={() => setLang('english')}
-                className={`px-3 py-1 rounded-lg transition-all cursor-pointer ${
-                  lang === 'english' ? 'bg-primary text-white shadow-md' : 'text-white/70 hover:text-white'
-                }`}
-              >
-                English
-              </button>
             </div>
-          </div>
 
-          <h1 className="font-headline-lg text-3xl sm:text-5xl md:text-6xl font-black leading-tight tracking-tight drop-shadow-md">
-            {lang === 'hindi' ? (
-              <>स्वेच्छा से जुड़ें और <span className="text-secondary-container">कैंसर-मुक्त भारत का निर्माण करें।</span></>
-            ) : (
-              <>Join Our Mission as a <span className="text-secondary-container">Volunteer Advocate.</span></>
-            )}
-          </h1>
-
-          <p className="font-body-lg text-slate-200 text-sm sm:text-base leading-relaxed max-w-3xl font-medium">
-            {lang === 'hindi' ? (
-              'स्वास्थ्य जागरूकता केवल चिकित्सकों का कार्य नहीं—जिम्मेदार समुदाय सहभागिता भी इसकी महत्वपूर्ण शक्ति है। यदि आप अपनी स्वेच्छा (Free Will) से अपने गाँव या शहर में सही स्वास्थ्य जानकारी और जिम्मेदार रेफरल जागरूकता बढ़ाने में योगदान देना चाहते हैं, तो स्वयंसेवक के रूप में अपनी रुचि दर्ज करें।'
-            ) : (
-              'Healthcare awareness is powered by compassionate community volunteers. If you wish to dedicate your time and effort out of your own free will to guide families, spread early screening awareness, and support patients, join us today.'
-            )}
-          </p>
-
-          <div className="flex flex-wrap items-center gap-4 pt-2">
-            <button
-              onClick={() => navigate('/volunteer/login')}
-              className="px-5 py-2.5 rounded-xl bg-white/15 hover:bg-white/25 border border-white/20 text-white font-bold text-xs backdrop-blur-md flex items-center gap-2 cursor-pointer transition-all"
-            >
-              <LogIn className="w-4 h-4 text-slate-400" />
-              <span>Already Registered? Go to Volunteer Login</span>
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== MISSION & VISION SUMMARY FOR VOLUNTEERS ===== */}
-      <section className="bg-white rounded-3xl p-6 sm:p-10 border border-outline-variant/30 shadow-md space-y-6">
-        <div className="text-center max-w-2xl mx-auto space-y-2">
-          <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider">
-            MISSION & VISION OVERVIEW / हमारा मिशन एवं दृष्टि
-          </span>
-          <h2 className="font-headline-lg text-2xl sm:text-3xl font-black text-slate-900">
-            जानें हमारे मिशन और विज़न के बारे में
-          </h2>
-          <p className="text-xs sm:text-sm text-slate-600">
-            स्वयंसेवक बनने से पूर्व समझें कि हमारा अभियान गाँव और समाज के लिए किस प्रकार कार्य करता है।
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          
-          {/* Mission Card */}
-          <div className="bg-surface-container-low p-6 rounded-2xl border border-outline-variant/20 space-y-3">
-            <div className="flex items-center gap-2.5 text-primary">
-              <div className="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center font-bold">
-                <Target className="w-5 h-5" />
+            {/* Language & Login Toggle */}
+            <div className="flex flex-wrap items-center gap-3">
+              <div className="flex items-center bg-white/90 p-1 rounded-xl border border-[#0E3B36]/15 text-xs font-bold shadow-xs">
+                <button
+                  onClick={() => setLang('hindi')}
+                  className={`px-3.5 py-1.5 rounded-lg transition-all cursor-pointer ${
+                    lang === 'hindi' ? 'bg-[#0E3B36] text-white shadow-xs' : 'text-[#0E3B36]/70 hover:text-[#0E3B36]'
+                  }`}
+                >
+                  हिंदी (Hindi)
+                </button>
+                <button
+                  onClick={() => setLang('english')}
+                  className={`px-3.5 py-1.5 rounded-lg transition-all cursor-pointer ${
+                    lang === 'english' ? 'bg-[#0E3B36] text-white shadow-xs' : 'text-[#0E3B36]/70 hover:text-[#0E3B36]'
+                  }`}
+                >
+                  English
+                </button>
               </div>
-              <h3 className="font-bold text-base">हमारा मिशन (Our Mission)</h3>
-            </div>
-            <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-semibold border-l-3 border-primary pl-3">
-              "गाँव-गाँव स्वास्थ्य जागरूकता और जिम्मेदार रेफरल सहायता का ऐसा समुदाय-आधारित नेटवर्क विकसित करना, जो लोगों को संभावित गंभीर स्वास्थ्य संकेतों के प्रति जागरूक करे और उन्हें समय पर उचित चिकित्सा सेवा तक पहुँचाने में सहयोग करे।"
-            </p>
-          </div>
 
-          {/* Vision Card */}
-          <div className="bg-surface-container-low p-6 rounded-2xl border border-outline-variant/20 space-y-3">
-            <div className="flex items-center gap-2.5 text-secondary">
-              <div className="w-9 h-9 rounded-xl bg-secondary/10 flex items-center justify-center font-bold">
-                <Eye className="w-5 h-5" />
-              </div>
-              <h3 className="font-bold text-base">हमारा विज़न (Our Vision)</h3>
-            </div>
-            <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-semibold border-l-3 border-secondary pl-3">
-              "एक ऐसा जागरूक समाज, जहाँ गंभीर बीमारी के संभावित संकेतों को समय रहते पहचाना जाए, लोग उचित चिकित्सकीय परामर्श लेने में अनावश्यक देरी न करें और ग्रामीण समुदायों को सही स्वास्थ्य जानकारी एवं रेफरल सहायता उपलब्ध हो।"
-            </p>
-          </div>
-
-        </div>
-      </section>
-
-      {/* ===== IMPORTANT STATUTORY DECLARATION ===== */}
-      <section className="bg-secondary/10 border border-secondary/30 rounded-3xl p-6 sm:p-8 space-y-3 relative overflow-hidden shadow-sm">
-        <div className="flex items-start gap-4">
-          <div className="w-10 h-10 rounded-2xl bg-secondary text-neutral-950 flex items-center justify-center shrink-0 font-bold mt-1">
-            <AlertTriangle className="w-6 h-6" />
-          </div>
-          <div className="space-y-2">
-            <h3 className="font-bold text-base text-primary dark:text-slate-300 flex items-center gap-2">
-              <span>IMPORTANT DECLARATION FOR VOLUNTEERS / वैधानिक घोषणा</span>
-            </h3>
-            <p className="text-xs sm:text-sm text-slate-900/90 leading-relaxed font-semibold">
-              "मिशन से जुड़ना किसी व्यक्ति को ‘डॉक्टर’, ‘चिकित्सक’ या independent medical practitioner का दर्जा अथवा चिकित्सा अभ्यास का अधिकार प्रदान नहीं करता। भूमिका, प्रशिक्षण और गतिविधियाँ निर्धारित SOP, योग्यता और लागू कानून के अधीन होंगी।"
-            </p>
-            <p className="text-[11px] text-slate-800/80 leading-relaxed italic">
-              Joining the mission as a volunteer does NOT grant any individual the title, status, or right to practice medicine. All volunteer roles strictly adhere to non-clinical health awareness SOPs.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== VOLUNTEER ROLES SELECTION ===== */}
-      <section className="space-y-6">
-        <div className="text-center max-w-2xl mx-auto space-y-2">
-          <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider">
-            VOLUNTEER ROLES / स्वयंसेवक की भूमिकाएं
-          </span>
-          <h2 className="font-headline-lg text-2xl sm:text-4xl font-black text-primary">
-            अपनी इच्छानुसार भूमिका चुनें
-          </h2>
-          <p className="text-xs sm:text-sm text-slate-600">
-            अपनी रुचि और सामर्थ्य के अनुसार स्वयंसेवक की भूमिका का चयन करें।
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {VOLUNTEER_ROLES.map((role) => {
-            const isSelected = selectedRole === role.id;
-            return (
-              <div
-                key={role.id}
-                onClick={() => setSelectedRole(role.id)}
-                className={`bg-white rounded-2xl p-6 border transition-all duration-300 cursor-pointer flex flex-col justify-between space-y-4 group ${
-                  isSelected
-                    ? 'border-primary ring-2 ring-primary/20 shadow-xl bg-primary/5'
-                    : 'border-outline-variant/30 hover:border-primary/50 shadow-xs hover:shadow-md'
-                }`}
-              >
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="px-2.5 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold">
-                      {role.badgeHi}
-                    </span>
-                    <input
-                      type="radio"
-                      name="volunteerRole"
-                      checked={isSelected}
-                      onChange={() => setSelectedRole(role.id)}
-                      className="w-4 h-4 text-primary focus:ring-primary cursor-pointer"
-                    />
-                  </div>
-
-                  <h3 className="font-bold text-base text-slate-900 group-hover:text-primary transition-colors">
-                    {lang === 'hindi' ? role.titleHi : role.titleEn}
-                  </h3>
-
-                  <p className="text-xs text-slate-600 leading-relaxed">
-                    {lang === 'hindi' ? role.descHi : role.descEn}
-                  </p>
-                </div>
-
-                <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-primary">
-                  <span>{isSelected ? 'चयनित भूमिका (Selected)' : 'चुनने के लिए क्लिक करें'}</span>
-                  <ChevronRight className={`w-4 h-4 transition-transform ${isSelected ? 'translate-x-1' : ''}`} />
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* ===== VOLUNTEER REGISTRATION FORM ===== */}
-      <section className="bg-white rounded-3xl p-6 sm:p-10 md:p-12 border border-outline-variant/30 shadow-xl space-y-8 max-w-4xl mx-auto">
-        <div className="border-b border-slate-100 pb-6 text-center space-y-2">
-          <span className="px-3 py-1 rounded-full bg-slate-50 text-slate-700 text-xs font-bold uppercase tracking-wider border border-slate-200">
-            VOLUNTEER APPLICATION
-          </span>
-          <h2 className="font-headline-lg text-2xl sm:text-3xl font-black text-slate-900">
-            स्वयंसेवक अभिरुचि फॉर्म (Volunteer Registration)
-          </h2>
-          <p className="text-xs text-slate-500">
-            चयनित भूमिका: <strong className="text-primary">{VOLUNTEER_ROLES.find(r => r.id === selectedRole)?.titleHi}</strong>
-          </p>
-        </div>
-
-        {isSubmitted ? (
-          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-8 text-center space-y-4 text-primary">
-            <div className="w-16 h-16 rounded-full bg-primary text-white flex items-center justify-center mx-auto shadow-lg animate-bounce">
-              <CheckCircle2 className="w-10 h-10" />
-            </div>
-            <h3 className="font-headline-lg text-xl sm:text-2xl font-black">
-              बधाई! आपका स्वयंसेवक आवेदन सबमिट हो गया है!
-            </h3>
-            <p className="text-xs sm:text-sm text-slate-800 max-w-md mx-auto leading-relaxed">
-              आपका आवेदन प्रशासन की स्वीकृति हेतु लंबित है (Pending Approval)। स्वीकृति मिलने पर Cancer Aware Bharat की टीम आपसे संपर्क कर ओरिएंटेशन और स्वयंसेवक गाइड साझा करेगी। आप नीचे दिए गए लॉगिन से अपनी स्थिति देख सकते हैं।
-            </p>
-            <div className="inline-block bg-white px-4 py-2 rounded-xl border border-slate-300 font-mono text-xs font-bold text-slate-800 shadow-xs">
-              स्वयंसेवक ID: <span className="text-primary">{refId}</span>
-            </div>
-            <div className="pt-4 flex flex-wrap justify-center gap-3">
               <button
                 onClick={() => navigate('/volunteer/login')}
-                className="px-6 py-2.5 bg-primary text-white font-bold text-xs rounded-xl hover:opacity-90 cursor-pointer shadow-md"
+                className="px-4 py-2 rounded-xl bg-white border border-[#0E3B36]/15 text-[#0E3B36] font-bold text-xs hover:bg-[#EEF3EF] flex items-center gap-1.5 transition-all shadow-xs cursor-pointer"
               >
-                Volunteer Portal Login
+                <LogIn className="w-3.5 h-3.5 text-[#E8A23A]" />
+                <span>Volunteer Login</span>
               </button>
             </div>
           </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              
-              {/* Full Name */}
-              <div className="space-y-2">
-                <label className="block text-xs font-bold text-slate-700">
-                  पूरा नाम (Full Name) <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  required
-                  placeholder="उदा. अमित शर्मा"
-                  value={fullName}
-                  onChange={e => setFullName(e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none text-xs bg-slate-50 focus:bg-white transition-all"
-                />
-              </div>
 
-              {/* Phone Number */}
-              <div className="space-y-2">
-                <label className="block text-xs font-bold text-slate-700">
-                  मोबाइल नंबर (Mobile Number) <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="tel"
-                  required
-                  placeholder="उदा. 9876543210"
-                  value={phone}
-                  onChange={e => setPhone(e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none text-xs bg-slate-50 focus:bg-white transition-all"
-                />
-              </div>
+          <div className="max-w-4xl space-y-4">
+            <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-normal text-[#0E3B36] tracking-tight leading-[1.12]">
+              {lang === 'hindi' ? (
+                <>
+                  स्वेच्छा से जुड़ें और <br />
+                  <span className="italic font-serif text-[#C8443C]">कैंसर-सचेत भारत का निर्माण करें।</span>
+                </>
+              ) : (
+                <>
+                  Join Our Grassroots Mission as a <br />
+                  <span className="italic font-serif text-[#C8443C]">Volunteer Advocate.</span>
+                </>
+              )}
+            </h1>
 
-              {/* District & State */}
-              <div className="space-y-2">
-                <label className="block text-xs font-bold text-slate-700">
-                  जिला एवं राज्य (District & State) <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  required
-                  placeholder="उदा. पुणे, महाराष्ट्र / द्वारका, नई दिल्ली"
-                  value={districtState}
-                  onChange={e => setDistrictState(e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none text-xs bg-slate-50 focus:bg-white transition-all"
-                />
-              </div>
-
-              {/* Email Address */}
-              <div className="space-y-2">
-                <label className="block text-xs font-bold text-slate-700">
-                  ईमेल पता (Email Address) <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="email"
-                  required
-                  placeholder="amit@example.com"
-                  value={email}
-                  onChange={e => setEmail(e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none text-xs bg-slate-50 focus:bg-white transition-all"
-                />
-              </div>
-
-              {/* Password */}
-              <div className="space-y-2">
-                <label className="block text-xs font-bold text-slate-700">
-                  पासवर्ड बनाएं (Create Password) <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="password"
-                  required
-                  minLength={8}
-                  placeholder="कम से कम 8 अक्षर"
-                  value={password}
-                  onChange={e => setPassword(e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none text-xs bg-slate-50 focus:bg-white transition-all"
-                />
-              </div>
-
-              {/* Confirm Password */}
-              <div className="space-y-2">
-                <label className="block text-xs font-bold text-slate-700">
-                  पासवर्ड की पुष्टि करें (Confirm Password) <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="password"
-                  required
-                  minLength={8}
-                  placeholder="पासवर्ड दोबारा लिखें"
-                  value={confirmPassword}
-                  onChange={e => setConfirmPassword(e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none text-xs bg-slate-50 focus:bg-white transition-all"
-                />
-              </div>
-
-            </div>
-
-            {formError && (
-              <p className="text-xs font-semibold text-red-600 bg-red-50 border border-red-200 rounded-xl px-4 py-2.5">
-                {formError}
-              </p>
-            )}
-
-            {/* Past Experience / Notes */}
-            <div className="space-y-2">
-              <label className="block text-xs font-bold text-slate-700">
-                सामाजिक कार्य / स्वयंसेवक अनुभव या संदेश (Experience / Notes - Optional)
-              </label>
-              <textarea
-                rows={3}
-                placeholder="यदि आपने पहले किसी एनजीओ, एनएसएस (NSS) या स्वास्थ्य अभियान में काम किया है तो संक्षेप में लिखें..."
-                value={notes}
-                onChange={e => setNotes(e.target.value)}
-                className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none text-xs bg-slate-50 focus:bg-white transition-all"
-              />
-            </div>
-
-            <div className="pt-2">
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full py-4 rounded-xl bg-primary text-white font-bold text-sm hover:opacity-95 shadow-xl cursor-pointer disabled:opacity-50 transition-all flex items-center justify-center gap-2"
-              >
-                {isSubmitting ? (
-                  <span>स्वयंसेवक फॉर्म जमा किया जा रहा है...</span>
-                ) : (
-                  <>
-                    <Send className="w-4 h-4" />
-                    <span>स्वेच्छा से स्वयंसेवक बनें (Register as Volunteer Advocate)</span>
-                  </>
-                )}
-              </button>
-            </div>
-          </form>
-        )}
+            <p className="font-sans text-base sm:text-lg text-[#1B2620]/80 leading-relaxed max-w-3xl">
+              {lang === 'hindi' ? (
+                'स्वास्थ्य जागरूकता केवल चिकित्सकों का कार्य नहीं—जिम्मेदार समुदाय सहभागिता भी इसकी महत्वपूर्ण शक्ति है। यदि आप अपनी स्वेच्छा (Free Will) से अपने गाँव या शहर में सही स्वास्थ्य जानकारी और जिम्मेदार रेफरल जागरूकता बढ़ाने में योगदान देना चाहते हैं, तो स्वयंसेवक के रूप में अपनी रुचि दर्ज करें।'
+              ) : (
+                'Healthcare awareness is powered by compassionate community volunteers. If you wish to dedicate your time and effort out of your own free will to guide families, spread early screening awareness, and support patients, join us today.'
+              )}
+            </p>
+          </div>
+        </div>
       </section>
 
-        </div>
-      </PremiumSection>
-    </>
+      {/* ─── Main Content Container ─── */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 space-y-12">
+        
+        {/* Statutory Declaration Box */}
+        <section className="bg-[#E8A23A]/10 border border-[#E8A23A]/30 rounded-2xl p-5 sm:p-7 shadow-xs">
+          <div className="flex items-start gap-4">
+            <div className="w-10 h-10 rounded-xl bg-[#E8A23A] text-[#1B2620] flex items-center justify-center shrink-0 font-bold mt-0.5 shadow-xs">
+              <AlertTriangle className="w-5 h-5" />
+            </div>
+            <div className="space-y-1.5">
+              <h3 className="font-bold text-sm text-[#0E3B36] uppercase tracking-wider flex items-center gap-2">
+                <span>IMPORTANT STATUTORY DECLARATION / वैधानिक घोषणा</span>
+              </h3>
+              <p className="text-xs sm:text-sm text-[#1B2620]/90 leading-relaxed font-medium">
+                "मिशन से जुड़ना किसी व्यक्ति को ‘डॉक्टर’, ‘चिकित्सक’ या independent medical practitioner का दर्जा अथवा चिकित्सा अभ्यास का अधिकार प्रदान नहीं करता। भूमिका, प्रशिक्षण और गतिविधियाँ निर्धारित SOP, योग्यता और लागू कानून के अधीन होंगी।"
+              </p>
+              <p className="text-[11px] text-[#1B2620]/70 leading-relaxed italic">
+                Joining the mission as a volunteer does NOT grant any individual the title, status, or right to practice medicine. All volunteer roles strictly adhere to non-clinical health awareness SOPs.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* ─── Choose Volunteer Role ─── */}
+        <section className="space-y-6">
+          <div className="text-center max-w-2xl mx-auto space-y-2">
+            <span className="px-3.5 py-1 rounded-full bg-[#0E3B36]/8 text-[#0E3B36] text-xs font-bold uppercase tracking-wider border border-[#0E3B36]/15">
+              VOLUNTEER ROLES / स्वयंसेवक की भूमिकाएं
+            </span>
+            <h2 className="font-serif text-2xl sm:text-4xl font-normal text-[#0E3B36]">
+              अपनी इच्छानुसार भूमिका चुनें
+            </h2>
+            <p className="text-xs sm:text-sm text-[#1B2620]/70">
+              अपनी रुचि और सामर्थ्य के अनुसार स्वयंसेवक की भूमिका का चयन करें।
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {VOLUNTEER_ROLES.map((role) => {
+              const isSelected = selectedRole === role.id;
+              return (
+                <div
+                  key={role.id}
+                  onClick={() => setSelectedRole(role.id)}
+                  className={`bg-[#FAFCF8] rounded-2xl p-6 border transition-all duration-300 cursor-pointer flex flex-col justify-between space-y-4 group ${
+                    isSelected
+                      ? 'border-[#0E3B36] ring-2 ring-[#0E3B36]/20 shadow-lg bg-white'
+                      : 'border-[#0E3B36]/12 hover:border-[#0E3B36]/40 shadow-xs hover:shadow-md'
+                  }`}
+                >
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="px-3 py-1 rounded-full bg-[#0E3B36]/8 text-[#0E3B36] text-[10px] font-bold uppercase tracking-wider">
+                        {role.badgeHi}
+                      </span>
+                      <input
+                        type="radio"
+                        name="volunteerRole"
+                        checked={isSelected}
+                        onChange={() => setSelectedRole(role.id)}
+                        className="w-4 h-4 text-[#0E3B36] focus:ring-[#0E3B36] cursor-pointer"
+                      />
+                    </div>
+
+                    <h3 className="font-serif text-lg font-normal text-[#0E3B36] group-hover:text-[#C8443C] transition-colors">
+                      {lang === 'hindi' ? role.titleHi : role.titleEn}
+                    </h3>
+
+                    <p className="text-xs text-[#1B2620]/75 leading-relaxed">
+                      {lang === 'hindi' ? role.descHi : role.descEn}
+                    </p>
+                  </div>
+
+                  <div className="pt-3 border-t border-[#0E3B36]/10 flex items-center justify-between text-xs font-bold text-[#0E3B36]">
+                    <span>{isSelected ? '✓ चयनित भूमिका (Selected)' : 'चुनने के लिए क्लिक करें'}</span>
+                    <ChevronRight className={`w-4 h-4 transition-transform ${isSelected ? 'translate-x-1 text-[#E8A23A]' : ''}`} />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* ─── Volunteer Registration Form ─── */}
+        <section className="bg-[#FAFCF8] rounded-3xl p-6 sm:p-10 md:p-12 border border-[#0E3B36]/12 shadow-md space-y-8 max-w-4xl mx-auto">
+          <div className="border-b border-[#0E3B36]/10 pb-6 text-center space-y-2">
+            <span className="px-3.5 py-1 rounded-full bg-[#0E3B36]/8 text-[#0E3B36] text-xs font-bold uppercase tracking-wider border border-[#0E3B36]/15">
+              APPLICATION FORM
+            </span>
+            <h2 className="font-serif text-2xl sm:text-3xl font-normal text-[#0E3B36]">
+              स्वयंसेवक अभिरुचि फॉर्म (Volunteer Registration)
+            </h2>
+            <p className="text-xs text-[#1B2620]/70">
+              चयनित भूमिका: <strong className="text-[#0E3B36]">{VOLUNTEER_ROLES.find(r => r.id === selectedRole)?.titleHi}</strong>
+            </p>
+          </div>
+
+          {isSubmitted ? (
+            <div className="bg-[#EEF3EF] border border-[#0E3B36]/15 rounded-2xl p-8 text-center space-y-4 text-[#0E3B36]">
+              <div className="w-16 h-16 rounded-full bg-[#0E3B36] text-white flex items-center justify-center mx-auto shadow-lg">
+                <CheckCircle2 className="w-10 h-10 text-[#E8A23A]" />
+              </div>
+              <h3 className="font-serif text-xl sm:text-2xl font-normal text-[#0E3B36]">
+                बधाई! आपका स्वयंसेवक आवेदन सबमिट हो गया है!
+              </h3>
+              <p className="text-xs sm:text-sm text-[#1B2620]/80 max-w-md mx-auto leading-relaxed">
+                आपका आवेदन प्रशासन की स्वीकृति हेतु लंबित है (Pending Approval)। स्वीकृति मिलने पर Cancer Aware Bharat की टीम आपसे संपर्क कर ओरिएंटेशन और स्वयंसेवक गाइड साझा करेगी।
+              </p>
+              <div className="inline-block bg-white px-5 py-2.5 rounded-xl border border-[#0E3B36]/15 font-mono text-xs font-bold text-[#0E3B36] shadow-xs">
+                स्वयंसेवक ID: <span className="text-[#C8443C]">{refId}</span>
+              </div>
+              <div className="pt-4 flex flex-wrap justify-center gap-3">
+                <button
+                  onClick={() => navigate('/volunteer/login')}
+                  className="px-6 py-2.5 bg-[#0E3B36] text-white font-bold text-xs rounded-xl hover:bg-[#0E3B36]/90 cursor-pointer shadow-md"
+                >
+                  Go to Volunteer Login
+                </button>
+              </div>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                
+                {/* Full Name */}
+                <div className="space-y-2">
+                  <label className="block text-xs font-bold text-[#0E3B36]">
+                    पूरा नाम (Full Name) <span className="text-[#C8443C]">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="उदा. अमित शर्मा"
+                    value={fullName}
+                    onChange={e => setFullName(e.target.value)}
+                    className="w-full px-4 py-3 rounded-xl border border-[#0E3B36]/20 focus:border-[#0E3B36] focus:ring-2 focus:ring-[#0E3B36]/20 outline-none text-xs bg-white text-[#1B2620] transition-all"
+                  />
+                </div>
+
+                {/* Phone Number */}
+                <div className="space-y-2">
+                  <label className="block text-xs font-bold text-[#0E3B36]">
+                    मोबाइल नंबर (Mobile Number) <span className="text-[#C8443C]">*</span>
+                  </label>
+                  <input
+                    type="tel"
+                    required
+                    placeholder="उदा. 9876543210"
+                    value={phone}
+                    onChange={e => setPhone(e.target.value)}
+                    className="w-full px-4 py-3 rounded-xl border border-[#0E3B36]/20 focus:border-[#0E3B36] focus:ring-2 focus:ring-[#0E3B36]/20 outline-none text-xs bg-white text-[#1B2620] transition-all"
+                  />
+                </div>
+
+                {/* District & State */}
+                <div className="space-y-2">
+                  <label className="block text-xs font-bold text-[#0E3B36]">
+                    जिला एवं राज्य (District & State) <span className="text-[#C8443C]">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="उदा. पुणे, महाराष्ट्र / द्वारका, नई दिल्ली"
+                    value={districtState}
+                    onChange={e => setDistrictState(e.target.value)}
+                    className="w-full px-4 py-3 rounded-xl border border-[#0E3B36]/20 focus:border-[#0E3B36] focus:ring-2 focus:ring-[#0E3B36]/20 outline-none text-xs bg-white text-[#1B2620] transition-all"
+                  />
+                </div>
+
+                {/* Email Address */}
+                <div className="space-y-2">
+                  <label className="block text-xs font-bold text-[#0E3B36]">
+                    ईमेल पता (Email Address) <span className="text-[#C8443C]">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    required
+                    placeholder="amit@example.com"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    className="w-full px-4 py-3 rounded-xl border border-[#0E3B36]/20 focus:border-[#0E3B36] focus:ring-2 focus:ring-[#0E3B36]/20 outline-none text-xs bg-white text-[#1B2620] transition-all"
+                  />
+                </div>
+
+                {/* Password */}
+                <div className="space-y-2">
+                  <label className="block text-xs font-bold text-[#0E3B36]">
+                    पासवर्ड बनाएं (Create Password) <span className="text-[#C8443C]">*</span>
+                  </label>
+                  <input
+                    type="password"
+                    required
+                    minLength={8}
+                    placeholder="कम से कम 8 अक्षर"
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    className="w-full px-4 py-3 rounded-xl border border-[#0E3B36]/20 focus:border-[#0E3B36] focus:ring-2 focus:ring-[#0E3B36]/20 outline-none text-xs bg-white text-[#1B2620] transition-all"
+                  />
+                </div>
+
+                {/* Confirm Password */}
+                <div className="space-y-2">
+                  <label className="block text-xs font-bold text-[#0E3B36]">
+                    पासवर्ड की पुष्टि करें (Confirm Password) <span className="text-[#C8443C]">*</span>
+                  </label>
+                  <input
+                    type="password"
+                    required
+                    minLength={8}
+                    placeholder="पासवर्ड दोबारा लिखें"
+                    value={confirmPassword}
+                    onChange={e => setConfirmPassword(e.target.value)}
+                    className="w-full px-4 py-3 rounded-xl border border-[#0E3B36]/20 focus:border-[#0E3B36] focus:ring-2 focus:ring-[#0E3B36]/20 outline-none text-xs bg-white text-[#1B2620] transition-all"
+                  />
+                </div>
+
+              </div>
+
+              {formError && (
+                <p className="text-xs font-semibold text-red-600 bg-red-50 border border-red-200 rounded-xl px-4 py-2.5">
+                  {formError}
+                </p>
+              )}
+
+              {/* Past Experience / Notes */}
+              <div className="space-y-2">
+                <label className="block text-xs font-bold text-[#0E3B36]">
+                  सामाजिक कार्य / स्वयंसेवक अनुभव या संदेश (Experience / Notes - Optional)
+                </label>
+                <textarea
+                  rows={3}
+                  placeholder="यदि आपने पहले किसी एनजीओ, एनएसएस (NSS) या स्वास्थ्य अभियान में काम किया है तो संक्षेप में लिखें..."
+                  value={notes}
+                  onChange={e => setNotes(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl border border-[#0E3B36]/20 focus:border-[#0E3B36] focus:ring-2 focus:ring-[#0E3B36]/20 outline-none text-xs bg-white text-[#1B2620] transition-all"
+                />
+              </div>
+
+              <div className="pt-2">
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full py-3.5 rounded-xl bg-[#0E3B36] hover:bg-[#0E3B36]/90 text-white font-bold text-xs sm:text-sm shadow-md cursor-pointer disabled:opacity-50 transition-all flex items-center justify-center gap-2"
+                >
+                  {isSubmitting ? (
+                    <span>स्वयंसेवक फॉर्म जमा किया जा रहा है...</span>
+                  ) : (
+                    <>
+                      <Send className="w-4 h-4 text-[#E8A23A]" />
+                      <span>स्वेच्छा से स्वयंसेवक बनें (Register as Volunteer Advocate)</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </form>
+          )}
+        </section>
+
+      </div>
+
+    </div>
   );
 }

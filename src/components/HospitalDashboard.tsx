@@ -640,7 +640,7 @@ export default function HospitalDashboard({ onPageChange, onLogout }: { onPageCh
   });
 
   return (
-    <div className="min-h-screen bg-slate-50 flex text-slate-800 font-sans">
+    <div className="min-h-screen bg-[#F3F6F1] flex text-slate-800 font-sans">
 
       <DashboardSidebar
         items={sidebarItems}
@@ -653,18 +653,18 @@ export default function HospitalDashboard({ onPageChange, onLogout }: { onPageCh
         sidebarCollapsed={sidebarCollapsed}
         mobileSidebarOpen={mobileSidebarOpen}
         onCloseMobile={() => setMobileSidebarOpen(false)}
-        bgClass="bg-[#063b42]"
+        bgClass="bg-[#0E3B36]"
         brandIcon={Building2}
-        brandIconWrapperClass="bg-primary/20 border border-slate-400/30 text-slate-300"
+        brandIconWrapperClass="bg-[#7C9A82]/20 border border-[#7C9A82]/40 text-[#7C9A82]"
         brandLabel={
           <>
             <span className="block">Partner Hospital</span>
-            <span className="text-[10px] text-slate-300 font-semibold tracking-wider uppercase block">CAB Clinical Network</span>
+            <span className="text-[10px] text-[#7C9A82] font-semibold tracking-wider uppercase block">CAB Clinical Network</span>
           </>
         }
         brandLabelClass="text-base"
-        activeAccentBorderClass="border-slate-400"
-        badgeClass="bg-slate-400 text-[#063b42]"
+        activeAccentBorderClass="border-[#7C9A82]"
+        badgeClass="bg-[#7C9A82] text-[#0E3B36]"
         navItemPaddingClass="p-2.5 text-[13px]"
         navIconSizeClass="w-4.5 h-4.5"
         navIconMarginClass="mr-3"
@@ -688,30 +688,30 @@ export default function HospitalDashboard({ onPageChange, onLogout }: { onPageCh
       />
 
       {/* ===== MAIN WORKSPACE ===== */}
-      <main className="flex-1 flex flex-col min-w-0 bg-[#f4f8f9]">
+      <main className="flex-1 flex flex-col min-w-0 bg-[#F3F6F1]">
 
         {/* Top Header Bar */}
-        <header className="bg-white border-b border-slate-200/80 px-4 sm:px-6 py-3.5 flex items-center justify-between sticky top-0 z-30 shadow-xs">
+        <header className="bg-white/85 backdrop-blur-md border-b border-[#0E3B36]/10 px-4 sm:px-6 py-3.5 flex items-center justify-between sticky top-0 z-30 shadow-xs">
           <div className="flex items-center space-x-3 sm:space-x-4">
             <button
               onClick={toggleSidebar}
-              className="p-1.5 rounded-lg hover:bg-slate-100 text-slate-500 cursor-pointer"
+              className="p-1.5 rounded-lg hover:bg-[#0E3B36]/5 text-[#0E3B36]/70 cursor-pointer transition-colors"
               title="Toggle Menu"
               aria-label="Toggle menu"
             >
               <Menu className="w-5 h-5 lg:hidden" />
               <Terminal className="w-5 h-5 hidden lg:block" />
             </button>
-            <h2 className="font-headline-lg text-base sm:text-lg font-bold text-slate-900 capitalize">
+            <h2 className="font-serif text-lg sm:text-xl font-bold text-[#0E3B36] capitalize tracking-tight">
               {activeTab.replace('-', ' ')}
             </h2>
           </div>
 
           <div className="flex items-center space-x-4">
-            <span className="hidden sm:inline-flex items-center px-3 py-1 rounded-full bg-slate-50 text-slate-800 text-xs font-semibold border border-slate-200 gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-primary animate-pulse" /> {profile.shortName} • Active Clinical Node
+            <span className="hidden sm:inline-flex items-center px-3 py-1 rounded-full bg-[#7C9A82]/10 text-[#0E3B36] text-xs font-semibold border border-[#7C9A82]/30 gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-[#0E3B36] animate-pulse" /> {profile.shortName} • Active Clinical Node
             </span>
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary-container to-[#063b42] flex items-center justify-center font-bold text-white text-xs shadow-md">
+            <div className="w-9 h-9 rounded-xl bg-[#0E3B36] text-[#F3F6F1] flex items-center justify-center font-bold text-xs shadow-sm">
               HOSP
             </div>
           </div>
@@ -719,8 +719,8 @@ export default function HospitalDashboard({ onPageChange, onLogout }: { onPageCh
 
         {/* Global Toast */}
         {toastMessage && (
-          <div className="fixed top-4 right-4 z-50 bg-slate-900 text-white px-5 py-3 rounded-xl shadow-2xl text-xs font-semibold flex items-center gap-2 animate-[fadeInUp_0.3s_ease-out]">
-            <CheckCircle2 className="w-4 h-4 text-slate-400" /> {toastMessage}
+          <div className="fixed top-4 right-4 z-50 bg-[#0E3B36] text-[#F3F6F1] px-5 py-3 rounded-xl shadow-2xl text-xs font-semibold flex items-center gap-2 animate-[fadeInUp_0.3s_ease-out] border border-white/15">
+            <CheckCircle2 className="w-4 h-4 text-[#7C9A82]" /> {toastMessage}
           </div>
         )}
 

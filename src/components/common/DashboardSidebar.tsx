@@ -69,32 +69,32 @@ export default function DashboardSidebar({
       )}
 
       <aside
-        className={`fixed lg:static inset-y-0 left-0 z-50 ${bgClass} text-white transition-all duration-300 flex flex-col justify-between select-none ${
+        className={`fixed lg:static inset-y-0 left-0 z-50 ${bgClass} text-white transition-all duration-300 flex flex-col justify-between select-none shadow-xl ${
           mobileSidebarOpen ? 'translate-x-0 w-72 shadow-2xl' : '-translate-x-full lg:translate-x-0'
         } ${sidebarCollapsed ? 'lg:w-20' : 'lg:w-72'}`}
       >
         <div>
           <div className="p-5 flex items-center justify-between border-b border-white/10">
             <div className="flex items-center space-x-3 overflow-hidden">
-              <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${brandIconWrapperClass}`}>
+              <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 shadow-md ${brandIconWrapperClass}`}>
                 <BrandIcon className="w-5 h-5" />
               </div>
               {expanded && (
-                <span className={`font-headline-lg ${brandLabelClass} font-black text-white tracking-tight truncate`}>
+                <span className={`font-serif ${brandLabelClass} font-bold text-white tracking-tight truncate`}>
                   {brandLabel}
                 </span>
               )}
             </div>
             <button
               onClick={onCloseMobile}
-              className="lg:hidden text-white/70 hover:text-white p-1 rounded-lg"
+              className="lg:hidden text-white/70 hover:text-white p-1 rounded-lg hover:bg-white/10 transition-colors"
               aria-label="Close menu"
             >
               <X className="w-5 h-5" />
             </button>
           </div>
 
-          <nav className="p-3 space-y-1 max-h-[calc(100vh-160px)] overflow-y-auto">
+          <nav className="p-3 space-y-1.5 max-h-[calc(100vh-160px)] overflow-y-auto">
             {items.map((item) => {
               const IconComp = item.icon;
               const isActive = activeTab === item.id;
@@ -103,15 +103,15 @@ export default function DashboardSidebar({
                   key={item.id}
                   onClick={() => onSelect(item.id)}
                   aria-current={isActive ? 'page' : undefined}
-                  className={`w-full flex items-center justify-between rounded-xl ${navItemPaddingClass} font-semibold transition-all cursor-pointer ${
+                  className={`w-full flex items-center justify-between rounded-xl ${navItemPaddingClass} font-medium transition-all cursor-pointer ${
                     isActive
-                      ? `bg-white/10 text-white shadow-sm border-l-4 ${activeAccentBorderClass}`
-                      : 'text-white/60 hover:text-white hover:bg-white/5'
+                      ? `bg-white/12 text-white shadow-sm border-l-4 ${activeAccentBorderClass}`
+                      : 'text-white/70 hover:text-white hover:bg-white/6'
                   }`}
                 >
                   <div className="flex items-center">
                     <IconComp className={`${navIconSizeClass} shrink-0 ${sidebarCollapsed && !mobileSidebarOpen ? 'mx-auto' : navIconMarginClass}`} />
-                    {expanded && <span>{item.label}</span>}
+                    {expanded && <span className="tracking-wide">{item.label}</span>}
                   </div>
                   {expanded && badgeClass && item.badge !== undefined && item.badge > 0 && (
                     <span className={`px-2 py-0.5 text-[10px] font-bold rounded-full ${badgeClass}`}>
@@ -124,7 +124,7 @@ export default function DashboardSidebar({
           </nav>
         </div>
 
-        {footer && <div className="p-3 border-t border-white/10 space-y-1">{footer}</div>}
+        {footer && <div className="p-3 border-t border-white/10 space-y-1.5">{footer}</div>}
       </aside>
     </>
   );

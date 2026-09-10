@@ -1,8 +1,6 @@
 import React, { useState, useMemo } from 'react';
-import { Newspaper, ChevronRight, Search, Calendar, MapPin, ArrowRight, ChevronLeft } from 'lucide-react';
+import { Newspaper, ChevronRight, Search, Calendar, MapPin, ArrowRight, ChevronLeft, Sparkles, Tag, Clock } from 'lucide-react';
 import { useNavigate } from 'react-router';
-import RevealSection from './common/RevealSection';
-import PremiumSection from './common/PremiumSection';
 
 // --- Mock Data ---
 const NEWS_CATEGORIES = ['All', 'Announcements', 'Events', 'Medical', 'Campaigns', 'Partnerships'];
@@ -171,46 +169,47 @@ export default function NewsTab() {
   };
 
   return (
-    <>
-      {/* Hero Section */}
-      <section className="relative h-[300px] md:h-[400px] w-full overflow-hidden flex items-center justify-center">
-        <div className="absolute inset-0 z-0">
-          <img 
-            src="/hero-gallery/hero-3.jpeg" 
-            alt="Cancer Aware Bharat News" 
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-primary/80 backdrop-blur-sm" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
-        </div>
-        
-        <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
-          <RevealSection>
-            <span className="inline-block px-3 py-1 bg-secondary/20 text-secondary text-xs font-bold uppercase tracking-wider rounded-full mb-4 border border-secondary/30">
-              Press Room
-            </span>
-            <h1 className="font-outfit text-3xl md:text-5xl font-extrabold text-white mb-4 tracking-tight leading-tight">
-              Latest <span className="text-secondary">News</span> & Updates
+    <div className="bg-[#F3F6F1] text-[#1B2620] min-h-screen">
+      
+      {/* ─── Sunrise Arc Hero Header ─── */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#EAEFE9] via-[#F4F7F2] to-[#F3F6F1] border-b border-[#0E3B36]/10 pt-28 pb-16 md:pt-36 md:pb-20">
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#E8A23A]/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-10 w-80 h-80 bg-[#0E3B36]/5 rounded-full blur-2xl pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="max-w-3xl">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0E3B36]/8 border border-[#0E3B36]/15 text-[#0E3B36] text-xs font-bold tracking-wider uppercase mb-5">
+              <Sparkles className="w-3.5 h-3.5 text-[#E8A23A]" />
+              <span>Press Room & Field Dispatches</span>
+            </div>
+
+            <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-normal text-[#0E3B36] tracking-tight leading-[1.12]">
+              Latest News & <br />
+              <span className="italic font-serif text-[#C8443C]">National Announcements.</span>
             </h1>
-            <p className="text-white/80 text-sm md:text-base leading-relaxed font-medium">
-              Stay updated with the latest awareness campaigns, screening camps, medical initiatives, upcoming events, and important announcements from Cancer Aware Bharat.
+
+            <p className="font-serif-hindi text-lg sm:text-xl text-[#0E3B36]/80 mt-3 font-normal">
+              प्रेस विज्ञप्तियां, राज्यव्यापी जांच अभियान और कैंसर अवेयर भारत के नवीनतम घटनाक्रम।
             </p>
-          </RevealSection>
+
+            <p className="mt-5 text-sm sm:text-base text-[#1B2620]/75 leading-relaxed font-sans max-w-2xl">
+              Stay updated with grassroots screening milestones, hospital tie-up announcements, medical initiatives, and upcoming events across Bharat.
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* Main Content Area */}
-      <PremiumSection variant="warm-2">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+      {/* ─── Main Content Grid ─── */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
           
-          {/* Left Column (Main Feed) */}
+          {/* Left Column (Main News Feed) */}
           <div className="lg:col-span-8 space-y-8">
             
-            {/* Search Bar (Mobile only, hidden on desktop since sidebar has one, OR keep it here for all?) 
-                Let's put the main search in the left column top for everyone. */}
-            <RevealSection delay={100}>
+            {/* Search and Category Filter Card */}
+            <div className="bg-[#FAFCF8] rounded-2xl border border-[#0E3B36]/12 p-5 sm:p-6 shadow-xs space-y-4">
               <div className="relative">
-                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-primary/50 w-5 h-5" />
+                <Search className="absolute left-3.5 top-1/2 transform -translate-y-1/2 text-[#0E3B36]/50 w-4 h-4" />
                 <input
                   type="text"
                   placeholder="Search articles, announcements, and events..."
@@ -219,223 +218,224 @@ export default function NewsTab() {
                     setSearchQuery(e.target.value);
                     setCurrentPage(1);
                   }}
-                  className="w-full pl-12 pr-4 py-4 rounded-2xl bg-white border border-outline-variant/30 text-primary focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary shadow-sm text-sm transition-all"
+                  className="w-full pl-10 pr-4 py-3 rounded-xl bg-white border border-[#0E3B36]/15 text-xs sm:text-sm text-[#1B2620] placeholder-[#1B2620]/40 focus:outline-none focus:ring-2 focus:ring-[#0E3B36]/30 focus:border-[#0E3B36] transition-all"
                 />
               </div>
-            </RevealSection>
 
-            {/* Featured Article */}
+              {/* Category Pills */}
+              <div className="flex gap-2 overflow-x-auto pb-1">
+                {NEWS_CATEGORIES.map(cat => (
+                  <button
+                    key={cat}
+                    onClick={() => handleCategoryClick(cat)}
+                    className={`px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${
+                      activeCategory === cat
+                        ? 'bg-[#0E3B36] text-[#FAFCF8] shadow-sm'
+                        : 'bg-white hover:bg-[#EEF3EF] text-[#1B2620]/80 border border-[#0E3B36]/10'
+                    }`}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Featured Article Card */}
             {currentPage === 1 && featuredNews && (
-              <RevealSection delay={200}>
-                <div className="card-premium overflow-hidden rounded-3xl border border-outline-variant/30 group cursor-pointer hover:border-primary/20 transition-all duration-300 hover:shadow-[0_20px_60px_rgba(22,58,95,0.08)]">
-                  <div className="h-64 md:h-80 w-full overflow-hidden relative">
-                    <img 
-                      src={featuredNews.image} 
-                      alt={featuredNews.title} 
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                    <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
-                      <span className="bg-secondary text-primary text-xs font-bold px-3 py-1.5 rounded-full shadow-sm">
-                        {featuredNews.category}
-                      </span>
-                      <span className="text-white/90 text-xs font-medium bg-black/30 px-3 py-1.5 rounded-full backdrop-blur-md">
-                        {featuredNews.date}
-                      </span>
-                    </div>
+              <div className="bg-[#FAFCF8] rounded-3xl border border-[#0E3B36]/12 overflow-hidden shadow-sm group hover:shadow-xl hover:border-[#0E3B36]/30 transition-all duration-300">
+                <div className="h-64 sm:h-80 md:h-96 w-full overflow-hidden relative bg-[#EEF3EF]">
+                  <img 
+                    src={featuredNews.image} 
+                    alt={featuredNews.title} 
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                  <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+                    <span className="bg-[#E8A23A] text-[#1B2620] text-xs font-bold px-3 py-1 rounded-full shadow-xs">
+                      {featuredNews.category}
+                    </span>
+                    <span className="text-white text-xs font-semibold bg-black/40 px-3 py-1 rounded-full backdrop-blur-md border border-white/15">
+                      {featuredNews.date}
+                    </span>
                   </div>
-                  <div className="p-6 md:p-8 bg-white">
-                    <h2 className="font-outfit text-2xl md:text-3xl font-bold text-primary mb-3 group-hover:text-secondary transition-colors">
-                      {featuredNews.title}
-                    </h2>
-                    <p className="text-on-surface-variant text-sm md:text-base leading-relaxed mb-6 line-clamp-3">
-                      {featuredNews.description}
-                    </p>
-                    <button className="flex items-center text-primary font-semibold text-sm group-hover:text-secondary transition-colors">
-                      Read Full Story <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                </div>
+
+                <div className="p-6 sm:p-8 space-y-3">
+                  <h2 className="font-serif text-2xl sm:text-3xl font-normal text-[#0E3B36] leading-snug group-hover:text-[#C8443C] transition-colors">
+                    {featuredNews.title}
+                  </h2>
+                  <p className="text-xs sm:text-sm text-[#1B2620]/75 leading-relaxed line-clamp-3">
+                    {featuredNews.description}
+                  </p>
+                  <div className="pt-2">
+                    <button className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0E3B36] group-hover:text-[#C8443C] transition-colors cursor-pointer">
+                      Read Full Report <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                     </button>
                   </div>
                 </div>
-              </RevealSection>
+              </div>
             )}
 
             {/* News Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {paginatedNews.length > 0 ? (
-                paginatedNews.map((news, i) => (
-                  <RevealSection key={news.id} delay={i * 100}>
-                    <div className="card-premium h-full flex flex-col overflow-hidden rounded-2xl border border-outline-variant/30 group cursor-pointer hover:border-primary/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-                      <div className="h-48 relative overflow-hidden">
+                paginatedNews.map((news) => (
+                  <div 
+                    key={news.id} 
+                    className="bg-[#FAFCF8] rounded-2xl border border-[#0E3B36]/12 overflow-hidden shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group"
+                  >
+                    <div>
+                      <div className="h-48 sm:h-52 bg-[#EEF3EF] relative overflow-hidden">
                         <img 
                           src={news.image} 
                           alt={news.title} 
-                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                         />
-                        <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-primary text-[10px] font-bold px-2.5 py-1 rounded-full shadow-sm border border-white/20">
+                        <span className="absolute top-3 left-3 bg-[#0E3B36]/90 backdrop-blur-md text-[#FAFCF8] text-[10px] font-bold px-3 py-1 rounded-full border border-white/10 shadow-xs">
                           {news.category}
-                        </div>
+                        </span>
                       </div>
-                      <div className="p-5 flex flex-col flex-1 bg-white">
-                        <div className="flex items-center text-xs text-on-surface-variant font-medium mb-2.5">
-                          <Calendar className="w-3.5 h-3.5 mr-1.5 text-primary/60" /> {news.date}
+                      
+                      <div className="p-5 sm:p-6 space-y-2 text-left">
+                        <div className="flex items-center text-[11px] text-[#1B2620]/60 font-semibold gap-1.5">
+                          <Calendar className="w-3.5 h-3.5 text-[#E8A23A]" /> {news.date}
                         </div>
-                        <h3 className="font-outfit text-lg font-bold text-primary mb-2 line-clamp-2 group-hover:text-secondary transition-colors">
+                        <h3 className="font-serif text-lg font-normal text-[#0E3B36] line-clamp-2 leading-snug group-hover:text-[#C8443C] transition-colors">
                           {news.title}
                         </h3>
-                        <p className="text-xs text-on-surface-variant leading-relaxed line-clamp-3 mb-4 flex-1">
+                        <p className="text-xs text-[#1B2620]/75 leading-relaxed line-clamp-3">
                           {news.description}
                         </p>
-                        <button className="flex items-center text-secondary font-bold text-[11px] uppercase tracking-wider group-hover:text-primary transition-colors">
-                          Read More <ChevronRight className="w-3.5 h-3.5 ml-0.5 group-hover:translate-x-1 transition-transform" />
-                        </button>
                       </div>
                     </div>
-                  </RevealSection>
+
+                    <div className="px-5 sm:px-6 pb-5 pt-3 border-t border-[#0E3B36]/10 flex items-center justify-between bg-white/40">
+                      <span className="text-xs font-bold text-[#0E3B36] flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                        Read Story <ChevronRight className="w-3.5 h-3.5" />
+                      </span>
+                    </div>
+                  </div>
                 ))
               ) : (
-                <div className="col-span-1 sm:col-span-2 text-center py-12">
-                  <p className="text-on-surface-variant">No news articles found matching your criteria.</p>
+                <div className="col-span-1 sm:col-span-2 text-center py-12 bg-[#FAFCF8] rounded-2xl border border-[#0E3B36]/10 p-8 space-y-2">
+                  <p className="font-serif text-lg text-[#0E3B36]">No news articles found matching your search.</p>
+                  <p className="text-xs text-[#1B2620]/60">Try clearing filters to see all press dispatches.</p>
                 </div>
               )}
             </div>
 
-            {/* Pagination */}
+            {/* Pagination Controls */}
             {totalPages > 1 && (
-              <RevealSection>
-                <div className="flex justify-center items-center space-x-2 pt-8">
-                  <button 
-                    onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
-                    disabled={currentPage === 1}
-                    className="w-10 h-10 rounded-full border border-outline-variant/30 flex items-center justify-center text-primary hover:bg-primary/5 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+              <div className="flex justify-center items-center space-x-2 pt-6">
+                <button 
+                  onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                  disabled={currentPage === 1}
+                  className="w-10 h-10 rounded-xl border border-[#0E3B36]/20 bg-white flex items-center justify-center text-[#0E3B36] hover:bg-[#EEF3EF] disabled:opacity-30 disabled:cursor-not-allowed transition-colors cursor-pointer"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </button>
+                
+                {Array.from({ length: totalPages }).map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setCurrentPage(i + 1)}
+                    className={`w-10 h-10 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                      currentPage === i + 1
+                        ? 'bg-[#0E3B36] text-white shadow-xs'
+                        : 'bg-white text-[#0E3B36] border border-[#0E3B36]/20 hover:bg-[#EEF3EF]'
+                    }`}
                   >
-                    <ChevronLeft className="w-4 h-4" />
+                    {i + 1}
                   </button>
-                  
-                  {Array.from({ length: totalPages }).map((_, i) => (
-                    <button
-                      key={i}
-                      onClick={() => setCurrentPage(i + 1)}
-                      className={`w-10 h-10 rounded-full text-sm font-semibold transition-all ${
-                        currentPage === i + 1
-                          ? 'bg-primary text-white shadow-md'
-                          : 'bg-white text-primary border border-outline-variant/30 hover:bg-primary/5'
-                      }`}
-                    >
-                      {i + 1}
-                    </button>
-                  ))}
+                ))}
 
-                  <button 
-                    onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
-                    disabled={currentPage === totalPages}
-                    className="w-10 h-10 rounded-full border border-outline-variant/30 flex items-center justify-center text-primary hover:bg-primary/5 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-                  >
-                    <ChevronRight className="w-4 h-4" />
-                  </button>
-                </div>
-              </RevealSection>
+                <button 
+                  onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                  disabled={currentPage === totalPages}
+                  className="w-10 h-10 rounded-xl border border-[#0E3B36]/20 bg-white flex items-center justify-center text-[#0E3B36] hover:bg-[#EEF3EF] disabled:opacity-30 disabled:cursor-not-allowed transition-colors cursor-pointer"
+                >
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+              </div>
             )}
 
           </div>
 
           {/* Right Column (Sidebar) */}
-          <div className="lg:col-span-4 space-y-8">
+          <div className="lg:col-span-4 space-y-6">
             
-            {/* Categories */}
-            <RevealSection delay={150}>
-              <div className="bg-white rounded-3xl p-6 border border-outline-variant/30 shadow-sm">
-                <h3 className="font-outfit text-lg font-bold text-primary mb-4 flex items-center border-b border-outline-variant/15 pb-3">
-                  <div className="w-2 h-4 bg-secondary rounded-full mr-2" /> Categories
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {NEWS_CATEGORIES.map(cat => (
-                    <button
-                      key={cat}
-                      onClick={() => handleCategoryClick(cat)}
-                      className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
-                        activeCategory === cat
-                          ? 'bg-primary text-white shadow-sm'
-                          : 'bg-surface-container-low text-on-surface-variant hover:bg-surface-container'
-                      }`}
-                    >
-                      {cat}
-                    </button>
-                  ))}
-                </div>
+            {/* Recent Posts Widget */}
+            <div className="bg-[#FAFCF8] rounded-3xl p-6 sm:p-7 border border-[#0E3B36]/12 shadow-xs space-y-4">
+              <h3 className="font-serif text-lg font-normal text-[#0E3B36] border-b border-[#0E3B36]/10 pb-3 flex items-center gap-2">
+                <span className="w-2 h-4 bg-[#E8A23A] rounded-full" />
+                Recent Press Updates
+              </h3>
+              <div className="space-y-4">
+                {MOCK_NEWS.slice(0, 4).map(news => (
+                  <div key={`sidebar-${news.id}`} className="flex items-start gap-3 group cursor-pointer">
+                    <div className="w-16 h-16 rounded-xl overflow-hidden shrink-0 bg-[#EEF3EF] border border-[#0E3B36]/10">
+                      <img src={news.image} alt={news.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                    </div>
+                    <div>
+                      <h4 className="font-serif text-xs font-normal text-[#0E3B36] line-clamp-2 leading-snug group-hover:text-[#C8443C] transition-colors">
+                        {news.title}
+                      </h4>
+                      <p className="text-[10px] text-[#1B2620]/60 font-medium mt-1">
+                        {news.date}
+                      </p>
+                    </div>
+                  </div>
+                ))}
               </div>
-            </RevealSection>
+            </div>
 
-            {/* Recent Posts (Sidebar) */}
-            <RevealSection delay={250}>
-              <div className="bg-white rounded-3xl p-6 border border-outline-variant/30 shadow-sm">
-                <h3 className="font-outfit text-lg font-bold text-primary mb-4 flex items-center border-b border-outline-variant/15 pb-3">
-                  <div className="w-2 h-4 bg-secondary rounded-full mr-2" /> Recent Posts
-                </h3>
-                <div className="space-y-4">
-                  {MOCK_NEWS.slice(0, 4).map(news => (
-                    <div key={`sidebar-${news.id}`} className="flex items-start gap-3 group cursor-pointer">
-                      <div className="w-16 h-16 rounded-xl overflow-hidden shrink-0">
-                        <img src={news.image} alt={news.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+            {/* Upcoming Events Box */}
+            <div className="bg-[#0E3B36] rounded-3xl p-6 sm:p-7 shadow-xl text-white space-y-5">
+              <h3 className="font-serif text-lg font-normal text-white border-b border-white/15 pb-3 flex items-center gap-2">
+                <Calendar className="w-5 h-5 text-[#E8A23A]" />
+                Upcoming Assemblies
+              </h3>
+              
+              <div className="space-y-4">
+                {UPCOMING_EVENTS.map(event => (
+                  <div key={event.id} className="group cursor-pointer">
+                    <div className="flex gap-3 mb-1.5">
+                      <div className="bg-white/10 rounded-xl p-2 text-center shrink-0 w-12 h-12 flex flex-col justify-center items-center border border-white/10 group-hover:bg-[#E8A23A] group-hover:text-[#1B2620] transition-colors">
+                        <span className="text-[10px] uppercase font-bold text-[#E8A23A] group-hover:text-[#1B2620] leading-none mb-0.5">
+                          {event.date.split(' ')[0].substring(0, 3)}
+                        </span>
+                        <span className="text-sm font-black leading-none">
+                          {event.date.split(' ')[1].replace(',', '')}
+                        </span>
                       </div>
                       <div>
-                        <h4 className="font-outfit text-sm font-bold text-primary line-clamp-2 leading-tight group-hover:text-secondary transition-colors">
-                          {news.title}
+                        <h4 className="font-serif text-xs sm:text-sm font-normal text-white line-clamp-1 group-hover:text-[#E8A23A] transition-colors">
+                          {event.title}
                         </h4>
-                        <p className="text-[10px] text-on-surface-variant font-medium mt-1">
-                          {news.date}
+                        <p className="text-[10px] text-white/70 flex items-center mt-1 line-clamp-1">
+                          <MapPin className="w-3 h-3 mr-1 text-[#E8A23A]" /> {event.location}
                         </p>
                       </div>
                     </div>
-                  ))}
-                </div>
+                    <p className="text-xs text-white/75 line-clamp-2 leading-relaxed">
+                      {event.description}
+                    </p>
+                  </div>
+                ))}
               </div>
-            </RevealSection>
 
-            {/* Upcoming Events */}
-            <RevealSection delay={350}>
-              <div className="bg-gradient-to-br from-primary to-[#0f2842] rounded-3xl p-6 border border-primary/20 shadow-lg text-white">
-                <h3 className="font-outfit text-lg font-bold text-white mb-4 flex items-center border-b border-white/10 pb-3">
-                  <Calendar className="w-5 h-5 mr-2 text-secondary" /> Upcoming Events
-                </h3>
-                <div className="space-y-5">
-                  {UPCOMING_EVENTS.map(event => (
-                    <div key={event.id} className="group cursor-pointer">
-                      <div className="flex gap-3 mb-2">
-                        <div className="bg-white/10 rounded-lg p-2 text-center shrink-0 w-12 h-12 flex flex-col justify-center items-center border border-white/5 group-hover:bg-secondary/20 transition-colors">
-                          <span className="text-[10px] uppercase font-bold text-secondary leading-none mb-0.5">
-                            {event.date.split(' ')[0].substring(0, 3)}
-                          </span>
-                          <span className="text-sm font-extrabold text-white leading-none">
-                            {event.date.split(' ')[1].replace(',', '')}
-                          </span>
-                        </div>
-                        <div>
-                          <h4 className="font-outfit text-sm font-bold text-white line-clamp-1 group-hover:text-secondary transition-colors">
-                            {event.title}
-                          </h4>
-                          <p className="text-[10px] text-white/60 flex items-center mt-1 line-clamp-1">
-                            <MapPin className="w-3 h-3 mr-1" /> {event.location}
-                          </p>
-                        </div>
-                      </div>
-                      <p className="text-xs text-white/70 line-clamp-2 leading-relaxed">
-                        {event.description}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-                <button 
-                  onClick={() => navigate('/events')}
-                  className="mt-6 w-full py-2.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-xs font-bold text-white transition-all flex items-center justify-center gap-2"
-                >
-                  View All Events <ArrowRight className="w-3.5 h-3.5" />
-                </button>
-              </div>
-            </RevealSection>
+              <button 
+                onClick={() => navigate('/events')}
+                className="w-full py-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-xs font-bold text-white transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+              >
+                View Full Calendar <ArrowRight className="w-3.5 h-3.5 text-[#E8A23A]" />
+              </button>
+            </div>
 
           </div>
         </div>
-      </PremiumSection>
-    </>
+      </div>
+
+    </div>
   );
 }
