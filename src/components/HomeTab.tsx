@@ -18,7 +18,7 @@ import { Facebook, Instagram, Youtube } from './icons/SocialIcons';
    ═══════════════════════════════════════════ */
 const CAROUSEL_SLIDES = [
   {
-    image: '/hero/hero-new-1.png',
+    image: '/dr-ajay-kumar.jpg',
     tag: 'डॉक्टर नेटवर्क',
     tagEn: 'Doctor Network',
     badgeText: 'विशेषज्ञ ऑन्कोलॉजी परामर्श',
@@ -30,8 +30,8 @@ const CAROUSEL_SLIDES = [
     secondaryBtn: 'मरीज पूछताछ',
     primaryAction: 'events',
     secondaryAction: 'enquiry',
-    objectPosition: 'center 20%',
-    alt: 'विशेषज्ञ कैंसर देखभाल',
+    objectPosition: 'center 15%',
+    alt: 'डॉ. अजय कुमार - विशेषज्ञ कैंसर देखभाल',
     dawnTheme: 'gradient-dawn-1',
     highlightStat: '14,250+ Screened',
     accentColor: '#E8A23A'
@@ -1026,29 +1026,75 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
                 <Phone className="w-3.5 h-3.5 text-[#0E3B36]" />
                 <span>+91 11 4055 9200</span>
               </a>
+
+              {/* Social CTA Icons */}
+              <div className="flex items-center gap-2 shrink-0">
+                <a 
+                  href="https://instagram.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  aria-label="Instagram"
+                  className="w-10 h-10 rounded-full bg-[#EEF3EF] hover:bg-[#E8A23A] text-[#0E3B36] hover:text-[#1B2620] flex items-center justify-center transition-all duration-200 border border-[#D5DFD7] hover:scale-105 shadow-xs"
+                >
+                  <Instagram className="w-4 h-4" />
+                </a>
+                <a 
+                  href="https://facebook.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  aria-label="Facebook"
+                  className="w-10 h-10 rounded-full bg-[#EEF3EF] hover:bg-[#E8A23A] text-[#0E3B36] hover:text-[#1B2620] flex items-center justify-center transition-all duration-200 border border-[#D5DFD7] hover:scale-105 shadow-xs"
+                >
+                  <Facebook className="w-4 h-4" />
+                </a>
+                <a 
+                  href="https://youtube.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  aria-label="YouTube"
+                  className="w-10 h-10 rounded-full bg-[#EEF3EF] hover:bg-[#E8A23A] text-[#0E3B36] hover:text-[#1B2620] flex items-center justify-center transition-all duration-200 border border-[#D5DFD7] hover:scale-105 shadow-xs"
+                >
+                  <Youtube className="w-4 h-4" />
+                </a>
+              </div>
             </form>
 
           </div>
 
-          {/* Bottom Quick Suggestion Tags */}
-          <div className="mt-4 pt-4 border-t border-[#D5DFD7]/60 flex flex-wrap items-center gap-2 text-xs text-[#7A8E83]">
-            <span className="font-semibold text-[#0E3B36]">Popular Searches:</span>
-            {[
-              'Oral Cancer Screening',
-              'Mammography Van Camps',
-              'Surgical Second Opinion',
-              'Ayushman Bharat Scheme Navigation',
-              'Volunteer Registration'
-            ].map((tag, idx) => (
-              <button
-                key={idx}
-                type="button"
-                onClick={() => navigate('/events')}
-                className="px-2.5 py-1 rounded-lg bg-[#EEF3EF] text-[#0E3B36] hover:bg-[#E8A23A] hover:text-[#1B2620] transition-colors cursor-pointer text-[11.5px] font-medium"
-              >
-                {tag}
-              </button>
-            ))}
+          {/* Bottom Quick Suggestion Tags & Follow Strip */}
+          <div className="mt-4 pt-4 border-t border-[#D5DFD7]/60 flex flex-wrap items-center justify-between gap-3 text-xs text-[#7A8E83]">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="font-semibold text-[#0E3B36]">Popular Searches:</span>
+              {[
+                'Oral Cancer Screening',
+                'Mammography Van Camps',
+                'Surgical Second Opinion',
+                'Ayushman Bharat Scheme Navigation',
+                'Volunteer Registration'
+              ].map((tag, idx) => (
+                <button
+                  key={idx}
+                  type="button"
+                  onClick={() => navigate('/events')}
+                  className="px-2.5 py-1 rounded-lg bg-[#EEF3EF] text-[#0E3B36] hover:bg-[#E8A23A] hover:text-[#1B2620] transition-colors cursor-pointer text-[11.5px] font-medium"
+                >
+                  {tag}
+                </button>
+              ))}
+            </div>
+
+            <div className="flex items-center gap-2">
+              <span className="font-semibold text-[#0E3B36]">Connect:</span>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-[#0E3B36] hover:text-[#E8A23A] transition-colors p-1">
+                <Instagram className="w-3.5 h-3.5" />
+              </a>
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-[#0E3B36] hover:text-[#E8A23A] transition-colors p-1">
+                <Facebook className="w-3.5 h-3.5" />
+              </a>
+              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="text-[#0E3B36] hover:text-[#E8A23A] transition-colors p-1">
+                <Youtube className="w-3.5 h-3.5" />
+              </a>
+            </div>
           </div>
 
         </div>
