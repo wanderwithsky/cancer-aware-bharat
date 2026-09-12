@@ -732,10 +732,6 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
   const [isPaused, setIsPaused] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
-  // Quick triage input state
-  const [selectedSpecialty, setSelectedSpecialty] = useState('All Specialties');
-  const [pincodeCity, setPincodeCity] = useState('');
-
   const handlePrevSlide = () => {
     setActiveSlide((prev) => (prev <= 0 ? CAROUSEL_SLIDES.length - 1 : prev - 1));
   };
@@ -751,11 +747,6 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
     }, 5500);
     return () => clearInterval(slideInterval);
   }, [activeSlide, isPaused]);
-
-  const handleQuickSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    navigate('/events');
-  };
 
   const faqs = [
     { 
@@ -967,136 +958,81 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
       </section>
 
       {/* ═══════════════════════════════════════════
-          SECTION 1.1: REFINED INTERACTIVE CLINICAL TRIAGE & SEARCH BAR
+          SECTION 1.1: CLEAN CLINICAL TRIAGE & CONSULTATION CTA
           ═══════════════════════════════════════════ */}
-      <div className="relative z-30 -mt-10 md:-mt-12 mb-10 px-4 max-w-6xl mx-auto">
-        <div className="bg-white rounded-3xl p-5 md:p-8 shadow-[0_16px_40px_rgba(14,59,54,0.08)] border border-[#D5DFD7]">
-          
-          <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-6">
+      <div className="relative z-30 -mt-8 md:-mt-10 mb-10 px-4 max-w-6xl mx-auto">
+        <div className="bg-white rounded-3xl p-6 md:p-8 shadow-[0_16px_40px_rgba(14,59,54,0.08)] border border-[#D5DFD7]">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
             
-            {/* Left Info & Quick Consultation */}
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-[#EEF3EF] text-[#0E3B36] flex items-center justify-center shrink-0 shadow-sm">
-                <PhoneCall className="w-6 h-6 text-[#E8A23A]" />
-              </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <span className="text-[11px] font-bold uppercase tracking-widest text-[#7C9A82]">
-                    Free Patient Guidance & Camp Triage
-                  </span>
-                  <span className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" /> 24/7 Available
-                  </span>
-                </div>
-                <h3 className="font-serif text-lg md:text-xl font-bold text-[#0E3B36] mt-0.5">
-                  Need Oncology Second Opinion or Camp Location?
-                </h3>
-                <p className="text-xs md:text-sm text-[#4A5E54] font-light mt-0.5">
-                  Connect directly with empaneled surgical oncologists and patient caseworkers.
-                </p>
-              </div>
+            {/* Simple 2-Line Info */}
+            <div className="text-center lg:text-left">
+              <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#0E3B36] tracking-tight">
+                Need Cancer Guidance or Second Opinion?
+              </h3>
+              <p className="text-sm sm:text-base text-[#4A5E54] font-light mt-1">
+                Speak directly with senior oncologists and patient caseworkers across India.
+              </p>
             </div>
 
-            {/* Quick Interactive Search / Action Triggers */}
-            <form onSubmit={handleQuickSearch} className="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto shrink-0">
-              <div className="relative w-full sm:w-60">
-                <MapPin className="w-4 h-4 text-[#7A8E83] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-                <input
-                  type="text"
-                  placeholder="Enter City or Pincode"
-                  value={pincodeCity}
-                  onChange={(e) => setPincodeCity(e.target.value)}
-                  className="w-full pl-10 pr-3 py-3 rounded-full bg-[#FAFCF8] border border-[#D5DFD7] text-xs text-[#1B2620] placeholder:text-[#7A8E83] focus:border-[#0E3B36] focus:bg-white outline-none transition-all shadow-inner"
-                />
-              </div>
-
+            {/* Actions: Book Free Consultation, Phone Number, Big Brand Social Icons */}
+            <div className="flex flex-wrap items-center justify-center lg:justify-end gap-3 sm:gap-4 shrink-0 w-full lg:w-auto">
+              
+              {/* Book Free Consultation Button */}
               <button
                 type="button"
                 onClick={onOpenEnquiry}
-                className="w-full sm:w-auto btn-marigold !py-3 !px-6 text-xs sm:text-sm font-bold flex items-center justify-center gap-2 cursor-pointer shadow-md"
+                className="btn-marigold !py-3 !px-6 text-xs sm:text-sm font-bold flex items-center justify-center gap-2 cursor-pointer shadow-md hover:shadow-lg transition-all"
               >
                 <Calendar className="w-4 h-4" />
                 <span>Book Free Consultation</span>
               </button>
 
+              {/* Phone Number */}
               <a
                 href="tel:+911140559200"
-                className="w-full sm:w-auto px-5 py-3 rounded-full border border-[#0E3B36] text-[#0E3B36] text-xs sm:text-sm font-semibold hover:bg-[#EEF3EF] transition-colors flex items-center justify-center gap-2 shrink-0"
+                className="px-5 py-3 rounded-full border-2 border-[#0E3B36] text-[#0E3B36] text-xs sm:text-sm font-bold hover:bg-[#EEF3EF] transition-all flex items-center justify-center gap-2 shadow-xs"
               >
-                <Phone className="w-3.5 h-3.5 text-[#0E3B36]" />
+                <Phone className="w-4 h-4 text-[#0E3B36]" />
                 <span>+91 11 4055 9200</span>
               </a>
 
-              {/* Social CTA Icons */}
-              <div className="flex items-center gap-2 shrink-0">
+              {/* Big Original Color Social Icons */}
+              <div className="flex items-center gap-2.5">
                 <a 
                   href="https://instagram.com" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   aria-label="Instagram"
-                  className="w-10 h-10 rounded-full bg-[#EEF3EF] hover:bg-[#E8A23A] text-[#0E3B36] hover:text-[#1B2620] flex items-center justify-center transition-all duration-200 border border-[#D5DFD7] hover:scale-105 shadow-xs"
+                  title="Instagram"
+                  className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white flex items-center justify-center shadow-md hover:scale-110 hover:shadow-lg transition-all duration-200 shrink-0"
                 >
-                  <Instagram className="w-4 h-4" />
+                  <Instagram className="w-5 h-5 sm:w-6 sm:h-6" />
                 </a>
                 <a 
                   href="https://facebook.com" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   aria-label="Facebook"
-                  className="w-10 h-10 rounded-full bg-[#EEF3EF] hover:bg-[#E8A23A] text-[#0E3B36] hover:text-[#1B2620] flex items-center justify-center transition-all duration-200 border border-[#D5DFD7] hover:scale-105 shadow-xs"
+                  title="Facebook"
+                  className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#1877F2] text-white flex items-center justify-center shadow-md hover:scale-110 hover:shadow-lg transition-all duration-200 shrink-0"
                 >
-                  <Facebook className="w-4 h-4" />
+                  <Facebook className="w-5 h-5 sm:w-6 sm:h-6" />
                 </a>
                 <a 
                   href="https://youtube.com" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   aria-label="YouTube"
-                  className="w-10 h-10 rounded-full bg-[#EEF3EF] hover:bg-[#E8A23A] text-[#0E3B36] hover:text-[#1B2620] flex items-center justify-center transition-all duration-200 border border-[#D5DFD7] hover:scale-105 shadow-xs"
+                  title="YouTube"
+                  className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#FF0000] text-white flex items-center justify-center shadow-md hover:scale-110 hover:shadow-lg transition-all duration-200 shrink-0"
                 >
-                  <Youtube className="w-4 h-4" />
+                  <Youtube className="w-5 h-5 sm:w-6 sm:h-6" />
                 </a>
               </div>
-            </form>
 
-          </div>
-
-          {/* Bottom Quick Suggestion Tags & Follow Strip */}
-          <div className="mt-4 pt-4 border-t border-[#D5DFD7]/60 flex flex-wrap items-center justify-between gap-3 text-xs text-[#7A8E83]">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="font-semibold text-[#0E3B36]">Popular Searches:</span>
-              {[
-                'Oral Cancer Screening',
-                'Mammography Van Camps',
-                'Surgical Second Opinion',
-                'Ayushman Bharat Scheme Navigation',
-                'Volunteer Registration'
-              ].map((tag, idx) => (
-                <button
-                  key={idx}
-                  type="button"
-                  onClick={() => navigate('/events')}
-                  className="px-2.5 py-1 rounded-lg bg-[#EEF3EF] text-[#0E3B36] hover:bg-[#E8A23A] hover:text-[#1B2620] transition-colors cursor-pointer text-[11.5px] font-medium"
-                >
-                  {tag}
-                </button>
-              ))}
             </div>
 
-            <div className="flex items-center gap-2">
-              <span className="font-semibold text-[#0E3B36]">Connect:</span>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-[#0E3B36] hover:text-[#E8A23A] transition-colors p-1">
-                <Instagram className="w-3.5 h-3.5" />
-              </a>
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-[#0E3B36] hover:text-[#E8A23A] transition-colors p-1">
-                <Facebook className="w-3.5 h-3.5" />
-              </a>
-              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="text-[#0E3B36] hover:text-[#E8A23A] transition-colors p-1">
-                <Youtube className="w-3.5 h-3.5" />
-              </a>
-            </div>
           </div>
-
         </div>
       </div>
 
