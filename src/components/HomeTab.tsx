@@ -1215,30 +1215,6 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
                 desc: 'Access our panel of senior surgical oncologists for independent evaluation and treatment verification before major surgical or chemotherapy interventions.',
                 image: '/programs/second-opinion.jpg',
                 action: 'Request Opinion'
-              },
-              {
-                icon: Activity,
-                badge: 'Diagnostic Pathways',
-                title: 'Targeted Clinical Guidance',
-                desc: 'Structured diagnostic protocols for high-risk individuals, mammography scheduling, low-dose respiratory evaluations, and histopathology correlation.',
-                image: '/programs/clinical-guidance.jpg',
-                action: 'View Protocols'
-              },
-              {
-                icon: BookOpen,
-                badge: 'Community Outreach',
-                title: 'Cancer Education & Prevention',
-                desc: 'Grassroots awareness workshops, tobacco cessation drives, self-examination training, and healthy lifestyle seminars for schools and community centres.',
-                image: '/programs/cancer-education.jpg',
-                action: 'Join Workshop'
-              },
-              {
-                icon: MapPin,
-                badge: 'Mobile Healthcare',
-                title: 'Follow-Up Health Camps',
-                desc: 'Mobile teams equipped with diagnostic tools, delivering follow-up care and specialist consultations directly to underserved districts.',
-                image: '/programs/mobile-clinic.jpg',
-                action: 'Find Nearest Camp'
               }
             ].map((item, i) => (
               <RevealSection key={i} delay={i * 90}>
