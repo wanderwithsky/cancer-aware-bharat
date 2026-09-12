@@ -258,14 +258,13 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
-/* Teal duotone hover effect for medical board */
+/* Crisp natural image rendering with smooth zoom */
 .duotone-teal {
-  filter: contrast(105%) brightness(95%);
-  transition: all 0.4s ease;
+  transition: transform 0.5s ease;
 }
 
 .duotone-teal:hover {
-  filter: sepia(30%) hue-rotate(120deg) saturate(120%);
+  /* Keep natural colors without artificial green/sepia tint */
 }
 
 /* ========================================

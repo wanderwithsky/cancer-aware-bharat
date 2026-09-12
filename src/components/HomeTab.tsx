@@ -620,7 +620,7 @@ function TestimonialsCarousel() {
                   {/* Profile Signature */}
                   <div className="flex items-center gap-3 pt-3.5 border-t border-[#D5DFD7]/60 mt-auto">
                     <div className="w-10 h-10 rounded-full overflow-hidden shrink-0 border border-[#D5DFD7] bg-[#EEF3EF]">
-                      <img src={item.image} alt={item.name} className="w-full h-full object-cover duotone-teal" />
+                      <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                     </div>
                     <div className="min-w-0">
                       <h4 className="font-serif font-bold text-[#0E3B36] text-[14px] truncate">{item.name}</h4>
@@ -1087,7 +1087,7 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
                     <img
                       src="/dr-ajay-kumar.jpg"
                       alt="Dr. Ajay Kumar - Senior Surgical Oncologist"
-                      className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105 duotone-teal"
+                      className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
                     />
                   </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0E3B36]/90 via-transparent to-transparent pointer-events-none" />

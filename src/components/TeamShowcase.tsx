@@ -93,7 +93,7 @@ export const TeamCard = ({ member, delay }: { member: any; delay: number }) => (
         <img 
           src={member.img} 
           alt={member.name} 
-          className="w-full h-full object-cover object-top transition-all duration-500 group-hover:scale-105 duotone-teal" 
+          className="w-full h-full object-cover object-top transition-all duration-500 group-hover:scale-105" 
         />
         
         {/* Subtle Gradient Overlay */}
