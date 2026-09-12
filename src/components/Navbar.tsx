@@ -130,7 +130,7 @@ export default function Navbar({
             </button>
           </div>
           <div className="hidden md:flex items-center gap-4 text-[11px] text-white/90 shrink-0">
-            <span>National Helpline: <a href="tel:+911140559200" className="font-bold text-white hover:text-amber-200 transition-colors">+91 11 4055 9200</a></span>
+            <span>National Helpline: <a href="tel:+919120110286" className="font-bold text-white hover:text-amber-200 transition-colors">+91-9120110286</a></span>
           </div>
         </div>
       </div>
@@ -140,12 +140,12 @@ export default function Navbar({
         <div className="w-full px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto py-2 flex items-center justify-between gap-4">
           <div className="flex items-center gap-6">
             <a 
-              href="tel:+911140559200" 
+              href="tel:+919120110286" 
               className="flex items-center gap-1.5 text-white/90 hover:text-white transition-colors"
             >
               <PhoneCall className="w-3.5 h-3.5 text-[#E8A23A]" />
               <span className="font-semibold text-white">24/7 Helpline:</span>
-              <span className="text-white/80">+91 11 4055 9200</span>
+              <span className="text-white/80">+91-9120110286</span>
             </a>
             <a 
               href="https://wa.me/919120110286" 

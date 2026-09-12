@@ -10,7 +10,7 @@ export const INITIAL_HOSPITALS: Hospital[] = [
     city: 'New Delhi',
     state: 'Delhi',
     specialties: ['Radiation Therapy', 'Surgical Oncology', 'Palliative Care'],
-    phone: '+91 11 4055 9200',
+    phone: '+91-9120110286',
     email: 'contact@apexoncology.in',
     address: 'Sector 7, Dwarka, New Delhi, Delhi 110075',
     lat: 28.5921,

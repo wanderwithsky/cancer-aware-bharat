@@ -45,8 +45,8 @@ export default function Footer({
                 </div>
                 <div>
                   <span className="text-white/60 text-xs font-medium">24/7 Cancer Care Helpline:</span>
-                  <a href="tel:+911140559200" className="ml-2 font-bold text-white hover:text-[#E8A23A] transition-colors">
-                    +91 11 4055 9200
+                  <a href="tel:+919120110286" className="ml-2 font-bold text-white hover:text-[#E8A23A] transition-colors">
+                    +91-9120110286
                   </a>
                 </div>
               </div>
@@ -135,8 +135,8 @@ export default function Footer({
                   <span className="font-light">National Partner Hospital Network & Delhi Outreach Support Centre</span>
                 </div>
                 <div className="flex items-center gap-2.5">
-                  <Phone className="w-4 h-4 text-[#E8A23A] shrink-0" />
-                  <a href="tel:+911140559200" className="hover:text-[#E8A23A] transition-colors">+91 11 4055 9200 / +91-9120110286</a>
+                  <Phone className="w-4 h-4 text-[#E8A23A]" />
+                  <a href="tel:+919120110286" className="hover:text-[#E8A23A] transition-colors">+91-9120110286</a>
                 </div>
                 <div className="flex items-center gap-2.5">
                   <Mail className="w-4 h-4 text-[#E8A23A] shrink-0" />
@@ -229,9 +229,9 @@ export default function Footer({
 
         {/* Emergency Helpline */}
         <a
-          href="tel:+911140559200"
+          href="tel:+919120110286"
           aria-label="Call Emergency Helpline"
-          title="24/7 Cancer Care Helpline: +91 11 4055 9200"
+          title="24/7 Cancer Care Helpline: +91-9120110286"
           className="w-12 h-12 rounded-full bg-[#0E3B36] border-2 border-[#E8A23A] text-white flex items-center justify-center shadow-[0_8px_20px_rgba(14,59,54,0.4)] hover:scale-110 hover:shadow-[0_12px_24px_rgba(232,162,58,0.4)] transition-all duration-300"
         >
           <Phone className="w-5 h-5 text-[#E8A23A]" />

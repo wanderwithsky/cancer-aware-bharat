@@ -755,7 +755,7 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
     },
     { 
       q: 'How do I register for an upcoming screening camp in my city?', 
-      a: 'You can register online through our Patient Enquiry form, call our 24/7 Helpline (+91 11 4055 9200), or check the Screening Camps schedule on the Events page to secure an appointment slot.' 
+      a: 'You can register online through our Patient Enquiry form, call our 24/7 Helpline (+91-9120110286), or check the Screening Camps schedule on the Events page to secure an appointment slot.' 
     },
     { 
       q: 'Can I join as a volunteer without medical qualifications?', 
@@ -794,11 +794,11 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
         </div>
 
         {/* ── Main Hero Content Stage (Synchronized 7:5 Editorial & Visual Ratio) ── */}
-        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 flex flex-col justify-center">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 lg:gap-4 items-center">
+        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 flex flex-col justify-start pt-3 sm:pt-4">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6 items-start">
             
-            {/* LEFT COLUMN: Editorial Typography & High-Converting Action (7 Cols) */}
-            <div className="lg:col-span-7 flex flex-col justify-center space-y-3.5 pr-0 lg:pr-2">
+            {/* LEFT COLUMN: Editorial Typography & High-Converting Action (7 Cols) - Top Left Aligned */}
+            <div className="lg:col-span-7 flex flex-col justify-start space-y-3.5 pr-0 lg:pr-2 pt-1 sm:pt-2">
               
               {/* Live Badge Pill */}
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#D5DFD7] shadow-sm w-fit">
@@ -989,11 +989,11 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
 
               {/* Phone Number */}
               <a
-                href="tel:+911140559200"
+                href="tel:+919120110286"
                 className="px-5 py-3 rounded-full border-2 border-[#0E3B36] text-[#0E3B36] text-xs sm:text-sm font-bold hover:bg-[#EEF3EF] transition-all flex items-center justify-center gap-2 shadow-xs"
               >
                 <Phone className="w-4 h-4 text-[#0E3B36]" />
-                <span>+91 11 4055 9200</span>
+                <span>+91-9120110286</span>
               </a>
 
               {/* Big Original Color Social Icons */}
@@ -1418,11 +1418,11 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
                     <ArrowRight className="w-4 h-4" />
                   </button>
                   <a
-                    href="tel:+911140559200"
+                    href="tel:+919120110286"
                     className="px-6 py-3 rounded-full border border-[#0E3B36] text-[#0E3B36] text-xs sm:text-sm font-semibold hover:bg-[#EEF3EF] transition-colors flex items-center justify-center gap-2"
                   >
                     <Phone className="w-4 h-4 text-[#0E3B36]" />
-                    <span>+91 11 4055 9200</span>
+                    <span>+91-9120110286</span>
                   </a>
                 </div>
 
