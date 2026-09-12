@@ -640,91 +640,75 @@ function TestimonialsCarousel() {
 }
 
 /* ═══════════════════════════════════════════
-   FINAL REPRISE CTA (Clean, Focused Sunrise Callback)
+   FINAL REPRISE CTA (Clean, Minimalist & Focused)
    ═══════════════════════════════════════════ */
 function SunriseRepriseCtaSection({ onOpenVolunteer, onOpenEnquiry }: { onOpenVolunteer: () => void; onOpenEnquiry: () => void }) {
   return (
-    <section className="relative py-16 md:py-20 overflow-hidden gradient-dawn-1 text-white border-t border-white/10">
-      {/* Background Soft Ray Accents */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 right-[20%] w-96 h-96 bg-[#E8A23A]/10 rounded-full blur-[100px]" />
-        <div className="absolute bottom-0 left-[15%] w-96 h-96 bg-[#7C9A82]/15 rounded-full blur-[120px]" />
+    <section className="relative py-14 md:py-16 overflow-hidden bg-[#0E3B36] text-white border-t border-[#164E48]">
+      {/* Background Soft Glow */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[260px] bg-[#E8A23A]/10 rounded-full blur-[100px]" />
       </div>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
         <RevealSection>
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[#E8A23A] text-xs font-bold uppercase tracking-widest mb-5">
-            <Sun className="w-3.5 h-3.5 text-[#E8A23A]" /> जीवन की नई किरण • GET IN TOUCH
-          </div>
-          
           {/* Headline */}
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold leading-tight tracking-tight mb-4">
+          <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold leading-tight mb-3">
             Join Our Mission Against Cancer
           </h2>
           
-          {/* Subtitle */}
-          <p className="text-white/85 text-base md:text-lg mb-8 leading-relaxed font-light max-w-2xl mx-auto">
-            Connect with our network for free screening guidance, clinical second opinions, and community outreach.
+          {/* Brief Subtitle */}
+          <p className="text-white/80 text-sm sm:text-base mb-6 font-light max-w-lg mx-auto leading-relaxed">
+            Connecting communities with free screenings, specialist evaluations, and full-cycle patient care.
           </p>
 
-          {/* Clean Primary Buttons */}
-          <div className="flex flex-wrap items-center justify-center gap-4 mb-10">
-            <button 
-              onClick={onOpenVolunteer}
-              className="btn-marigold text-xs sm:text-sm !py-3.5 !px-8 cursor-pointer shadow-lg flex items-center gap-2 font-bold"
-            >
-              <Heart className="w-4 h-4" />
-              <span>Become a Volunteer</span>
-            </button>
+          {/* Simple Primary Buttons */}
+          <div className="flex flex-wrap items-center justify-center gap-3 mb-6">
             <button 
               onClick={onOpenEnquiry}
-              className="px-8 py-3.5 rounded-full bg-white/15 hover:bg-white/25 border border-white/30 text-white font-semibold text-xs sm:text-sm transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer shadow-sm"
+              className="btn-marigold text-xs sm:text-sm !py-2.5 !px-6 cursor-pointer shadow-md font-bold flex items-center gap-2"
             >
-              <PhoneCall className="w-4 h-4 text-[#E8A23A]" />
+              <Calendar className="w-4 h-4" />
               <span>Book Consultation</span>
             </button>
-            <a
-              href="tel:+911140559200"
-              className="px-7 py-3.5 rounded-full bg-[#0E3B36]/80 hover:bg-[#0E3B36] border border-white/20 text-white font-medium text-xs sm:text-sm transition-all duration-200 flex items-center justify-center gap-2"
+            <button 
+              onClick={onOpenVolunteer}
+              className="px-6 py-2.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/25 text-white font-semibold text-xs sm:text-sm transition-all cursor-pointer flex items-center gap-2"
             >
-              <Phone className="w-3.5 h-3.5 text-[#E8A23A]" />
-              <span>+91 11 4055 9200</span>
-            </a>
+              <Heart className="w-4 h-4 text-[#E8A23A]" />
+              <span>Become a Volunteer</span>
+            </button>
           </div>
 
-          {/* Social Connect Strip */}
-          <div className="pt-8 border-t border-white/15 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
-            <span className="text-xs text-white/80 font-medium">Follow & Connect with Our Outreach Community:</span>
-            <div className="flex items-center gap-3">
-              <a 
-                href="https://instagram.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#E8A23A] text-white hover:text-[#1B2620] flex items-center justify-center transition-all duration-200 border border-white/20 hover:scale-105"
-              >
-                <Instagram className="w-4 h-4" />
-              </a>
-              <a 
-                href="https://facebook.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                aria-label="Facebook"
-                className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#E8A23A] text-white hover:text-[#1B2620] flex items-center justify-center transition-all duration-200 border border-white/20 hover:scale-105"
-              >
-                <Facebook className="w-4 h-4" />
-              </a>
-              <a 
-                href="https://youtube.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                aria-label="YouTube"
-                className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#E8A23A] text-white hover:text-[#1B2620] flex items-center justify-center transition-all duration-200 border border-white/20 hover:scale-105"
-              >
-                <Youtube className="w-4 h-4" />
-              </a>
-            </div>
+          {/* Social Icons CTA */}
+          <div className="flex items-center justify-center gap-3 pt-5 border-t border-white/10">
+            <a 
+              href="https://instagram.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              aria-label="Follow us on Instagram"
+              className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#E8A23A] text-white hover:text-[#1B2620] flex items-center justify-center transition-all duration-200 border border-white/20 hover:scale-105"
+            >
+              <Instagram className="w-4 h-4" />
+            </a>
+            <a 
+              href="https://facebook.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              aria-label="Follow us on Facebook"
+              className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#E8A23A] text-white hover:text-[#1B2620] flex items-center justify-center transition-all duration-200 border border-white/20 hover:scale-105"
+            >
+              <Facebook className="w-4 h-4" />
+            </a>
+            <a 
+              href="https://youtube.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              aria-label="Subscribe on YouTube"
+              className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#E8A23A] text-white hover:text-[#1B2620] flex items-center justify-center transition-all duration-200 border border-white/20 hover:scale-105"
+            >
+              <Youtube className="w-4 h-4" />
+            </a>
           </div>
         </RevealSection>
       </div>
@@ -820,10 +804,10 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
 
         {/* ── Main Hero Content Stage (Synchronized 7:5 Editorial & Visual Ratio) ── */}
         <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 flex flex-col justify-center">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 lg:gap-4 items-center">
             
             {/* LEFT COLUMN: Editorial Typography & High-Converting Action (7 Cols) */}
-            <div className="lg:col-span-7 flex flex-col justify-center space-y-4">
+            <div className="lg:col-span-7 flex flex-col justify-center space-y-3.5 pr-0 lg:pr-2">
               
               {/* Live Badge Pill */}
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#D5DFD7] shadow-sm w-fit">
@@ -849,10 +833,10 @@ export default function HomeTab({ onOpenVolunteer, onOpenEnquiry }: HomeTabProps
               </h1>
 
               {/* Subtitle & Narrative */}
-              <p className="text-[#4A5E54] text-base sm:text-lg font-normal leading-relaxed max-w-xl" key={`bright-desc-${activeSlide}`}>
+              <p className="text-[#4A5E54] text-base sm:text-lg font-normal leading-relaxed" key={`bright-desc-${activeSlide}`}>
                 {CAROUSEL_SLIDES[activeSlide].desc}
               </p>
-              <p className="text-[#7A8E83] text-xs sm:text-sm italic font-light leading-relaxed max-w-lg">
+              <p className="text-[#7A8E83] text-xs sm:text-sm italic font-light leading-relaxed">
                 {CAROUSEL_SLIDES[activeSlide].subtitleEn}
               </p>
 
