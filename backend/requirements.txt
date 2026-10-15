@@ -10,7 +10,7 @@ alembic==1.18.5
 psycopg[binary]==3.3.4
 pydantic==2.10.4
 pydantic[email]==2.10.4
-pydantic-settings==2.14.2
+pydantic-settings==2.15.0
 # 3.3.0 has 3 known CVEs (algorithm-confusion attack, JWT-bomp DoS via
 # crafted compressed tokens) -- 3.5.0 is the current clean release.
 python-jose[cryptography]==3.5.0
